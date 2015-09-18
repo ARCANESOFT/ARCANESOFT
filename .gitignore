@@ -5,6 +5,7 @@
 /node_modules/
 /storage/debugbar/
 /vendor/
+/www/assets/
 /.env
 /_ide_helper.php
 /composer.lock
