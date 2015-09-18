@@ -83,6 +83,7 @@ return [
 
         // ARCANEDEV Service Providers...
         Arcanedev\LaravelHtml\HtmlServiceProvider::class,
+        Arcanedev\Localization\LocalizationServiceProvider::class,
     ],
 
     /* ------------------------------------------------------------------------------------------------
@@ -127,6 +128,6 @@ return [
 
         // ARCANEDEV Facades...
         'Form'      => Arcanedev\LaravelHtml\Facades\Form::class,
-        'Html'      => Arcanedev\LaravelHtml\Facades\Html::class
+        'Html'      => Arcanedev\LaravelHtml\Facades\Html::class,
     ],
 ];
