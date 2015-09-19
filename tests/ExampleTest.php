@@ -13,14 +13,14 @@ class ExampleTest extends TestCase
     /** @test */
     public function it_can_see_the_home_page()
     {
-        $this->visit('/')->see('ARCANESOFT');
+        $this->visit('demo')->see('ARCANESOFT');
     }
 
     /** @test */
     public function it_must_have_a_home_route()
     {
-        $response = $this->route('GET', 'home');
+        $response = $this->route('GET', 'public::home');
 
-        $this->assertEquals(200, $response->status());
+        $this->assertEquals(301, $response->status());
     }
 }
