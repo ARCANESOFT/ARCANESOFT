@@ -3,17 +3,22 @@
 use App\Bases\Controller;
 
 /**
- * Class PagesController
+ * Class ContactController
  * @package App\Http\Controllers
  */
-class PagesController extends Controller
+class ContactController extends Controller
 {
     /* ------------------------------------------------------------------------------------------------
      |  Main Controller Functions
      | ------------------------------------------------------------------------------------------------
      */
-    public function index()
+    public function getForm()
     {
-        return view('home');
+        return view('contact');
+    }
+
+    public function sendForm()
+    {
+        // TODO: implement the sendForm method
     }
 }
