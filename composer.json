@@ -50,7 +50,8 @@
         ],
         "post-create-project-cmd": [
             "php artisan key:generate"
-        ]
+        ],
+        "test": "vendor\\bin\\phpunit --coverage-text"
     },
     "config": {
         "preferred-install": "dist",
