@@ -20,7 +20,7 @@ before_script:
 
 script:
   - mkdir -p build/logs
-  - php -r \"copy('.env.example', '.env');\"
+  - cp .env.example .env
   - php artisan key:generate
   - phpunit --coverage-text --coverage-clover=coverage.clover
 
