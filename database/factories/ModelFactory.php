@@ -11,12 +11,12 @@ use Illuminate\Database\Eloquent\Factory;
 $factory->define(User::class, function (Faker\Generator $faker) {
     return [
         'email'          => $faker->email,
+        'password'       => bcrypt(str_random(10)),
         'username'       => $faker->userName,
         'last_name'      => $faker->lastName,
         'first_name'     => $faker->firstName,
-        'password'       => bcrypt(str_random(10)),
-        'remember_token' => str_random(10),
-        'type'           => 'member',
+        'type'           => $faker->randomElement(['member', 'admin']),
         'active'         => rand(0, 1),
+        'remember_token' => str_random(10),
     ];
 });
