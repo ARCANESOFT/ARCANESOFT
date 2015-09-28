@@ -17,6 +17,6 @@ class DatabaseSeeder extends Seeder
      * @var array
      */
     protected $seeds = [
-        // UserTableSeeder::class
+        UserTableSeeder::class
     ];
 }

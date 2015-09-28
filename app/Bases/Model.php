@@ -1,6 +1,6 @@
 <?php namespace App\Bases;
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
+use Arcanedev\Support\Bases\Model as Eloquent;
 
 /**
  * Class Model
@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
  */
 abstract class Model extends Eloquent
 {
+    //
 }
