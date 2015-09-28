@@ -1,9 +1,6 @@
 <?php namespace App\Bases;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
+use Arcanedev\Support\Bases\Controller as BaseController;
 
 /**
  * Class Controller
@@ -12,8 +9,13 @@ use Illuminate\Routing\Controller as BaseController;
 abstract class Controller extends BaseController
 {
     /* ------------------------------------------------------------------------------------------------
-     |  Traits
+     |  Properties
      | ------------------------------------------------------------------------------------------------
      */
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    /**
+     * The view template - master, layout (... whatever).
+     *
+     * @var string
+     */
+    protected $template     = '_templates.default.master';
 }
