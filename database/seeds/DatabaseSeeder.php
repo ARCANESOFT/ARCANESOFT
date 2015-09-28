@@ -1,7 +1,6 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model as Eloquent;
+use Arcanedev\Support\Bases\Seeder;
 
 /**
  * Class DatabaseSeeder
@@ -9,20 +8,15 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class DatabaseSeeder extends Seeder
 {
     /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
+     |  Properties
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Run the database seeds.
+     * Seeder collection.
      *
-     * @return void
+     * @var array
      */
-    public function run()
-    {
-        Eloquent::unguard();
-
-        // $this->call(UserTableSeeder::class);
-
-        Eloquent::reguard();
-    }
+    protected $seeds = [
+        // UserTableSeeder::class
+    ];
 }
