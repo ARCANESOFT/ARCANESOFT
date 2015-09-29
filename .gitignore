@@ -1,7 +1,7 @@
 /.idea/
 /.svn/
 /build/
-/bower_components/
+/resources/assets/bower/
 /node_modules/
 /storage/debugbar/
 /vendor/
