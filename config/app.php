@@ -23,7 +23,7 @@ return [
      |  Application Locale Configuration
      | ------------------------------------------------------------------------------------------------
      */
-    'locale'    => 'fr',
+    'locale'    => 'en',
 
     /* ------------------------------------------------------------------------------------------------
      |  Application Fallback Locale
@@ -83,7 +83,10 @@ return [
 
         // ARCANEDEV Service Providers...
         Arcanedev\LaravelHtml\HtmlServiceProvider::class,
+        Arcanedev\NoCaptcha\Laravel\ServiceProvider::class,
         Arcanedev\Localization\LocalizationServiceProvider::class,
+        App\Providers\ComposerServiceProvider::class,
+        App\Providers\DevServiceProvider::class,
     ],
 
     /* ------------------------------------------------------------------------------------------------
@@ -129,5 +132,6 @@ return [
         // ARCANEDEV Facades...
         'Form'      => Arcanedev\LaravelHtml\Facades\Form::class,
         'Html'      => Arcanedev\LaravelHtml\Facades\Html::class,
+        'Captcha'   => Arcanedev\NoCaptcha\Laravel\Facade::class,
     ],
 ];
