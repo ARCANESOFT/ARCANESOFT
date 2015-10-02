@@ -8,4 +8,5 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
  */
 abstract class EventServiceProvider extends ServiceProvider
 {
+    //
 }

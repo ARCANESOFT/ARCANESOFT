@@ -4,8 +4,10 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Routing\Router;
 
 /**
- * Class RouteServiceProvider
- * @package App\Bases\Providers
+ * Class     RouteServiceProvider
+ *
+ * @package  App\Bases\Providers
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class RouteServiceProvider extends ServiceProvider
 {

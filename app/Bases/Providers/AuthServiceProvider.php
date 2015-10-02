@@ -10,4 +10,5 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
  */
 abstract class AuthServiceProvider extends ServiceProvider
 {
+    //
 }

@@ -4,8 +4,10 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 
 /**
- * Class ServiceProvider
- * @package App\Bases
+ * Class     ServiceProvider
+ *
+ * @package  App\Bases
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class ServiceProvider extends IlluminateServiceProvider
 {

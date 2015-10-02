@@ -3,8 +3,10 @@
 use Illuminate\Bus\Queueable;
 
 /**
- * Class Job
- * @package App\Bases
+ * Class     Job
+ *
+ * @package  App\Bases
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class Job
 {
