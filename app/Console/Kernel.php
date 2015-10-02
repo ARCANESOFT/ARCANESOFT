@@ -4,8 +4,10 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 /**
- * Class Kernel
- * @package App\Console
+ * Class     Kernel
+ *
+ * @package  App\Console
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Kernel extends ConsoleKernel
 {
@@ -15,6 +17,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        //
     ];
 
     /**

@@ -9,8 +9,10 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class Handler
- * @package App\Exceptions
+ * Class     Handler
+ *
+ * @package  App\Exceptions
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Handler extends ExceptionHandler
 {
