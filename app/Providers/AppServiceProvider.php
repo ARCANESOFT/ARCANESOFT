@@ -3,8 +3,10 @@
 use App\Bases\ServiceProvider;
 
 /**
- * Class AppServiceProvider
- * @package App\Providers
+ * Class     AppServiceProvider
+ *
+ * @package  App\Providers
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,22 +27,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if ($this->isLocal()) {
-            $this->app->register(DevServiceProvider::class);
-        }
-    }
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Check Functions
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Check if environment is local
-     *
-     * @return bool
-     */
-    private function isLocal()
-    {
-        return $this->app->environment() !== 'production';
+        //
     }
 }

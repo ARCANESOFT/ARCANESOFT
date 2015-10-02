@@ -6,8 +6,10 @@ use Barryvdh\Debugbar\ServiceProvider as DebugBarServiceProvider;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 
 /**
- * Class DevServiceProvider
- * @package App\Providers
+ * Class     DevServiceProvider
+ *
+ * @package  App\Providers
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class DevServiceProvider extends ServiceProvider
 {
@@ -20,6 +22,7 @@ class DevServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //
     }
 
     /**
@@ -27,8 +30,26 @@ class DevServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        if ( ! $this->isLocal()) {
+            return;
+        }
+
         $this->registerIdeHelper();
         $this->registerDebugBar();
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Check Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Check if environment is local
+     *
+     * @return bool
+     */
+    private function isLocal()
+    {
+        return $this->app->environment() !== 'production';
     }
 
     /* ------------------------------------------------------------------------------------------------

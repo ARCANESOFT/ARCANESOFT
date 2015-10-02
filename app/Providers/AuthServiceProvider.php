@@ -11,6 +11,10 @@ use App\Bases\Providers\AuthServiceProvider as ServiceProvider;
  */
 class AuthServiceProvider extends ServiceProvider
 {
+    /* ------------------------------------------------------------------------------------------------
+     |  Properties
+     | ------------------------------------------------------------------------------------------------
+     */
     /**
      * The policy mappings for the application.
      *
@@ -20,6 +24,10 @@ class AuthServiceProvider extends ServiceProvider
         'App\Model' => 'App\Policies\ModelPolicy',
     ];
 
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
     /**
      * Register any application authentication / authorization services.
      *
@@ -27,7 +35,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(GateContract $gate)
     {
-        $this->registerPolicies($gate);
+        parent::registerPolicies($gate);
 
         //
     }
