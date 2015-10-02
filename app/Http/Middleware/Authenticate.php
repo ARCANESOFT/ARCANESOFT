@@ -6,8 +6,10 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 
 /**
- * Class Authenticate
- * @package App\Http\Middleware
+ * Class     Authenticate
+ *
+ * @package  App\Http\Middleware
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Authenticate extends Middleware
 {

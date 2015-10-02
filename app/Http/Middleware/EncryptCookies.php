@@ -3,8 +3,10 @@
 use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncrypter;
 
 /**
- * Class EncryptCookies
- * @package App\Http\Middleware
+ * Class     EncryptCookies
+ *
+ * @package  App\Http\Middleware
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class EncryptCookies extends BaseEncrypter
 {

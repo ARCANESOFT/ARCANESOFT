@@ -3,17 +3,34 @@
 use App\Bases\Controller;
 
 /**
- * Class PagesController
- * @package App\Http\Controllers
+ * Class     PagesController
+ *
+ * @package  App\Http\Controllers
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class PagesController extends Controller
 {
     /* ------------------------------------------------------------------------------------------------
-     |  Main Controller Functions
+     |  Main Function
      | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Get the home page.
+     *
+     * @return \Illuminate\View\View
      */
     public function index()
     {
-        return view('home');
+        return $this->view('home');
+    }
+
+    /**
+     * Get the about page.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function aboutUs()
+    {
+        return $this->view('about-us');
     }
 }

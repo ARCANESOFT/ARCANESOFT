@@ -9,8 +9,10 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 /**
- * Class Kernel
- * @package App\Http
+ * Class     Kernel
+ *
+ * @package  App\Http
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Kernel extends HttpKernel
 {

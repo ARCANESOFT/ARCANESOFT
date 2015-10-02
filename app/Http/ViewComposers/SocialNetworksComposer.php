@@ -1,60 +1,49 @@
-<?php namespace App\Http\Middleware;
+<?php namespace App\Http\ViewComposers;
 
-use Closure;
-use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 /**
- * Class     RedirectIfAuthenticated
+ * Class     SocialNetworksComposer
  *
- * @package  App\Http\Middleware
+ * @package  App\Http\ViewComposers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class RedirectIfAuthenticated
+class SocialNetworksComposer
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * The Guard implementation.
+     * Social networks data.
      *
-     * @var Guard
+     * @var array
      */
-    protected $auth;
+    protected $socialNetworks;
 
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Create a new filter instance.
-     *
-     * @param  Guard  $auth
+     * Create a new social networks composer.
      */
-    public function __construct(Guard $auth)
+    public function __construct()
     {
-        $this->auth = $auth;
+        $this->socialNetworks = config('cms.social-networks', []);
     }
 
     /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
+     |  Compose Functions
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Handle an incoming request.
+     * Bind data to the view.
      *
-     * @param  Request  $request
-     * @param  Closure  $next
-     *
-     * @return mixed
+     * @param  \Illuminate\View\View  $view
      */
-    public function handle(Request $request, Closure $next)
+    public function widget(View $view)
     {
-        if ($this->auth->check()) {
-            return redirect('/home');
-        }
-
-        return $next($request);
+        $view->with('socialNetworks', $this->socialNetworks);
     }
 }
