@@ -1,0 +1,9 @@
+.btn_link(@color, @duration: .2s) {
+    color: @color;
+    text-decoration: none;
+    .transition(color @duration ease-in-out);
+
+    &:hover, &:active {
+        color: lighten(@color, 10%);
+    }
+}
