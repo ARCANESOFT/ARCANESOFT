@@ -83,6 +83,7 @@ return [
 
         // ARCANEDEV Service Providers...
         Arcanedev\LaravelHtml\HtmlServiceProvider::class,
+        Arcanedev\Gravatar\GravatarServiceProvider::class,
         Arcanedev\NoCaptcha\Laravel\ServiceProvider::class,
         Arcanedev\Localization\LocalizationServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
@@ -132,6 +133,7 @@ return [
         // ARCANEDEV Facades...
         'Form'      => Arcanedev\LaravelHtml\Facades\Form::class,
         'Html'      => Arcanedev\LaravelHtml\Facades\Html::class,
+        'Gravatar'  => Arcanedev\Gravatar\Facades\Gravatar::class,
         'Captcha'   => Arcanedev\NoCaptcha\Laravel\Facade::class,
     ],
 ];

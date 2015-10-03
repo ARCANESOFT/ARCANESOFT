@@ -8,12 +8,13 @@
         "php": ">=5.5.9",
         "laravel/framework": "~5.1.0",
         "arcanedev/composer": "~1.0",
+        "arcanedev/gravatar": "~1.0",
         "arcanedev/laravel-html": "~5.1.0",
+        "arcanedev/localization": "~0.6.0",
         "arcanedev/log-viewer": "~3.0",
         "arcanedev/moduly": "~2.0",
-        "arcanedev/support": "~3.0",
         "arcanedev/no-captcha": "~2.0",
-        "arcanedev/localization": "~0.6.0"
+        "arcanedev/support": "~3.4.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
