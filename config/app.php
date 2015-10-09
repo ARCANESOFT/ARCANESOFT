@@ -81,11 +81,13 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        // ARCANEDEV Service Providers...
+        // ARCANEDEV Packages Service Providers...
         Arcanedev\LaravelHtml\HtmlServiceProvider::class,
         Arcanedev\Gravatar\GravatarServiceProvider::class,
         Arcanedev\NoCaptcha\Laravel\ServiceProvider::class,
         Arcanedev\Localization\LocalizationServiceProvider::class,
+
+        // ARCANESOFT Service Providers...
         App\Providers\ComposerServiceProvider::class,
         App\Providers\DevServiceProvider::class,
     ],
