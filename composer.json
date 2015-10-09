@@ -5,23 +5,25 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.5.9",
-        "laravel/framework": "~5.1.0",
-        "arcanedev/composer": "~1.0",
-        "arcanedev/gravatar": "~1.0",
-        "arcanedev/laravel-html": "~5.1.0",
-        "arcanedev/localization": "~0.6.0",
-        "arcanedev/log-viewer": "~3.0",
-        "arcanedev/moduly": "~2.0",
-        "arcanedev/no-captcha": "~2.0",
-        "arcanedev/support": "~3.4.0"
+        "php":                         ">=5.5.9",
+        "laravel/framework":           "~5.1.0",
+        "arcanedev/breadcrumbs":       "~2.1",
+        "arcanedev/composer":          "~1.0",
+        "arcanedev/head":              "~2.0",
+        "arcanedev/gravatar":          "~1.0",
+        "arcanedev/laravel-html":      "~5.1.0",
+        "arcanedev/localization":      "~0.6.0",
+        "arcanedev/log-viewer":        "~3.0",
+        "arcanedev/no-captcha":        "~2.0",
+        "arcanedev/notify":            "~3.0",
+        "arcanedev/sanitizer":         "~3.0",
+        "arcanedev/support":           "~3.6"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.0",
-        "fzaninotto/faker": "~1.4",
-        "mockery/mockery": "~0.9",
-        "barryvdh/laravel-debugbar": "~2.0",
-        "barryvdh/laravel-ide-helper": "~2.0"
+        "barryvdh/laravel-debugbar":   "~2.0",
+        "barryvdh/laravel-ide-helper": "~2.0",
+        "fzaninotto/faker":            "~1.4",
+        "phpunit/phpunit":             "~4.0"
     },
     "autoload": {
         "psr-4": {
@@ -43,7 +45,6 @@
             "php artisan clear-compiled"
         ],
         "post-update-cmd": [
-            "php artisan ide-helper:generate",
             "php artisan optimize"
         ],
         "post-root-package-install": [
@@ -55,10 +56,10 @@
         "test": "vendor\\bin\\phpunit --coverage-text"
     },
     "config": {
-        "preferred-install": "dist",
+        "preferred-install":      "dist",
         "classmap-authoritative": false,
-        "prepend-autoloader": true,
-        "optimize-autoloader": true
+        "prepend-autoloader":     true,
+        "optimize-autoloader":    true
     },
     "extra": {
         "merge-plugin": {
