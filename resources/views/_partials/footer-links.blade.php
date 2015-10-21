@@ -31,7 +31,7 @@
                     <h4 class="link-header">Contact us</h4>
                     <ul class="list-unstyled fa-ul contact-details">
                         <li><i class="fa-li fa fa-building"></i>{{ config('cms.address') }}</li>
-                        <li><i class="fa-li fa fa-envelope"></i>{!! Html::mailto(config('cms.mail'), config('cms.mail')) !!}</li>
+                        <li><i class="fa-li fa fa-envelope"></i>{!! Html::mailto(config('cms.mail')) !!}</li>
                         <li><i class="fa-li fa fa-phone"></i>{{ config('cms.phone') }}</li>
                         <li><i class="fa-li fa fa-mobile"></i>{{ config('cms.mobile') }}</li>
                     </ul>

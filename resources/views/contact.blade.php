@@ -3,13 +3,6 @@
 @endsection
 
 @section('content')
-    <ol class="breadcrumb">
-        <li>
-            {!! link_to_route('public::home', 'Home') !!}
-        </li>
-        <li class="active">Contact us</li>
-    </ol>
-
     <div class="row">
         <div class="col-lg-6">
             {!! Form::open(['route' => 'public::contact.post', 'method' => 'POST']) !!}

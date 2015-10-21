@@ -21,18 +21,6 @@
                 <li class="{{ Route::is('public::contact.get') ? 'active' : '' }}">
                     {!! link_to_route('public::contact.get', 'Contact') !!}
                 </li>
-
-                @if (Auth::guest())
-                    <li class="{{ Route::is('auth::login.get') ? 'active' : '' }}">
-                        {!! link_to_route('auth::login.get', 'Sign in') !!}
-                    </li>
-                @else
-                    <li class="{{ Route::is('auth::logout') ? 'active' : '' }}">
-                        <a href="#">
-                            {{ Auth::user()->first_name }}
-                        </a>
-                    </li>
-                @endif
             </ul>
         </div>
     </div>

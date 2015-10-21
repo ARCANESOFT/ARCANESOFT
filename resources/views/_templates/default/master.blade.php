@@ -28,15 +28,17 @@
                 <div class="page-header">
                     @yield('page-header')
                 </div>
+
+                {!! breadcrumbs()->render('public') !!}
             </div>
         </header>
     @endif
 
-    <div class="main-container">
+    <main class="main-container">
         <div class="container">
             @yield('content')
         </div>
-    </div>
+    </main>
 
     <footer class="main-footer">
         @include('_templates.default.footer')
@@ -45,6 +47,11 @@
     {{-- SCRIPTS --}}
     {!! Html::script('assets/js/vendors.js') !!}
     {!! Html::script('assets/js/app.js') !!}
+    <script>
+        @if (notify()->ready())
+            swal("{{ notify()->message() }}", '', "{{ notify()->type() }}");
+        @endif
+    </script>
     @yield('scripts')
 </body>
 </html>

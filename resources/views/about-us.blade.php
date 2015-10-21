@@ -3,13 +3,6 @@
 @endsection
 
 @section('content')
-    <ol class="breadcrumb">
-        <li>
-            {!! link_to_route('public::home', 'Home') !!}
-        </li>
-        <li class="active">About</li>
-    </ol>
-
     <div class="features">
         <div class="row feature">
             <div class="col-md-7">
