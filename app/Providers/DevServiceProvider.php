@@ -30,12 +30,10 @@ class DevServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if ( ! $this->isLocal()) {
-            return;
+        if ($this->isLocal()) {
+            $this->registerIdeHelper();
+            $this->registerDebugBar();
         }
-
-        $this->registerIdeHelper();
-        $this->registerDebugBar();
     }
 
     /* ------------------------------------------------------------------------------------------------
