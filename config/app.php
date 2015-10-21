@@ -82,10 +82,14 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         // ARCANEDEV Packages Service Providers...
-        Arcanedev\LaravelHtml\HtmlServiceProvider::class,
+        Arcanedev\Breadcrumbs\BreadcrumbsServiceProvider::class,
         Arcanedev\Gravatar\GravatarServiceProvider::class,
-        Arcanedev\NoCaptcha\Laravel\ServiceProvider::class,
-        Arcanedev\Localization\LocalizationServiceProvider::class,
+        Arcanedev\LaravelHtml\HtmlServiceProvider::class,
+        Arcanedev\NoCaptcha\NoCaptchaServiceProvider::class,
+        Arcanedev\LogViewer\LogViewerServiceProvider::class,
+        Arcanedev\Notify\NotifyServiceProvider::class,
+        Arcanedev\Sanitizer\SanitizerServiceProvider::class,
+        Arcanedev\SeoHelper\SeoHelperServiceProvider::class,
 
         // ARCANESOFT Service Providers...
         App\Providers\ComposerServiceProvider::class,
@@ -133,9 +137,10 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
         // ARCANEDEV Facades...
+        'Captcha'   => Arcanedev\NoCaptcha\Facades\NoCaptcha::class,
         'Form'      => Arcanedev\LaravelHtml\Facades\Form::class,
-        'Html'      => Arcanedev\LaravelHtml\Facades\Html::class,
         'Gravatar'  => Arcanedev\Gravatar\Facades\Gravatar::class,
-        'Captcha'   => Arcanedev\NoCaptcha\Laravel\Facade::class,
+        'Html'      => Arcanedev\LaravelHtml\Facades\Html::class,
+        'SeoHelper' => Arcanedev\SeoHelper\Facades\SeoHelper::class,
     ],
 ];
