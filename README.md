@@ -18,20 +18,25 @@ CMS built with Laravel Framework.
 
 ##### Production
 
-  * [arcanedev/breadcrumbs](https://github.com/ARCANEDEV/Breadcrumbs) : A simple &amp; easy way to create breadcrumbs.
-  * [arcanedev/composer](https://github.com/ARCANEDEV/Composer) : Composer plugin for ARCANESOFT.
-  * [arcanedev/gravatar](https://github.com/ARCANEDEV/Gravatar) : Gravatar Helper &amp; Generator (Laravel 5 supported).
-  * [arcanedev/laravel-html](https://github.com/ARCANEDEV/LaravelHtml) : HTML and Form Builders for the Laravel Framework.
-  * [arcanedev/log-viewer](https://github.com/ARCANEDEV/LogViewer) : Provides a log viewer for Laravel 5.
-  * [arcanedev/no-captcha](https://github.com/ARCANEDEV/noCAPTCHA) : Helper for Google's new noCAPTCHA (reCAPTCHA).
-  * [arcanedev/notify](https://github.com/ARCANEDEV/Notify) : Flash notifications Helper for Laravel.
-  * [arcanedev/sanitizer](https://github.com/ARCANEDEV/Sanitizer) : Sanitizer provides an easy way to sanitize/format user inputs.
-  * [arcanedev/seo-helper](https://github.com/ARCANEDEV/SEO-Helper) : SEO Helper provides tools and helpers for SEO (Search Engine Optimization).
-  * [arcanedev/support](https://github.com/ARCANEDEV/Support) : ARCANEDEV Support Library.
+| Package                                                            | Description                                                          |
+| ------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| [arcanedev/breadcrumbs](https://github.com/ARCANEDEV/Breadcrumbs)  | A simple &amp; easy way to create breadcrumbs                        |
+| [arcanedev/composer](https://github.com/ARCANEDEV/Composer)        | Composer plugin for ARCANESOFT                                       |
+| [arcanedev/gravatar](https://github.com/ARCANEDEV/Gravatar)        | Gravatar Helper &amp; Generator                                      |
+| [arcanedev/laravel-html](https://github.com/ARCANEDEV/LaravelHtml) | HTML and Form Builders for the Laravel Framework.                    |
+| [arcanedev/log-viewer](https://github.com/ARCANEDEV/LogViewer)     | Provides a log viewer                                                |
+| [arcanedev/no-captcha](https://github.com/ARCANEDEV/noCAPTCHA)     | Helper for Google's new reCAPTCHA                                    |
+| [arcanedev/notify](https://github.com/ARCANEDEV/Notify)            | Flash notifications Helper                                           |
+| [arcanedev/sanitizer](https://github.com/ARCANEDEV/Sanitizer)      | Sanitizer provides an easy way to sanitize/format user inputs        |
+| [arcanedev/seo-helper](https://github.com/ARCANEDEV/SEO-Helper)    | SEO Helper provides tools and helpers for Search Engine Optimization |
+| [arcanedev/support](https://github.com/ARCANEDEV/Support)          | ARCANEDEV Support Library                                            |
 
 ##### Development
 
- * [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar) : PHP Debugbar integration for Laravel.
- * [barryvdh/laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper): Laravel IDE Helper, generates correct PHPDocs for all Facade classes, to improve auto-completion.
- * [fzaninotto/faker](https://github.com/fzaninotto/Faker) : Faker is a PHP library that generates fake data for you.
- * [phpunit/phpunit](https://github.com/sebastianbergmann/phpunit.git) : The PHP Unit Testing framework.
+| Package                                                                       | Description                                                                                      |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar)     | PHP Debugbar integration for Laravel                                                             |
+| [barryvdh/laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper) | Laravel IDE Helper, generates correct PHPDocs for all Facade classes, to improve auto-completion |
+| [fzaninotto/faker](https://github.com/fzaninotto/Faker)                       | Faker is a PHP library that generates fake data for you                                          |
+| [phpunit/phpcov](https://github.com/sebastianbergmann/phpcov)                 | A command-line frontend for the PHP_CodeCoverage library                                         |
+| [phpunit/phpunit](https://github.com/sebastianbergmann/phpunit)               | The PHP Unit Testing framework                                                                   |
