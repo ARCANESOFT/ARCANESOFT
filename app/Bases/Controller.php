@@ -1,10 +1,6 @@
 <?php namespace App\Bases;
 
 use Arcanedev\Support\Bases\Controller as BaseController;
-use Arcanedev\Support\Traits\Templatable;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 
 /**
  * Class     Controller
@@ -18,7 +14,12 @@ abstract class Controller extends BaseController
      |  Traits
      | ------------------------------------------------------------------------------------------------
      */
-    use AuthorizesRequests, DispatchesJobs, Templatable, ValidatesRequests;
+    use \Arcanedev\Breadcrumbs\Traits\BreadcrumbsTrait,
+        \Arcanedev\SeoHelper\Traits\Seoable,
+        \Arcanedev\Support\Traits\Templatable,
+        \Illuminate\Foundation\Auth\Access\AuthorizesRequests,
+        \Illuminate\Foundation\Bus\DispatchesJobs,
+        \Illuminate\Foundation\Validation\ValidatesRequests;
 
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
@@ -32,5 +33,18 @@ abstract class Controller extends BaseController
         parent::__construct();
 
         $this->setTemplate(config('cms.template'));
+        $this->registerBreadcrumbs('public');
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  View Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Do random stuff before rendering view.
+     */
+    protected function beforeViewRender()
+    {
+        $this->loadBreadcrumbs();
     }
 }

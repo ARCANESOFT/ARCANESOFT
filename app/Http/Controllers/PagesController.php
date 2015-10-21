@@ -21,6 +21,8 @@ class PagesController extends Controller
      */
     public function index()
     {
+        $this->seoMeta()->setTitle('Hello World');
+
         return $this->view('home');
     }
 
@@ -31,6 +33,8 @@ class PagesController extends Controller
      */
     public function aboutUs()
     {
+        $this->addBreadcrumb('About us');
+
         return $this->view('about-us');
     }
 }

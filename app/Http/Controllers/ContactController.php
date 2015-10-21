@@ -22,6 +22,8 @@ class ContactController extends Controller
      */
     public function getForm()
     {
+        $this->addBreadcrumb('Contact us');
+
         return $this->view('contact');
     }
 
