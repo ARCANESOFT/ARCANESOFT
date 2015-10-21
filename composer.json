@@ -1,29 +1,30 @@
 {
-    "name": "arcanedev/arcanesoft",
+    "name":        "arcanedev/arcanesoft",
     "description": "ARCANESOFT - CMS built with Laravel Framework.",
-    "keywords": ["arcanedev", "arcanesoft", "cms", "framework", "laravel"],
-    "license": "MIT",
-    "type": "project",
+    "keywords":    ["arcanedev", "arcanesoft", "cms", "framework", "laravel"],
+    "homepage":    "https://github.com/ARCANEDEV/ARCANESOFT",
+    "license":     "MIT",
+    "type":        "project",
     "require": {
         "php":                         ">=5.5.9",
         "laravel/framework":           "~5.1.0",
         "arcanedev/breadcrumbs":       "~2.1",
         "arcanedev/composer":          "~1.0",
-        "arcanedev/head":              "~2.0",
         "arcanedev/gravatar":          "~1.0",
         "arcanedev/laravel-html":      "~5.1.0",
-        "arcanedev/localization":      "~0.6.0",
         "arcanedev/log-viewer":        "~3.0",
         "arcanedev/no-captcha":        "~2.0",
         "arcanedev/notify":            "~3.0",
         "arcanedev/sanitizer":         "~3.0",
+        "arcanedev/seo-helper":        "~0.15",
         "arcanedev/support":           "~3.6"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar":   "~2.0",
         "barryvdh/laravel-ide-helper": "~2.0",
         "fzaninotto/faker":            "~1.4",
-        "phpunit/phpunit":             "~4.0"
+        "phpunit/phpcov":              "~2.0",
+        "phpunit/phpunit":             "~4.0|~5.0"
     },
     "autoload": {
         "psr-4": {
