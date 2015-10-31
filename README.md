@@ -22,11 +22,14 @@ CMS built with Laravel Framework.
 | ------------------------------------------------------------------ | -------------------------------------------------------------------- |
 | [arcanedev/breadcrumbs](https://github.com/ARCANEDEV/Breadcrumbs)  | A simple &amp; easy way to create breadcrumbs                        |
 | [arcanedev/composer](https://github.com/ARCANEDEV/Composer)        | Composer plugin for ARCANESOFT                                       |
+| [arcanedev/hasher](https://github.com/ARCANEDEV/Hasher)            | Provides a flexible hash manager for Laravel.                        |
 | [arcanedev/gravatar](https://github.com/ARCANEDEV/Gravatar)        | Gravatar Helper &amp; Generator                                      |
 | [arcanedev/laravel-html](https://github.com/ARCANEDEV/LaravelHtml) | HTML and Form Builders for the Laravel Framework.                    |
 | [arcanedev/log-viewer](https://github.com/ARCANEDEV/LogViewer)     | Provides a log viewer                                                |
+| [arcanedev/menus](https://github.com/ARCANEDEV/Menus)              | Menu builder for Laravel 5                                           |
 | [arcanedev/no-captcha](https://github.com/ARCANEDEV/noCAPTCHA)     | Helper for Google's new reCAPTCHA                                    |
 | [arcanedev/notify](https://github.com/ARCANEDEV/Notify)            | Flash notifications Helper                                           |
+| [arcanedev/robots](https://github.com/ARCANEDEV/Robots)            | Robots.txt Generator                                                 |
 | [arcanedev/sanitizer](https://github.com/ARCANEDEV/Sanitizer)      | Sanitizer provides an easy way to sanitize/format user inputs        |
 | [arcanedev/seo-helper](https://github.com/ARCANEDEV/SEO-Helper)    | SEO Helper provides tools and helpers for Search Engine Optimization |
 | [arcanedev/support](https://github.com/ARCANEDEV/Support)          | ARCANEDEV Support Library                                            |
