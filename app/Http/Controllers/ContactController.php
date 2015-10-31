@@ -22,6 +22,11 @@ class ContactController extends Controller
      */
     public function getForm()
     {
+        $this->seo()
+            ->setTitle('Contact us')
+            ->setDescription('This is the contact us page description.')
+            ->setKeywords(['contact', 'us', 'page', 'map', 'phone']);
+
         $this->addBreadcrumb('Contact us');
 
         return $this->view('contact');

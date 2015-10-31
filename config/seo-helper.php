@@ -7,8 +7,8 @@ return [
      */
     'title' => [
         'default'   => 'Default title',
-        'site-name' => '',
-        'separator' => '-',
+        'site-name' => config('cms.name', 'ARCANESOFT'),
+        'separator' => '|',
         'first'     => true,
         'max'       => 55,
     ],
@@ -18,7 +18,7 @@ return [
      | ------------------------------------------------------------------------------------------------
      */
     'description' => [
-        'default'   => 'Default description',
+        'default'   => '',
         'max'       => 155,
     ],
 
