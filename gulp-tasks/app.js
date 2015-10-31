@@ -12,20 +12,14 @@ var gulp       = require('gulp'),
     notify     = require('gulp-notify');
 
 /* --------------------------------------------------------------------------
- *  Settings
- * --------------------------------------------------------------------------
- */
-var dirs = {
-    resources: './resources/assets',
-    public:    './www'
-};
-
-/* --------------------------------------------------------------------------
  *  Directories
  * --------------------------------------------------------------------------
  */
-dirs.bower  = dirs.resources + '/bower';
-dirs.assets = dirs.public    + '/assets';
+var dirs       = {};
+dirs.resources = './resources/assets';
+dirs.public    = './www';
+dirs.bower     = dirs.resources + '/bower';
+dirs.assets    = dirs.public    + '/assets';
 
 /* --------------------------------------------------------------------------
  *  Main Tasks
@@ -38,9 +32,7 @@ gulp.task('watch', function () {
     gulp.watch(dirs.resources + '/js/**/*.js', ['js']);
 });
 
-gulp.task('all', [
-    'less', 'js', 'vendors'
-]);
+gulp.task('all', ['default', 'modules', 'vendors']);
 
 /* --------------------------------------------------------------------------
  *  Resources Tasks
@@ -74,6 +66,14 @@ gulp.task('js', function () {
 });
 
 /* --------------------------------------------------------------------------
+ *  Modules Tasks
+ * --------------------------------------------------------------------------
+ */
+gulp.task('modules', function () {
+    //
+});
+
+/* --------------------------------------------------------------------------
  *  Vendors Tasks
  * --------------------------------------------------------------------------
  */
@@ -84,6 +84,7 @@ gulp.task('js-vendors', function() {
         dirs.bower + '/jquery/dist/jquery.js',
         dirs.bower + '/vue/dist/vue.js',
         dirs.bower + '/bootstrap/dist/js/bootstrap.js',
+        dirs.bower + '/sweetalert/dist/sweetalert.min.js',
         dirs.bower + '/owl.carousel/dist/assets/owl.carousel.js'
     ])
         .pipe(concat('vendors.js'))
