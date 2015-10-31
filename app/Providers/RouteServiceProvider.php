@@ -29,9 +29,21 @@ class RouteServiceProvider extends ServiceProvider
      | ------------------------------------------------------------------------------------------------
      */
     /**
+     * Define your route model bindings, pattern filters, etc.
+     *
+     * @param  \Illuminate\Routing\Router  $router
+     */
+    public function boot(Router $router)
+    {
+        $this->definePatternFilters($router);
+
+        parent::boot($router);
+    }
+
+    /**
      * Define the routes for the application.
      *
-     * @param  Router  $router
+     * @param  \Illuminate\Routing\Router  $router
      */
     public function map(Router $router)
     {
@@ -46,5 +58,24 @@ class RouteServiceProvider extends ServiceProvider
 
             require app_path('Http/routes.php');
         });
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Define route pattern filters.
+     *
+     * @param  Router  $router
+     */
+    private function definePatternFilters(Router $router)
+    {
+        $router->pattern('id',       '\d+');
+        $router->pattern('hash',     '[a-z0-9]+');
+        $router->pattern('uuid',     '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}');
+        $router->pattern('base',     '[a-zA-Z0-9]+');
+        $router->pattern('slug',     '[a-z0-9-]+');
+        $router->pattern('token',    '[a-z0-9-]+');
     }
 }
