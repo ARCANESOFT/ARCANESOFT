@@ -12,13 +12,13 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li class="{{ Route::is('public::home') ? 'active' : '' }}">
+                <li class="{{ route_is('public::home') ? 'active' : '' }}">
                     {!! link_to_route('public::home', 'Home') !!}
                 </li>
-                <li class="{{ Route::is('public::about.us') ? 'active' : '' }}">
+                <li class="{{ route_is('public::about.us') ? 'active' : '' }}">
                     {!! link_to_route('public::about.us', 'About us') !!}
                 </li>
-                <li class="{{ Route::is('public::contact.get') ? 'active' : '' }}">
+                <li class="{{ route_is('public::contact.get') ? 'active' : '' }}">
                     {!! link_to_route('public::contact.get', 'Contact') !!}
                 </li>
             </ul>
