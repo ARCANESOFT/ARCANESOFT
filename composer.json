@@ -5,6 +5,13 @@
     "homepage":    "https://github.com/ARCANEDEV/ARCANESOFT",
     "license":     "MIT",
     "type":        "project",
+    "authors":     [
+        {
+            "name":     "ARCANEDEV",
+            "email":    "arcanedev.maroc@gmail.com",
+            "homepage": "https://github.com/ARCANEDEV"
+        }
+    ],
     "require": {
         "php":                         ">=5.5.9",
         "laravel/framework":           "~5.1.0",
@@ -20,7 +27,7 @@
         "arcanedev/robots":            "~2.0",
         "arcanedev/sanitizer":         "~3.0",
         "arcanedev/seo-helper":        "~0.15",
-        "arcanedev/support":           "~3.6"
+        "arcanedev/support":           "~3.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar":   "~2.0",
@@ -56,8 +63,7 @@
         ],
         "post-create-project-cmd": [
             "php artisan key:generate"
-        ],
-        "test": "vendor\\bin\\phpunit --coverage-text"
+        ]
     },
     "config": {
         "preferred-install":      "dist",
@@ -67,9 +73,7 @@
     },
     "extra": {
         "merge-plugin": {
-            "include": [
-                "modules/*/composer.json"
-            ]
+            "include": ["modules/*/composer.json"]
         }
     },
     "minimum-stability": "stable"
