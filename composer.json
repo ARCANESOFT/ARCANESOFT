@@ -76,5 +76,8 @@
             "include": ["modules/*/composer.json"]
         }
     },
+    "suggest": {
+        "arcanedev/laravel-lang": "Translations manager and checker for Laravel 5 based on 'caouecs/Laravel-lang' translations."
+    },
     "minimum-stability": "stable"
 }
