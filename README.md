@@ -1,14 +1,14 @@
 # ARCANESOFT [![Packagist License][badge_license]](LICENSE.md)
 
-[![Packagist][badge_package]](https://packagist.org/packages/arcanedev/arcanesoft)
-[![Packagist Release][badge_release]](https://packagist.org/packages/arcanedev/arcanesoft)
-[![Packagist Downloads][badge_downloads]](https://packagist.org/packages/arcanedev/arcanesoft)
+[![Packagist][badge_package]](https://packagist.org/packages/arcanesoft/arcanesoft)
+[![Packagist Release][badge_release]](https://packagist.org/packages/arcanesoft/arcanesoft)
+[![Packagist Downloads][badge_downloads]](https://packagist.org/packages/arcanesoft/arcanesoft)
 
-[badge_license]:   http://img.shields.io/packagist/l/arcanedev/arcanesoft.svg?style=flat-square
+[badge_license]:   http://img.shields.io/packagist/l/arcanesoft/arcanesoft.svg?style=flat-square
 
-[badge_package]:   https://img.shields.io/badge/package-arcanedev/arcanesoft-blue.svg?style=flat-square
-[badge_release]:   https://img.shields.io/packagist/v/arcanedev/arcanesoft.svg?style=flat-square
-[badge_downloads]: https://img.shields.io/packagist/dt/arcanedev/arcanesoft.svg?style=flat-square
+[badge_package]:   https://img.shields.io/badge/package-arcanesoft/arcanesoft-blue.svg?style=flat-square
+[badge_release]:   https://img.shields.io/packagist/v/arcanesoft/arcanesoft.svg?style=flat-square
+[badge_downloads]: https://img.shields.io/packagist/dt/arcanesoft/arcanesoft.svg?style=flat-square
 
 CMS built with Laravel Framework.
 
@@ -43,3 +43,9 @@ CMS built with Laravel Framework.
 | [fzaninotto/faker](https://github.com/fzaninotto/Faker)                       | Faker is a PHP library that generates fake data for you                                          |
 | [phpunit/phpcov](https://github.com/sebastianbergmann/phpcov)                 | A command-line frontend for the PHP_CodeCoverage library                                         |
 | [phpunit/phpunit](https://github.com/sebastianbergmann/phpunit)               | The PHP Unit Testing framework                                                                   |
+
+### Suggested Packages
+
+| Package                                                            | Description                                                                                  |
+| ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| [arcanedev/laravel-lang](https://github.com/ARCANEDEV/LaravelLang) | Translations manager and checker for Laravel 5 based on 'caouecs/Laravel-lang' translations. |
