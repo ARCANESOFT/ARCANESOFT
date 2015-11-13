@@ -81,17 +81,17 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        // ARCANEDEV Packages Service Providers...
-        Arcanedev\Breadcrumbs\BreadcrumbsServiceProvider::class,
+        // ARCANEDEV & ARCANESOFT Packages Service Providers...
+        Arcanesoft\Foundation\FoundationServiceProvider::class,
+
         Arcanedev\Gravatar\GravatarServiceProvider::class,
         Arcanedev\LaravelHtml\HtmlServiceProvider::class,
         Arcanedev\NoCaptcha\NoCaptchaServiceProvider::class,
-        Arcanedev\LogViewer\LogViewerServiceProvider::class,
         Arcanedev\Notify\NotifyServiceProvider::class,
         Arcanedev\Sanitizer\SanitizerServiceProvider::class,
         Arcanedev\SeoHelper\SeoHelperServiceProvider::class,
 
-        // ARCANESOFT Service Providers...
+        // ARCANESOFT App Service Providers...
         App\Providers\ComposerServiceProvider::class,
         App\Providers\DevServiceProvider::class,
     ],
