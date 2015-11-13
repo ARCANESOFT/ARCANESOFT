@@ -56,7 +56,10 @@ class DevServiceProvider extends ServiceProvider
      */
     private function registerIdeHelper()
     {
-        if (class_exists(IdeHelperServiceProvider::class)) {
+        if (
+            class_exists(IdeHelperServiceProvider::class) &&
+            $this->app->runningInConsole()
+        ) {
             $this->app->register(IdeHelperServiceProvider::class);
         }
     }
