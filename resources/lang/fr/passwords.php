@@ -2,7 +2,7 @@
 
 return [
     /* ------------------------------------------------------------------------------------------------
-     |  Password Reminder Language Lines
+     |  Password Reset Language Lines
      | ------------------------------------------------------------------------------------------------
      */
     'password'  => 'Les mots de passe doivent avoir au moins six caractères et doivent être identiques.',

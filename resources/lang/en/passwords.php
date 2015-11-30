@@ -2,7 +2,7 @@
 
 return [
     /* ------------------------------------------------------------------------------------------------
-     |  Password Reminder Language Lines
+     |  Password Reset Language Lines
      | ------------------------------------------------------------------------------------------------
      */
     'password'  => 'Passwords must be at least six characters and match the confirmation.',
