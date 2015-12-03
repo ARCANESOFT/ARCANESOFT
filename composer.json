@@ -17,7 +17,6 @@
         "php":                         ">=5.5.9",
         "laravel/framework":           "~5.1.0",
         "arcanedev/composer":          "~1.0",
-        "arcanedev/gravatar":          "~1.0",
         "arcanedev/laravel-html":      "~5.1.0",
         "arcanedev/menus":             "~0.1",
         "arcanedev/no-captcha":        "~2.0",
