@@ -29,7 +29,7 @@ class Authenticate extends Middleware
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Create a new filter instance.
+     * Create a new middleware instance.
      *
      * @param  Guard  $auth
      */
