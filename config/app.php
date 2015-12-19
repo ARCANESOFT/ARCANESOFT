@@ -75,23 +75,21 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        // ARCANESOFT Service Providers...
+        Arcanesoft\Foundation\FoundationServiceProvider::class,
+        Arcanesoft\Auth\AuthServiceProvider::class,
+
+        // ARCANEDEV Service Providers...
+        Arcanedev\LaravelHtml\HtmlServiceProvider::class,
+        Arcanedev\NoCaptcha\NoCaptchaServiceProvider::class,
+        Arcanedev\Notify\NotifyServiceProvider::class,
+        Arcanedev\Sanitizer\SanitizerServiceProvider::class,
+
         // Application Service Providers...
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
-        // ARCANEDEV & ARCANESOFT Packages Service Providers...
-        Arcanesoft\Foundation\FoundationServiceProvider::class,
-
-        Arcanedev\Gravatar\GravatarServiceProvider::class,
-        Arcanedev\LaravelHtml\HtmlServiceProvider::class,
-        Arcanedev\NoCaptcha\NoCaptchaServiceProvider::class,
-        Arcanedev\Notify\NotifyServiceProvider::class,
-        Arcanedev\Sanitizer\SanitizerServiceProvider::class,
-        Arcanedev\SeoHelper\SeoHelperServiceProvider::class,
-
-        // ARCANESOFT App Service Providers...
         App\Providers\ComposerServiceProvider::class,
         App\Providers\DevServiceProvider::class,
     ],
