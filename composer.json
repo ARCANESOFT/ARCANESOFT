@@ -23,8 +23,8 @@
         "arcanedev/notify":            "~3.0",
         "arcanedev/robots":            "~2.0",
         "arcanedev/sanitizer":         "~3.0",
-        "arcanedev/seo-helper":        "~0.15",
-        "arcanesoft/foundation":       "~0.1"
+        "arcanesoft/auth":             "~0.5",
+        "arcanesoft/foundation":       "~0.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar":   "~2.0",
