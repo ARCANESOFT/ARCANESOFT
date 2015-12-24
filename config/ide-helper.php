@@ -67,5 +67,6 @@ return [
      |  Supported : 'postgresql', 'db2', 'drizzle', 'mysql', 'oracle', 'sqlanywhere', 'sqlite', 'mssql'
      */
     'custom_db_types' => [
+        //
     ],
 ];

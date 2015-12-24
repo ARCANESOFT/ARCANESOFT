@@ -43,6 +43,4 @@
 
 @section('scripts')
     {!! Captcha::script() !!}
-    <script>
-    </script>
 @endsection
