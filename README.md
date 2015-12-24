@@ -49,3 +49,7 @@ CMS built with Laravel Framework.
 | Package                                                            | Description                                                                                  |
 | ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
 | [arcanedev/laravel-lang](https://github.com/ARCANEDEV/LaravelLang) | Translations manager and checker for Laravel 5 based on 'caouecs/Laravel-lang' translations. |
+
+## Security
+
+If you discover any security related issues, please email arcanedev-maroc@gmail.com instead of using the issue tracker.
