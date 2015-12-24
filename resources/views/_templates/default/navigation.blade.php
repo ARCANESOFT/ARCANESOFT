@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            {!! link_to_route('public::home', config('cms.name', 'ARCANESOFT'), null, ['class' => 'navbar-brand']) !!}
+            {!! link_to_route('public::home', config('cms.name', 'ARCANESOFT'), [], ['class' => 'navbar-brand']) !!}
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
