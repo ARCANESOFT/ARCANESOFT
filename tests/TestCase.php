@@ -5,8 +5,10 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\TestCase as IlluminateTestCase;
 
 /**
- * Class TestCase
- * @package App\Tests
+ * Class     TestCase
+ *
+ * @package  App\Tests
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class TestCase extends IlluminateTestCase
 {
