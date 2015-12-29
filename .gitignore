@@ -2,7 +2,6 @@
 /.svn/
 /_arcanedev/
 /build/
-/config/arcanesoft/*.php
 /resources/assets/bower/
 /node_modules/
 /storage/debugbar/
