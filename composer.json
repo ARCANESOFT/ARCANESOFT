@@ -20,7 +20,6 @@
         "arcanedev/laravel-html":      "~5.1.0",
         "arcanedev/menus":             "~0.1",
         "arcanedev/no-captcha":        "~2.0",
-        "arcanedev/notify":            "~3.0",
         "arcanedev/robots":            "~2.0",
         "arcanedev/sanitizer":         "~3.0",
         "arcanesoft/auth":             "~0.5",
