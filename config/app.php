@@ -80,7 +80,6 @@ return [
         Arcanesoft\Auth\AuthServiceProvider::class,
 
         // ARCANEDEV Service Providers...
-        Arcanedev\LaravelHtml\HtmlServiceProvider::class,
         Arcanedev\NoCaptcha\NoCaptchaServiceProvider::class,
         Arcanedev\Notify\NotifyServiceProvider::class,
         Arcanedev\Sanitizer\SanitizerServiceProvider::class,
@@ -135,9 +134,6 @@ return [
 
         // ARCANEDEV Facades...
         'Captcha'   => Arcanedev\NoCaptcha\Facades\NoCaptcha::class,
-        'Form'      => Arcanedev\LaravelHtml\Facades\Form::class,
         'Gravatar'  => Arcanedev\Gravatar\Facades\Gravatar::class,
-        'Html'      => Arcanedev\LaravelHtml\Facades\Html::class,
-        'SeoHelper' => Arcanedev\SeoHelper\Facades\SeoHelper::class,
     ],
 ];
