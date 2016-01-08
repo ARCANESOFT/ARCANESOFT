@@ -21,6 +21,10 @@
                 <li class="{{ route_is('public::contact.get') ? 'active' : '' }}">
                     {!! link_to_route('public::contact.get', 'Contact') !!}
                 </li>
+
+                @if (view()->exists('auth::public._partials.navigation'))
+                    @include('auth::public._partials.navigation')
+                @endif
             </ul>
         </div>
     </div>
