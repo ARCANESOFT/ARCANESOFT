@@ -53,8 +53,8 @@ class RouteServiceProvider extends ServiceProvider
         ];
 
         $router->group($attributes, function (Router $router) {
-            (new PagesRoute)->map($router);
-            (new ContactRoute)->map($router);
+            PagesRoute::register($router);
+            ContactRoute::register($router);
 
             require app_path('Http/routes.php');
         });
@@ -71,11 +71,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     private function definePatternFilters(Router $router)
     {
-        $router->pattern('id',       '\d+');
-        $router->pattern('hash',     '[a-z0-9]+');
-        $router->pattern('uuid',     '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}');
-        $router->pattern('base',     '[a-zA-Z0-9]+');
-        $router->pattern('slug',     '[a-z0-9-]+');
-        $router->pattern('token',    '[a-z0-9-]+');
+        $router->pattern('id',    '\d+');
+        $router->pattern('hash',  '[a-z0-9]+');
+        $router->pattern('uuid',  '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}');
+        $router->pattern('base',  '[a-zA-Z0-9]+');
+        $router->pattern('slug',  '[a-z0-9-]+');
+        $router->pattern('token', '[a-z0-9-]+');
     }
 }

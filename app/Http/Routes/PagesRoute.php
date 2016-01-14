@@ -22,8 +22,6 @@ class PagesRoute extends RouteRegister
      */
     public function map(Registrar $router)
     {
-        $this->setRegister($router);
-
         $this->get('/', [
             'as'    => 'home',
             'uses'  => 'PagesController@index'

@@ -22,8 +22,6 @@ class ContactRoute extends RouteRegister
      */
     public function map(Registrar $router)
     {
-        parent::map($router);
-
         $this->group(['prefix' => 'contact'], function () {
             $this->get('/', [
                 'as'    => 'contact.get',
