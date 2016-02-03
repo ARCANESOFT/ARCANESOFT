@@ -23,7 +23,8 @@
         "arcanedev/sanitizer":         "~3.0",
         "arcanesoft/auth":             "~0.5",
         "arcanesoft/blog":             "*",
-        "arcanesoft/foundation":       "~0.5"
+        "arcanesoft/foundation":       "~0.5",
+        "arcanesoft/seo":              "~0.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar":   "~2.0",
