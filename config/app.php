@@ -78,6 +78,7 @@ return [
         // ARCANESOFT Service Providers...
         Arcanesoft\Foundation\FoundationServiceProvider::class,
         Arcanesoft\Auth\AuthServiceProvider::class,
+        Arcanesoft\Blog\BlogServiceProvider::class,
 
         // ARCANEDEV Service Providers...
         Arcanedev\NoCaptcha\NoCaptchaServiceProvider::class,
