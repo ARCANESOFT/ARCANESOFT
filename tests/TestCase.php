@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\TestCase as IlluminateTestCase;
  * @package  App\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class TestCase extends IlluminateTestCase
+abstract class TestCase extends IlluminateTestCase
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
