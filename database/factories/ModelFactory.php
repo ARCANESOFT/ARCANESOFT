@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factory;
 /** @var Factory $factory */
 $factory->define(User::class, function (Faker\Generator $faker) {
     return [
-        'email'          => $faker->email,
+        'email'          => $faker->safeEmail,
         'password'       => bcrypt(str_random(10)),
         'username'       => $faker->userName,
         'last_name'      => $faker->lastName,
