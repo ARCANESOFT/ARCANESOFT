@@ -1,12 +1,10 @@
 {
     "name":    "arcanesoft",
-    "version": "1.1.20",
+    "version": "1.2.1",
     "private": true,
     "devDependencies": {
-        "gulp":         "^3.8.0",
-        "vue":          "^1.0.10",
-        "vue-resource": "^0.1.17",
-        "vue-router":   "^0.7.7"
+        "gulp": "^3.8.0",
+        "vue":  "^1.0.10"
     },
     "dependencies": {
         "laravel-elixir":        "^4.0.0",

@@ -22,8 +22,8 @@ dirs.assets    = dirs.public    + '/assets';
  *  Configs
  * --------------------------------------------------------------------------
  */
-elixir.config.publicPath                  = dirs.assets;
-elixir.config.css.minifyCss.pluginOptions = {
+elixir.config.publicPath             = dirs.assets;
+elixir.config.css.less.pluginOptions = {
     keepSpecialComments: 0,
     processImport: false
 };
