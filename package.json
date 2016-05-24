@@ -2,12 +2,13 @@
     "name":    "arcanesoft",
     "version": "1.2.1",
     "private": true,
-    "devDependencies": {
-        "gulp": "^3.8.0",
-        "vue":  "^1.0.10"
+    "scripts": {
+        "prod": "gulp --production",
+        "dev":  "gulp watch"
     },
-    "dependencies": {
-        "laravel-elixir":        "^4.0.0",
+    "devDependencies": {
+        "gulp":                  "^3.9.1",
+        "laravel-elixir":        "^5.0.0",
         "laravel-elixir-vueify": "^1.0.0"
     }
 }
