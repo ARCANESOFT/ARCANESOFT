@@ -14,24 +14,21 @@
         }
     ],
     "require": {
-        "php":                         ">=5.5.9",
-        "laravel/framework":           "~5.1.0",
-        "arcanedev/composer":          "~1.0",
-        "arcanedev/menus":             "~0.1",
-        "arcanedev/no-captcha":        "~2.0",
-        "arcanedev/robots":            "~2.0",
-        "arcanedev/sanitizer":         "~3.0",
-        "arcanesoft/auth":             "~0.5",
-        "arcanesoft/blog":             "~0.3",
-        "arcanesoft/foundation":       "~0.5",
-        "arcanesoft/seo":              "~0.1"
+        "php":                         ">=5.6.4",
+        "laravel/framework":           "~5.3.0",
+        "arcanedev/laravel-html":      "~5.3",
+        "arcanedev/composer":          "~1.4",
+        "arcanesoft/foundation":       "~1.0",
+        "arcanesoft/auth":             "~1.0"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar":   "~2.0",
-        "barryvdh/laravel-ide-helper": "~2.0",
         "fzaninotto/faker":            "~1.4",
-        "phpunit/phpcov":              "~2.0|~3.0",
-        "phpunit/phpunit":             "~4.0|~5.0"
+        "mockery/mockery":             "~0.9.0",
+        "phpunit/phpunit":             "~5.0",
+        "symfony/css-selector":        "~3.1.0",
+        "symfony/dom-crawler":         "~3.1.0",
+        "barryvdh/laravel-ide-helper": "~2.2",
+        "barryvdh/laravel-debugbar":   "~2.2"
     },
     "autoload": {
         "psr-4": {
@@ -46,7 +43,7 @@
     },
     "scripts": {
         "post-root-package-install": [
-            "php -r \"copy('.env.example', '.env');\""
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
             "php artisan key:generate"
@@ -61,10 +58,7 @@
         ]
     },
     "config": {
-        "preferred-install":      "dist",
-        "classmap-authoritative": false,
-        "prepend-autoloader":     true,
-        "optimize-autoloader":    true
+        "preferred-install": "dist"
     },
     "extra": {
         "merge-plugin": {

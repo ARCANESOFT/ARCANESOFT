@@ -5,16 +5,17 @@
  |  Register The Auto Loader
  | ------------------------------------------------------------------------------------------------
  */
-require __DIR__ . '/bootstrap/autoload.php';
+require __DIR__.'/bootstrap/autoload.php';
 
-$app = require_once __DIR__ . '/bootstrap/app.php';
+/**  @var \Illuminate\Contracts\Foundation\Application $app  */
+$app = require_once __DIR__.'/bootstrap/app.php';
 
 /* ------------------------------------------------------------------------------------------------
  |  Run The Artisan Application
  | ------------------------------------------------------------------------------------------------
  */
-/** @var Illuminate\Foundation\Console\Kernel $kernel */
 $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+
 $status = $kernel->handle(
     $input = new Symfony\Component\Console\Input\ArgvInput,
     new Symfony\Component\Console\Output\ConsoleOutput
