@@ -1,6 +1,7 @@
 /node_modules/
-/resources/assets/_bower/
+/bower_components/
 /public/storage/
+/storage/*.key
 /vendor/
 /.env
 /_ide_helper.php
