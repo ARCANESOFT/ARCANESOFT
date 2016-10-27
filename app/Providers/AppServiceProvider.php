@@ -1,19 +1,21 @@
 <?php namespace App\Providers;
 
-use App\Bases\ServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
-/**
- * Class     AppServiceProvider
- *
- * @package  App\Providers
- * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
- */
 class AppServiceProvider extends ServiceProvider
 {
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Register any application services.
+     */
+    public function register()
+    {
+        $this->registerDevPackages();
+    }
+
     /**
      * Bootstrap any application services.
      */
@@ -22,11 +24,15 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 
-    /**
-     * Register any application services.
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
      */
-    public function register()
+    private function registerDevPackages()
     {
-        //
+        if ($this->app->environment() === 'local') {
+            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+            $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
+        }
     }
 }
