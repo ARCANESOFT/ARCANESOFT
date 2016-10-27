@@ -1,0 +1,97 @@
+.info-box {
+    &.level {
+        min-height: $log-icon-size;
+
+        .info-box-text,
+        .info-box-number,
+        .info-box-icon > i {
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-box-icon {
+            height: $log-icon-size;
+            width: $log-icon-size;
+            font-size: 40px;
+            line-height: $log-icon-size;
+        }
+
+        .info-box-content {
+            margin-left: $log-icon-size;
+        }
+    }
+
+    &.level-empty {
+        @include filter(grayscale, 100%);
+        opacity: .6;
+        @include transition(all .2s ease-in-out);
+        @include transition-property(filter, opacity);
+
+        &:hover {
+            @include filter(grayscale, 0%);
+            opacity: 1;
+        }
+    }
+}
+
+.badge,
+.label,
+.info-box,
+.timeline > li > .timeline-icon {
+    &.level-all,
+    &.level-emergency,
+    &.level-alert,
+    &.level-critical,
+    &.level-error,
+    &.level-warning,
+    &.level-notice,
+    &.level-info,
+    &.level-debug {
+        color: #FFF;
+    }
+
+    &.level-all {
+        background-color: $log-color-all;
+    }
+
+    &.level-emergency {
+        background-color: $log-color-emergency;
+    }
+
+    &.level-alert {
+        background-color: $log-color-alert;
+    }
+
+    &.level-critical {
+        background-color: $log-color-critical;
+    }
+
+    &.level-error {
+        background-color: $log-color-error;
+    }
+
+    &.level-warning {
+        background-color: $log-color-warning;
+    }
+
+    &.level-notice {
+        background-color: $log-color-notice;
+    }
+
+    &.level-info {
+        background-color: $log-color-info;
+    }
+
+    &.level-debug {
+        background-color: $log-color-debug;
+    }
+}
+
+.badge, .label {
+    &.level-env {
+        background-color: $log-color-env;
+    }
+
+    &.level-empty {
+        background-color: $log-color-empty;
+    }
+}

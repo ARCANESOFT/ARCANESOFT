@@ -1,0 +1,69 @@
+// Page: Lock Screen
+//==========================================>
+body.lockscreen {
+    background: $light-gray;
+}
+
+.lockscreen-logo {
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 300;
+
+    a { color: #444; }
+}
+
+.lockscreen-wrapper {
+    max-width: 400px;
+    margin: 10% auto 0;
+}
+
+/* User name [optional] */
+.lockscreen .lockscreen-name {
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Will contain the image and the sign in form */
+.lockscreen-item {
+    @include border-radius(4px);
+    padding: 0;
+    background: #fff;
+    position: relative;
+    margin: 10px auto 30px;
+    width: 290px;
+}
+
+/* User image */
+.lockscreen-image {
+    position: absolute;
+    z-index: 10;
+    left: -10px;
+    top: -25px;
+    padding: 5px;
+    background: #fff;
+    @include border-radius(50%);
+
+    & > img {
+        width: 70px;
+        height: 70px;
+        @include border-radius(50%);
+    }
+}
+
+/* Contains the password input and the login button */
+.lockscreen-credentials {
+    margin-left: 70px;
+
+    .form-control { border: 0; }
+
+    .btn {
+        background-color: #fff;
+        border: 0;
+        padding: 0 10px;
+    }
+}
+
+.lockscreen-footer {
+    margin-top: 10px;
+}

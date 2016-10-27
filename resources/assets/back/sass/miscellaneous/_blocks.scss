@@ -1,0 +1,99 @@
+// Miscellaneous : Description Blocks
+//==========================================>
+
+// Description Block
+.description-block {
+    display: block;
+    margin: 10px 0;
+    text-align: center;
+
+    &.margin-bottom {
+        margin-bottom: 25px;
+    }
+
+    & > .description-header {
+        margin: 0;
+        padding: 0;
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    & > .description-text {
+        text-transform: uppercase;
+    }
+
+    .description-icon {
+        font-size: 16px;
+    }
+}
+
+// User Block
+.user-block {
+    @include clearfix;
+
+    img {
+        width: 40px;
+        height: 40px;
+        float: left;
+    }
+
+    .username,
+    .description,
+    .comment {
+        display: block;
+        margin-left: 50px;
+    }
+
+    .username {
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .description {
+        color: #999;
+        font-size: 13px;
+    }
+
+    &.user-block-sm {
+        img {
+            @extend .img-sm;
+        }
+
+        .username,
+        .description,
+        .comment {
+            margin-left: 40px;
+        }
+
+        .username {
+            font-size: 14px;
+        }
+    }
+}
+
+// General attachment block
+.attachment-block {
+    border: 1px solid $box-border-color;
+    padding: 5px;
+    margin-bottom: 10px;
+    background: #f7f7f7;
+
+    .attachment-img {
+        max-width: 100px;
+        max-height: 100px;
+        height: auto;
+        float: left;
+    }
+
+    .attachment-pushed {
+        margin-left: 110px;
+    }
+
+    .attachment-heading {
+        margin: 0;
+    }
+
+    .attachment-text {
+        color: #555;
+    }
+}
