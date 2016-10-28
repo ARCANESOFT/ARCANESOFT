@@ -1,5 +1,5 @@
 require('../../_shared/js/bootstrap');
-require('../../_shared/js/components');
+// require('../../_shared/js/components');
 
 import config from './config'
 

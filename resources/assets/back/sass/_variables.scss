@@ -1,8 +1,10 @@
 // Variables
 //==========================================>
-@import "../../_shared/sass/_variables";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/variables";
+
 $bootstrap-sass-asset-helper: "../fonts";
-$boxed-layout-bg-image-path: "../img/boxed-bg.jpg";
+$wi-path:                     "../fonts";
+$boxed-layout-bg-image-path:  "../img/boxed-bg.jpg";
 
 // COLORS
 //--------------------------------------------------------

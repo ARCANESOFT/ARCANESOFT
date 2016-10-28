@@ -76,6 +76,10 @@ elixir((mix) => {
         './bower_components/toastr/toastr.js'
     ], './public/vendor/foundation/js/vendors.js');
 
+    mix.copy([
+        './bower_components/pace/pace.min.js',
+    ], 'public/vendor/foundation/js/vendors/pace.min.js');
+
     // Fonts
     mix.copy([
         './bower_components/bootstrap-sass/assets/fonts/bootstrap',
