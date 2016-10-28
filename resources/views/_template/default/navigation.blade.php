@@ -30,14 +30,20 @@
                         </li>
                     @endif
                 @else
+                    <?php $user = Auth::user() ?>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->full_name }} <span class="caret"></span>
+                            {{ $user->full_name }} <span class="caret"></span>
                         </a>
-
                         <ul class="dropdown-menu" role="menu">
+                            @if (($user->isAdmin() || $user->isModerator()) && Route::has('foundation::home'))
+                                <li>
+                                    {{ link_to_route('foundation::home', 'Dashboard') }}
+                                </li>
+                                <li class="divider"></li>
+                            @endif
                             <li>
-                                <logout-btn url="{{ route('auth::logout') }}" value="{{ trans('auth::generals.logout') }}"></logout-btn>
+                                {{ link_to_route('auth::logout', trans('auth::generals.logout')) }}
                             </li>
                         </ul>
                     </li>
