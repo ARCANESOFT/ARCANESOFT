@@ -1,1 +1,1 @@
-$.trumbowyg.svgPath = '/assets/fonts/trumbowyg.svg';
+$.trumbowyg.svgPath = '/vendor/foundation/fonts/trumbowyg.svg';

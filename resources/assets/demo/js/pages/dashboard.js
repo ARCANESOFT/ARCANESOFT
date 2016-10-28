@@ -1,38 +1,82 @@
-$(function () {
+/*
+ * Author: Abdullah A Almsaeed
+ * Date: 4 Jan 2014
+ * Description:
+ *      This is a demo file used only for the main dashboard (index.html)
+ **/
 
-    "use strict";
+$(function () {
+    'use strict';
 
     //Make the dashboard widgets sortable Using jquery UI
-    $(".connectedSortable").sortable({
-        placeholder: "sort-highlight",
-        connectWith: ".connectedSortable",
-        handle: ".box-header, .nav-tabs",
+    $('.connectedSortable').sortable({
+        placeholder: 'sort-highlight',
+        connectWith: '.connectedSortable',
+        handle: '.box-header, .nav-tabs',
         forcePlaceholderSize: true,
         zIndex: 999999
     });
 
-    $(".connectedSortable .box-header, .connectedSortable .nav-tabs-custom").css("cursor", "move");
+    $('.connectedSortable .box-header, .connectedSortable .nav-tabs-custom').css('cursor', 'move');
 
-    //bootstrap WYSIHTML5 - text editor
-    $(".textarea").wysihtml5();
+    // jQuery UI sortable for the todo list
+    var todoList = $('.todo-list');
+
+    todoList.sortable({
+        placeholder: 'sort-highlight',
+        handle: '.handle',
+        forcePlaceholderSize: true,
+        zIndex: 999999
+    });
+
+    todoList.todolist({
+        onCheck: function (elt) {
+            window.console.log('The element has been checked');
+
+            return elt;
+        },
+        onUncheck: function (elt) {
+            window.console.log('The element has been unchecked');
+
+            return elt;
+        }
+    });
+
+    // Trumbowyg - text editor
+    $('.textarea').trumbowyg();
 
     $('.daterange').daterangepicker({
         ranges: {
-            'Today':       [moment(), moment()],
-            'Yesterday':   [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            'Last 7 Days':  [moment().subtract(6, 'days'), moment()],
+            'Today': [moment(), moment()],
+            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
             'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-            'This Month':   [moment().startOf('month'), moment().endOf('month')],
-            'Last Month':   [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            'This Month': [moment().startOf('month'), moment().endOf('month')],
+            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
         },
         startDate: moment().subtract(29, 'days'),
         endDate: moment()
     }, function (start, end) {
-        // window.alert("You chose: " + start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        window.alert('You chose: ' + start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
     });
 
     /* jQueryKnob */
     $(".knob").knob();
+
+    //jvectormap data
+    var visitorsData = {
+        "US": 398, //USA
+        "SA": 400, //Saudi Arabia
+        "CA": 1000, //Canada
+        "DE": 500, //Germany
+        "FR": 760, //France
+        "CN": 300, //China
+        "AU": 700, //Australia
+        "BR": 600, //Brazil
+        "IN": 800, //India
+        "GB": 320, //Great Britain
+        "RU": 3000 //Russia
+    };
 
     //World map by jvectormap
     $('#world-map').vectorMap({
@@ -49,31 +93,21 @@ $(function () {
         },
         series: {
             regions: [{
-                values: {
-                    "US": 398, //USA
-                    "SA": 400, //Saudi Arabia
-                    "CA": 1000, //Canada
-                    "DE": 500, //Germany
-                    "FR": 760, //France
-                    "CN": 300, //China
-                    "AU": 700, //Australia
-                    "BR": 600, //Brazil
-                    "IN": 800, //India
-                    "GB": 320, //Great Britain
-                    "RU": 3000 //Russia
-                },
+                values: visitorsData,
                 scale: ["#92c1dc", "#ebf4f9"],
                 normalizeFunction: 'polynomial'
             }]
         },
         onRegionLabelShow: function (e, el, code) {
-            if (typeof visitorsData[code] != "undefined")
+            if (typeof visitorsData[code] != 'undefined')
                 el.html(el.html() + ': ' + visitorsData[code] + ' new visitors');
         }
     });
 
-    //Sparkline charts
-    $('#sparkline-1').sparkline([1000, 1200, 920, 927, 931, 1027, 819, 930, 1021], {
+    // Sparkline charts
+    $('#sparkline-1').sparkline([
+        1000, 1200, 920, 927, 931, 1027, 819, 930, 1021
+    ],{
         type: 'line',
         lineColor: '#92c1dc',
         fillColor: "#ebf4f9",
@@ -81,7 +115,9 @@ $(function () {
         width: '80'
     });
 
-    $('#sparkline-2').sparkline([515, 519, 520, 522, 652, 810, 370, 627, 319, 630, 921], {
+    $('#sparkline-2').sparkline([
+        515, 519, 520, 522, 652, 810, 370, 627, 319, 630, 921
+    ],{
         type: 'line',
         lineColor: '#92c1dc',
         fillColor: "#ebf4f9",
@@ -89,7 +125,9 @@ $(function () {
         width: '80'
     });
 
-    $('#sparkline-3').sparkline([15, 19, 20, 22, 33, 27, 31, 27, 19, 30, 21], {
+    $('#sparkline-3').sparkline([
+        15, 19, 20, 22, 33, 27, 31, 27, 19, 30, 21
+    ],{
         type: 'line',
         lineColor: '#92c1dc',
         fillColor: "#ebf4f9",
@@ -97,10 +135,13 @@ $(function () {
         width: '80'
     });
 
-    //The Calender
-    $("#calendar").datepicker();
+    // The Calender
+    $("#calendar").datetimepicker({
+        inline: true,
+        format: 'YYYY-MM-dd'
+    });
 
-    //SLIMSCROLL FOR CHAT WIDGET
+    // SLIMSCROLL FOR CHAT WIDGET
     $('#chat-box').slimScroll({
         height: '250px'
     });
@@ -125,9 +166,10 @@ $(function () {
         xkey: 'y',
         ykeys: ['item1', 'item2'],
         labels: ['Item 1', 'Item 2'],
-        lineColors: ['#a0d0e0', '#3c8dbc'],
+        lineColors: ['#7986CB', '#4DB6AC'],
         hideHover: 'auto'
     });
+
     var line = new Morris.Line({
         element: 'line-chart',
         resize: true,
@@ -146,7 +188,7 @@ $(function () {
         xkey: 'y',
         ykeys: ['item1'],
         labels: ['Item 1'],
-        lineColors: ['#efefef'],
+        lineColors: ['#00ACC1'],
         lineWidth: 2,
         hideHover: 'auto',
         gridTextColor: "#fff",
@@ -158,45 +200,23 @@ $(function () {
         gridTextSize: 10
     });
 
-    //Donut Chart
+    // Donut Chart
     var donut = new Morris.Donut({
         element: 'sales-chart',
         resize: true,
-        colors: ["#3c8dbc", "#f56954", "#00a65a"],
         data: [
             {label: "Download Sales", value: 12},
             {label: "In-Store Sales", value: 30},
             {label: "Mail-Order Sales", value: 20}
         ],
+        colors: ["#3c8dbc", "#f56954", "#00a65a"],
         hideHover: 'auto'
     });
 
     //Fix for charts under tabs
-    $('.box ul.nav a').on('shown.bs.tab', function () {
+    $('.nav-tabs-custom ul.nav a').on('shown.bs.tab', function () {
         area.redraw();
         donut.redraw();
         line.redraw();
-    });
-
-    //jQuery UI sortable for the todo list
-    var todoList = $(".todo-list");
-
-    todoList.sortable({
-        placeholder: "sort-highlight",
-        handle: ".handle",
-        forcePlaceholderSize: true,
-        zIndex: 999999
-    });
-
-    /* The todo list plugin */
-    todoList.todolist({
-        onCheck: function (ele) {
-            // window.console.log("The element has been checked");
-            return ele;
-        },
-        onUncheck: function (ele) {
-            // window.console.log("The element has been unchecked");
-            return ele;
-        }
     });
 });
