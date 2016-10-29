@@ -18,7 +18,7 @@
         "laravel/framework":           "~5.3.0",
         "arcanedev/laravel-html":      "~5.3",
         "arcanedev/composer":          "~1.4",
-        "arcanesoft/foundation":       "~1.0",
+        "arcanesoft/foundation":       "~1.1",
         "arcanesoft/auth":             "~1.0"
     },
     "require-dev": {
