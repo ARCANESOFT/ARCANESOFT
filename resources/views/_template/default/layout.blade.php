@@ -15,13 +15,15 @@
         @yield('styles')
     </head>
 <body>
-    @include('_template.default.navigation')
+    <main id="app">
+        @include('_template.default.navigation')
 
-    @yield('content')
+        @yield('content')
+    </main>
 
     {{-- Scripts --}}
-    <script src="/assets/js/vendors.js"></script>
-    <script src="/assets/js/app.js"></script>
+    {{ Html::script('assets/js/vendors.js') }}
+    {{ Html::script('assets/js/app.js') }}
     @yield('scripts')
 </body>
 </html>
