@@ -6,7 +6,7 @@ require('laravel-elixir-vue-2');
  |  Configs
  | ------------------------------------------------------------------------------------------------
  */
-elixir.config.sourcemaps = true;
+elixir.config.notifications = false;
 
 /* ------------------------------------------------------------------------------------------------
  |  Elixir Asset Management
@@ -15,13 +15,13 @@ elixir.config.sourcemaps = true;
 elixir((mix) => {
     // Front assets
     //---------------------------------------------------------------------------------------
-    mix.sass('./resources/assets/front/sass/app.scss', './public/assets/css')
-       .webpack('./resources/assets/front/js/app.js',  './public/assets/js');
+    mix.sass('./resources/assets/front/sass/app.scss', 'public/assets/css')
+       .webpack('./resources/assets/front/js/app.js',  'public/assets/js');
 
     mix.scripts([
-        './bower_components/jquery/dist/jquery.js',
-        './bower_components/bootstrap-sass/assets/javascripts/bootstrap.js'
-    ], './public/assets/js/vendors.js');
+        './bower_components/jquery/jquery.js',
+        './bower_components/bootstrap/dist/js/bootstrap.js'
+    ], 'public/assets/js/vendors.js');
 
     // Fonts
     mix.copy([
@@ -31,11 +31,11 @@ elixir((mix) => {
 
     // Back assets
     //---------------------------------------------------------------------------------------
-    mix.sass('./resources/assets/back/sass/app.scss', './public/vendor/foundation/css')
-       .webpack('./resources/assets/back/js/app.js',  './public/vendor/foundation/js');
+    mix.sass('./resources/assets/back/sass/app.scss', 'public/vendor/foundation/css')
+       .webpack('./resources/assets/back/js/app.js',  'public/vendor/foundation/js');
 
     mix.scripts([
-        './bower_components/jquery/dist/jquery.js',
+        './bower_components/jquery/jquery.js',
         './bower_components/jquery-ui/jquery-ui.js',
         './resources/assets/back/js/vendors/jquery-ui-fix.js',
         './bower_components/bootstrap/dist/js/bootstrap.js',
@@ -64,7 +64,6 @@ elixir((mix) => {
         './bower_components/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
         './bower_components/bootstrap-slider/dist/bootstrap-slider.js',
         './bower_components/select2/dist/js/select2.full.js',
-        './bower_components/slimScroll/jquery.slimscroll.js',
         './bower_components/fastclick/lib/fastclick.js',
         './bower_components/ionrangeslider/js/ion.rangeSlider.js',
         './bower_components/datatables/js/jquery.dataTables.js',
@@ -74,7 +73,7 @@ elixir((mix) => {
         './bower_components/trumbowyg/dist/langs/fr.min.js',
         './resources/assets/back/js/vendors/trumbowyg-config.js',
         './bower_components/toastr/toastr.js'
-    ], './public/vendor/foundation/js/vendors.js');
+    ], 'public/vendor/foundation/js/vendors.js');
 
     mix.copy([
         './bower_components/pace/pace.min.js',
@@ -103,5 +102,5 @@ elixir((mix) => {
     //---------------------------------------------------------------------------------------
     mix.scripts([
         './resources/assets/demo/js/pages/dashboard.js',
-    ], './public/demo-assets/js/dashboard.js');
+    ], 'public/demo-assets/js/dashboard.js');
 });
