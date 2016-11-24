@@ -42,6 +42,7 @@
                                 </li>
                                 <li class="divider"></li>
                             @endif
+                            @include('auth::public._includes.impersonation-nav-item')
                             <li>
                                 {{ link_to_route('auth::logout', trans('auth::generals.logout')) }}
                             </li>
