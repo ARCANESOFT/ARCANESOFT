@@ -2,7 +2,7 @@
 
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class DevServiceProvider extends ServiceProvider
 {
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerDevServiceProvider();
+        $this->registerProviders();
     }
 
     /**
@@ -29,18 +29,12 @@ class AppServiceProvider extends ServiceProvider
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Register the service provider.
+     * Register the external service providers.
      */
-    private function registerDevServiceProvider()
+    private function registerProviders()
     {
-        /** @var  \Illuminate\Contracts\Config\Repository  $config */
-        $config = $this->app['config'];
-
-        if (
-            $config->get('app.debug') &&
-            in_array($this->app->environment(), $config->get('dev.environments'))
-        ) {
-            $this->app->register(DevServiceProvider::class);
+        foreach ($this->app['config']['dev.providers'] as $provider) {
+            $this->app->register($provider);
         }
     }
 }
