@@ -8,7 +8,7 @@
                         <h4 class="modal-title">Upload</h4>
                     </div>
                     <div class="modal-body">
-                        <input @change="prepare" type="file" name="media" id="media" class="form-control">
+                        <input @change="prepare" type="file" name="media" id="media">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-sm btn-default pull-left" data-dismiss="modal">
