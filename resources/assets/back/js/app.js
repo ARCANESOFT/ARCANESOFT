@@ -11,6 +11,8 @@ import boxWidget from './widgets/box-widget'
 
 import todoList from './plugins/todo-list'
 
+import TodoList from './components/TodoList/TodoList.vue'
+
 $.App = {
     widgets: {
         layout,
@@ -21,10 +23,18 @@ $.App = {
     }
 };
 
+Vue.component(
+    'media-manager',
+    require('./components/arcanesoft/media/MediaManager.vue')
+);
+
 const app = new Vue({
     el: '#app',
     data: {
         widgets: $.App.widgets
+    },
+    components: {
+        'todo-list': TodoList
     },
     mounted() {
         $(() => {
@@ -66,12 +76,6 @@ const app = new Vue({
             if (options.sidebar.pushMenu)
                 this.widgets.pushMenu.activate(options.sidebar.toggleSelector);
 
-            // Activate Bootstrap tooltip
-            if (options.bootstrap.tooltip.enabled)
-                $('body').tooltip({
-                    selector: options.bootstrap.tooltip.selector
-                });
-
             // Activate box widget
             if (options.boxWidget.enabled)
                 this.widgets.boxWidget.activate();
@@ -88,19 +92,7 @@ const app = new Vue({
                     box.toggleClass('direct-chat-contacts-open');
                 });
 
-            /*
-             * INITIALIZE BUTTON TOGGLE
-             * ------------------------
-             */
-            $('.btn-group[data-toggle="btn-toggle"]').each((e) => {
-                var group = $(e.target);
-
-                group.find('.btn').on('click', function (e) {
-                    e.preventDefault();
-                    group.find('.btn.active').removeClass('active');
-                    $(e.target).addClass('active');
-                });
-            });
+            this.initTwitterBootstrap(options);
 
             /*
              * User menu animation
@@ -118,6 +110,27 @@ const app = new Vue({
             userMenu.on('hide.bs.dropdown', () => {
                 userDropMenu.removeClass('flipInY')
             })
+        },
+        initTwitterBootstrap(options) {
+            // ACTIVATE DROPDOWN
+            $(".dropdown-toggle").dropdown();
+
+            // ACTIVATE TOOLTIP
+            if (options.bootstrap.tooltip.enabled)
+                $('body').tooltip({
+                    selector: options.bootstrap.tooltip.selector
+                });
+
+            // INITIALIZE BUTTON TOGGLE
+            $('.btn-group[data-toggle="btn-toggle"]').each((e) => {
+                var group = $(e.target);
+
+                group.find('.btn').on('click', function (e) {
+                    e.preventDefault();
+                    group.find('.btn.active').removeClass('active');
+                    $(e.target).addClass('active');
+                });
+            });
         }
     }
 });

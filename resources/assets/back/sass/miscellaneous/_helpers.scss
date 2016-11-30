@@ -2,63 +2,37 @@
 //==========================================>
 
 // Remove padding
-.p0,
-.no-padding {
-    padding: 0 !important;
-}
+.p0, .no-padding { padding: 0 !important; }
 
 // 10px padding and margins
-.p10,
-.pad {
-    padding: 10px;
-}
+.p10, .pad { padding: 10px; }
 
 // Remove top padding
-.pt10,
-.no-pad-top {
-    padding-top: 0;
-}
+.pt10, .no-pad-top { padding-top: 0; }
 
 // Remove margins
-.m0,
-.no-margin {
-    margin: 0 !important;
-}
+.m0, .no-margin { margin: 0 !important; }
 
-.m10,
-.margin {
-    margin: 10px;
-}
+.m10, .margin { margin: 10px; }
 
-.mb20,
-.margin-bottom {
-    margin-bottom: 20px;
-}
+.mb0, .margin-bottom-none { margin-bottom: 0; }
 
-.mb0,
-.margin-bottom-none {
-    margin-bottom: 0;
-}
+.mb20, .margin-bottom { margin-bottom: 20px; }
 
-.mr5,
-.margin-r-5 {
-    margin-right: 5px;
-}
+.mb10 { margin-bottom: 10px; }
+.mb30 { margin-bottom: 30px; }
+
+.ml5, .margin-l-5 { margin-left: 5px; }
+.mr5, .margin-r-5 { margin-right: 5px; }
 
 // Display inline
-.inline {
-    display: inline;
-}
+.inline { display: inline; }
 
 // Hide elements by display none only
-.hide {
-    display: none !important;
-}
+.hide { display: none !important; }
 
 // Remove borders
-.no-border {
-    border: 0 !important;
-}
+.no-border { border: 0 !important; }
 
 // Remove box shadow
 .no-shadow {

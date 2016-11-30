@@ -47,7 +47,6 @@ export default {
 
                     // Fix the layout in case the sidebar stretches over the height of the window
                     layout.fix();
-                    console.debug(layout);
                 });
             }
 

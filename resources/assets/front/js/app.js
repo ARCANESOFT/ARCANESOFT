@@ -14,8 +14,14 @@ require('../../_shared/js/bootstrap');
  * the application, or feel free to tweak this setup for your needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
-
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    mounted() {
+        this.initTwitterBootstrap();
+    },
+    methods: {
+        initTwitterBootstrap() {
+            $(".dropdown-toggle").dropdown();
+        }
+    }
 });

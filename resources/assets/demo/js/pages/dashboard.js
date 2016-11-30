@@ -19,29 +19,6 @@ $(function () {
 
     $('.connectedSortable .box-header, .connectedSortable .nav-tabs-custom').css('cursor', 'move');
 
-    // jQuery UI sortable for the todo list
-    var todoList = $('.todo-list');
-
-    todoList.sortable({
-        placeholder: 'sort-highlight',
-        handle: '.handle',
-        forcePlaceholderSize: true,
-        zIndex: 999999
-    });
-
-    todoList.todolist({
-        onCheck: function (elt) {
-            window.console.log('The element has been checked');
-
-            return elt;
-        },
-        onUncheck: function (elt) {
-            window.console.log('The element has been unchecked');
-
-            return elt;
-        }
-    });
-
     // Trumbowyg - text editor
     $('.textarea').trumbowyg();
 

@@ -2,7 +2,10 @@
  * ======
  * Fixes the layout height in case min-height fails.
  */
-export default {
+
+$.fn.slimScroll = require('./../../../../../bower_components/slimScroll/jquery.slimscroll');
+
+const Layout = {
     activate() {
         var _this = this;
 
@@ -43,7 +46,7 @@ export default {
         $('.content-wrapper, .right-side').css('min-height', postSetWidth);
     },
 
-    fixSidebar () {
+    fixSidebar() {
         var sidebar = $('.sidebar');
 
         // Make sure the body tag has the .fixed class
@@ -74,3 +77,5 @@ export default {
         }
     }
 };
+
+export default Layout;

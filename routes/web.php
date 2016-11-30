@@ -15,12 +15,6 @@ Route::get('home', [
     'uses' => 'HomeController@index'
 ]);
 
-/* ------------------------------------------------------------------------------------------------
- |  Demo Routes
- | ------------------------------------------------------------------------------------------------
- */
-Route::group(['prefix' => 'demo'], function () {
-    Route::get('/', function () {
-        return view('demo.dahsboard-1');
-    });
-});
+if (app()->environment('local')) {
+    require __DIR__ . '/demo-web.php';
+}
