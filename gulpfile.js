@@ -40,7 +40,6 @@ elixir((mix) => {
         './resources/assets/back/js/vendors/jquery-ui-fix.js',
         './bower_components/bootstrap/dist/js/bootstrap.js',
         './resources/assets/back/js/vendors/bootstrap-fix.js',
-        './bower_components/fuelux/dist/js/fuelux.js',
         './bower_components/vue/dist/vue.js',
         './bower_components/jquery-flot/jquery.flot.js',
         './bower_components/jquery-flot/jquery.flot.resize.js',
@@ -84,7 +83,6 @@ elixir((mix) => {
         './bower_components/bootstrap-sass/assets/fonts/bootstrap',
         './bower_components/font-awesome/fonts',
         './bower_components/ionicons/fonts',
-        './bower_components/fuelux/dist/fonts',
         './bower_components/weather-icons/font',
         './resources/assets/back/fonts'
     ], 'public/vendor/foundation/fonts');
