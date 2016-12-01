@@ -19,7 +19,7 @@ elixir((mix) => {
        .webpack('./resources/assets/front/js/app.js',  'public/assets/js');
 
     mix.scripts([
-        './bower_components/jquery/jquery.js',
+        './bower_components/jquery/dist/jquery.js',
         './bower_components/bootstrap/dist/js/bootstrap.js'
     ], 'public/assets/js/vendors.js');
 
@@ -35,7 +35,7 @@ elixir((mix) => {
        .webpack('./resources/assets/back/js/app.js',  'public/vendor/foundation/js');
 
     mix.scripts([
-        './bower_components/jquery/jquery.js',
+        './bower_components/jquery/dist/jquery.js',
         './bower_components/jquery-ui/jquery-ui.js',
         './resources/assets/back/js/vendors/jquery-ui-fix.js',
         './bower_components/bootstrap/dist/js/bootstrap.js',

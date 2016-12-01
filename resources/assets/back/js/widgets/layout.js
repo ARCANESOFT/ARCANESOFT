@@ -3,24 +3,22 @@
  * Fixes the layout height in case min-height fails.
  */
 
-$.fn.slimScroll = require('./../../../../../bower_components/slimScroll/jquery.slimscroll');
-
-const Layout = {
+export default {
     activate() {
-        var _this = this;
+        let me = this;
 
-        _this.fix();
-        _this.fixSidebar();
+        me.fix();
+        me.fixSidebar();
 
         $(window, '.wrapper').resize(() => {
-            _this.fix();
-            _this.fixSidebar();
+            me.fix();
+            me.fixSidebar();
         });
     },
 
     fix() {
         // Get window height and the wrapper height
-        var neg            = $('.main-header').outerHeight() + $('.main-footer').outerHeight(),
+        let neg            = $('.main-header').outerHeight() + $('.main-footer').outerHeight(),
             window_height  = $(window).height(),
             sidebar_height = $('.sidebar').height(),
             postSetWidth;
@@ -33,7 +31,7 @@ const Layout = {
             postSetWidth = window_height >= sidebar_height ? (window_height - neg) : sidebar_height;
 
             // Fix for the control sidebar height
-            var controlSidebar = $($.App.options.sidebar.controlOptions.selector);
+            let controlSidebar = $($.App.options.sidebar.controlOptions.selector);
 
             if (
                 typeof controlSidebar !== 'undefined' &&
@@ -47,7 +45,7 @@ const Layout = {
     },
 
     fixSidebar() {
-        var sidebar = $('.sidebar');
+        let sidebar = $('.sidebar');
 
         // Make sure the body tag has the .fixed class
         if ( ! $('body').hasClass('fixed')) {
@@ -77,5 +75,3 @@ const Layout = {
         }
     }
 };
-
-export default Layout;

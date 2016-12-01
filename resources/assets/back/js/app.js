@@ -1,4 +1,6 @@
 require('../../_shared/js/bootstrap');
+require('./../../../../bower_components/slimScroll/jquery.slimscroll');
+
 // require('../../_shared/js/components');
 
 import config from './config'
