@@ -105,7 +105,8 @@
                 medias: [],
                 loading: true,
                 newDirectory: '',
-                selected: null
+                selected: null,
+                modalOpened: false
             }
         },
         components: {
@@ -118,42 +119,46 @@
             this.getHomeDirectory();
         },
         created() {
-            window.addEventListener('keyup', function(e) {
+            let me = this;
+
+            window.addEventListener('keyup', e => {
+                if (me.modalOpened) return;
+
                 switch (e.keyCode) {
                     case 39: // right
-                        this.selectNextMedia();
+                        me.selectNextMedia();
                         break;
 
                     case 37: // left
-                        this.selectPreviousMedia();
+                        me.selectPreviousMedia();
                         break;
 
                     case 13: // enter
-                        if (this.hasSelectedMedia()) {
-                            this.openMedia(this.selected);
+                        if (me.hasSelectedMedia()) {
+                            me.openMedia(me.selected);
                         }
                         break;
 
                     case 46: // delete
-                        if (this.hasSelectedMedia()) {
-                            this.openDeleteMediaModal()
+                        if (me.hasSelectedMedia()) {
+                            me.openDeleteMediaModal()
                         }
                         break;
 
                     case 8: // backspace
-                        if (this.breadcrumbs.length) {
-                            this.breadcrumbs = _.dropRight(this.breadcrumbs, 1);
+                        if (me.breadcrumbs.length) {
+                            me.breadcrumbs = _.dropRight(me.breadcrumbs, 1);
                         }
                         break;
 
 //                    case 27: // escape
-//                        this.resetSelected();
+//                        me.resetSelected();
 //                        break;
 
                     default:
                         // no break
                 }
-            }.bind(this), false)
+            }, false)
         },
         watch: {
             // whenever question changes, this function will run
@@ -200,8 +205,7 @@
                 return media.type == 'file';
             },
             isMediaImage(media) {
-                if ( ! this.isMediaFile(media))
-                    return false;
+                if ( ! this.isMediaFile(media)) return false;
 
                 return _.indexOf(config.supportedImages, media.mimetype) >= 0;
             },
@@ -266,15 +270,22 @@
 
             openNewFolderModal() {
                 eventHub.$emit('open-new-folder-modal', {});
+                this.modalOpened = true;
             },
             openMediaFolderModal() {
                 eventHub.$emit('open-rename-media-modal', {});
+                this.modalOpened = true;
             },
             openUploadMediaModal() {
                 eventHub.$emit('open-upload-media-modal', {});
+                this.modalOpened = true;
             },
             openDeleteMediaModal() {
                 eventHub.$emit('open-delete-media-modal', {});
+                this.modalOpened = true;
+            },
+            mediaModalClosed() {
+                this.modalOpened = false;
             }
         }
     }

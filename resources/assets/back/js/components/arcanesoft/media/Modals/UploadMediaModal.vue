@@ -8,7 +8,7 @@
                         <h4 class="modal-title">Upload</h4>
                     </div>
                     <div class="modal-body">
-                        <input @change="prepare" type="file" name="media" id="media">
+                        <input @change="prepare" type="file" multiple>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-sm btn-default pull-left" data-dismiss="modal">
@@ -33,7 +33,7 @@
         props: ['location'],
         data () {
             return {
-                medias: null
+                formData: null
             }
         },
         mounted() {
@@ -43,27 +43,28 @@
         },
         methods: {
             prepare(e) {
-                let medias  = e.target.files || e.dataTransfer.files;
-                this.medias = new FormData;
+                let medias = e.target.files || e.dataTransfer.files;
+                this.formData = new FormData;
 
-                // for single file
-                this.medias.append('media', medias[0]);
-                // Or for multiple files you can also do
-                //  _.each(files, function(v, k){
-                //    data.append('avatars['+k+']', v);
-                // });
+                this.formData.append('location', this.location);
+
+                _.forEach(medias, (media, index) => {
+                    this.formData.append('medias['+index+']', media);
+                });
             },
             upload() {
                 this.$http
-                    .post(config.endpoint + '/upload', {
-                        medias: this.medias
-                    })
+                    .post(config.endpoint + '/upload', this.formData)
                     .then((response) => {
-                        this.$parent.refreshDirectory();
+                        if (response.data.status == 'success') {
+                            this.$parent.refreshDirectory();
 
-                        $('div#uploadMediaModal').modal('hide');
+                            $('div#uploadMediaModal').modal('hide');
 
-                        this.medias = null;
+                            this.$parent.mediaModalClosed();
+
+                            this.formData = null;
+                        }
                     });
             }
         }

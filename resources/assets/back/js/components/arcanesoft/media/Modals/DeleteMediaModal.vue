@@ -50,6 +50,8 @@
 
                         $('div#deleteFolderModal').modal('hide');
 
+                        this.$parent.mediaModalClosed();
+
                         this.newDirectory = '';
                     });
             }

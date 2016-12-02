@@ -4,48 +4,47 @@ export default {
     animationSpeed: 0,
 
     activate(_box) {
-        let _this            = this;
-        _this.selectors      = $.App.options.boxWidget.options.selectors;
-        _this.icons          = $.App.options.boxWidget.options.icons;
-        _this.animationSpeed = $.App.options.animationSpeed;
+        let me            = this;
+        me.selectors      = $.App.options.boxWidget.options.selectors;
+        me.icons          = $.App.options.boxWidget.options.icons;
+        me.animationSpeed = $.App.options.animationSpeed;
 
         if ( ! _box) {
             _box = document; // activate all boxes per default
         }
 
         //Listen for collapse event triggers
-        $(_box).on('click', _this.selectors.collapse, (e) => {
+        $(_box).on('click', me.selectors.collapse, (e) => {
             e.preventDefault();
-            _this.collapse($(e.target));
+            me.collapse($(e.target));
         });
 
         //Listen for remove event triggers
-        $(_box).on('click', _this.selectors.remove, (e) => {
+        $(_box).on('click', me.selectors.remove, (e) => {
             e.preventDefault();
-            _this.remove($(e.target));
+            me.remove($(e.target));
         });
     },
 
     collapse(element) {
-        let _this       = this,
-            // Find the box parent
-            box         = element.parents('.box').first(),
-            // Find the body and the footer
-            box_content = box.find('> .box-body, > .box-footer, > form  >.box-body, > form > .box-footer');
+        // Find the box parent
+        let box         = element.parents('.box').first();
+        // Find the body and the footer
+        let box_content = box.find('> .box-body, > .box-footer, > form  >.box-body, > form > .box-footer');
 
         if (box.hasClass('collapsed-box')) {
             // Convert plus into minus
-            element.children(':first').removeClass(_this.icons.open).addClass(_this.icons.collapse);
+            element.children(':first').removeClass(this.icons.open).addClass(this.icons.collapse);
 
             // Show the content
-            box_content.slideDown(_this.animationSpeed, () => box.removeClass('collapsed-box'));
+            box_content.slideDown(this.animationSpeed, () => box.removeClass('collapsed-box'));
         }
         else {
             // Convert minus into plus
-            element.children(':first').removeClass(_this.icons.collapse).addClass(_this.icons.open);
+            element.children(':first').removeClass(this.icons.collapse).addClass(this.icons.open);
 
             // Hide the content
-            box_content.slideUp(_this.animationSpeed, () => box.addClass('collapsed-box'));
+            box_content.slideUp(this.animationSpeed, () => box.addClass('collapsed-box'));
         }
     },
 

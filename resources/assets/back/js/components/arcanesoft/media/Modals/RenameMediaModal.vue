@@ -54,6 +54,8 @@
                             this.$parent.refreshDirectory();
 
                             $('div#renameFolderModal').modal('hide');
+
+                            this.$parent.mediaModalClosed();
                         });
                 }
             }

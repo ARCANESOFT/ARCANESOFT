@@ -1,42 +1,32 @@
 require('../../_shared/js/bootstrap');
-require('./../../../../bower_components/slimScroll/jquery.slimscroll');
-
 // require('../../_shared/js/components');
 
+require('./../../../../bower_components/jquery-ui/jquery-ui');
+require('./../../../../bower_components/slimScroll/jquery.slimscroll');
+require('./../../../../bower_components/trumbowyg/dist/trumbowyg');
+
+$.trumbowyg.svgPath = '/vendor/foundation/fonts/trumbowyg.svg';
+
 import config from './config'
-
-import layout from './widgets/layout'
-import pushMenu from './widgets/push-menu'
-import sidebar from './widgets/sidebar'
-import controlSidebar from './widgets/control-sidebar'
-import boxWidget from './widgets/box-widget'
-
 import todoList from './plugins/todo-list'
-
-import TodoList from './components/TodoList/TodoList.vue'
 
 $.App = {
     widgets: {
-        layout,
-        pushMenu,
-        sidebar,
-        controlSidebar,
-        boxWidget
+        layout: require('./widgets/layout').default,
+        pushMenu: require('./widgets/push-menu').default,
+        sidebar: require('./widgets/sidebar').default,
+        controlSidebar: require('./widgets/control-sidebar').default,
+        boxWidget: require('./widgets/box-widget').default
     }
 };
 
-Vue.component(
-    'media-manager',
-    require('./components/arcanesoft/media/MediaManager.vue')
-);
+Vue.component('media-manager', require('./components/arcanesoft/media/MediaManager.vue'));
+Vue.component('todo-list', require('./components/TodoList/TodoList.vue'));
 
 const app = new Vue({
     el: '#app',
     data: {
         widgets: $.App.widgets
-    },
-    components: {
-        'todo-list': TodoList
     },
     mounted() {
         $(() => {
@@ -125,9 +115,9 @@ const app = new Vue({
 
             // INITIALIZE BUTTON TOGGLE
             $('.btn-group[data-toggle="btn-toggle"]').each((e) => {
-                var group = $(e.target);
+                let group = $(e.target);
 
-                group.find('.btn').on('click', function (e) {
+                group.find('.btn').on('click', (e) => {
                     e.preventDefault();
                     group.find('.btn.active').removeClass('active');
                     $(e.target).addClass('active');
@@ -154,7 +144,7 @@ $(() => {
      */
     $.fn.boxRefresh = (options) => {
         // Render options
-        var settings = $.extend({
+        let settings = $.extend({
             // Refresh button selector
             trigger: '.refresh-btn',
             // File source to be loaded (e.g: ajax/src.php)
@@ -171,9 +161,9 @@ $(() => {
         }, options);
 
         // The overlay
-        var overlay = $('<div class="overlay"><div class="fa fa-refresh fa-spin"></div></div>');
+        let overlay = $('<div class="overlay"><div class="fa fa-refresh fa-spin"></div></div>');
 
-        return this.each(function () {
+        return this.each(() => {
             // if a source is specified
             if (settings.source === '') {
                 if (window.console) {
@@ -184,7 +174,7 @@ $(() => {
             }
 
             // the box
-            var box  = $(this),
+            let box  = $(this),
                 rBtn = box.find(settings.trigger).first(); // the Button
 
             // On trigger click
