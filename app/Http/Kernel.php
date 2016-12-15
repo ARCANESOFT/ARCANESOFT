@@ -1,5 +1,6 @@
 <?php namespace App\Http;
 
+use Arcanedev\LaravelAuth\Http\Middleware\TrackLastActivity;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -31,6 +32,7 @@ class Kernel extends HttpKernel
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
+            \Arcanedev\LaravelAuth\Http\Middleware\TrackLastActivity::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
@@ -55,5 +57,6 @@ class Kernel extends HttpKernel
         'guest'       => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle'    => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'impersonate' => \Arcanedev\LaravelAuth\Http\Middleware\Impersonate::class,
+        'tracking'    => \Arcanedev\LaravelTracker\Middleware\Tracking::class,
     ];
 }

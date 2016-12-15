@@ -34,8 +34,7 @@ class DevServiceProvider extends ServiceProvider
     private function registerProviders()
     {
         foreach ($this->app['config']['dev.providers'] as $provider) {
-            if (class_exists($provider))
-                $this->app->register($provider);
+            if (class_exists($provider)) $this->app->register($provider);
         }
     }
 }
