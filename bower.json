@@ -20,6 +20,7 @@
         "datatables": "datatables.net#~1.10",
         "datatables-bs": "datatables.net-bs#~1.10",
         "fastclick": "~1.0",
+        "flag-icon-css": "^2.7.0",
         "font-awesome": "~4.7",
         "fullcalendar": "~3.0",
         "ionicons": "~2.0",

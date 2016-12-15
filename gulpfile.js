@@ -94,6 +94,9 @@ elixir((mix) => {
     ).copy(
         './bower_components/ionrangeslider/img',
         'public/vendor/foundation/img/ion-rangeslider'
+    ).copy(
+        './bower_components/flag-icon-css/flags',
+        'public/vendor/foundation/svg/flags'
     );
 
     // Demo assets

@@ -16,4 +16,13 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
     ],
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Class Aliases
+     | ------------------------------------------------------------------------------------------------
+     */
+    'aliases' => [
+        //
+    ],
+
 ];

@@ -6,6 +6,10 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
+    /* ------------------------------------------------------------------------------------------------
+     |  Properties
+     | ------------------------------------------------------------------------------------------------
+     */
     /**
      * A list of the exception types that should not be reported.
      *
@@ -20,6 +24,10 @@ class Handler extends ExceptionHandler
         \Illuminate\Validation\ValidationException::class,
     ];
 
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
     /**
      * Report or log an exception.
      *
@@ -38,13 +46,23 @@ class Handler extends ExceptionHandler
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception                $exception
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
+            return redirect()->back()
+                ->withInput($request->except('password'))
+                ->withErrors(trans('errors.token-mismatch.message'));
+        }
+
         return parent::render($request, $exception);
     }
 
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
+     */
     /**
      * Convert an authentication exception into an unauthenticated response.
      *
@@ -70,17 +88,28 @@ class Handler extends ExceptionHandler
      */
     protected function convertExceptionToResponse(Exception $e)
     {
-        if (config('app.debug')) {
-            $whoops = new \Whoops\Run;
-            $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-
-            return response()->make(
-                $whoops->handleException($e),
-                method_exists($e, 'getStatusCode') ? $e->getStatusCode() : 500,
-                method_exists($e, 'getHeaders') ? $e->getHeaders() : []
-            );
-        }
+        if (config('app.debug', false))
+            return $this->renderWhoopsPage($e);
 
         return parent::convertExceptionToResponse($e);
+    }
+
+    /**
+     * Render Whoops page.
+     *
+     * @param  \Exception  $e
+     *
+     * @return \Illuminate\Http\Response
+     */
+    protected function renderWhoopsPage(Exception $e)
+    {
+        $whoops = new \Whoops\Run;
+        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+
+        return response()->make(
+            $whoops->handleException($e),
+            method_exists($e, 'getStatusCode') ? $e->getStatusCode() : 500,
+            method_exists($e, 'getHeaders') ? $e->getHeaders() : []
+        );
     }
 }

@@ -18,9 +18,11 @@
         "laravel/framework":           "~5.3.0",
         "arcanedev/laravel-html":      "~5.3",
         "arcanedev/composer":          "~1.4",
+
         "arcanesoft/foundation":       "~1.1",
         "arcanesoft/auth":             "~1.7",
-        "arcanesoft/media":            "^0.0.1"
+        "arcanesoft/media":            "~0.1",
+        "arcanesoft/tracker":          "~0.1"
     },
     "require-dev": {
         "fzaninotto/faker":            "~1.4",
