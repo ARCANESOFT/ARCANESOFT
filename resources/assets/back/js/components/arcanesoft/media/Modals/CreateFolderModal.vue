@@ -43,8 +43,7 @@
         },
         methods: {
             createFolder() {
-                this.$http
-                    .post(config.endpoint + '/create', {
+                axios.post(config.endpoint + '/create', {
                         name: this.newDirectory,
                         location: this.location
                     })

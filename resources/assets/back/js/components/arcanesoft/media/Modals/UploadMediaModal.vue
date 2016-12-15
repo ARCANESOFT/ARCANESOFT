@@ -53,8 +53,7 @@
                 });
             },
             upload() {
-                this.$http
-                    .post(config.endpoint + '/upload', this.formData)
+                axios.post(config.endpoint + '/upload', this.formData)
                     .then((response) => {
                         if (response.data.status == 'success') {
                             this.$parent.refreshDirectory();

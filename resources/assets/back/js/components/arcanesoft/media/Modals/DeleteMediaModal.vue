@@ -41,8 +41,7 @@
         },
         methods: {
             deleteFolder() {
-                this.$http
-                    .post(config.endpoint + '/delete', {
+                axios.post(config.endpoint + '/delete', {
                         media: this.media
                     })
                     .then((response) => {

@@ -44,8 +44,7 @@
         methods: {
             renameFolder() {
                 if (this.isDirty) {
-                    this.$http
-                        .post(config.endpoint + '/rename', {
+                    axios.post(config.endpoint + '/rename', {
                             location: this.location,
                             media:    this.media,
                             newName:  this.newName

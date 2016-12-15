@@ -191,8 +191,8 @@
                 this.breadcrumbs = [];
                 this.resetSelected();
 
-                this.$http.get(config.endpoint + '/all').then((response) => {
-                    this.medias = response.body.data;
+                axios.get(config.endpoint + '/all').then((response) => {
+                    this.medias = response.data.data;
                     this.loading = false;
                 });
             },
@@ -231,8 +231,8 @@
                 this.resetSelected();
                 this.loading = true;
 
-                this.$http.get(config.endpoint + '/all?location=' + location).then((response) => {
-                    this.medias  = response.body.data;
+                axios.get(config.endpoint + '/all?location=' + location).then((response) => {
+                    this.medias  = response.data.data;
                     this.loading = false;
                 });
             },
