@@ -1,10 +1,9 @@
 export default {
     // instantiate the object
-    activate() {
-        let _this   = this,                                 // Get the object
-            options = $.App.options.sidebar.controlOptions, // Update options
-            sidebar = $(options.selector),                  // Get the sidebar
-            btn     = $(options.toggleBtnSelector);         // The toggle button
+    activate(options) {
+        let _this   = this,                          // Get the object
+            sidebar = $(options.selector),           // Get the sidebar
+            btn     = $(options.toggleBtnSelector);  // The toggle button
 
         // Listen to the click event
         btn.on('click', (e) => {

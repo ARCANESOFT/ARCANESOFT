@@ -81,7 +81,7 @@
             <transition name="fade">
                 <div class="media-loader" v-show="loading">
                     <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
-                    <p>LOADING&hellip;</p>
+                    <p>{{ loadingText }}</p>
                 </div>
             </transition>
         </div>
@@ -99,6 +99,12 @@
     import eventHub from './../../../shared/EventHub'
 
     export default {
+        props: {
+            loadingText: {
+                type: String,
+                default: "LOADING..."
+            },
+        },
         data () {
             return {
                 breadcrumbs: [],
@@ -291,7 +297,7 @@
     }
 </script>
 
-<style lang="sass-loader" rel="stylesheet/scss">
+<style lang="sass-loader" rel="stylesheet/scss" scoped>
     $container-height: 400px;
     $base-color: #4da7e8;
 
@@ -370,6 +376,12 @@
                             font-size: 14px;
                             font-weight: 600;
                             line-height: 1.4em;
+
+                            -webkit-touch-callout: none;
+                            -webkit-user-select: none;
+                            -moz-user-select: none;
+                            -ms-user-select: none;
+                            user-select: none;
                         }
                     }
                 }

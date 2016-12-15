@@ -2,57 +2,71 @@
  * ==========
  * Adds the push menu functionality to the sidebar.
  */
+
+import Cookies from "js-cookie"
+
 export default {
     activate(toggleBtn) {
         // Get the screen sizes
-        var body        = $('body'),
-            screenSizes = $.App.options.screenSizes;
+        let _this       = this,
+            body        = $('body'),
+            screenSizes = App.options.screenSizes;
+
+        if (Cookies.get('sidebar') === 'collapsed' && ! body.hasClass('sidebar-collapse')) {
+            body.addClass('sidebar-collapse').trigger('collapsed.pushMenu');
+        }
 
         //Enable sidebar toggle
         $(document).on('click', toggleBtn, (e) => {
             e.preventDefault();
 
-            // Enable sidebar push menu
             if ($(window).width() > (screenSizes.sm - 1)) {
-                if (body.hasClass('sidebar-collapse')) {
-                    body.removeClass('sidebar-collapse').trigger('expanded.pushMenu');
-                } else {
-                    body.addClass('sidebar-collapse').trigger('collapsed.pushMenu');
-                }
+                // Enable sidebar push menu
+                _this.handleSidebarPushMenu(body);
             }
-            // Handle sidebar push menu for small screens
             else {
-                if (body.hasClass('sidebar-open')) {
-                    body.removeClass('sidebar-open').removeClass('sidebar-collapse').trigger('collapsed.pushMenu');
-                } else {
-                    body.addClass('sidebar-open').trigger('expanded.pushMenu');
-                }
+                // Handle sidebar push menu for small screens
+                _this.handleSidebarPushMenuForSmallScreen(body);
             }
         });
 
         $('.content-wrapper').click(() => {
             // Enable hide menu when clicking on the content-wrapper on small screens
-            if (
-                $(window).width() <= (screenSizes.sm - 1) &&
-                body.hasClass('sidebar-open')
-            ) {
+            if ($(window).width() <= (screenSizes.sm - 1) && body.hasClass('sidebar-open')) {
                 body.removeClass('sidebar-open');
             }
         });
 
         // Enable expand on hover for sidebar mini
-        if (
-            $.App.options.sidebar.expandOnHover ||
-            (body.hasClass('fixed') && body.hasClass('sidebar-mini'))
-        ) {
+        if (App.options.sidebar.expandOnHover || (body.hasClass('fixed') && body.hasClass('sidebar-mini'))) {
             this.expandOnHover();
         }
     },
 
-    expandOnHover () {
-        var _this       = this,
+    handleSidebarPushMenu(body) {
+        if (body.hasClass('sidebar-collapse')) {
+            Cookies.remove('sidebar');
+            body.removeClass('sidebar-collapse').trigger('expanded.pushMenu');
+        }
+        else {
+            Cookies.set('sidebar', 'collapsed', { expires: 7, path: '/' });
+            body.addClass('sidebar-collapse').trigger('collapsed.pushMenu');
+        }
+    },
+
+    handleSidebarPushMenuForSmallScreen(body) {
+        if (body.hasClass('sidebar-open')) {
+            body.removeClass('sidebar-open').removeClass('sidebar-collapse').trigger('collapsed.pushMenu');
+        }
+        else {
+            body.addClass('sidebar-open').trigger('expanded.pushMenu');
+        }
+    },
+
+    expandOnHover() {
+        let _this       = this,
             body        = $('body'),
-            screenWidth = $.App.options.screenSizes.sm - 1;
+            screenWidth = App.options.screenSizes.sm - 1;
 
         // Expand sidebar on hover
         $('.main-sidebar').hover(() => {
@@ -63,7 +77,7 @@ export default {
             ) {
                 _this.expand();
             }
-        }, function () {
+        }, () => {
             if (
                 body.hasClass('sidebar-mini') &&
                 body.hasClass('sidebar-expanded-on-hover') &&
@@ -74,12 +88,12 @@ export default {
         });
     },
 
-    expand () {
+    expand() {
         $('body').removeClass('sidebar-collapse').addClass('sidebar-expanded-on-hover');
     },
 
     collapse () {
-        var body = $('body');
+        let body = $('body');
 
         if (body.hasClass('sidebar-expanded-on-hover')) {
             body.removeClass('sidebar-expanded-on-hover').addClass('sidebar-collapse');

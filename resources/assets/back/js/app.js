@@ -10,14 +10,12 @@ $.trumbowyg.svgPath = '/vendor/foundation/fonts/trumbowyg.svg';
 import config from './config'
 import todoList from './plugins/todo-list'
 
-$.App = {
-    widgets: {
-        layout: require('./widgets/layout').default,
-        pushMenu: require('./widgets/push-menu').default,
-        sidebar: require('./widgets/sidebar').default,
-        controlSidebar: require('./widgets/control-sidebar').default,
-        boxWidget: require('./widgets/box-widget').default
-    }
+App.widgets = {
+    layout: require('./widgets/layout').default,
+    pushMenu: require('./widgets/push-menu').default,
+    sidebar: require('./widgets/sidebar').default,
+    controlSidebar: require('./widgets/control-sidebar').default,
+    boxWidget: require('./widgets/box-widget').default
 };
 
 Vue.component('media-manager', require('./components/arcanesoft/media/MediaManager.vue'));
@@ -26,18 +24,18 @@ Vue.component('todo-list', require('./components/TodoList/TodoList.vue'));
 const app = new Vue({
     el: '#app',
     data: {
-        widgets: $.App.widgets
+        widgets: App.widgets
     },
     mounted() {
         $(() => {
             // Fix for IE page transitions
             $('body').removeClass('hold-transition');
 
-            $.App.options = config;
+            App.options = config;
 
             // Extend options if external options exist
             if (typeof AppOptions !== 'undefined') {
-                $.extend(true, $.App.options, AppOptions);
+                $.extend(true, App.options, AppOptions);
             }
 
             this.init()
@@ -45,7 +43,7 @@ const app = new Vue({
     },
     methods: {
         init() {
-            let options = $.App.options;
+            let options = App.options;
 
             this.widgets.layout.activate();
 
@@ -53,8 +51,8 @@ const app = new Vue({
             this.widgets.sidebar.activate(this.widgets.layout, '.sidebar');
 
             // Enable control sidebar
-            if (options.sidebar.controlOptions.enabled)
-                this.widgets.controlSidebar.activate();
+            if (App.options.sidebar.controlOptions.enabled)
+                this.widgets.controlSidebar.activate(App.options.sidebar.controlOptions);
 
             // Add slimscroll to navbar dropdown
             if (options.navbar.menu.slimScroll.enabled && typeof $.fn.slimscroll != 'undefined')
@@ -215,17 +213,17 @@ $(() => {
      * @usage $("#box-widget").removeBox();
      */
     $.fn.activateBox = () => {
-        $.App.widgets.boxWidget.activate(this);
+        App.widgets.boxWidget.activate(this);
     };
 
     $.fn.toggleBox = () => {
-        let button = $($.App.boxWidget.selectors.collapse, this);
-        $.App.widgets.boxWidget.collapse(button);
+        let button = $(App.boxWidget.selectors.collapse, this);
+        App.widgets.boxWidget.collapse(button);
     };
 
     $.fn.removeBox = () => {
-        let button = $($.App.boxWidget.selectors.remove, this);
-        $.App.widgets.boxWidget.remove(button);
+        let button = $(App.boxWidget.selectors.remove, this);
+        App.widgets.boxWidget.remove(button);
     };
 
     /*

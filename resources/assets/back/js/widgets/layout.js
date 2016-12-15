@@ -31,7 +31,7 @@ export default {
             postSetWidth = window_height >= sidebar_height ? (window_height - neg) : sidebar_height;
 
             // Fix for the control sidebar height
-            let controlSidebar = $($.App.options.sidebar.controlOptions.selector);
+            let controlSidebar = $(App.options.sidebar.controlOptions.selector);
 
             if (
                 typeof controlSidebar !== 'undefined' &&
@@ -60,7 +60,7 @@ export default {
         }
 
         // Enable slimscroll for fixed layout
-        if ($.App.options.sidebar.slimScroll) {
+        if (App.options.sidebar.slimScroll) {
             if (typeof $.fn.slimScroll != 'undefined') {
                 // Destroy if it exists
                 sidebar.slimScroll({destroy: true}).height('auto');

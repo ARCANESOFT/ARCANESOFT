@@ -1,6 +1,6 @@
 export default function (options) {
     // Render options
-    var settings = $.extend({
+    let settings = $.extend({
         //When the user checks the input
         onCheck(elt) { return elt; },
 
@@ -10,7 +10,7 @@ export default function (options) {
 
     return this.each(() => {
         $('input', this).on('change', () => {
-            var ele = $(this).parents('li').first();
+            let ele = $(this).parents('li').first();
             ele.toggleClass('done');
 
             if ($('input', ele).is(':checked'))

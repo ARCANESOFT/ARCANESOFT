@@ -5,9 +5,9 @@ export default {
 
     activate(_box) {
         let me            = this;
-        me.selectors      = $.App.options.boxWidget.options.selectors;
-        me.icons          = $.App.options.boxWidget.options.icons;
-        me.animationSpeed = $.App.options.animationSpeed;
+        me.selectors      = App.options.boxWidget.options.selectors;
+        me.icons          = App.options.boxWidget.options.icons;
+        me.animationSpeed = App.options.animationSpeed;
 
         if ( ! _box) {
             _box = document; // activate all boxes per default
@@ -50,7 +50,7 @@ export default {
 
     remove(element) {
         // Find the box parent
-        var box = element.parents('.box').first();
+        let box = element.parents('.box').first();
 
         box.slideUp(this.animationSpeed, () => $(this).remove());
     }
