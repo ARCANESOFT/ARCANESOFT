@@ -96,13 +96,13 @@ return [
          * Package Service Providers...
          */
 
-
         /*
          * ARCANESOFT Service Providers...
          */
         Arcanesoft\Foundation\FoundationServiceProvider::class,
         Arcanesoft\Auth\AuthServiceProvider::class,
         Arcanesoft\Media\MediaServiceProvider::class,
+        Arcanesoft\Tracker\TrackerServiceProvider::class,
 
         /*
          * Application Service Providers...
