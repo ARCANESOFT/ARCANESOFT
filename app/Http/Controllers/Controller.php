@@ -1,11 +1,40 @@
 <?php namespace App\Http\Controllers;
 
+use Arcanesoft\Core\Bases\Controller as BaseController;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    /* ------------------------------------------------------------------------------------------------
+     |  Traits
+     | ------------------------------------------------------------------------------------------------
+     */
+    use DispatchesJobs, ValidatesRequests;
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Constructor
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Controller constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->registerBreadcrumbs('public'); // todo: Refactor this constructor to the core
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Do random stuff before rendering view.
+     */
+    protected function beforeViewRender()
+    {
+        $this->loadBreadcrumbs();
+    }
 }

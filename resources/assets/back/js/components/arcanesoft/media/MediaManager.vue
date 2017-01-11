@@ -54,26 +54,18 @@
                 >
                     <div class="media-icon">
                         <i class="fa fa-fw fa-folder-o" v-if="isMediaDirectory(media)"></i>
-                        <div class="media-image"
-                             v-if="isMediaImage(media)"
+
+                        <div v-if="isMediaImage(media)"
                              :style="'background-image: url(' + media.url + ');'"
+                             class="media-image"
                         ></div>
+
+                        <i v-if="isMediaNotImage(media)" :class="getMediaFileIcon(media)" class="fa fa-fw"></i>
                     </div>
                     <div class="media-details">
                         <h4 class="media-name">{{ media.name }}</h4>
                     </div>
                 </a>
-                <!--<a class="media-item media-file"-->
-                   <!--v-for="file in files"-->
-                   <!--:class="{selected: file.name == selected.name}"-->
-                   <!--@click="selectMedia(file.name, 'file')">-->
-                    <!--<div class="media-icon">-->
-                        <!--<div class="media-image" :style="'background-image: url(' + file.url + ');'"></div>-->
-                    <!--</div>-->
-                    <!--<div class="media-details">-->
-                        <!--<h4 class="media-name">{{ file.name }}</h4>-->
-                    <!--</div>-->
-                <!--</a>-->
             </div>
             <div class="media-status-bar">
 
@@ -214,6 +206,15 @@
                 if ( ! this.isMediaFile(media)) return false;
 
                 return _.indexOf(config.supportedImages, media.mimetype) >= 0;
+            },
+            isMediaNotImage(media) {
+                return ! (this.isMediaDirectory(media) || this.isMediaImage(media));
+            },
+
+            getMediaFileIcon(media) {
+                return _.has(config.icons, media.mimetype)
+                    ? config.icons[media.mimetype]
+                    : config['default-icon'];
             },
 
             openMedia(media) {

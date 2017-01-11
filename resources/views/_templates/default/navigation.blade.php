@@ -36,9 +36,9 @@
                             {{ $user->full_name }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            @if (($user->isAdmin() || $user->isModerator()) && Route::has('foundation::home'))
+                            @if (($user->isAdmin() || $user->isModerator()) && Route::has('admin::foundation.home'))
                                 <li>
-                                    {{ link_to_route('foundation::home', 'Dashboard') }}
+                                    {{ link_to_route('admin::foundation.home', 'Dashboard') }}
                                 </li>
                                 <li class="divider"></li>
                             @endif

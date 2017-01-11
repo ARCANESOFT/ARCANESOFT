@@ -8,12 +8,16 @@
         {{-- Styles --}}
         {{ Html::style('assets/css/app.css') }}
         {{-- CSRF Token --}}
-        @include('_template.default.csrf-token')
+        @include('_templates.default.csrf-token')
         @yield('styles')
     </head>
 <body>
     <main id="app">
-        @include('_template.default.navigation')
+        @include('_templates.default.navigation')
+
+        @unless(route_is('public::home'))
+            @include('_templates.default.page-header')
+        @endunless
 
         @yield('content')
     </main>

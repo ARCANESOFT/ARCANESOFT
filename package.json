@@ -19,5 +19,8 @@
         "node-sass": "^3.10.1",
         "sortablejs": "^1.5.0-rc1",
         "vue": "^2.0.1"
+    },
+    "dependencies": {
+        "eonasdan-bootstrap-datetimepicker": "^4.17.43"
     }
 }

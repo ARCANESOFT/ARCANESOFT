@@ -19,8 +19,10 @@
         "arcanedev/laravel-html":      "~5.3",
         "arcanedev/composer":          "~1.4",
 
-        "arcanesoft/foundation":       "~1.1",
-        "arcanesoft/auth":             "~1.7",
+        "arcanesoft/foundation":       "~1.4",
+        "arcanesoft/auth":             "~1.10",
+        "arcanesoft/seo":              "~0.2",
+        "arcanesoft/blog":             "~0.4",
         "arcanesoft/media":            "~0.1",
         "arcanesoft/tracker":          "~0.1"
     },
@@ -63,7 +65,8 @@
         ]
     },
     "config": {
-        "preferred-install": "dist"
+        "preferred-install": "dist",
+        "sort-packages": true
     },
     "extra": {
         "merge-plugin": {

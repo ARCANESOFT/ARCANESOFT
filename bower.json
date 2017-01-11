@@ -29,7 +29,6 @@
         "jquery-flot": "flot#~0.8",
         "jquery-inputmask": "jquery.inputmask#~3.3",
         "jquery-knob": "~1.2",
-        "jquery-ui": "~1.12",
         "morris.js": "~0.5",
         "pace": "~1.0",
         "select2": "~4.0",

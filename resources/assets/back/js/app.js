@@ -1,11 +1,7 @@
 require('../../_shared/js/bootstrap');
 // require('../../_shared/js/components');
 
-require('./../../../../bower_components/jquery-ui/jquery-ui');
-require('./../../../../bower_components/slimScroll/jquery.slimscroll');
-require('./../../../../bower_components/trumbowyg/dist/trumbowyg');
-
-$.trumbowyg.svgPath = '/vendor/foundation/fonts/trumbowyg.svg';
+require('./vendors');
 
 import config from './config'
 import todoList from './plugins/todo-list'
@@ -19,6 +15,7 @@ App.widgets = {
 };
 
 Vue.component('media-manager', require('./components/arcanesoft/media/MediaManager.vue'));
+Vue.component('seo-counter', require('./components/arcanesoft/seo/SeoCounter.vue'));
 Vue.component('todo-list', require('./components/TodoList/TodoList.vue'));
 
 const app = new Vue({
@@ -83,6 +80,7 @@ const app = new Vue({
                 });
 
             this.initTwitterBootstrap(options);
+            this.initPlugins(options);
 
             /*
              * User menu animation
@@ -101,6 +99,7 @@ const app = new Vue({
                 userDropMenu.removeClass('flipInY')
             })
         },
+
         initTwitterBootstrap(options) {
             // ACTIVATE DROPDOWN
             $(".dropdown-toggle").dropdown();
@@ -121,6 +120,11 @@ const app = new Vue({
                     $(e.target).addClass('active');
                 });
             });
+        },
+
+        initPlugins($options) {
+            // INITIALIZE SELECT2
+            $('select.select-2').select2();
         }
     }
 });
