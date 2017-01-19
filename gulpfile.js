@@ -64,10 +64,7 @@ elixir((mix) => {
         './bower_components/ionrangeslider/js/ion.rangeSlider.js',
         './bower_components/datatables/js/jquery.dataTables.js',
         './bower_components/datatables-bs/js/dataTables.bootstrap.js',
-        './bower_components/trumbowyg/dist/trumbowyg.js',
-        './bower_components/trumbowyg/dist/langs/ar.min.js',
-        './bower_components/trumbowyg/dist/langs/fr.min.js',
-        './resources/assets/back/js/vendors/trumbowyg-config.js',
+        './bower_components/simplemde/dist/simplemde.min.js',
         './bower_components/toastr/toastr.js'
     ], 'public/vendor/foundation/js/vendors.js');
 
