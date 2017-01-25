@@ -3,12 +3,6 @@
 return [
 
     /* ------------------------------------------------------------------------------------------------
-     |  PDO Fetch Style
-     | ------------------------------------------------------------------------------------------------
-     */
-    'fetch' => PDO::FETCH_OBJ,
-
-    /* ------------------------------------------------------------------------------------------------
      |  Default Database Connection Name
      | ------------------------------------------------------------------------------------------------
      */
@@ -33,8 +27,8 @@ return [
             'database'  => env('DB_DATABASE', 'forge'),
             'username'  => env('DB_USERNAME', 'forge'),
             'password'  => env('DB_PASSWORD', ''),
-            'charset'   => 'utf8',
-            'collation' => 'utf8_unicode_ci',
+            'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
             'prefix'    => '',
             'strict'    => true,
             'engine'    => null,
@@ -66,9 +60,8 @@ return [
      | ------------------------------------------------------------------------------------------------
      */
     'redis' => [
-        'client'  => env('REDIS_CLIENT', 'predis'),
 
-        'cluster' => false,
+        'client' => 'predis',
 
         'default' => [
             'host'     => env('REDIS_HOST', 'localhost'),

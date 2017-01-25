@@ -2,23 +2,23 @@
 //==========================================>
 
 .nav {
-    & > li {
-        & > a {
-            &:hover, &:active, &:focus {
-                color: #444;
-                background: #F7F7F7;
-            }
+    & > li > a {
+        &:hover, &:active, &:focus {
+            color: #444;
+            background: #F7F7F7;
         }
+    }
+
+    &.nav-sm > li > a {
+        padding: 4px 10px;
     }
 }
 
 .nav-pills,
 .nav-stacked {
-    & > li {
-        & > a {
-            @include border-radius(0);
-            color: #444;
-        }
+    & > li > a {
+        @include border-radius(0);
+        color: #444;
     }
 }
 
@@ -28,18 +28,18 @@
         & > a {
             border-top: 3px solid transparent;
 
-            & > .fa, & > .glyphicon, & > .ion {
+            & > .fa,
+            & > .glyphicon,
+            & > .ion {
                 margin-right: 5px;
             }
         }
 
-        &.active {
-            & > a {
-                font-weight: 600;
+        &.active > a {
+            font-weight: 600;
 
-                &, &:hover, &:focus {
-                    border-top-color: $brand-primary;
-                }
+            &, &:hover, &:focus {
+                border-top-color: $brand-primary;
             }
         }
     }
@@ -53,17 +53,14 @@
             border-left: 3px solid transparent;
         }
 
-        &.active {
-            & > a {
-                &, &:hover {
-                    background: transparent;
-                    color: #444;
-                    border-top: 0;
-                    border-left-color: $brand-primary;
-                }
+        &.active > a {
+            &, &:hover {
+                background: transparent;
+                color: #444;
+                border-top: 0;
+                border-left-color: $brand-primary;
             }
         }
-
 
         &.header {
             border-bottom: 1px solid #DDD;
@@ -84,7 +81,7 @@
 
     & > .nav-tabs {
         margin: 0;
-        border-bottom-color: #f4f4f4;
+        border-bottom-color: #F4F4F4;
         @include border-top-radius($box-border-radius);
 
         & > li {
@@ -163,12 +160,16 @@
             font-size: 20px;
             color: #444;
 
-            & > .fa, & > .glyphicon, & > .ion { margin-right: 5px; }
+            & > .fa,
+            & > .glyphicon,
+            & > .ion {
+                margin-right: 5px;
+            }
         }
     }
 
     & > .tab-content {
-        background: #fff;
+        background: #FFF;
         padding: 10px;
         @include border-bottom-radius($box-border-radius);
     }
@@ -181,40 +182,28 @@
     }
 
     // Tab color variations
-    &.tab-default {
-        & > .nav-tabs {
-            & > li.active { border-top-color: $light-gray; }
-        }
+    &.tab-default > .nav-tabs {
+        & > li.active { border-top-color: $light-gray; }
     }
 
-    &.tab-primary {
-        & > .nav-tabs {
-            & > li.active { border-top-color: $brand-primary; }
-        }
+    &.tab-primary > .nav-tabs {
+        & > li.active { border-top-color: $brand-primary; }
     }
 
-    &.tab-success {
-        & > .nav-tabs {
-            & > li.active { border-top-color: $brand-success; }
-        }
+    &.tab-success > .nav-tabs {
+        & > li.active { border-top-color: $brand-success; }
     }
 
-    &.tab-info {
-        & > .nav-tabs {
-            & > li.active { border-top-color: $brand-info; }
-        }
+    &.tab-info > .nav-tabs {
+        & > li.active { border-top-color: $brand-info; }
     }
 
-    &.tab-warning {
-        & > .nav-tabs {
-            & > li.active { border-top-color: $brand-warning; }
-        }
+    &.tab-warning > .nav-tabs {
+        & > li.active { border-top-color: $brand-warning; }
     }
 
-    &.tab-danger {
-        & > .nav-tabs {
-            & > li.active { border-top-color: $brand-danger; }
-        }
+    &.tab-danger > .nav-tabs {
+        & > li.active { border-top-color: $brand-danger; }
     }
 }
 
@@ -225,9 +214,7 @@
         color: #666;
     }
 
-    &.pagination-flat {
-        & > li > a {
-            @include border-radius(0 !important);
-        }
+    &.pagination-flat > li > a {
+        @include border-radius(0 !important);
     }
 }

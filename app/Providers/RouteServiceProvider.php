@@ -1,7 +1,6 @@
 <?php namespace App\Providers;
 
 use App\Http\Routes;
-use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -57,12 +56,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::group([
-            'middleware' => ['web', 'impersonate', 'tracking'],
-            'namespace'  => $this->namespace,
-        ], function (Registrar $router) {
-            require base_path('routes/web.php');
-        });
+        Route::middleware(['web', 'impersonate', 'tracking'])
+             ->namespace($this->namespace)
+             ->group(base_path('routes/web.php'));
     }
 
     /**
@@ -72,12 +68,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::group([
-            'middleware' => 'api',
-            'namespace'  => $this->namespace,
-            'prefix'     => 'api',
-        ], function (Registrar $router) {
-            require base_path('routes/api.php');
-        });
+        Route::middleware('api')
+             ->namespace($this->namespace)
+             ->prefix('api')
+             ->group(base_path('routes/api.php'));
     }
 }
