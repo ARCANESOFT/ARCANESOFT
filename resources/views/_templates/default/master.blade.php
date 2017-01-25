@@ -15,7 +15,7 @@
     <main id="app">
         @include('_templates.default.navigation')
 
-        @unless(route_is('public::home'))
+        @unless(route_is(['public::home', 'auth::*']))
             @include('_templates.default.page-header')
         @endunless
 
