@@ -124,7 +124,13 @@ const app = new Vue({
 
         initPlugins($options) {
             // INITIALIZE SELECT2
-            $('select.select-2').select2();
+            $('select.select-2').select2({
+                width: 'resolve'
+            });
+
+            $('select.select-2-fw').select2({
+                width: '100%'
+            });
         }
     }
 });
