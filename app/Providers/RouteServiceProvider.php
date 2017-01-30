@@ -1,7 +1,10 @@
 <?php namespace App\Providers;
 
 use App\Http\Routes;
+use Arcanedev\LaravelAuth\Services\SocialAuthenticator;
+use Arcanedev\LaravelAuth\Services\UserImpersonator;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
@@ -42,6 +45,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapAuthRoutes();
+
         //
     }
 
@@ -72,5 +77,30 @@ class RouteServiceProvider extends ServiceProvider
              ->namespace($this->namespace)
              ->prefix('api')
              ->group(base_path('routes/api.php'));
+    }
+
+    /**
+     * Define the auth routes for the application.
+     */
+    private function mapAuthRoutes()
+    {
+        $attributes = [
+            'prefix'     => 'auth',
+            'as'         => 'auth::',
+            'namespace'  => $this->namespace.'\\Auth',
+            'middleware' => ['web', 'impersonate', 'tracking'],
+        ];
+
+        Route::group($attributes, function (Router $router) {
+            Routes\Auth\AuthenticationRoutes::register($router);
+            Routes\Auth\RegisterRoutes::register($router);
+            Routes\Auth\PasswordResetRoutes::register($router);
+
+            if (UserImpersonator::isEnabled())
+                Routes\Auth\ImpersonateRoutes::register($router);
+
+            if (SocialAuthenticator::isEnabled())
+                Routes\Auth\SocialiteRoutes::register($router);
+        });
     }
 }

@@ -1,9 +1,14 @@
 <?php namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-class LoginController extends Controller
+/**
+ * Class     LoginController
+ *
+ * @package  App\Http\Controllers\Auth
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
+class LoginController extends AuthController
 {
     use AuthenticatesUsers;
 
@@ -19,6 +24,6 @@ class LoginController extends Controller
 
     protected function redirectTo()
     {
-        return '/home';
+        return route('public::welcome');
     }
 }

@@ -3,6 +3,12 @@
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
+/**
+ * Class     ResetPasswordController
+ *
+ * @package  App\Http\Controllers\Auth
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 class ResetPasswordController extends Controller
 {
     use ResetsPasswords;
@@ -19,6 +25,6 @@ class ResetPasswordController extends Controller
 
     protected function redirectTo()
     {
-        return '/home';
+        return route('public::welcome');
     }
 }
