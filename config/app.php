@@ -101,11 +101,6 @@ return [
          * ARCANESOFT Service Providers...
          */
         Arcanesoft\Foundation\FoundationServiceProvider::class,
-        Arcanesoft\Auth\AuthServiceProvider::class,
-        Arcanesoft\Seo\SeoServiceProvider::class,
-        Arcanesoft\Blog\BlogServiceProvider::class,
-        Arcanesoft\Media\MediaServiceProvider::class,
-        Arcanesoft\Tracker\TrackerServiceProvider::class,
 
         /*
          * Application Service Providers...

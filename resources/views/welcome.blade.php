@@ -1,7 +1,10 @@
 @extends('_templates.default.master')
 
+@section('page-title')
+    Welcome page
+@endsection
+
 @section('content')
     <div class="container">
-        <h1>Homepage</h1>
     </div>
 @endsection

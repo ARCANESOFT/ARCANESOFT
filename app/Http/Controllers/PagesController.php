@@ -6,4 +6,9 @@ class PagesController extends Controller
     {
         return $this->view('home');
     }
+
+    public function welcome()
+    {
+        return $this->view('welcome');
+    }
 }
