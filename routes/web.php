@@ -5,7 +5,9 @@
  | ------------------------------------------------------------------------------------------------
  */
 Route::group(['as' => 'public::'], function () {
-    Route::get('/', 'PagesController@home')->name('home');
+    Route::get('/', 'PagesController@home')->name('home'); // public::home
+
+    Route::get('/welcome', 'PagesController@welcome')->middleware('auth')->name('welcome'); // public::welcome
 });
 
 //if (app()->environment('local')) {
