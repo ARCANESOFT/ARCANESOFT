@@ -63,7 +63,12 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware(['web', 'impersonate', 'tracking'])
              ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
+             ->group(function ($router) {
+                 Routes\Front\PagesRoutes::register($router);
+                 Routes\Front\ProfileRoutes::register($router);
+
+                 require_once base_path('routes/web.php');
+             });
     }
 
     /**

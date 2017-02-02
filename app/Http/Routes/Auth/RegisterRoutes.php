@@ -1,7 +1,6 @@
 <?php namespace App\Http\Routes\Auth;
 
-use Arcanedev\Support\Bases\RouteRegister;
-use Illuminate\Contracts\Routing\Registrar;
+use Arcanedev\Support\Routing\RouteRegistrar;
 
 /**
  * Class     RegisterRoutes
@@ -9,7 +8,7 @@ use Illuminate\Contracts\Routing\Registrar;
  * @package  App\Http\Routes\Auth
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class RegisterRoutes extends RouteRegister
+class RegisterRoutes extends RouteRegistrar
 {
     /* ------------------------------------------------------------------------------------------------
     |  Main Functions
@@ -17,13 +16,11 @@ class RegisterRoutes extends RouteRegister
     */
     /**
      * Map routes.
-     *
-     * @param  \Illuminate\Contracts\Routing\Registrar  $router
      */
-    public function map(Registrar $router)
+    public function map()
     {
         if ($this->isEnabled()) {
-            $this->group(['prefix' => 'register', 'as' => 'register.'], function () {
+            $this->prefix('register')->name('register.')->group(function () {
                 $this->get('/', 'RegisterController@showRegistrationForm')->name('get'); // auth::register.get
 
                 $this->post('/', 'RegisterController@register')->name('post'); // auth::register.post

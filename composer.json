@@ -16,14 +16,14 @@
     "require": {
         "php": ">=5.6.4",
         "arcanedev/composer": "~1.4",
-        "arcanedev/laravel-html": "~5.3",
-        "arcanedev/laravel-markdown": "^1.1",
-        "arcanesoft/auth": "~1.10",
-        "arcanesoft/blog": "~0.4",
-        "arcanesoft/foundation": "~1.4",
-        "arcanesoft/media": "~0.1",
-        "arcanesoft/seo": "~0.2",
-        "arcanesoft/tracker": "~0.1",
+        "arcanedev/laravel-html": "~5.4",
+        "arcanedev/laravel-markdown": "~1.2",
+        "arcanesoft/auth": "~2.0",
+        "arcanesoft/blog": "~1.0",
+        "arcanesoft/foundation": "~1.5",
+        "arcanesoft/media": "~1.0",
+        "arcanesoft/seo": "~1.0",
+        "arcanesoft/tracker": "~1.0",
         "laravel/framework": "~5.4.0",
         "laravel/tinker": "~1.0"
     },
@@ -49,18 +49,18 @@
     },
     "scripts": {
         "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "@php artisan key:generate"
+            "php artisan key:generate"
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "@php artisan optimize"
+            "php artisan optimize"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "@php artisan optimize"
+            "php artisan optimize"
         ]
     },
     "config": {

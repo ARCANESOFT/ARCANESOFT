@@ -1,14 +1,14 @@
-<?php namespace App\Http\Routes\Auth;
+<?php namespace App\Http\Routes\Front;
 
 use Arcanedev\Support\Routing\RouteRegistrar;
 
 /**
- * Class     ImpersonateRoutes
+ * Class     ProfileRoutes
  *
- * @package  App\Http\Routes\Auth
+ * @package  App\Http\Routes\Front
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class ImpersonateRoutes extends RouteRegistrar
+class ProfileRoutes extends RouteRegistrar
 {
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -19,10 +19,6 @@ class ImpersonateRoutes extends RouteRegistrar
      */
     public function map()
     {
-        $this->prefix('users/impersonate')
-             ->name('users.impersonate.')
-             ->group(function () {
-                 $this->get('stop', 'ImpersonateController@stop')->name('stop'); // auth::users.impersonate.stop
-             });
+        //
     }
 }

@@ -1,7 +1,6 @@
 <?php namespace App\Http\Routes\Auth;
 
-use Arcanedev\Support\Bases\RouteRegister;
-use Illuminate\Contracts\Routing\Registrar;
+use Arcanedev\Support\Routing\RouteRegistrar;
 
 /**
  * Class     SocialiteRoutes
@@ -9,7 +8,7 @@ use Illuminate\Contracts\Routing\Registrar;
  * @package  App\Http\Routes\Auth
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SocialiteRoutes extends RouteRegister
+class SocialiteRoutes extends RouteRegistrar
 {
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -17,12 +16,10 @@ class SocialiteRoutes extends RouteRegister
      */
     /**
      * Map routes.
-     *
-     * @param  \Illuminate\Contracts\Routing\Registrar $router
      */
-    public function map(Registrar $router)
+    public function map()
     {
-        $this->group(['prefix' => 'social/{social_provider}', 'as' => 'social.'], function () {
+        $this->prefix('social/{social_provider}')->name('social.')->group(function () {
             $this->get('/', 'SocialAuthController@redirectToProvider')->name('redirect'); // auth::social.redirect
 
             $this->get('callback', 'SocialAuthController@handleCallback')->name('callback'); // auth::social.callback

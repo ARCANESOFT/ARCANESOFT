@@ -1,9 +1,14 @@
 <?php namespace App\Http\Routes\Auth;
 
-use Arcanedev\Support\Bases\RouteRegister;
-use Illuminate\Contracts\Routing\Registrar;
+use Arcanedev\Support\Routing\RouteRegistrar;
 
-class AuthenticationRoutes extends RouteRegister
+/**
+ * Class     AuthenticationRoutes
+ *
+ * @package  App\Http\Routes\Auth
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
+class AuthenticationRoutes extends RouteRegistrar
 {
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -11,10 +16,8 @@ class AuthenticationRoutes extends RouteRegister
      */
     /**
      * Map routes.
-     *
-     * @param  \Illuminate\Contracts\Routing\Registrar  $router
      */
-    public function map(Registrar $router)
+    public function map()
     {
         if ($this->isEnabled()) {
             $this->mapLoginRoutes();
@@ -27,10 +30,7 @@ class AuthenticationRoutes extends RouteRegister
      */
     protected function mapLoginRoutes()
     {
-        $this->group([
-            'prefix' => 'login',
-            'as'     => 'login.',
-        ], function () {
+        $this->prefix('login')->name('login.')->group(function () {
             $this->get('/', 'LoginController@showLoginForm')->name('get'); // auth::login.get
             $this->post('/', 'LoginController@login')->name('post'); // auth::login.post
         });

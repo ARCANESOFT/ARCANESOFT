@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use Arcanesoft\Core\Bases\Controller as BaseController;
+use Arcanesoft\Core\Http\Controllers\Controller as BaseController;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 

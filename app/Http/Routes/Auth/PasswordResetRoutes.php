@@ -1,9 +1,14 @@
 <?php namespace App\Http\Routes\Auth;
 
-use Arcanedev\Support\Bases\RouteRegister;
-use Illuminate\Contracts\Routing\Registrar;
+use Arcanedev\Support\Routing\RouteRegistrar;
 
-class PasswordResetRoutes extends RouteRegister
+/**
+ * Class     PasswordResetRoutes
+ *
+ * @package  App\Http\Routes\Auth
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
+class PasswordResetRoutes extends RouteRegistrar
 {
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -11,13 +16,11 @@ class PasswordResetRoutes extends RouteRegister
      */
     /**
      * Map routes.
-     *
-     * @param  \Illuminate\Contracts\Routing\Registrar  $router
      */
-    public function map(Registrar $router)
+    public function map()
     {
         if ($this->isEnabled()) {
-            $this->group(['prefix' => 'password', 'as' => 'password.'], function () {
+            $this->prefix('password')->name('password.')->group(function () {
                 $this->get('reset', 'ForgotPasswordController@showLinkRequestForm')->name('get'); // auth::password.get
 
                 $this->post('email', 'ForgotPasswordController@sendResetLinkEmail')->name('email'); // auth::password.email
