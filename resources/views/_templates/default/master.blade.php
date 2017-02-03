@@ -23,8 +23,10 @@
     </main>
 
     {{-- Scripts --}}
-    {{ Html::script('assets/js/vendors.js') }}
-    {{ Html::script('assets/js/app.js') }}
+    {{ Html::script(mix('assets/js/manifest.js')) }}
+    {{ Html::script(mix('assets/js/vendor.js')) }}
+    {{ Html::script(mix('assets/js/app.js')) }}
+
     @yield('scripts')
 </body>
 </html>
