@@ -1,23 +1,22 @@
 // Vendors
 //==========================================>
 
-@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
-@import "../../../../bower_components/animate-sass/animate";
+@import "../../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "../../../../node_modules/animate-sass/animate";
 
 @import "vendors/pace";
 
-@import "../../../../bower_components/bootstrap-colorpicker/src/sass/colorpicker";
-@import "../../../../bower_components/bootstrap-datetimepicker/src/sass/bootstrap-datetimepicker";
-@import "../../../../bower_components/bootstrap-slider/src/sass/bootstrap-slider";
-@import "vendors/fuelux";
+@import "../../../../node_modules/bootstrap-colorpicker/src/sass/colorpicker";
+@import "../../../../node_modules/eonasdan-bootstrap-datetimepicker/src/sass/bootstrap-datetimepicker";
+@import "../../../../node_modules/bootstrap-slider/src/sass/bootstrap-slider";
 @import "vendors/morris-js";
 @import "vendors/fullcalendar/fullcalendar";
 //@import "vendors/fullcalendar/fullcalendar-print";
 @import "vendors/jquery-jvectormap";
 @import "vendors/daterangepicker";
 @import "vendors/ion-rangeslider/ion-rangeSlider";
-@import "../../../../bower_components/select2/src/scss/core";
-@import "../../../../bower_components/select2-bootstrap/src/select2-bootstrap";
+@import "../../../../node_modules/select2/src/scss/core";
+@import "../../../../node_modules/select2-bootstrap-theme/src/select2-bootstrap";
 @import "vendors/datatables-bootstrap";
 @import "vendors/simplemde";
-@import "../../../../bower_components/toastr/toastr.scss";
+@import "../../../../node_modules/toastr/toastr.scss";
