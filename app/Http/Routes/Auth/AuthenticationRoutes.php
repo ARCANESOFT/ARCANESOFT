@@ -20,28 +20,13 @@ class AuthenticationRoutes extends RouteRegistrar
     public function map()
     {
         if ($this->isEnabled()) {
-            $this->mapLoginRoutes();
-            $this->mapLogoutRoute();
+            $this->prefix('login')->name('login.')->group(function () {
+                $this->get('/', 'LoginController@showLoginForm')->name('get'); // auth::login.get
+                $this->post('/', 'LoginController@login')->name('post'); // auth::login.post
+            });
+
+            $this->post('logout', 'LoginController@logout')->name('logout'); // auth::logout
         }
-    }
-
-    /**
-     * Map the login routes.
-     */
-    protected function mapLoginRoutes()
-    {
-        $this->prefix('login')->name('login.')->group(function () {
-            $this->get('/', 'LoginController@showLoginForm')->name('get'); // auth::login.get
-            $this->post('/', 'LoginController@login')->name('post'); // auth::login.post
-        });
-    }
-
-    /**
-     * Map the logout routes
-     */
-    protected function mapLogoutRoute()
-    {
-        $this->get('logout', 'LoginController@logout')->name('logout'); // auth::logout
     }
 
     /* ------------------------------------------------------------------------------------------------
