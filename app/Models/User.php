@@ -1,10 +1,16 @@
 <?php namespace App\Models;
 
+use App\Notifications\Users\ResetPassword as ResetPasswordNotification;
 use Arcanesoft\Auth\Models\Role;
 use Arcanesoft\Auth\Models\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Arcanesoft\Auth\Notifications\Users\ResetPassword as ResetPasswordNotification;
 
+/**
+ * Class     User
+ *
+ * @package  App\Models
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 class User extends Authenticatable
 {
     /* ------------------------------------------------------------------------------------------------
@@ -18,17 +24,21 @@ class User extends Authenticatable
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Set the current user as member.
+     * Create a user as a member.
+     *
+     * @param  array  $data
      *
      * @return self
      */
-    public function setAsMember()
+    public static function createAsMember(array $data)
     {
-        /** @var  \Arcanesoft\Auth\Models\Role  $role */
-        $role = Role::member()->first();
-        $this->attachRole($role);
+        $user = new self($data);
+        $user->is_active = true;
+        $user->save();
 
-        return $this;
+        $user->syncRoles([Role::MEMBER]);
+
+        return $user;
     }
 
     /* ------------------------------------------------------------------------------------------------

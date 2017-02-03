@@ -22,15 +22,6 @@ class PagesRoutes extends RouteRegistrar
         $this->name('public::')->group(function () {
             // public::home
             $this->get('/', 'PagesController@home')->name('home');
-
-            // public::welcome
-            $this->get('/welcome', 'PagesController@welcome')->middleware('auth')->name('welcome');
-        });
-
-        $this->prefix('api')->group(function () {
-            $this->get('test', function () {
-                return 'Test';
-            });
         });
     }
 }

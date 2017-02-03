@@ -39,7 +39,7 @@
                             </div>
                             <div>
                                 {{ Form::button(trans('auth::login.submit'), ['type' => 'submit', 'class' => 'btn btn-primary']) }}
-                                {{ link_to_route('auth::password.get', trans('auth::login.links.forget'), [], ['class' => 'btn btn-link']) }}
+                                {{ link_to_route('auth::password.request', trans('auth::login.links.forget'), [], ['class' => 'btn btn-link']) }}
                             </div>
                         {{ Form::close() }}
                     </div>

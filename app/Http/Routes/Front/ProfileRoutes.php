@@ -19,6 +19,11 @@ class ProfileRoutes extends RouteRegistrar
      */
     public function map()
     {
-        //
+        $this->middleware('auth')
+             ->prefix('account')
+             ->as('account::')
+             ->group(function () {
+                 $this->get('/', 'ProfileController@index')->name('index');
+             });
     }
 }

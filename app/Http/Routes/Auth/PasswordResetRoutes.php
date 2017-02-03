@@ -21,13 +21,17 @@ class PasswordResetRoutes extends RouteRegistrar
     {
         if ($this->isEnabled()) {
             $this->prefix('password')->name('password.')->group(function () {
-                $this->get('reset', 'ForgotPasswordController@showLinkRequestForm')->name('get'); // auth::password.get
+                $this->get('reset', 'ForgotPasswordController@showLinkRequestForm')
+                     ->name('request'); // auth::password.request
 
-                $this->post('email', 'ForgotPasswordController@sendResetLinkEmail')->name('email'); // auth::password.email
+                $this->post('email', 'ForgotPasswordController@sendResetLinkEmail')
+                     ->name('email'); // auth::password.email
 
-                $this->get('reset/{token}', 'ResetPasswordController@showResetForm')->name('token'); // auth::password.token
+                $this->get('reset/{token}', 'ResetPasswordController@showResetForm')
+                     ->name('reset'); // auth::password.reset
 
-                $this->post('reset', 'ResetPasswordController@reset')->name('post'); // auth::password.post
+                $this->post('reset', 'ResetPasswordController@reset')
+                     ->name('process'); // auth::password.reset
             });
         }
     }

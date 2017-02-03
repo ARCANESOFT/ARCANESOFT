@@ -8,7 +8,7 @@
                     <div class="panel-heading">{{ trans('auth::password.heading') }}</div>
 
                     <div class="panel-body">
-                        {{ Form::open(['route' => 'auth::password.post', 'method' => 'POST', 'role' => 'form']) }}
+                        {{ Form::open(['route' => 'auth::password.process', 'method' => 'POST', 'role' => 'form']) }}
                             {{ Form::hidden('token', $token) }}
 
                             <div class="form-group {{ $errors->first('email', 'has-error') }}">

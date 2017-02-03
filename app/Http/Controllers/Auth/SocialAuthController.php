@@ -73,7 +73,7 @@ class SocialAuthController extends Controller
             return $authUser;
         }
 
-        return User::create([
+        return User::createAsMember([
             'name'               => $user->name,
             'email'              => $user->email,
             'social_provider'    => $provider,
@@ -96,6 +96,11 @@ class SocialAuthController extends Controller
         return Socialite::driver($driver);
     }
 
+    /**
+     * Get the post register redirect path.
+     *
+     * @return string
+     */
     protected function redirectTo()
     {
         return route('public::welcome');

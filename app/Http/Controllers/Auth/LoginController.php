@@ -10,8 +10,16 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
  */
 class LoginController extends AuthController
 {
+    /* ------------------------------------------------------------------------------------------------
+     |  Traits
+     | ------------------------------------------------------------------------------------------------
+     */
     use AuthenticatesUsers;
 
+    /* ------------------------------------------------------------------------------------------------
+     |  Constructor
+     | ------------------------------------------------------------------------------------------------
+     */
     /**
      * Create a new controller instance.
      */
@@ -22,8 +30,22 @@ class LoginController extends AuthController
         parent::__construct();
     }
 
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Get the post login redirect path.
+     *
+     * @return string
+     */
     protected function redirectTo()
     {
-        return route('public::welcome');
+        /** @var  \App\Models\User  $user */
+        $user = $this->guard()->user();
+
+        return ($user->isAdmin() || $user->isModerator())
+            ? route('admin::foundation.home')
+            : route('account::index');
     }
 }

@@ -2,7 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 
 /**
@@ -46,7 +46,7 @@ class RegisterController extends AuthController
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        return validator($data, [
             'email'      => ['required', 'email', 'max:255', Rule::unique('users', 'email')],
             'password'   => ['required', 'confirmed', 'min:8', 'max:30'],
             'username'   => ['required', 'max:30'],
@@ -68,20 +68,9 @@ class RegisterController extends AuthController
      */
     protected function create(array $data)
     {
-        /**  @var \App\Models\User  $user */
-        $user = new User([
-            'email'      => $data['email'],
-            'password'   => $data['password'],
-            'username'   => $data['username'],
-            'first_name' => $data['first_name'],
-            'last_name'  => $data['last_name'],
-        ]);
-        $user->is_active = true;
-        $user->save();
-
-        $user->setAsMember();
-
-        return $user;
+        return User::createAsMember(
+            Arr::only($data, ['email', 'password', 'username', 'first_name', 'last_name'])
+        );
     }
 
     /**
@@ -91,6 +80,6 @@ class RegisterController extends AuthController
      */
     protected function redirectTo()
     {
-        return route('public::welcome');
+        return route('account::index');
     }
 }

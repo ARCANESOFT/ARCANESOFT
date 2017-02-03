@@ -41,6 +41,11 @@
                                     {{ link_to_route('admin::foundation.home', 'Dashboard') }}
                                 </li>
                                 <li class="divider"></li>
+                            @elseif ($user->isMember())
+                                <li>
+                                    {{ link_to_route('account::index', 'Profile') }}
+                                </li>
+                                <li class="divider"></li>
                             @endif
                             @include('auth._includes.impersonation-nav-item')
                             <li>

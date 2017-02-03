@@ -3,10 +3,17 @@
 use App\Http\Routes;
 use Arcanedev\LaravelAuth\Services\SocialAuthenticator;
 use Arcanedev\LaravelAuth\Services\UserImpersonator;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Route;
+use Arcanedev\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Contracts\Routing\Registrar as Router;
 
+/**
+ * Class     RouteServiceProvider
+ *
+ * @package  App\Providers
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ *
+ * @method  \Arcanedev\Support\Routing\RouteRegistrar  middleware(array|string $middleware)
+ */
 class RouteServiceProvider extends ServiceProvider
 {
     /* ------------------------------------------------------------------------------------------------
@@ -38,14 +45,16 @@ class RouteServiceProvider extends ServiceProvider
 
     /**
      * Define the routes for the application.
+     *
+     * @param  \Illuminate\Contracts\Routing\Registrar  $router
      */
-    public function map()
+    public function map(Router $router)
     {
-        $this->mapApiRoutes();
-
         $this->mapWebRoutes();
 
         $this->mapAuthRoutes();
+
+        $this->mapApiRoutes();
 
         //
     }
@@ -61,13 +70,35 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::middleware(['web', 'impersonate', 'tracking'])
+        $this->middleware(['web', 'impersonate', 'tracking'])
              ->namespace($this->namespace)
-             ->group(function ($router) {
-                 Routes\Front\PagesRoutes::register($router);
-                 Routes\Front\ProfileRoutes::register($router);
+             ->group(function () {
+                 Routes\Front\PagesRoutes::register();
+                 Routes\Front\ProfileRoutes::register();
 
                  require_once base_path('routes/web.php');
+             });
+    }
+
+    /**
+     * Define the auth routes for the application.
+     */
+    private function mapAuthRoutes()
+    {
+        $this->middleware(['web', 'impersonate', 'tracking'])
+             ->namespace($this->namespace.'\\Auth')
+             ->prefix('auth')
+             ->as('auth::')
+             ->group(function () {
+                 Routes\Auth\AuthenticationRoutes::register();
+                 Routes\Auth\RegisterRoutes::register();
+                 Routes\Auth\PasswordResetRoutes::register();
+
+                 if (UserImpersonator::isEnabled())
+                     Routes\Auth\ImpersonateRoutes::register();
+
+                 if (SocialAuthenticator::isEnabled())
+                     Routes\Auth\SocialiteRoutes::register();
              });
     }
 
@@ -78,34 +109,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::middleware('api')
+        $this->middleware('api')
              ->namespace($this->namespace)
              ->prefix('api')
              ->group(base_path('routes/api.php'));
-    }
-
-    /**
-     * Define the auth routes for the application.
-     */
-    private function mapAuthRoutes()
-    {
-        $attributes = [
-            'prefix'     => 'auth',
-            'as'         => 'auth::',
-            'namespace'  => $this->namespace.'\\Auth',
-            'middleware' => ['web', 'impersonate', 'tracking'],
-        ];
-
-        Route::group($attributes, function (Router $router) {
-            Routes\Auth\AuthenticationRoutes::register($router);
-            Routes\Auth\RegisterRoutes::register($router);
-            Routes\Auth\PasswordResetRoutes::register($router);
-
-            if (UserImpersonator::isEnabled())
-                Routes\Auth\ImpersonateRoutes::register($router);
-
-            if (SocialAuthenticator::isEnabled())
-                Routes\Auth\SocialiteRoutes::register($router);
-        });
     }
 }

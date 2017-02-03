@@ -14,14 +14,18 @@ class ImpersonateController extends AuthController
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Stop the impersonation.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function stop()
     {
-        if (UserImpersonator::isImpersonating()) {
-            UserImpersonator::stop();
+        if ( ! UserImpersonator::isImpersonating())
+            self::pageNotFound();
 
-            return redirect()->route('public::home');
-        }
+        UserImpersonator::stop();
 
-        return self::pageNotFound();
+        return redirect()->route('public::home');
     }
 }
