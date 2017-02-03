@@ -19,14 +19,14 @@ elixir((mix) => {
        .webpack('./resources/assets/front/js/app.js',  'public/assets/js');
 
     mix.scripts([
-        './bower_components/jquery/dist/jquery.js',
-        './bower_components/bootstrap/dist/js/bootstrap.js'
+        './node_modules/jquery/dist/jquery.js',
+        './node_modules/bootstrap/dist/js/bootstrap.js'
     ], 'public/assets/js/vendors.js');
 
     // Fonts
     mix.copy([
-        './bower_components/bootstrap-sass/assets/fonts/bootstrap',
-        './bower_components/font-awesome/fonts'
+        './node_modules/bootstrap-sass/assets/fonts/bootstrap',
+        './node_modules/font-awesome/fonts'
     ], 'public/assets/fonts');
 
     // Back assets
@@ -35,61 +35,61 @@ elixir((mix) => {
        .webpack('./resources/assets/back/js/app.js',  'public/vendor/foundation/js');
 
     mix.scripts([
-        './bower_components/jquery/dist/jquery.js',
-        './bower_components/vue/dist/vue.js',
-        './bower_components/bootstrap/dist/js/bootstrap.js',
-        './bower_components/jquery-flot/jquery.flot.js',
-        './bower_components/jquery-flot/jquery.flot.resize.js',
-        './bower_components/jquery-flot/jquery.flot.pie.js',
-        './bower_components/jquery-flot/jquery.flot.stack.js',
-        './bower_components/jquery-flot/jquery.flot.categories.js',
-        './bower_components/raphael/raphael.js',
-        './bower_components/morris.js/morris.js',
-        './bower_components/chart.js/dist/Chart.js',
-        './bower_components/sweetalert/dist/sweetalert-dev.js',
+        './node_modules/jquery/dist/jquery.js',
+        './node_modules/vue/dist/vue.js',
+        './node_modules/bootstrap/dist/js/bootstrap.js',
+        './node_modules/flot/jquery.flot.js',
+        './node_modules/flot/jquery.flot.resize.js',
+        './node_modules/flot/jquery.flot.pie.js',
+        './node_modules/flot/jquery.flot.stack.js',
+        './node_modules/flot/jquery.flot.categories.js',
+        './node_modules/raphael/raphael.js',
+        './node_modules/morris.js/morris.js',
+        './node_modules/chart.js/dist/Chart.js',
+        './node_modules/sweetalert/dist/sweetalert-dev.js',
         './resources/assets/back/js/vendors/jquery.sparkline.js',
         './resources/assets/back/js/vendors/jquery-jvectormap.js',
         './resources/assets/back/js/vendors/jquery-jvectormap-world-mill-en.js',
-        './bower_components/jquery-knob/js/jquery.knob.js',
-        './bower_components/jquery-inputmask/dist/jquery.inputmask.bundle.js',
-        './bower_components/moment/moment.js',
-        './bower_components/fullcalendar/dist/fullcalendar.js',
-        './bower_components/fullcalendar/dist/locale-all.js',
-        './bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js',
-        './bower_components/bootstrap-daterangepicker/daterangepicker.js',
-        // './bower_components/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
-        './bower_components/bootstrap-slider/dist/bootstrap-slider.js',
-        // './bower_components/select2/dist/js/select2.full.js',
-        './bower_components/fastclick/lib/fastclick.js',
-        './bower_components/ionrangeslider/js/ion.rangeSlider.js',
-        './bower_components/datatables/js/jquery.dataTables.js',
-        './bower_components/datatables-bs/js/dataTables.bootstrap.js',
-        './bower_components/simplemde/dist/simplemde.min.js',
-        './bower_components/toastr/toastr.js'
+        './node_modules/jquery-knob/js/jquery.knob.js',
+        './node_modules/jquery.inputmask/dist/jquery.inputmask.bundle.js',
+        './node_modules/moment/moment.js',
+        './node_modules/fullcalendar/dist/fullcalendar.js',
+        './node_modules/fullcalendar/dist/locale-all.js',
+        './node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js',
+        './node_modules/bootstrap-daterangepicker/daterangepicker.js',
+        // './node_modules/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
+        './node_modules/bootstrap-slider/dist/bootstrap-slider.js',
+        // './node_modules/select2/dist/js/select2.full.js',
+        './node_modules/fastclick/lib/fastclick.js',
+        './node_modules/ion-rangeslider/js/ion.rangeSlider.js',
+        './node_modules/datatables/media/js/jquery.dataTables.js',
+        './node_modules/datatables.net-bs/js/dataTables.bootstrap.js',
+        './node_modules/simplemde/dist/simplemde.min.js',
+        './node_modules/toastr/toastr.js'
     ], 'public/vendor/foundation/js/vendors.js');
 
     mix.copy([
-        './bower_components/pace/pace.min.js',
+        './node_modules/pace-progress/pace.min.js',
     ], 'public/vendor/foundation/js/vendors/pace.min.js');
 
     // Fonts
     mix.copy([
-        './bower_components/bootstrap-sass/assets/fonts/bootstrap',
-        './bower_components/font-awesome/fonts',
-        './bower_components/ionicons/fonts',
-        './bower_components/weather-icons/font',
+        './node_modules/bootstrap-sass/assets/fonts/bootstrap',
+        './node_modules/font-awesome/fonts',
+        './node_modules/ionicons/dist/fonts',
+        './node_modules/weathericons/font',
         './resources/assets/back/fonts'
     ], 'public/vendor/foundation/fonts');
 
     // Images
     mix.copy(
-        './bower_components/bootstrap-colorpicker/dist/img/bootstrap-colorpicker',
+        './node_modules/bootstrap-colorpicker/dist/img/bootstrap-colorpicker',
         'public/vendor/foundation/img/bootstrap-colorpicker'
     ).copy(
-        './bower_components/ionrangeslider/img',
+        './node_modules/ionrangeslider/img',
         'public/vendor/foundation/img/ion-rangeslider'
     ).copy(
-        './bower_components/flag-icon-css/flags',
+        './node_modules/flag-icon-css/flags',
         'public/vendor/foundation/svg/flags'
     );
 
