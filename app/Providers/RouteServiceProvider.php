@@ -29,6 +29,17 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected $namespace = 'App\\Http\\Controllers';
 
+    /**
+     * The web middlewares.
+     *
+     * @var array
+     */
+    protected $webMiddlewares = [
+        'web',
+        'impersonate',
+        // 'tracking',
+    ];
+
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
@@ -70,7 +81,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        $this->middleware(['web', 'impersonate', 'tracking'])
+        $this->middleware($this->webMiddlewares)
              ->namespace($this->namespace)
              ->group(function () {
                  Routes\Front\PagesRoutes::register();
@@ -85,7 +96,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     private function mapAuthRoutes()
     {
-        $this->middleware(['web', 'impersonate', 'tracking'])
+        $this->middleware($this->webMiddlewares)
              ->namespace($this->namespace.'\\Auth')
              ->prefix('auth')
              ->as('auth::')
@@ -112,6 +123,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->middleware('api')
              ->namespace($this->namespace)
              ->prefix('api')
+             ->as('api::')
              ->group(base_path('routes/api.php'));
     }
 }
