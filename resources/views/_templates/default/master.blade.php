@@ -24,7 +24,7 @@
 
     {{-- Scripts --}}
     {{ Html::script(mix('assets/js/manifest.js')) }}
-    {{ Html::script(mix('assets/js/vendor.js')) }}
+    {{ Html::script(mix('assets/js/vendors.js')) }}
     {{ Html::script(mix('assets/js/app.js')) }}
 
     @yield('scripts')

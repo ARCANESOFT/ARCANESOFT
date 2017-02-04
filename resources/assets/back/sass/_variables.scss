@@ -1,16 +1,27 @@
-// Variables
+// Paths
 //==========================================>
+$assets-folder:              "/assets";
+$fonts-folder:               "#{$assets-folder}/fonts";
+$images-folder:              "#{$assets-folder}/img";
+$svg-folder:                 "#{$assets-folder}/svg";
 
-$icon-font-path:              "/vendor/foundation/fonts/";
-$fa-font-path:                "/vendor/foundation/fonts";
-$ionicons-font-path:          "/vendor/foundation/fonts";
-$wi-path:                     "/vendor/foundation/fonts";
-$boxed-layout-bg-image-path:  "/vendor/foundation/img/boxed-bg.jpg";
-$flag-icon-css-path:          "/vendor/foundation/svg/flags";
-$range-slider-img-path:       "/vendor/foundation/img/ion-rangeslider";
-$colorpicker-img-path:        "/vendor/foundation/img/bootstrap-colorpicker";
+$icon-font-path:             "#{$fonts-folder}/";
+$fa-font-path:               "#{$fonts-folder}";
+$ionicons-font-path:         "#{$fonts-folder}";
+$wi-path:                    "#{$fonts-folder}";
 
-// COLORS
+$boxed-layout-bg-image-path: "#{$images-folder}/boxed-bg.jpg";
+$range-slider-img-path:      "#{$images-folder}/ion-rangeslider";
+$colorpicker-img-path:       "#{$images-folder}/bootstrap-colorpicker";
+
+$flag-icon-css-path:         "#{$svg-folder}/flags";
+
+// Animate
+//--------------------------------------------------------
+
+$use-flipInX: true;
+
+// Colors
 //--------------------------------------------------------
 $brand-primary:         #3C8DBC;
 $brand-success:         #00A65A;
