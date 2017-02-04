@@ -1,59 +1,48 @@
 const { mix } = require('laravel-mix');
 
-// Front assets
+// Styles
 //-------------------------------------------------------
 
-// Style & Scripts
-mix.sass('resources/assets/front/sass/app.scss', '/assets/css')
-   .js('resources/assets/front/js/app.js', '/assets/js')
+mix.sass('resources/assets/front/sass/app.scss', '/assets/css');
+mix.sass('resources/assets/back/sass/admin.scss', '/assets/css');
+
+// Scripts
+//-------------------------------------------------------
+
+mix.js('resources/assets/front/js/app.js', '/assets/js');
+mix.js('resources/assets/back/js/admin.js', '/assets/js')
    .extract(
-       ['axios', 'vue', 'jquery', 'bootstrap-sass', 'lodash'],
+       [
+           'axios', 'vue', 'jquery', 'bootstrap-sass', 'lodash', 'chart.js', 'simplemde',
+           'eonasdan-bootstrap-datetimepicker', 'jquery-slimscroll', 'select2', 'js-cookie'
+       ],
        '/assets/js/vendors.js'
    );
 
-// Fonts
-mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap', 'public/assets/fonts');
-mix.copy('node_modules/font-awesome/fonts', 'public/assets/fonts');
+mix.copy('node_modules/pace-progress/pace.min.js', 'public/assets/js/vendors/pace.min.js');
 
-// Back assets
+mix.sourceMaps().version();
+
+// Fonts
 //-------------------------------------------------------
 
-// Style & Scripts
-mix.sass('resources/assets/back/sass/app.scss', '/vendor/foundation/css')
-   .js('resources/assets/back/js/app.js', '/vendor/foundation/js')
-   .extract(
-       [
-           'axios', 'vue', 'jquery', 'bootstrap-sass', 'lodash', 'simplemde', 'eonasdan-bootstrap-datetimepicker',
-           'jquery-slimscroll', 'select2'
-       ],
-       '/vendor/foundation/js/vendors.js'
-   );
-
-mix.copy('node_modules/pace-progress/pace.min.js', 'public/vendor/foundation/js/vendors/pace.min.js');
-
-// Fonts
-mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap', 'public/vendor/foundation/fonts');
-mix.copy('node_modules/font-awesome/fonts', 'public/vendor/foundation/fonts');
-mix.copy('node_modules/ionicons/dist/fonts', 'public/vendor/foundation/fonts');
-mix.copy('node_modules/weathericons/font', 'public/vendor/foundation/fonts');
-mix.copy('resources/assets/back/fonts', 'public/vendor/foundation/fonts');
+mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap', 'public/assets/fonts');
+mix.copy('node_modules/font-awesome/fonts', 'public/assets/fonts');
+mix.copy('node_modules/ionicons/dist/fonts', 'public/assets/fonts');
+mix.copy('node_modules/weathericons/font', 'public/assets/fonts');
+mix.copy('resources/assets/back/fonts', 'public/assets/fonts');
 
 // Images
-mix.copy(
-    'node_modules/bootstrap-colorpicker/dist/img/bootstrap-colorpicker',
-    'public/vendor/foundation/img/bootstrap-colorpicker'
-);
+//-------------------------------------------------------
 
-mix.copy(
-    'node_modules/ion-rangeslider/img',
-    'public/vendor/foundation/img/ion-rangeslider'
-);
+mix.copy('node_modules/bootstrap-colorpicker/dist/img/bootstrap-colorpicker', 'public/assets/img/bootstrap-colorpicker');
+mix.copy('node_modules/ion-rangeslider/img', 'public/assets/img/ion-rangeslider');
+mix.copy('resources/assets/back/img', 'public/assets/img');
 
 // SVG
-mix.copy(
-    'node_modules/flag-icon-css/flags',
-    'public/vendor/foundation/svg/flags'
-);
+//-------------------------------------------------------
+
+mix.copy('node_modules/flag-icon-css/flags', 'public/assets/svg/flags');
 
 // Demo assets
 //-------------------------------------------------------

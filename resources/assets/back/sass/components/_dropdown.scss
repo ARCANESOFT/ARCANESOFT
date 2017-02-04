@@ -7,18 +7,16 @@
     box-shadow: none;
     border-color: #eee;
 
-    & > li {
-        & > a {
-            color: #777;
+    & > li > a {
+        color: #777;
 
-            & > .glyphicon, & > .fa, & > .ion {
-                margin-right: 10px;
-            }
+        & > .glyphicon, & > .fa, & > .ion {
+            margin-right: 10px;
+        }
 
-            &:hover {
-                background-color: lighten($light-gray, 5%);
-                color: #333;
-            }
+        &:hover {
+            background-color: lighten($light-gray, 5%);
+            color: #333;
         }
     }
 
@@ -273,7 +271,6 @@
     }
 }
 
-
 /* Add fade animation to dropdown menus by appending
  the class .animated-dropdown-menu to the .dropdown-menu ul (or ol)*/
 .open:not(.dropup) > .animated-dropdown-menu {
@@ -281,68 +278,15 @@
     @include animation(flipInX .7s both);
 }
 
-@keyframes flipInX {
-    0% {
-        transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-        transition-timing-function: ease-in;
-        opacity: 0;
-    }
-
-    40% {
-        transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-        transition-timing-function: ease-in;
-    }
-
-    60% {
-        transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-        opacity: 1;
-    }
-
-    80% {
-        transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-    }
-
-    100% {
-        transform: perspective(400px);
-    }
-}
-
-@-webkit-keyframes flipInX {
-    0% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-        -webkit-transition-timing-function: ease-in;
-        opacity: 0;
-    }
-
-    40% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-        -webkit-transition-timing-function: ease-in;
-    }
-
-    60% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-        opacity: 1;
-    }
-
-    80% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-    }
-
-    100% {
-        -webkit-transform: perspective(400px);
-    }
-}
-
 /* Fix dropdown menu in navbars */
-.navbar-custom-menu > .navbar-nav {
-    & > li {
-        position: relative;
+.navbar-custom-menu > .navbar-nav > li {
+    position: relative;
 
-        & > .dropdown-menu {
-            position: absolute;
-            right: 0;
-            left: auto;
-        }
+    & > .dropdown-menu {
+        position: absolute;
+        right: 0;
+        left: auto;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     }
 }
 

@@ -1,7 +1,6 @@
-// Require the vendors
-//--------------------------------------
-
-require('eonasdan-bootstrap-datetimepicker');
+require('chart.js');
 require('jquery-slimscroll');
-require('simplemde');
 require('select2');
+
+window.SimpleMDE = require('simplemde');
+window.$.fn.datetimepicker = require('eonasdan-bootstrap-datetimepicker');
