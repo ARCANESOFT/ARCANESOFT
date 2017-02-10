@@ -7,8 +7,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
         {{-- Styles --}}
         {{ Html::style(mix('assets/css/app.css')) }}
-        {{-- CSRF Token --}}
-        @include('_templates.default.csrf-token')
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         @yield('styles')
     </head>
 <body>
