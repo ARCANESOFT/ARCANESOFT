@@ -10,9 +10,9 @@ use Arcanedev\Support\Routing\RouteRegistrar;
  */
 class PagesRoutes extends RouteRegistrar
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Map routes.
@@ -20,8 +20,8 @@ class PagesRoutes extends RouteRegistrar
     public function map()
     {
         $this->name('public::')->group(function () {
-            // public::home
-            $this->get('/', 'PagesController@home')->name('home');
+            $this->get('/', 'PagesController@home')
+                 ->name('home'); // public::home
         });
     }
 }

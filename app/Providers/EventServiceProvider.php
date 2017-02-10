@@ -1,13 +1,18 @@
 <?php namespace App\Providers;
 
-use Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
+/**
+ * Class     EventServiceProvider
+ *
+ * @package  App\Providers
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 class EventServiceProvider extends ServiceProvider
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     /**
      * The event listener mappings for the application.
@@ -20,6 +25,10 @@ class EventServiceProvider extends ServiceProvider
         ],
     ];
 
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
+     */
     /**
      * Register any events for your application.
      */

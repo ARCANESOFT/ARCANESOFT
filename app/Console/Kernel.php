@@ -3,8 +3,18 @@
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+/**
+ * Class     Kernel
+ *
+ * @package  App\Console
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 class Kernel extends ConsoleKernel
 {
+    /* -----------------------------------------------------------------
+     |  Properties
+     | -----------------------------------------------------------------
+     */
     /**
      * The Artisan commands provided by your application.
      *
@@ -14,6 +24,10 @@ class Kernel extends ConsoleKernel
         //
     ];
 
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
+     */
     /**
      * Define the application's command schedule.
      *

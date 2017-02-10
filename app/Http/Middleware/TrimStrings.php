@@ -2,8 +2,18 @@
 
 use Illuminate\Foundation\Http\Middleware\TrimStrings as BaseTrimmer;
 
+/**
+ * Class     TrimStrings
+ *
+ * @package  App\Http\Middleware
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 class TrimStrings extends BaseTrimmer
 {
+    /* -----------------------------------------------------------------
+     |  Properties
+     | -----------------------------------------------------------------
+     */
     /**
      * The names of the attributes that should not be trimmed.
      *

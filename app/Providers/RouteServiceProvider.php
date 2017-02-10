@@ -4,15 +4,12 @@ use App\Http\Routes;
 use Arcanedev\LaravelAuth\Services\SocialAuthenticator;
 use Arcanedev\LaravelAuth\Services\UserImpersonator;
 use Arcanedev\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Contracts\Routing\Registrar as Router;
 
 /**
  * Class     RouteServiceProvider
  *
  * @package  App\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
- *
- * @method  \Arcanedev\Support\Routing\RouteRegistrar  middleware(array|string $middleware)
  */
 class RouteServiceProvider extends ServiceProvider
 {
@@ -56,15 +53,11 @@ class RouteServiceProvider extends ServiceProvider
 
     /**
      * Define the routes for the application.
-     *
-     * @param  \Illuminate\Contracts\Routing\Registrar  $router
      */
-    public function map(Router $router)
+    public function map()
     {
         $this->mapWebRoutes();
-
         $this->mapAuthRoutes();
-
         $this->mapApiRoutes();
 
         //
@@ -94,7 +87,7 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define the auth routes for the application.
      */
-    private function mapAuthRoutes()
+    protected function mapAuthRoutes()
     {
         $this->middleware($this->webMiddlewares)
              ->namespace($this->namespace.'\\Auth')
@@ -124,6 +117,8 @@ class RouteServiceProvider extends ServiceProvider
              ->namespace($this->namespace)
              ->prefix('api')
              ->as('api::')
-             ->group(base_path('routes/api.php'));
+             ->group(function () {
+                 base_path('routes/api.php');
+             });
     }
 }

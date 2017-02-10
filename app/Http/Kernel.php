@@ -1,13 +1,18 @@
 <?php namespace App\Http;
 
-use Arcanedev\LaravelAuth\Http\Middleware\TrackLastActivity;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
+/**
+ * Class     Kernel
+ *
+ * @package  App\Http
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 class Kernel extends HttpKernel
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     /**
      * The application's global HTTP middleware stack.

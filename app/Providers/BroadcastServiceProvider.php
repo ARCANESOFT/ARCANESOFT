@@ -3,12 +3,20 @@
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class     BroadcastServiceProvider
+ *
+ * @package  App\Providers
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 class BroadcastServiceProvider extends ServiceProvider
 {
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
+     */
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
     public function boot()
     {

@@ -1,12 +1,19 @@
 <?php namespace App\Providers;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class     AppServiceProvider
+ *
+ * @package  App\Providers
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 class AppServiceProvider extends ServiceProvider
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Register any application services.
@@ -21,12 +28,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Schema::defaultStringLength(191);
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Register the service provider.
@@ -34,11 +41,11 @@ class AppServiceProvider extends ServiceProvider
     private function registerDevServiceProvider()
     {
         /** @var  \Illuminate\Contracts\Config\Repository  $config */
-        $config = $this->app['config'];
+        $config = $this->app->make('config');
 
         if (
             $config->get('app.debug') &&
-            in_array($this->app->environment(), $config->get('dev.environments'))
+            in_array($this->app->environment(), $config->get('dev.environments', []))
         ) {
             $this->app->register(DevServiceProvider::class);
         }

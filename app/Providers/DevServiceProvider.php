@@ -2,11 +2,17 @@
 
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class     DevServiceProvider
+ *
+ * @package  App\Providers
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 class DevServiceProvider extends ServiceProvider
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Register any application services.
@@ -24,17 +30,17 @@ class DevServiceProvider extends ServiceProvider
         //
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Register the external service providers.
      */
     private function registerProviders()
     {
-        foreach ($this->app['config']['dev.providers'] as $provider) {
-            if (class_exists($provider)) $this->app->register($provider);
+        foreach ($this->app->make('config')->get('dev.providers', []) as $provider) {
+            $this->app->register($provider);
         }
     }
 }

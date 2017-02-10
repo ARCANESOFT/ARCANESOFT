@@ -10,9 +10,9 @@ use Arcanedev\Support\Routing\RouteRegistrar;
  */
 class ProfileRoutes extends RouteRegistrar
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Map routes.
@@ -23,7 +23,8 @@ class ProfileRoutes extends RouteRegistrar
              ->prefix('account')
              ->as('account::')
              ->group(function () {
-                 $this->get('/', 'ProfileController@index')->name('index');
+                 $this->get('/', 'ProfileController@index')
+                      ->name('index'); // account::index
              });
     }
 }

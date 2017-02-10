@@ -2,6 +2,12 @@
 
 use Illuminate\Foundation\Application as IlluminateApplication;
 
+/**
+ * Class     Application
+ *
+ * @package  App
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 class Application extends IlluminateApplication
 {
     /* ------------------------------------------------------------------------------------------------

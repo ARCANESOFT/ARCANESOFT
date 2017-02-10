@@ -10,19 +10,23 @@ use Arcanedev\Support\Routing\RouteRegistrar;
  */
 class SocialiteRoutes extends RouteRegistrar
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Map routes.
      */
     public function map()
     {
-        $this->prefix('social/{social_provider}')->name('social.')->group(function () {
-            $this->get('/', 'SocialAuthController@redirectToProvider')->name('redirect'); // auth::social.redirect
+        $this->prefix('social/{social_provider}')
+             ->name('social.')
+             ->group(function () {
+                $this->get('/', 'SocialAuthController@redirectToProvider')
+                     ->name('redirect'); // auth::social.redirect
 
-            $this->get('callback', 'SocialAuthController@handleCallback')->name('callback'); // auth::social.callback
-        });
+                $this->get('callback', 'SocialAuthController@handleCallback')
+                     ->name('callback'); // auth::social.callback
+             });
     }
 }
