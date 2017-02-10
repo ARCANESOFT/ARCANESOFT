@@ -11,13 +11,10 @@ mix.sass('resources/assets/back/sass/admin.scss', '/assets/css');
 
 mix.js('resources/assets/front/js/app.js', '/assets/js');
 mix.js('resources/assets/back/js/admin.js', '/assets/js')
-   .extract(
-       [
-           'axios', 'vue', 'jquery', 'bootstrap-sass', 'lodash', 'chart.js', 'simplemde',
-           'eonasdan-bootstrap-datetimepicker', 'jquery-slimscroll', 'select2', 'js-cookie'
-       ],
-       '/assets/js/vendors.js'
-   );
+   .extract([
+       'axios', 'vue', 'jquery', 'bootstrap-sass', 'lodash', 'chart.js', 'simplemde',
+       'eonasdan-bootstrap-datetimepicker', 'jquery-slimscroll', 'select2', 'js-cookie', 'fastclick'
+   ], '/assets/js/vendors.js');
 
 mix.copy('node_modules/pace-progress/pace.min.js', 'public/assets/js/vendors/pace.min.js');
 
@@ -25,12 +22,13 @@ mix.sourceMaps().version();
 
 // Fonts
 //-------------------------------------------------------
-
-mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap', 'public/assets/fonts');
-mix.copy('node_modules/font-awesome/fonts', 'public/assets/fonts');
-mix.copy('node_modules/ionicons/dist/fonts', 'public/assets/fonts');
-mix.copy('node_modules/weathericons/font', 'public/assets/fonts');
-mix.copy('resources/assets/back/fonts', 'public/assets/fonts');
+mix.copy([
+    'node_modules/bootstrap-sass/assets/fonts/bootstrap',
+    'node_modules/font-awesome/fonts',
+    'node_modules/ionicons/dist/fonts',
+    'node_modules/weathericons/font',
+    'resources/assets/back/fonts',
+], 'public/assets/fonts');
 
 // Images
 //-------------------------------------------------------

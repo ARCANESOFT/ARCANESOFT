@@ -76,6 +76,7 @@ const config = {
                 //Remove icon
                 remove: 'fa-times'
             },
+
             selectors: {
                 //Remove button selector
                 remove:   '[data-widget="remove"]',
