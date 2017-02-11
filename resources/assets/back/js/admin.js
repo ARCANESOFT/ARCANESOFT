@@ -1,5 +1,4 @@
 require('../../_shared/js/bootstrap');
-// require('../../_shared/js/components');
 
 require('./vendors');
 

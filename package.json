@@ -24,6 +24,7 @@
         "chart.js": "^2.4.0",
         "datatables": "^1.10.13",
         "datatables.net-bs": "^2.1.1",
+        "dropzone": "^4.3.0",
         "eonasdan-bootstrap-datetimepicker": "^4.17.46",
         "fastclick": "^1.0.6",
         "flag-icon-css": "^2.8.0",

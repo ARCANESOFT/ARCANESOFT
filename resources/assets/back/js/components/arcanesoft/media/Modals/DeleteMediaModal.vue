@@ -1,7 +1,7 @@
 <template>
     <div id="deleteFolderModal" class="modal fade">
         <div class="modal-dialog">
-            <form @submit.prevent="deleteFolder()">
+            <form @submit.prevent="deleteFolder">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -14,7 +14,7 @@
                         <button type="button" class="btn btn-sm btn-default pull-left" data-dismiss="modal">
                             Cancel
                         </button>
-                        <button type="submit" class="btn btn-sm btn-danger">
+                        <button type="submit" class="btn btn-sm btn-danger" data-loading-text="Loading&hellip;">
                             <i class="fa fa-fw fa-trash-o"></i> Delete
                         </button>
                     </div>
@@ -25,26 +25,34 @@
 </template>
 
 <script>
-    const config = require('./../Config').default;
-
+    import config from './../Config'
     import eventHub from './../../../../shared/EventHub'
 
     export default {
         props: ['media'],
-        mounted() {
-            eventHub.$on('open-delete-media-modal', function(data) {
-                $('div#deleteFolderModal').modal({
+
+        created() {
+            let that = this;
+
+            eventHub.$on('open-delete-media-modal', data => {
+                let modal = $('div#deleteFolderModal');
+
+                modal.modal({
                     backdrop: 'static',
                     keyboard: false
                 });
             })
         },
+
         methods: {
-            deleteFolder() {
+            deleteFolder(e) {
+                let $submitBtn = $(e.target.querySelector('button[type="submit"]'));
+                    $submitBtn.button('loading');
+
                 axios.post(config.endpoint + '/delete', {
                         media: this.media
                     })
-                    .then((response) => {
+                    .then(response => {
                         this.$parent.refreshDirectory();
 
                         $('div#deleteFolderModal').modal('hide');
@@ -52,6 +60,8 @@
                         this.$parent.mediaModalClosed();
 
                         this.newDirectory = '';
+
+                        $submitBtn.button('reset');
                     });
             }
         }

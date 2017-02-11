@@ -1,5 +1,7 @@
 const { mix } = require('laravel-mix');
 
+// mix.disableNotifications();
+
 // Styles
 //-------------------------------------------------------
 
@@ -12,7 +14,7 @@ mix.sass('resources/assets/back/sass/admin.scss', '/assets/css');
 mix.js('resources/assets/front/js/app.js', '/assets/js');
 mix.js('resources/assets/back/js/admin.js', '/assets/js')
    .extract([
-       'axios', 'vue', 'jquery', 'bootstrap-sass', 'lodash', 'chart.js', 'simplemde',
+       'axios', 'vue', 'jquery', 'bootstrap-sass', 'lodash', 'chart.js', 'simplemde', 'dropzone',
        'eonasdan-bootstrap-datetimepicker', 'jquery-slimscroll', 'select2', 'js-cookie', 'fastclick'
    ], '/assets/js/vendors.js');
 

@@ -1,20 +1,20 @@
 <template>
     <div id="uploadMediaModal" class="modal fade">
-        <div class="modal-dialog">
-            <form @submit.prevent="upload()">
+        <div class="modal-dialog modal-lg">
+            <form @submit.prevent="upload">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">Upload</h4>
                     </div>
                     <div class="modal-body">
-                        <input @change="prepare" type="file" multiple>
+                        <div id="dropzoneArea" class="dropzone"></div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-sm btn-default pull-left" data-dismiss="modal">
                             Cancel
                         </button>
-                        <button type="submit" class="btn btn-sm btn-primary">
+                        <button type="submit" class="btn btn-sm btn-primary" data-loading-text="Loading&hellip;">
                             <i class="fa fa-fw fa-cloud-upload"></i> Upload
                         </button>
                     </div>
@@ -25,46 +25,84 @@
 </template>
 
 <script>
-    const config = require('./../Config').default;
-
+    import config from './../Config'
     import eventHub from './../../../../shared/EventHub'
+
+    import Dropzone from 'dropzone'
+
+    Dropzone.autoDiscover = false;
 
     export default {
         props: ['location'],
+
         data () {
             return {
-                formData: null
+                formData: null,
+                dropzone: null,
+                modal: null,
+                submitBtn: null,
             }
         },
+
         mounted() {
-            eventHub.$on('open-upload-media-modal', function(data) {
-                $('div#uploadMediaModal').modal('show');
+            let that = this;
+
+            eventHub.$on('open-upload-media-modal', data => {
+                that.modal     = $('div#uploadMediaModal');
+                that.submitBtn = that.modal.find('button[type="submit"]');
+
+                if (that.dropzone == undefined) {
+                    that.initDropzone();
+                }
+
+                that.modal.modal('show');
+
+                that.modal.on('hidden.bs.modal', e => {
+                    that.dropzone.removeAllFiles();
+                });
             })
         },
+
         methods: {
-            prepare(e) {
-                let medias = e.target.files || e.dataTransfer.files;
-                this.formData = new FormData;
+            initDropzone() {
+                let that = this;
 
-                this.formData.append('location', this.location);
+                this.dropzone = new Dropzone('div#dropzoneArea', {
+                    url: config.endpoint+'/upload',
+                    autoProcessQueue: false,
+                    uploadMultiple: true,
+                    parallelUploads: 100,
+                    maxFiles: 100,
+                    paramName: 'medias',
+                    headers: {
+                        'X-CSRF-TOKEN': App.csrfToken
+                    },
+                    sendingmultiple(file, xhr, formData) {
+                        formData.append('location', that.location);
+                    },
+                    successmultiple(files, response) {
+                        if (response.status == 'success') {
+                            that.$parent.refreshDirectory();
 
-                _.forEach(medias, (media, index) => {
-                    this.formData.append('medias['+index+']', media);
+                            that.modal.modal('hide');
+                            that.submitBtn.button('reset');
+
+                            that.$parent.mediaModalClosed();
+                        }
+                    },
+                    errormultiple(files, response) {
+                        window.console.debug(files, response);
+                    }
                 });
             },
-            upload() {
-                axios.post(config.endpoint + '/upload', this.formData)
-                    .then((response) => {
-                        if (response.data.status == 'success') {
-                            this.$parent.refreshDirectory();
 
-                            $('div#uploadMediaModal').modal('hide');
+            upload(e) {
+                e.preventDefault();
+                e.stopPropagation();
 
-                            this.$parent.mediaModalClosed();
+                this.submitBtn.button('loading');
 
-                            this.formData = null;
-                        }
-                    });
+                this.dropzone.processQueue();
             }
         }
     }

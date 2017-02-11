@@ -4,30 +4,30 @@
             <div class="media-toolbar">
                 <div class="media-toolbar-buttons btn-toolbar" role="toolbar">
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-primary" @click="openUploadMediaModal()">
+                        <button type="button" class="btn btn-success" @click="openUploadMediaModal">
                             <i class="fa fa-fw fa-cloud-upload"></i> Upload
                         </button>
-                        <button type="button" class="btn btn-primary" @click="openNewFolderModal()">
+                        <button type="button" class="btn btn-primary" @click="openNewFolderModal">
                             <i class="fa fa-fw fa-folder"></i> Add Folder
                         </button>
                     </div>
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default" @click="getHomeDirectory()">
+                        <button type="button" class="btn btn-default" @click="getHomeDirectory">
                             <i class="fa fa-fw fa-home"></i>
                         </button>
-                        <button type="button" class="btn btn-default" @click="refreshDirectory()">
+                        <button type="button" class="btn btn-default" @click="refreshDirectory">
                             <i class="fa fa-fw fa-refresh"></i>
                         </button>
                     </div>
                     <transition name="fade">
                         <div class="btn-group" role="group" v-if="selected != null">
-                            <button type="button" class="btn btn-default">
+                            <button type="button" class="btn btn-info">
                                 <i class="fa fa-fw fa-arrow-circle-right"></i> Move
                             </button>
-                            <button type="button" class="btn btn-default" @click="openMediaFolderModal()">
+                            <button type="button" class="btn btn-warning" @click="openMediaFolderModal">
                                 <i class="fa fa-fw fa-pencil"></i> Rename
                             </button>
-                            <button type="button" class="btn btn-default" @click="openDeleteMediaModal()">
+                            <button type="button" class="btn btn-danger" @click="openDeleteMediaModal">
                                 <i class="fa fa-fw fa-trash-o"></i> Delete
                             </button>
                         </div>
@@ -86,8 +86,7 @@
 </template>
 
 <script>
-    const config = require('./Config').default;
-
+    import config from './Config'
     import eventHub from './../../../shared/EventHub'
 
     export default {
@@ -97,6 +96,7 @@
                 default: "LOADING..."
             },
         },
+
         data () {
             return {
                 breadcrumbs: [],
@@ -107,15 +107,18 @@
                 modalOpened: false
             }
         },
+
         components: {
             'create-folder-modal': require('./Modals/CreateFolderModal.vue'),
             'upload-media-modal':  require('./Modals/UploadMediaModal.vue'),
             'rename-media-modal':  require('./Modals/RenameMediaModal.vue'),
             'delete-media-modal':  require('./Modals/DeleteMediaModal.vue')
         },
+
         mounted() {
             this.getHomeDirectory();
         },
+
         created() {
             let me = this;
 
@@ -158,12 +161,14 @@
                 }
             }, false)
         },
+
         watch: {
             // whenever question changes, this function will run
             breadcrumbs(newBreadcrumbs) {
                 this.getDirectories(newBreadcrumbs.join('/'));
             }
         },
+
         computed: {
             currentUri() {
                 return this.breadcrumbs.length == 0 ? '/' : this.breadcrumbs.join('/')
@@ -178,6 +183,7 @@
                 return this.medias.length;
             }
         },
+
         methods: {
             getHomeDirectory() {
                 this.breadcrumbs = [];
@@ -188,6 +194,7 @@
                     this.loading = false;
                 });
             },
+
             goBack(index) {
                 let back = this.breadcrumbs.length - (index + 1);
 
@@ -199,14 +206,17 @@
             isMediaDirectory(media) {
                 return media.type == 'directory';
             },
+
             isMediaFile(media) {
                 return media.type == 'file';
             },
+
             isMediaImage(media) {
                 if ( ! this.isMediaFile(media)) return false;
 
                 return _.indexOf(config.supportedImages, media.mimetype) >= 0;
             },
+
             isMediaNotImage(media) {
                 return ! (this.isMediaDirectory(media) || this.isMediaImage(media));
             },
@@ -222,34 +232,41 @@
                     this.breadcrumbs.push(media.name);
                 }
                 else if (this.isMediaFile(media)) {
-
+                    //
                 }
             },
+
             refreshDirectory() {
                 this.getDirectories(this.currentUri);
             },
+
             getDirectories(location) {
                 this.resetSelected();
                 this.loading = true;
 
-                axios.get(config.endpoint + '/all?location=' + location).then((response) => {
+                axios.get(config.endpoint + '/all?location=' + location).then(response => {
                     this.medias  = response.data.data;
                     this.loading = false;
                 });
             },
 
+
             hasSelectedMedia() {
                 return this.selected != null;
             },
+
             selectMedia(media) {
                 this.selected = media;
             },
+
             isSelected(media) {
                 return media == this.selected;
             },
+
             resetSelected() {
                 this.selected = null;
             },
+
             selectNextMedia() {
                 if (this.hasSelectedMedia()) {
                     let index = _.indexOf(this.medias, this.selected) + 1;
@@ -262,6 +279,7 @@
                     this.selected = _.first(this.medias);
                 }
             },
+
             selectPreviousMedia() {
                 if (this.hasSelectedMedia()) {
                     let index = _.indexOf(this.medias, this.selected) - 1;
@@ -279,18 +297,22 @@
                 eventHub.$emit('open-new-folder-modal', {});
                 this.modalOpened = true;
             },
+
             openMediaFolderModal() {
                 eventHub.$emit('open-rename-media-modal', {});
                 this.modalOpened = true;
             },
+
             openUploadMediaModal() {
                 eventHub.$emit('open-upload-media-modal', {});
                 this.modalOpened = true;
             },
+
             openDeleteMediaModal() {
                 eventHub.$emit('open-delete-media-modal', {});
                 this.modalOpened = true;
             },
+
             mediaModalClosed() {
                 this.modalOpened = false;
             }
@@ -324,8 +346,8 @@
 
         .media-container {
             display: flex;
-            flex-wrap: wrap;
-            flex-direction: row;
+            flex-flow: row wrap;
+            align-content: flex-start;
             padding: 10px;
             max-height: $container-height;
             height: $container-height;
@@ -333,7 +355,7 @@
 
             .media-item {
                 margin: 10px;
-                flex: 1;
+                flex: 0 1 calc(25% - 20px);
                 max-height: 70px;
                 width: 100%;
                 max-width: 100%;
@@ -441,21 +463,21 @@
     /* Small devices (tablets, 768px and up) */
     @media (min-width: 768px) {
         .media-manager .media-container .media-item {
-            max-width: 50%;
+            flex: 0 1 calc(50% - 20px);
         }
     }
 
     /* Medium devices (desktops, 992px and up) */
     @media (min-width: 992px) {
         .media-manager .media-container .media-item {
-            max-width: 33.3333%;
+            flex: 0 1 calc(33.3333% - 20px);
         }
     }
 
     /* Large devices (large desktops, 1200px and up) */
     @media (min-width: 1200px) {
         .media-manager .media-container .media-item {
-            max-width: 25%;
+            flex: 0 1 calc(25% - 20px);
         }
     }
 

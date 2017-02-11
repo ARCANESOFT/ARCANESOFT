@@ -1,7 +1,7 @@
 <template>
     <div id="renameFolderModal" class="modal fade">
         <div class="modal-dialog">
-            <form @submit.prevent="renameFolder()">
+            <form @submit.prevent="renameFolder">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -25,22 +25,24 @@
 </template>
 
 <script>
-    const config = require('./../Config').default;
-
+    import config from './../Config'
     import eventHub from './../../../../shared/EventHub'
 
     export default {
         props: ['location', 'media'],
+
         data () {
             return { newName: ''};
         },
-        mounted() {
+
+        created() {
             this.newName = this.media !== null ? this.media.name : '';
 
-            eventHub.$on('open-rename-media-modal', function(data) {
+            eventHub.$on('open-rename-media-modal', data => {
                 $('div#renameFolderModal').modal('show');
             })
         },
+
         methods: {
             renameFolder() {
                 if (this.isDirty) {
@@ -49,7 +51,7 @@
                             media:    this.media,
                             newName:  this.newName
                         })
-                        .then((response) => {
+                        .then(response => {
                             this.$parent.refreshDirectory();
 
                             $('div#renameFolderModal').modal('hide');
@@ -59,6 +61,7 @@
                 }
             }
         },
+
         computed: {
             isDirty() {
                 return this.media != null && this.media.name != this.newName;
