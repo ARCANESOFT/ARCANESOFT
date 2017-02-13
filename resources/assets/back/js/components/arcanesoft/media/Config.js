@@ -14,6 +14,10 @@ const config = {
         "application/pdf": "fa-file-pdf-o",
         "application/vnd.ms-excel": "fa-file-excel-o",
         "text/plain": "fa-file-text-o"
+    },
+
+    events: {
+        OPEN_NEW_FOLDER_MODAL: 'open_new_folder_modal'
     }
 };
 

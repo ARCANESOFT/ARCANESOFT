@@ -20,7 +20,10 @@ window.App.widgets = {
     boxWidget
 };
 
-Vue.component('media-manager', require('./components/arcanesoft/media/MediaManager.vue'));
+/**
+ * Register Vue components...
+ */
+require('./components/arcanesoft/media/main');
 Vue.component('seo-counter', require('./components/arcanesoft/seo/SeoCounter.vue'));
 Vue.component('todo-list', require('./components/TodoList/TodoList.vue'));
 

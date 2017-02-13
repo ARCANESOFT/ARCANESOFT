@@ -25,10 +25,9 @@
 </template>
 
 <script>
-    import config from './../Config'
-    import eventHub from './../../../../shared/EventHub'
-
-    import Dropzone from 'dropzone'
+    import config from './../Config';
+    import events from './../Events';
+    import Dropzone from 'dropzone';
 
     Dropzone.autoDiscover = false;
 
@@ -47,7 +46,7 @@
         mounted() {
             let that = this;
 
-            eventHub.$on('open-upload-media-modal', data => {
+            eventHub.$on(events.OPEN_UPLOAD_MEDIA_MODAL, data => {
                 that.modal     = $('div#uploadMediaModal');
                 that.submitBtn = that.modal.find('button[type="submit"]');
 
@@ -82,12 +81,10 @@
                     },
                     successmultiple(files, response) {
                         if (response.status == 'success') {
-                            that.$parent.refreshDirectory();
+                            eventHub.$emit(events.MEDIA_MODAL_CLOSED, true);
 
                             that.modal.modal('hide');
                             that.submitBtn.button('reset');
-
-                            that.$parent.mediaModalClosed();
                         }
                     },
                     errormultiple(files, response) {
