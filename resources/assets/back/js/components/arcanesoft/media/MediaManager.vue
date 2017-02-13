@@ -1,14 +1,14 @@
 <template>
     <div>
-        <div id="media-manager" class="media-manager" :class="{'full-screen': fullScreen}">
+        <div id="media-manager" class="media-manager" :class="{'full-screen': fullScreen, 'item-details-opened': showDetails}">
             <div class="media-toolbar">
                 <div class="media-toolbar-buttons btn-toolbar" role="toolbar">
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-success" @click="openUploadMediaModal">
-                            <i class="fa fa-fw fa-cloud-upload"></i> Upload
+                            <i class="fa fa-fw fa-cloud-upload"></i> <span class="hidden-xs">Upload</span>
                         </button>
                         <button type="button" class="btn btn-primary" @click="openNewFolderModal">
-                            <i class="fa fa-fw fa-folder"></i> Add Folder
+                            <i class="fa fa-fw fa-folder"></i> <span class="hidden-xs">Add Folder</span>
                         </button>
                     </div>
                     <div class="btn-group" role="group">
@@ -22,13 +22,13 @@
                     <transition name="fade">
                         <div class="btn-group" role="group" v-if="selected != null">
                             <button type="button" class="btn btn-info">
-                                <i class="fa fa-fw fa-arrow-circle-right"></i> Move
+                                <i class="fa fa-fw fa-arrow-circle-right"></i> <span class="hidden-xs">Move</span>
                             </button>
                             <button type="button" class="btn btn-warning" @click="openRenameMediaModal">
-                                <i class="fa fa-fw fa-pencil"></i> Rename
+                                <i class="fa fa-fw fa-pencil"></i> <span class="hidden-xs">Rename</span>
                             </button>
                             <button type="button" class="btn btn-danger" @click="openDeleteMediaModal">
-                                <i class="fa fa-fw fa-trash-o"></i> Delete
+                                <i class="fa fa-fw fa-trash-o"></i> <span class="hidden-xs">Delete</span>
                             </button>
                         </div>
                     </transition>
@@ -38,35 +38,24 @@
                         </button>
                     </div>
                 </div>
-                <ol class="media-toolbar-breadcrumbs breadcrumb">
-                    <li>
-                        <a @click="getHomeDirectory()">
-                            <i class="fa fa-fw fa-home"></i>
-                        </a>
-                    </li>
-                    <li v-for="(breadcrumb, index) in breadcrumbs">
-                        <a @click="goBack(index)">{{ breadcrumb }}</a>
-                    </li>
-                </ol>
+                <media-breadcrumbs></media-breadcrumbs>
             </div>
             <div class="media-container">
                 <div class="media-items-container">
                     <a
-                        v-for="media in medias"
+                        v-for="media in medias.all()"
                         class="media-item"
-                        :class="{'selected': isSelected(media), 'media-file': isMediaFile(media), 'media-directory': isMediaDirectory(media)}"
+                        :class="{'selected': isSelected(media), 'media-file': media.isFile, 'media-directory': media.isDirectory()}"
                         @click="selectMedia(media)"
                         @dblclick="openMedia(media)"
                     >
                         <div class="media-icon">
-                            <i class="fa fa-fw fa-folder-o" v-if="isMediaDirectory(media)"></i>
-
-                            <div v-if="isMediaImage(media)"
-                                 :style="'background-image: url(' + media.url + ');'"
+                            <i v-if="media.isDirectory()" class="fa fa-fw fa-folder-o"></i>
+                            <div v-if="media.isImage()"
+                                 :style="'background-image: url('+media.url+');'"
                                  class="media-image"
                             ></div>
-
-                            <i v-if="isMediaNotImage(media)" :class="getMediaFileIcon(media)" class="fa fa-fw"></i>
+                            <i v-if="media.isNotImage()" :class="media.icon()" class="fa fa-fw"></i>
                         </div>
                         <div class="media-details">
                             <h4 class="media-name">{{ media.name }}</h4>
@@ -93,13 +82,14 @@
 <script>
     import config from './Config';
     import events from './Events';
+    import MediaCollection from './Entities/MediaCollection';
 
     export default {
         data () {
             return {
-                breadcrumbs: [],
-                medias: [],
-                loading: true,
+                currentUri: '/',
+                medias: new MediaCollection(),
+                loading: false,
                 newDirectory: '',
                 selected: null,
                 modalOpened: false,
@@ -109,63 +99,36 @@
         },
 
         components: {
+            'media-breadcrumbs':   require('./Components/MediaBreadcrumbs.vue'),
+            'media-item-details':  require('./Components/MediaItemDetails.vue'),
+
             'create-folder-modal': require('./Modals/CreateFolderModal.vue'),
             'upload-media-modal':  require('./Modals/UploadMediaModal.vue'),
             'rename-media-modal':  require('./Modals/RenameMediaModal.vue'),
-            'delete-media-modal':  require('./Modals/DeleteMediaModal.vue'),
-            'media-item-details':  require('./Components/MediaItemDetails.vue')
+            'delete-media-modal':  require('./Modals/DeleteMediaModal.vue')
         },
 
         created() {
-            let me = this;
-
-            window.addEventListener('keyup', e => {
-                if (me.modalOpened) return;
-
-                switch (e.keyCode) {
-                    case 39: // right
-                        me.selectNextMedia();
-                        break;
-
-                    case 37: // left
-                        me.selectPreviousMedia();
-                        break;
-
-                    case 13: // enter
-                        if (me.hasSelectedMedia()) {
-                            me.openMedia(me.selected);
-                        }
-                        break;
-
-                    case 46: // delete
-                        if (me.hasSelectedMedia()) {
-                            me.openDeleteMediaModal()
-                        }
-                        break;
-
-                    case 8: // backspace
-                        if (me.breadcrumbs.length) {
-                            me.breadcrumbs = _.dropRight(me.breadcrumbs, 1);
-                        }
-                        break;
-
-//                    case 27: // escape
-//                        me.resetSelected();
-//                        break;
-
-                    default:
-                        // no break
-                }
-            }, false);
+            this.listenToKeyboard();
 
             eventHub.$on(events.MEDIA_MODAL_CLOSED, (refresh) => {
-                if (refresh) me.refreshDirectory();
+                if (refresh)
+                    this.refreshDirectory();
 
-                me.closeModal();
+                this.closeModal();
             });
 
-            eventHub.$on('item-details-closed', () => {
-                me.closeMediaDetails();
+            eventHub.$on(events.ITEM_DETAILS_CLOSED, () => {
+                this.closeMediaDetails();
+            });
+
+            eventHub.$on('breadcrumbs_go_home', () => {
+                this.getHomeDirectory();
+            });
+
+            eventHub.$on('breadcrumbs_changed_location', (location, uri) => {
+                this.currentUri = uri;
+                (location == '') ? this.getHomeDirectory() : this.getDirectories(location);
             });
         },
 
@@ -173,83 +136,63 @@
             this.getHomeDirectory();
         },
 
-        watch: {
-            // whenever question changes, this function will run
-            breadcrumbs(newBreadcrumbs) {
-                this.getDirectories(newBreadcrumbs.join('/'));
-            }
-        },
-
         computed: {
-            currentUri() {
-                return this.breadcrumbs.length == 0 ? '/' : this.breadcrumbs.join('/')
-            },
-
             selectedUri() {
-                if (this.selected == null)
-                    return this.currentUri;
-
-                return this.currentUri + this.selected.name;
+                return this.currentUri + (this.selected == null ? '' : this.selected.name);
             },
 
             mediasCount() {
-                return this.medias.length;
+                return this.medias.count();
             }
         },
 
         methods: {
             getHomeDirectory() {
-                this.breadcrumbs = [];
+                this.loading = true;
+                this.resetBreadcrumbs();
                 this.resetSelected();
                 this.closeMediaDetails();
 
                 axios.get(config.endpoint+'/all').then((response) => {
-                    this.medias = response.data.data;
+                    this.medias.load(response.data.data);
                     this.loading = false;
                 });
             },
 
-            goBack(index) {
-                let back = this.breadcrumbs.length - (index + 1);
+            getDirectories(location) {
+                this.loading = true;
+                this.resetSelected();
+                this.closeMediaDetails();
 
-                if (back > 0) {
-                    this.breadcrumbs = _.dropRight(this.breadcrumbs, back);
-                }
+                axios.get(config.endpoint+'/all?location='+location).then(response => {
+                    this.medias.load(response.data.data);
+                    this.loading = false;
+                });
             },
 
-            isMediaDirectory(media) {
-                return media.type == 'directory';
+            resetBreadcrumbs() {
+                eventHub.$emit('media_location_cleared', {});
             },
 
-            isMediaFile(media) {
-                return media.type == 'file';
-            },
-
-            isMediaImage(media) {
-                if ( ! this.isMediaFile(media)) return false;
-
-                return _.indexOf(config.supportedImages, media.mimetype) >= 0;
-            },
-
-            isMediaNotImage(media) {
-                return ! (this.isMediaDirectory(media) || this.isMediaImage(media));
-            },
-
-            getMediaFileIcon(media) {
-                return _.has(config.icons, media.mimetype)
-                    ? config.icons[media.mimetype]
-                    : config['default-icon'];
-            },
-
+            /**
+             * Open Media.
+             *
+             * @param  {Media}  media
+             */
             openMedia(media) {
-                if (this.isMediaDirectory(media)) {
-                    this.breadcrumbs.push(media.name);
+                if (media.isDirectory()) {
+                    eventHub.$emit('media_directory_opened', media.name);
                 }
-                else if (this.isMediaFile(media)) {
+                else if (media.isFile()) {
                     this.openMediaDetails(media);
                 }
             },
 
+            /**
+             * Open media details (only files).
+             *
+             * @param  {Media}  media
+             */
             openMediaDetails(media) {
                 this.showDetails = true;
             },
@@ -262,23 +205,15 @@
                 this.getDirectories(this.currentUri);
             },
 
-            getDirectories(location) {
-                this.resetSelected();
-                this.closeMediaDetails();
-                this.loading = true;
-
-                axios.get(config.endpoint+'/all?location='+location).then(response => {
-                    this.medias  = response.data.data;
-                    this.loading = false;
-                });
-            },
-
             // SELECTION
             hasSelectedMedia() {
                 return this.selected != null;
             },
 
             selectMedia(media) {
+                if (media.isDirectory())
+                    this.closeMediaDetails();
+
                 this.selected = media;
             },
 
@@ -292,27 +227,28 @@
 
             selectNextMedia() {
                 if (this.hasSelectedMedia()) {
-                    let index = _.indexOf(this.medias, this.selected) + 1;
+                    let index = this.medias.getIndex(this.selected) + 1;
 
                     if (index >= this.mediasCount) index = 0;
 
-                    this.selected = this.medias[index];
+                    this.selected = this.medias.get(index);
                 }
                 else if (this.mediasCount > 0) {
-                    this.selected = _.first(this.medias);
+                    this.selected = this.medias.first();
                 }
             },
 
             selectPreviousMedia() {
                 if (this.hasSelectedMedia()) {
-                    let index = _.indexOf(this.medias, this.selected) - 1;
+                    let index = this.medias.getIndex(this.selected) - 1;
 
-                    if (index < 0) index = this.mediasCount - 1;
+                    if (index < 0)
+                        index = this.mediasCount - 1;
 
-                    this.selected = this.medias[index];
+                    this.selected = this.medias.get(index);
                 }
                 else if (this.mediasCount > 0) {
-                    this.selected = _.last(this.medias);
+                    this.selected = this.medias.last();
                 }
             },
 
@@ -348,6 +284,49 @@
             // FullScreen
             toggleFullScreen() {
                 this.fullScreen = ! this.fullScreen;
+            },
+
+            listenToKeyboard() {
+                let me = this;
+
+                window.addEventListener('keyup', e => {
+                    if (me.modalOpened) return;
+
+                    switch (e.keyCode) {
+                        case 39: // right
+                            me.selectNextMedia();
+                            break;
+
+                        case 37: // left
+                            me.selectPreviousMedia();
+                            break;
+
+                        case 13: // enter
+                            if (me.hasSelectedMedia()) {
+                                me.openMedia(me.selected);
+                            }
+                            break;
+
+                        case 46: // delete
+                            if (me.hasSelectedMedia()) {
+                                me.openDeleteMediaModal()
+                            }
+                            break;
+
+//                        case 8: // backspace
+//                            if (me.breadcrumbs.length) {
+//                                me.breadcrumbs = _.dropRight(me.breadcrumbs, 1);
+//                            }
+//                            break;
+
+//                    case 27: // escape
+//                        me.resetSelected();
+//                        break;
+
+                        default:
+                        // no break
+                    }
+                }, false);
             }
         },
 

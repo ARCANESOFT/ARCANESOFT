@@ -43,41 +43,45 @@
         },
 
         created() {
-            let me = this;
-
             eventHub.$on(events.OPEN_DELETE_MEDIA_MODAL, data => {
-                me.modal = $('div#deleteFolderModal');
+                this.modal     = $('div#deleteFolderModal');
+                this.submitBtn = this.modal.find('button[type="submit"]');
 
-                me.submitBtn = me.modal.find('button[type="submit"]');
-
-                me.modal.modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
+                this.modal.modal({backdrop: 'static', keyboard: false});
             });
+        },
+
+        mounted() {
+            //
         },
 
         methods: {
             deleteFolder(e) {
+                this.disableSubmitButton();
+
+                axios.post(config.endpoint+'/delete', {media: this.media})
+                     .then(response => {
+                         if (response.data.status == 'success') {
+                             this.modal.modal('hide');
+                             this.resetSubmitButton();
+                             eventHub.$emit(events.MEDIA_MODAL_CLOSED, true);
+                         }
+                         else {
+                             // Throw an error
+                         }
+                     })
+                     .catch(error => {
+                         this.resetSubmitButton();
+                         this.errors = error.response.data.errors;
+                     });
+            },
+
+            disableSubmitButton() {
                 this.submitBtn.button('loading');
+            },
 
-                axios.post(config.endpoint+'/delete', {
-                        media: this.media
-                    })
-                    .then(response => {
-                        eventHub.$emit(events.MEDIA_MODAL_CLOSED, true);
-
-                        this.modal.modal('hide');
-
-                        this.newDirectory = '';
-
-                        this.submitBtn.button('reset');
-                    })
-                    .catch(error => {
-                        this.submitBtn.button('reset');
-
-                        this.errors = error.response.data.errors;
-                    });
+            resetSubmitButton() {
+                this.submitBtn.button('reset');
             }
         }
     }

@@ -1,6 +1,8 @@
 const { mix } = require('laravel-mix');
 
 // mix.disableNotifications();
+// mix.sourceMaps();
+// mix.version();
 
 // Styles
 //-------------------------------------------------------
@@ -19,8 +21,6 @@ mix.js('resources/assets/back/js/admin.js', '/assets/js')
    ], '/assets/js/vendors.js');
 
 mix.copy('node_modules/pace-progress/pace.min.js', 'public/assets/js/vendors/pace.min.js');
-
-mix.sourceMaps().version();
 
 // Fonts
 //-------------------------------------------------------

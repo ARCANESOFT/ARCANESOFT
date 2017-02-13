@@ -47,45 +47,40 @@
         },
 
         created() {
-            let me = this;
-
             eventHub.$on(events.OPEN_NEW_FOLDER_MODAL, data => {
-                me.modal     = $('div#newFolderModal');
-                me.submitBtn = me.modal.find('button[type="submit"]');
+                this.modal     = $('div#newFolderModal');
+                this.submitBtn = this.modal.find('button[type="submit"]');
 
-                me.modal.modal('show');
+                this.modal.modal('show');
 
-                me.modal.on('shown.bs.modal', () => {
-                    me.modal.find('[autofocus]').focus();
+                this.modal.on('shown.bs.modal', () => {
+                    this.modal.find('[autofocus]').focus();
                 });
 
-                me.modal.on('hidden.bs.modal', () => {
-                    me.resetErrors();
+                this.modal.on('hidden.bs.modal', () => {
+                    this.resetErrors();
                 })
             });
         },
 
         methods: {
             createFolder(e) {
+                this.disableSubmitBtn();
                 this.resetErrors();
-
-                this.submitBtn.button('loading');
 
                 axios.post(config.endpoint+'/create', {
                         name: this.newDirectory,
                         location: this.location
                     })
                     .then(response => {
-                        eventHub.$emit(events.MEDIA_MODAL_CLOSED, true);
-
                         this.modal.modal('hide');
-
                         this.newDirectory = '';
+                        this.resetSubmitBtn();
 
-                        this.submitBtn.button('reset');
+                        eventHub.$emit(events.MEDIA_MODAL_CLOSED, true);
                     })
                     .catch(error => {
-                        this.submitBtn.button('reset');
+                        this.resetSubmitBtn();
 
                         this.errors = error.response.data.errors;
                     });
@@ -93,6 +88,14 @@
 
             resetErrors() {
                 this.errors = [];
+            },
+
+            disableSubmitBtn() {
+                this.submitBtn.button('loading');
+            },
+
+            resetSubmitBtn() {
+                this.submitBtn.button('reset');
             }
         }
     }
