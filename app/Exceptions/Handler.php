@@ -52,7 +52,7 @@ class Handler extends ExceptionHandler
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception                $exception
      *
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function render($request, Exception $exception)
     {
@@ -79,10 +79,9 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        if ($request->expectsJson())
-            return response()->json(['error' => 'Unauthenticated.'], 401);
-
-        return redirect()->guest(route('auth::login.get'));
+        return $request->expectsJson()
+            ? response()->json(['error' => $exception->getMessage()], 401)
+            : redirect()->guest(route('auth::login.get'));
     }
 
     /**
@@ -94,10 +93,9 @@ class Handler extends ExceptionHandler
      */
     protected function convertExceptionToResponse(Exception $e)
     {
-        if (config('app.debug', false))
-            return $this->renderWhoopsPage($e);
-
-        return parent::convertExceptionToResponse($e);
+        return config('app.debug', false)
+            ? $this->renderWhoopsPage($e)
+            : parent::convertExceptionToResponse($e);
     }
 
     /**

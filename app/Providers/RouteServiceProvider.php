@@ -80,7 +80,7 @@ class RouteServiceProvider extends ServiceProvider
                  Routes\Front\PagesRoutes::register();
                  Routes\Front\ProfileRoutes::register();
 
-                 require_once base_path('routes/web.php');
+                 require base_path('routes/web.php');
              });
     }
 
@@ -118,7 +118,7 @@ class RouteServiceProvider extends ServiceProvider
              ->prefix('api')
              ->as('api::')
              ->group(function () {
-                 base_path('routes/api.php');
+                 require base_path('routes/api.php');
              });
     }
 }

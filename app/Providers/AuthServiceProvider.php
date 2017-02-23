@@ -1,6 +1,6 @@
 <?php namespace App\Providers;
 
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Arcanedev\Support\Providers\AuthorizationServiceProvider as ServiceProvider;
 
 /**
  * Class     AuthServiceProvider

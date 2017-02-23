@@ -1,7 +1,7 @@
 <template>
     <aside id="mediaDetails" class="media-item-details">
-        <div class="details-thumbnail">
-            <img :src="media.url" v-if="media.isImage()" class="img-responsive" style="max-height: 200px;">
+        <div class="details-thumbnail" v-if="media.isImage()">
+            <img :src="media.url">
         </div>
         <div class="item-body">
             <p>
