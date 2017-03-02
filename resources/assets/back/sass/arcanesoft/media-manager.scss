@@ -59,10 +59,10 @@
             align-content: flex-start;
 
             padding: 10px;
-            min-height: $media-manager-container-height;
-            max-height: $media-manager-container-height;
+            min-height: $media-manager-container-min-height;
+            max-height: $media-manager-container-max-height;
             overflow-x: hidden;
-            background-color: #FFF;
+            background-color: $media-manager-container-bg-color;
 
             .media-item {
                 margin: $media-manager-item-margin;
@@ -81,9 +81,9 @@
                     background: #F6F8F9;
 
                     &.selected {
-                        background-color: #4DA7E8;
-                        border-color: darken(#4DA7E8, 5%);
-                        color: #fff;
+                        background-color: $media-manager-item-selected-bg-color;
+                        border-color: darken($media-manager-item-selected-bg-color, 5%);
+                        color: $media-manager-item-selected-font-color;
                         transition-property: background-color, border-color, color;
                         transition-duration: 0.2s;
                         transition-timing-function: ease-in-out;
@@ -121,10 +121,11 @@
                 &.media-file {
                     .media-icon {
                         .media-image {
+                            margin-right: 10px;
                             height: 48px;
                             width: 48px;
                             background: no-repeat center;
-                            background-size: auto 100%;
+                            background-size: 100% auto;
                         }
                     }
                 }
@@ -225,7 +226,7 @@
             }
 
             .media-item-details {
-                width: 50%;
+                width: $media-manager-item-details-xs-width;
             }
         }
     }
@@ -248,7 +249,7 @@
             }
 
             .media-item-details {
-                width: 35%;
+                width: $media-manager-item-details-sm-width;
             }
         }
     }
@@ -271,9 +272,14 @@
             }
 
             .media-item-details {
-                width: 35%;
+                width: $media-manager-item-details-md-width;
             }
         }
+    }
+
+    .modal-xl {
+        width: 90%;
+        max-width: 1200px;
     }
 }
 
@@ -292,9 +298,14 @@
             }
 
             .media-item-details {
-                width: 35%;
+                width: $media-manager-item-details-lg-width;
             }
         }
+    }
+
+    .modal-xl {
+        width: 90%;
+        max-width: 1200px;
     }
 }
 

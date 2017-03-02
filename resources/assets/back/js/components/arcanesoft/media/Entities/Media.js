@@ -35,9 +35,9 @@ class Media {
      * @return {string}
      */
     icon() {
-        return _.has(config.icons, this.mimetype)
-            ? config.icons[this.mimetype]
-            : config['default-icon'];
+        return _.has(config.icons.supported, this.mimetype)
+            ? config.icons.supported[this.mimetype]
+            : config.icons.default;
     }
 
     /**

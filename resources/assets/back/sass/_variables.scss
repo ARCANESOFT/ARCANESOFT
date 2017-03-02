@@ -1,10 +1,6 @@
-// Paths
-//==========================================>
-$assets-folder:              "/assets";
-$fonts-folder:               "#{$assets-folder}/fonts";
-$images-folder:              "#{$assets-folder}/img";
-$svg-folder:                 "#{$assets-folder}/svg";
+@import "../../_shared/sass/_variables";
 
+// Paths
 $icon-font-path:             "#{$fonts-folder}/";
 $fa-font-path:               "#{$fonts-folder}";
 $ionicons-font-path:         "#{$fonts-folder}";

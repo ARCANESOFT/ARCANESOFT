@@ -1,6 +1,14 @@
+// Paths
+//--------------------------------------------------------
+
+$assets-folder:              "/assets";
+$fonts-folder:               "#{$assets-folder}/fonts";
+$images-folder:              "#{$assets-folder}/img";
+$svg-folder:                 "#{$assets-folder}/svg";
 
 // Social colors
 //--------------------------------------------------------
+
 $color-social-adn:        #D87A68; // app.net
 $color-social-bitbucket:  #205081;
 $color-social-dropbox:    #1087DD;

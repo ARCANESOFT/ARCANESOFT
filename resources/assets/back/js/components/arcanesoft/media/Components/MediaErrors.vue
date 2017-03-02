@@ -1,13 +1,3 @@
-<template>
-    <transition name="fade">
-        <ul class="list-unstyled" v-if="hasErrors">
-            <li v-for="error in errors">
-                <span class="label label-danger">{{ displayFirstError(error) }}</span>
-            </li>
-        </ul>
-    </transition>
-</template>
-
 <script>
     export default {
         props: ['errors'],
@@ -23,3 +13,13 @@
         }
     }
 </script>
+
+<template>
+    <transition name="fade">
+        <ul class="list-unstyled" v-if="hasErrors">
+            <li v-for="error in errors">
+                <span class="label label-danger">{{ displayFirstError(error) }}</span>
+            </li>
+        </ul>
+    </transition>
+</template>

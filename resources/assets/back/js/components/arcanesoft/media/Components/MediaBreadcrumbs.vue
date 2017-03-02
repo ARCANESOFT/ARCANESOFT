@@ -1,3 +1,53 @@
+<script>
+    import Breadcrumbs from './../Entities/Breadcrumbs';
+    import events from './../Events';
+
+    export default {
+        data() {
+            return {
+                breadcrumbs: new Breadcrumbs
+            }
+        },
+
+        mounted() {
+            eventHub.$on(events.MEDIA_DIRECTORY_OPENED, name => {
+                this.breadcrumbs.push(name);
+                this.fireLocationChangedEvent();
+            });
+
+            eventHub.$on(events.MEDIA_LOCATION_CLEARED, () => {
+                this.breadcrumbs.clear();
+            });
+        },
+
+        methods: {
+            // Navigation
+            goHome() {
+                this.breadcrumbs.clear();
+                this.fireLocationChangedEvent();
+            },
+
+            goBack(index) {
+                this.breadcrumbs.goBack(index);
+                this.fireLocationChangedEvent();
+            },
+
+            // Check Methods
+            isRoot() {
+                return this.breadcrumbs.isRoot();
+            },
+
+            // Other Methods
+            fireLocationChangedEvent() {
+                eventHub.$emit(events.MEDIA_LOCATION_CHANGED,
+                    this.breadcrumbs.location(),
+                    this.breadcrumbs.uri()
+                );
+            }
+        }
+    }
+</script>
+
 <template>
     <ol class="media-toolbar-breadcrumbs breadcrumb">
         <li>
@@ -10,51 +60,3 @@
         </li>
     </ol>
 </template>
-
-<script>
-    import Breadcrumbs from './../Breadcrumbs';
-
-    export default {
-        data() {
-            return {
-                breadcrumbs: new Breadcrumbs
-            }
-        },
-
-        mounted() {
-            eventHub.$on('media_directory_opened', name => {
-                this.breadcrumbs.push(name);
-                eventHub.$emit('breadcrumbs_changed_location',
-                    this.breadcrumbs.location(),
-                    this.breadcrumbs.uri()
-                );
-            });
-
-            eventHub.$on('media_location_cleared', () => {
-                this.breadcrumbs.clear();
-            });
-        },
-
-        methods: {
-            // Navigation
-            goHome() {
-                this.breadcrumbs.clear();
-
-                eventHub.$emit('breadcrumbs_changed_location',
-                    this.breadcrumbs.location(),
-                    this.breadcrumbs.uri()
-                );
-            },
-
-            goBack(index) {
-                this.breadcrumbs.goBack(index);
-
-                eventHub.$emit('breadcrumbs_changed_location', this.breadcrumbs.location());
-            },
-
-            isRoot() {
-                return this.breadcrumbs.isRoot();
-            }
-        }
-    }
-</script>

@@ -1,32 +1,6 @@
-<template>
-    <div id="uploadMediaModal" class="modal fade">
-        <div class="modal-dialog modal-lg">
-            <form @submit.prevent="upload">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Upload</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div id="dropzoneArea" class="dropzone"></div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-default pull-left" data-dismiss="modal">
-                            Cancel
-                        </button>
-                        <button type="submit" class="btn btn-sm btn-primary" data-loading-text="Loading&hellip;">
-                            <i class="fa fa-fw fa-cloud-upload"></i> Upload
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</template>
-
 <script>
-    import config from './../Config';
-    import events from './../Events';
+    import config from './../../Config';
+    import events from './../../Events';
     import Dropzone from 'dropzone';
 
     Dropzone.autoDiscover = false;
@@ -39,14 +13,14 @@
                 formData: null,
                 dropzone: null,
                 modal: null,
-                submitBtn: null,
+                submitBtn: null
             }
         },
 
         mounted() {
             let that = this;
 
-            eventHub.$on(events.OPEN_UPLOAD_MEDIA_MODAL, data => {
+            eventHub.$on(events.MEDIA_MODAL_UPLOAD_OPEN, data => {
                 that.modal     = $('div#uploadMediaModal');
                 that.submitBtn = that.modal.find('button[type="submit"]');
 
@@ -104,3 +78,29 @@
         }
     }
 </script>
+
+<template>
+    <div id="uploadMediaModal" class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <form @submit.prevent="upload">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Upload</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="dropzoneArea" class="dropzone"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-default pull-left" data-dismiss="modal">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn btn-sm btn-primary" data-loading-text="Loading&hellip;">
+                            <i class="fa fa-fw fa-cloud-upload"></i> Upload
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</template>

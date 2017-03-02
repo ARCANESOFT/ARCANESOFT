@@ -7,5 +7,6 @@ if ( ! window.eventHub) {
 /**
  * Register Vue components...
  */
-Vue.component('media-manager', require('./MediaManager.vue'));
-Vue.component('media-browser', require('./MediaBrowser.vue'));
+Vue.component('media-manager',       require('./MediaManager.vue'));
+Vue.component('media-browser',       require('./MediaBrowser.vue'));
+Vue.component('media-browser-modal', require('./Components/Modals/BrowseMediaModal.vue'));

@@ -1,90 +1,16 @@
-<template>
-    <div>
-        <div id="media-manager" class="media-manager" :class="{'full-screen': fullScreen, 'item-details-opened': showDetails}">
-            <div class="media-toolbar">
-                <div class="media-toolbar-buttons btn-toolbar" role="toolbar">
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-success" @click="openUploadMediaModal">
-                            <i class="fa fa-fw fa-cloud-upload"></i> <span class="hidden-xs">Upload</span>
-                        </button>
-                        <button type="button" class="btn btn-primary" @click="openNewFolderModal">
-                            <i class="fa fa-fw fa-folder"></i> <span class="hidden-xs">Add Folder</span>
-                        </button>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default" @click="getHomeDirectory">
-                            <i class="fa fa-fw fa-home"></i>
-                        </button>
-                        <button type="button" class="btn btn-default" @click="refreshDirectory">
-                            <i class="fa fa-fw fa-refresh"></i>
-                        </button>
-                    </div>
-                    <transition name="fade">
-                        <div class="btn-group" role="group" v-if="selected != null">
-                            <button type="button" class="btn btn-info">
-                                <i class="fa fa-fw fa-arrow-circle-right"></i> <span class="hidden-xs">Move</span>
-                            </button>
-                            <button type="button" class="btn btn-warning" @click="openRenameMediaModal">
-                                <i class="fa fa-fw fa-pencil"></i> <span class="hidden-xs">Rename</span>
-                            </button>
-                            <button type="button" class="btn btn-danger" @click="openDeleteMediaModal">
-                                <i class="fa fa-fw fa-trash-o"></i> <span class="hidden-xs">Delete</span>
-                            </button>
-                        </div>
-                    </transition>
-                    <div class="btn-group pull-right" role="group">
-                        <button type="button" class="btn btn-default" @click="toggleFullScreen">
-                            <i class="fa fa-fw" :class="[fullScreen ? 'fa-compress' : 'fa-expand']"></i>
-                        </button>
-                    </div>
-                </div>
-                <media-breadcrumbs></media-breadcrumbs>
-            </div>
-            <div class="media-container">
-                <div class="media-items-container">
-                    <a
-                        v-for="media in medias.all()"
-                        class="media-item"
-                        :class="{'selected': isSelected(media), 'media-file': media.isFile, 'media-directory': media.isDirectory()}"
-                        @click="selectMedia(media)"
-                        @dblclick="openMedia(media)"
-                    >
-                        <div class="media-icon">
-                            <i v-if="media.isDirectory()" class="fa fa-fw fa-folder-o"></i>
-                            <div v-if="media.isImage()"
-                                 :style="'background-image: url('+media.url+');'"
-                                 class="media-image"
-                            ></div>
-                            <i v-if="media.isNotImage()" :class="media.icon()" class="fa fa-fw"></i>
-                        </div>
-                        <div class="media-details">
-                            <h4 class="media-name">{{ media.name }}</h4>
-                        </div>
-                    </a>
-                </div>
-                <media-item-details :media="selected" v-if="showDetails"></media-item-details>
-            </div>
-            <transition name="fade">
-                <div class="media-loader" v-show="loading">
-                    <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
-                    <p>LOADING...</p>
-                </div>
-            </transition>
-        </div>
-
-        <create-folder-modal :location="currentUri"></create-folder-modal>
-        <upload-media-modal :location="currentUri"></upload-media-modal>
-        <rename-media-modal :location="currentUri" :media="selected" v-if="selected"></rename-media-modal>
-        <delete-media-modal :media="selected" v-if="selected"></delete-media-modal>
-    </div>
-</template>
-
 <script>
     import config from './Config';
     import events from './Events';
     import MediaCollection from './Entities/MediaCollection';
 
     export default {
+        props: {
+            readonly: {
+                type: Boolean,
+                default: false
+            }
+        },
+
         data () {
             return {
                 currentUri: '/',
@@ -99,21 +25,21 @@
         },
 
         components: {
-            'media-breadcrumbs':   require('./Components/MediaBreadcrumbs.vue'),
-            'media-item-details':  require('./Components/MediaItemDetails.vue'),
+            'media-breadcrumbs': require('./Components/MediaBreadcrumbs.vue'),
+            'media-item-details': require('./Components/MediaItemDetails.vue'),
 
-            'create-folder-modal': require('./Modals/CreateFolderModal.vue'),
-            'upload-media-modal':  require('./Modals/UploadMediaModal.vue'),
-            'rename-media-modal':  require('./Modals/RenameMediaModal.vue'),
-            'delete-media-modal':  require('./Modals/DeleteMediaModal.vue')
+            'create-folder-modal': require('./Components/Modals/CreateFolderModal.vue'),
+            'upload-media-modal': require('./Components/Modals/UploadMediaModal.vue'),
+            'move-media-modal': require('./Components/Modals/MoveMediaModal.vue'),
+            'rename-media-modal': require('./Components/Modals/RenameMediaModal.vue'),
+            'delete-media-modal': require('./Components/Modals/DeleteMediaModal.vue')
         },
 
         created() {
             this.listenToKeyboard();
 
             eventHub.$on(events.MEDIA_MODAL_CLOSED, (refresh) => {
-                if (refresh)
-                    this.refreshDirectory();
+                if (refresh) this.refreshDirectory();
 
                 this.closeModal();
             });
@@ -122,12 +48,13 @@
                 this.closeMediaDetails();
             });
 
-            eventHub.$on('breadcrumbs_go_home', () => {
+            eventHub.$on(events.MEDIA_LOCATION_HOME, () => {
                 this.getHomeDirectory();
             });
 
-            eventHub.$on('breadcrumbs_changed_location', (location, uri) => {
+            eventHub.$on(events.MEDIA_LOCATION_CHANGED, (location, uri) => {
                 this.currentUri = uri;
+
                 (location == '') ? this.getHomeDirectory() : this.getDirectories(location);
             });
         },
@@ -143,7 +70,12 @@
 
             mediasCount() {
                 return this.medias.count();
+            },
+
+            isNotReadonly() {
+                return ! this.readonly;
             }
+
         },
 
         methods: {
@@ -164,14 +96,15 @@
                 this.resetSelected();
                 this.closeMediaDetails();
 
-                axios.get(config.endpoint+'/all?location='+location).then(response => {
-                    this.medias.load(response.data.data);
-                    this.loading = false;
-                });
+                axios.get(config.endpoint+'/all', {params: {location}})
+                     .then(response => {
+                         this.medias.load(response.data.data);
+                         this.loading = false;
+                     });
             },
 
             resetBreadcrumbs() {
-                eventHub.$emit('media_location_cleared', {});
+                eventHub.$emit(events.MEDIA_LOCATION_CLEARED);
             },
 
             /**
@@ -181,20 +114,16 @@
              */
             openMedia(media) {
                 if (media.isDirectory()) {
-                    eventHub.$emit('media_directory_opened', media.name);
+                    eventHub.$emit(events.MEDIA_DIRECTORY_OPENED, media.name);
                 }
                 else if (media.isFile()) {
                     this.openMediaDetails(media);
                 }
             },
 
-            /**
-             * Open media details (only files).
-             *
-             * @param  {Media}  media
-             */
             openMediaDetails(media) {
-                this.showDetails = true;
+                if (this.isNotReadonly)
+                    this.showDetails = true;
             },
 
             closeMediaDetails() {
@@ -205,36 +134,41 @@
                 this.getDirectories(this.currentUri);
             },
 
-            // SELECTION
             hasSelectedMedia() {
                 return this.selected != null;
             },
 
             selectMedia(media) {
-                if (media.isDirectory())
-                    this.closeMediaDetails();
+                if (media.isDirectory()) this.closeMediaDetails();
 
-                this.selected = media;
+                this.setSelected(media);
+            },
+
+            resetSelected() {
+                this.setSelected(null);
+            },
+
+            setSelected(selected) {
+                this.selected = selected;
+
+                eventHub.$emit(events.MEDIA_ITEM_SELECTED, selected);
             },
 
             isSelected(media) {
                 return media == this.selected;
             },
 
-            resetSelected() {
-                this.selected = null;
-            },
-
             selectNextMedia() {
                 if (this.hasSelectedMedia()) {
                     let index = this.medias.getIndex(this.selected) + 1;
 
-                    if (index >= this.mediasCount) index = 0;
+                    if (index >= this.mediasCount)
+                        index = 0;
 
-                    this.selected = this.medias.get(index);
+                    this.selectMedia(this.medias.get(index));
                 }
                 else if (this.mediasCount > 0) {
-                    this.selected = this.medias.first();
+                    this.selectMedia(this.medias.first());
                 }
             },
 
@@ -245,35 +179,36 @@
                     if (index < 0)
                         index = this.mediasCount - 1;
 
-                    this.selected = this.medias.get(index);
+                    this.selectMedia(this.medias.get(index));
                 }
                 else if (this.mediasCount > 0) {
-                    this.selected = this.medias.last();
+                    this.selectMedia(this.medias.last());
                 }
             },
 
             // MODALS
             openUploadMediaModal() {
-                eventHub.$emit(events.OPEN_UPLOAD_MEDIA_MODAL, {});
-                this.openModal();
+                this.openModal(events.MEDIA_MODAL_UPLOAD_OPEN);
             },
 
             openNewFolderModal() {
-                eventHub.$emit(events.OPEN_NEW_FOLDER_MODAL, {});
-                this.openModal();
+                this.openModal(events.MEDIA_MODAL_NEW_FOLDER_OPEN);
+            },
+
+            openMoveMediaModal() {
+                this.openModal(events.MEDIA_MODAL_MOVE_OPEN);
             },
 
             openRenameMediaModal() {
-                eventHub.$emit(events.OPEN_RENAME_MEDIA_MODAL, {});
-                this.openModal();
+                this.openModal(events.MEDIA_MODAL_RENAME_OPEN);
             },
 
             openDeleteMediaModal() {
-                eventHub.$emit(events.OPEN_DELETE_MEDIA_MODAL, {});
-                this.openModal();
+                this.openModal(events.MEDIA_MODAL_DELETE_OPEN);
             },
 
-            openModal() {
+            openModal(modalEvent) {
+                eventHub.$emit(modalEvent);
                 this.modalOpened = true;
             },
 
@@ -281,7 +216,6 @@
                 this.modalOpened = false;
             },
 
-            // FullScreen
             toggleFullScreen() {
                 this.fullScreen = ! this.fullScreen;
             },
@@ -327,15 +261,93 @@
                         // no break
                     }
                 }, false);
-            }
-        },
+            },
 
-        filters: {
-            humanFileSize(size) {
-                let i = Math.floor(Math.log(size) / Math.log(1024));
-
-                return (size / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i];
+            isEditable() {
+                return this.selected && this.isNotReadonly;
             }
         }
     }
 </script>
+
+<template>
+    <div>
+        <div id="media-manager" class="media-manager" :class="{'full-screen': fullScreen, 'item-details-opened': showDetails}">
+            <div class="media-toolbar">
+                <div class="media-toolbar-buttons btn-toolbar" role="toolbar">
+                    <div class="btn-group" role="group" v-if="isNotReadonly">
+                        <button type="button" class="btn btn-success" @click="openUploadMediaModal">
+                            <i class="fa fa-fw fa-cloud-upload"></i> <span class="hidden-xs">Upload</span>
+                        </button>
+                        <button type="button" class="btn btn-primary" @click="openNewFolderModal">
+                            <i class="fa fa-fw fa-folder"></i> <span class="hidden-xs">Add Folder</span>
+                        </button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default" @click="getHomeDirectory">
+                            <i class="fa fa-fw fa-home"></i>
+                        </button>
+                        <button type="button" class="btn btn-default" @click="refreshDirectory">
+                            <i class="fa fa-fw fa-refresh"></i>
+                        </button>
+                    </div>
+                    <transition name="fade">
+                        <div class="btn-group" role="group" v-if="isEditable()">
+                            <button type="button" class="btn btn-info" @click="openMoveMediaModal">
+                                <i class="fa fa-fw fa-arrow-circle-right"></i> <span class="hidden-xs">Move</span>
+                            </button>
+                            <button type="button" class="btn btn-warning" @click="openRenameMediaModal">
+                                <i class="fa fa-fw fa-pencil"></i> <span class="hidden-xs">Rename</span>
+                            </button>
+                            <button type="button" class="btn btn-danger" @click="openDeleteMediaModal">
+                                <i class="fa fa-fw fa-trash-o"></i> <span class="hidden-xs">Delete</span>
+                            </button>
+                        </div>
+                    </transition>
+                    <div class="btn-group pull-right" role="group" v-if="isNotReadonly">
+                        <button type="button" class="btn btn-default" @click="toggleFullScreen">
+                            <i class="fa fa-fw" :class="[fullScreen ? 'fa-compress' : 'fa-expand']"></i>
+                        </button>
+                    </div>
+                </div>
+                <media-breadcrumbs></media-breadcrumbs>
+            </div>
+            <div class="media-container">
+                <div class="media-items-container">
+                    <a
+                        v-for="media in medias.all()"
+                        class="media-item"
+                        :class="{'selected': isSelected(media), 'media-file': media.isFile, 'media-directory': media.isDirectory()}"
+                        @click="selectMedia(media)"
+                        @dblclick="openMedia(media)"
+                    >
+                        <div class="media-icon">
+                            <i v-if="media.isDirectory()" class="fa fa-fw fa-folder-o"></i>
+                            <div v-if="media.isImage()"
+                                 :style="'background-image: url('+media.url+');'"
+                                 class="media-image"
+                            ></div>
+                            <i v-if="media.isNotImage()" :class="media.icon()" class="fa fa-fw"></i>
+                        </div>
+                        <div class="media-details">
+                            <h4 class="media-name">{{ media.name }}</h4>
+                        </div>
+                    </a>
+                </div>
+                <media-item-details :media="selected" v-if="showDetails"></media-item-details>
+            </div>
+            <transition name="fade">
+                <div class="media-loader" v-show="loading">
+                    <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+                    <p>LOADING...</p>
+                </div>
+            </transition>
+        </div>
+
+        <create-folder-modal :location="currentUri" v-if="isNotReadonly"></create-folder-modal>
+        <upload-media-modal :location="currentUri" v-if="isNotReadonly"></upload-media-modal>
+        <move-media-modal :location="currentUri" :media="selected" v-if="isEditable()"></move-media-modal>
+        <rename-media-modal :location="currentUri" :media="selected" v-if="isEditable()"></rename-media-modal>
+        <delete-media-modal :media="selected" v-if="isEditable()"></delete-media-modal>
+    </div>
+</template>

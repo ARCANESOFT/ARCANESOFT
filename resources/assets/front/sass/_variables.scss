@@ -1,7 +1,8 @@
 @import "../../_shared/sass/_variables";
 
-$icon-font-path: "/assets/fonts/";
-$fa-font-path:   "/assets/fonts";
+// Paths
+$icon-font-path:             "#{$fonts-folder}/";
+$fa-font-path:               "#{$fonts-folder}";
 
 // Body
 $body-bg: #f5f8fa;
@@ -15,7 +16,7 @@ $panel-inner-border: $laravel-border-color;
 
 // Brands
 $brand-primary: #3097D1;
-$brand-info: #8eb4cb;
+$brand-info:    #8eb4cb;
 $brand-success: #2ab27b;
 $brand-warning: #cbb956;
 $brand-danger:  #bf5329;

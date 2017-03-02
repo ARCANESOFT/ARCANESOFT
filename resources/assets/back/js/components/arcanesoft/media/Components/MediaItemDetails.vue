@@ -1,3 +1,37 @@
+<script>
+    import config from './../Config';
+    import events from './../Events';
+
+    export default {
+        props: {
+            media: {
+                type: Object,
+                required: true
+            }
+        },
+
+        data () {
+            return {
+                //
+            };
+        },
+
+        created() {
+            //
+        },
+
+        methods: {
+            close() {
+                eventHub.$emit(events.ITEM_DETAILS_CLOSED);
+            },
+        },
+
+        computed: {
+            //
+        }
+    }
+</script>
+
 <template>
     <aside id="mediaDetails" class="media-item-details">
         <div class="details-thumbnail" v-if="media.isImage()">
@@ -38,37 +72,3 @@
         </div>
     </aside>
 </template>
-
-<script>
-    import config from './../Config';
-    import events from './../Events';
-
-    export default {
-        props: {
-            media: {
-                type: Object,
-                required: true
-            }
-        },
-
-        data () {
-            return {
-                //
-            };
-        },
-
-        created() {
-            //
-        },
-
-        methods: {
-            close() {
-                eventHub.$emit(events.ITEM_DETAILS_CLOSED);
-            },
-        },
-
-        computed: {
-            //
-        }
-    }
-</script>

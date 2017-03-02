@@ -1,2 +1,13 @@
-$media-manager-container-height: 400px !default;
+$media-manager-container-min-height: 400px !default;
+$media-manager-container-max-height: 600px !default;
+$media-manager-container-bg-color: #FFF;
+
 $media-manager-item-margin: 10px !default;
+
+$media-manager-item-details-xs-width: 50% !default;
+$media-manager-item-details-sm-width: 35% !default;
+$media-manager-item-details-md-width: 35% !default;
+$media-manager-item-details-lg-width: 25% !default;
+
+$media-manager-item-selected-bg-color:   #4DA7E8 !default;
+$media-manager-item-selected-font-color: #FFF !default;
