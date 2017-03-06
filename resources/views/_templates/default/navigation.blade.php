@@ -30,7 +30,7 @@
                         </li>
                     @endif
                 @else
-                    <?php $user = Auth::user() ?>
+                    @php($user = Auth::user())
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ $user->full_name }} <span class="caret"></span>

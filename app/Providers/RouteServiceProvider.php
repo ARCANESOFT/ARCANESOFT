@@ -32,9 +32,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var array
      */
     protected $webMiddlewares = [
-        'web',
-        'impersonate',
-        // 'tracking',
+        'public'
     ];
 
     /* ------------------------------------------------------------------------------------------------

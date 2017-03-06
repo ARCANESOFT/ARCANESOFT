@@ -45,9 +45,8 @@
                             </div>
                         {{ Form::close() }}
                     </div>
-                    @if (Arcanedev\LaravelAuth\Services\SocialAuthenticator::isEnabled())
-                        @include('auth._includes.social-networks-links')
-                    @endif
+
+                    @includeWhen(Arcanedev\LaravelAuth\Services\SocialAuthenticator::isEnabled(), 'auth._includes.social-networks-links')
                 </div>
             </div>
         </div>
