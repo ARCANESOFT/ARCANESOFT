@@ -13,7 +13,7 @@ return [
      |  Session Lifetime
      | ------------------------------------------------------------------------------------------------
      */
-    'lifetime' => 120,
+    'lifetime' => 120, // minutes
 
     'expire_on_close' => false,
 
