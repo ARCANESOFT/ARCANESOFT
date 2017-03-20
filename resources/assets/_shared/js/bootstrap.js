@@ -26,7 +26,9 @@ window.eventHub = new Vue();
  * Laravel Echo
  */
 
-// import Echo from "laravel-echo"
+// import Echo from 'laravel-echo'
+
+// window.Pusher = require('pusher-js');
 
 // window.Echo = new Echo({
 //     broadcaster: 'pusher',

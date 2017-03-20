@@ -6,7 +6,6 @@
  */
 
 require('../../_shared/js/bootstrap');
-// require('../../_shared/js/components');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
