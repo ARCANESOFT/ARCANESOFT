@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Support\Str;
 
 /**
  * Class     ResetPasswordController
@@ -36,12 +37,28 @@ class ResetPasswordController extends Controller
      | -----------------------------------------------------------------
      */
     /**
+     * Reset the given user's password.
+     *
+     * @param  \App\Models\User  $user
+     * @param  string            $password
+     */
+    protected function resetPassword($user, $password)
+    {
+        $user->forceFill([
+            'password'       => $password,
+            'remember_token' => Str::random(60),
+        ])->save();
+
+        $this->guard()->login($user);
+    }
+
+    /**
      * Get the post reset redirect path.
      *
      * @return string
      */
     protected function redirectTo()
     {
-        return route('public::welcome');
+        return route('account::index');
     }
 }

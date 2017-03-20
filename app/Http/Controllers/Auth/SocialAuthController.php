@@ -103,6 +103,6 @@ class SocialAuthController extends Controller
      */
     protected function redirectTo()
     {
-        return route('public::welcome');
+        return route('account::index');
     }
 }
