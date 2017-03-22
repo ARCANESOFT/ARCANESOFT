@@ -6,6 +6,7 @@ return [
      |  Validation Language Lines
      | -----------------------------------------------------------------
      */
+
     'accepted'             => 'The :attribute must be accepted.',
     'active_url'           => 'The :attribute is not a valid URL.',
     'after'                => 'The :attribute must be a date after :date.',
@@ -83,6 +84,7 @@ return [
      |  Custom Validation Language Lines
      | -----------------------------------------------------------------
      */
+
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
@@ -93,6 +95,7 @@ return [
      |  Custom Validation Attributes
      | -----------------------------------------------------------------
      */
+
     'attributes' => [],
 
 ];
