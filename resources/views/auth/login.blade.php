@@ -11,7 +11,7 @@
                             <div class="form-group {{ $errors->first('email', 'has-error') }}">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-fw fa-at"></i></span>
-                                    {{ Form::email('email', old('email'), ['class' => 'form-control', 'required', 'autofocus', 'placeholder' => trans('auth::users.email')]) }}
+                                    {{ Form::email('email', old('email'), ['class' => 'form-control', 'required', 'autofocus', 'placeholder' => trans('auth::users.attributes.email')]) }}
                                 </div>
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -22,7 +22,7 @@
                             <div class="form-group {{ $errors->first('password', 'has-error') }}">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-fw fa-key"></i></span>
-                                    {{ Form::password('password', ['class' => 'form-control', 'required', 'placeholder' => trans('auth::users.password')]) }}
+                                    {{ Form::password('password', ['class' => 'form-control', 'required', 'placeholder' => trans('auth::users.attributes.password')]) }}
                                 </div>
                                 @if ($errors->has('password'))
                                     <span class="help-block">
