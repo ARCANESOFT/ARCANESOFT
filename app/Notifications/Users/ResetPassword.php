@@ -60,9 +60,10 @@ class ResetPassword extends Notification
     public function toMail()
     {
         return (new MailMessage)
-            ->subject(trans('auth::password.mail.subject', ['name' => config('app.name')]))
-            ->line(trans('auth::password.mail.line-1'))
-            ->action(trans('auth::password.mail.action'), route('auth::password.reset', [$this->token]))
-            ->line(trans('auth::password.mail.line-2'));
+            ->markdown('notifications.email')
+            ->subject(trans('auth.password-reset.email.subject', ['name' => config('app.name')]))
+            ->line(trans('auth.password-reset.email.line-1'))
+            ->action(trans('auth.password-reset.email.action'), route('auth::password.reset', [$this->token]))
+            ->line(trans('auth.password-reset.email.line-2'));
     }
 }

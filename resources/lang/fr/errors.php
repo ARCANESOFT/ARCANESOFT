@@ -3,11 +3,12 @@
 return [
 
     /* -----------------------------------------------------------------
-     |  Pagination Language Lines
+     |  Exceptions Lines
      | -----------------------------------------------------------------
      */
 
-    'previous' => '&laquo; Previous',
-    'next'     => 'Next &raquo;',
+    'token-mismatch' => [
+        'message' => 'Votre session a expiré, veuillez soumettre le formulaire à nouveau.',
+    ],
 
 ];

@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <div class="panel panel-default">
-                    <div class="panel-heading">{{ trans('auth::password.heading') }}</div>
+                    <div class="panel-heading">{{ trans('auth.password-reset.form.heading') }}</div>
                     <div class="panel-body">
                         @if (session('status'))
                             <div class="alert alert-success">{{ session('status') }}</div>
@@ -15,17 +15,15 @@
                             <div class="form-group {{ $errors->first('email', 'has-error') }}">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-fw fa-at"></i></span>
-                                    {{ Form::email('email', old('email'), ['class' => 'form-control', 'required', 'autofocus', 'placeholder' => trans('auth::users.email')]) }}
+                                    {{ Form::email('email', old('email'), ['class' => 'form-control', 'required', 'autofocus', 'placeholder' => trans('auth::users.attributes.email')]) }}
                                 </div>
                                 @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                                    <span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
                                 @endif
                             </div>
 
                             <div class="form-group">
-                                {{ Form::button(trans('auth::password.submit'), ['type' => 'submit', 'class' => 'btn btn-block btn-primary']) }}
+                                {{ Form::button(trans('auth.password-reset.form.actions.reset'), ['type' => 'submit', 'class' => 'btn btn-block btn-primary']) }}
                             </div>
                         {{ Form::close() }}
                     </div>

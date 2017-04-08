@@ -47,7 +47,7 @@ class RegisterController extends AuthController
     protected function validator(array $data)
     {
         return validator($data, [
-            'email'      => ['required', 'email', 'max:255', Rule::unique('users', 'email')],
+            'email'      => ['required', 'email', 'max:255', Rule::unique($this->getUsersTableName(), 'email')],
             'password'   => ['required', 'confirmed', 'min:8', 'max:30'],
             'username'   => ['required', 'max:30'],
             'first_name' => ['required', 'max:30'],
@@ -81,5 +81,15 @@ class RegisterController extends AuthController
     protected function redirectTo()
     {
         return route('account::index');
+    }
+
+    /**
+     * Get the users table name.
+     *
+     * @return string
+     */
+    private function getUsersTableName()
+    {
+        return config('arcanesoft.auth.database.prefix', '').config('arcanesoft.auth.users.table', 'users');
     }
 }
