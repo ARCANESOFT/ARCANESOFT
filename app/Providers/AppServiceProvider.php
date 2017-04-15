@@ -1,5 +1,6 @@
 <?php namespace App\Providers;
 
+use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -19,7 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerDevServiceProvider();
+        if ($this->app->environment('local', 'testing')) {
+            $this->registerDevServiceProvider();
+        }
     }
 
     /**
@@ -27,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Carbon::setLocale($this->app->getLocale());
     }
 
     /* -----------------------------------------------------------------
@@ -39,14 +42,8 @@ class AppServiceProvider extends ServiceProvider
      */
     private function registerDevServiceProvider()
     {
-        /** @var  \Illuminate\Contracts\Config\Repository  $config */
-        $config = $this->app->make('config');
-
-        if (
-            $config->get('app.debug') &&
-            in_array($this->app->environment(), $config->get('dev.environments', []))
-        ) {
-            $this->app->register(DevServiceProvider::class);
+        foreach ($this->app['config']->get('app.providers-dev', []) as $provider) {
+            $this->app->register($provider);
         }
     }
 }
