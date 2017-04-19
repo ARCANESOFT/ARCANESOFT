@@ -12,6 +12,7 @@ class PagesController extends Controller
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Show the home page.
      *

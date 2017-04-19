@@ -4,18 +4,26 @@ use Arcanesoft\Core\Http\Controllers\Controller as BaseController;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
+/**
+ * Class     Controller
+ *
+ * @package  App\Http\Controllers
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 class Controller extends BaseController
 {
     /* -----------------------------------------------------------------
      |  Traits
      | -----------------------------------------------------------------
      */
+
     use DispatchesJobs, ValidatesRequests;
 
     /* -----------------------------------------------------------------
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * Controller constructor.
      */
@@ -30,6 +38,7 @@ class Controller extends BaseController
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Do random stuff before rendering view.
      */
