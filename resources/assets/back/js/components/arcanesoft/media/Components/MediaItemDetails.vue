@@ -1,8 +1,13 @@
 <script>
-    import config from './../Config';
-    import events from './../Events';
+    import config from '../config';
+    import events from '../events';
+    import { translator } from './../mixins';
 
     export default {
+        name: 'media-item-details',
+
+        mixins: [translator],
+
         props: {
             media: {
                 type: Object,
@@ -10,24 +15,10 @@
             }
         },
 
-        data () {
-            return {
-                //
-            };
-        },
-
-        created() {
-            //
-        },
-
         methods: {
             close() {
-                eventHub.$emit(events.ITEM_DETAILS_CLOSED);
+                window.eventHub.$emit(events.ITEM_DETAILS_CLOSED);
             },
-        },
-
-        computed: {
-            //
         }
     }
 </script>
@@ -39,36 +30,40 @@
         </div>
         <div class="item-body">
             <p>
-                <b>Name: </b><br>
+                <b>{{ lang.get('item.attributes.name') }}: </b><br>
                 <small style="word-break: break-all;">{{ media.name }}</small>
             </p>
             <p>
-                <b>Path: </b><br>
+                <b>{{ lang.get('item.attributes.path') }}: </b><br>
                 <small style="word-break: break-all;">{{ media.path }}</small>
             </p>
             <p>
-                <b>URL: </b><br>
+                <b>{{ lang.get('item.attributes.url') }}: </b><br>
                 <small style="word-break: break-all;">{{ media.url }}</small>
             </p>
             <p>
-                <b>Mimetype: </b><small style="word-break: break-all;">{{ media.mimetype }}</small>
+                <b>{{ lang.get('item.attributes.mimetype') }}: </b>
+                <small style="word-break: break-all;">{{ media.mimetype }}</small>
             </p>
             <p>
-                <b>Size: </b><small>{{ media.humanFileSize() }}</small>
+                <b>{{ lang.get('item.attributes.size') }}: </b>
+                <small>{{ media.humanFileSize() }}</small>
             </p>
             <p>
-                <b>Last modified: </b><small>{{ media.lastModified }}</small>
+                <b>{{ lang.get('item.attributes.last_modified') }}: </b>
+                <small>{{ media.lastModified }}</small>
             </p>
-
             <p>
-                <b>Visibility: </b>
+                <b>{{ lang.get('item.attributes.visibility') }}: </b>
                 <span class="label" :class="media.isPublic() ? 'label-success' : 'label-danger'">
-                    {{ media.isPublic() ? 'Public' : 'Private' }}
+                    {{ lang.get(media.isPublic() ? 'item.visibility.public' : 'item.visibility.public') }}
                 </span>
             </p>
         </div>
         <div class="item-footer">
-            <button class="btn btn-sm btn-default" @click="close">Close</button>
+            <button class="btn btn-sm btn-default" @click="close">
+                {{ lang.get('actions.close') }}
+            </button>
         </div>
     </aside>
 </template>

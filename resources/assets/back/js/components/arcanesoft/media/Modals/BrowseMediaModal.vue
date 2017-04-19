@@ -1,9 +1,15 @@
 <script>
-    import events from './../../Events';
+    import events from '../events';
+    import { translator } from './../mixins';
+    import MediaManager from '../MediaManager.vue';
 
     export default {
+        name: 'media-browser-modal',
+
+        mixins: [translator],
+
         components: {
-            'media-manager': require('./../../MediaManager.vue')
+            MediaManager
         },
 
         data() {
@@ -21,18 +27,22 @@
                 this.modalOpened = false;
             });
 
-            eventHub.$on(events.MEDIA_MODAL_BROWSER_OPEN, () => {
+            window.eventHub.$on(events.MEDIA_MODAL_BROWSER_OPEN, () => {
                 this.openModal();
-            }, this);
+            });
 
-            eventHub.$on(events.MEDIA_ITEM_SELECTED, (media) => {
+            window.eventHub.$on(events.MEDIA_ITEM_SELECTED, (media) => {
                 this.selected = (media && media.isFile()) ? media : null;
-            }, this);
+            });
         },
 
         computed: {
+            isSelected() {
+                return ! this.isNotSelected;
+            },
+
             isNotSelected() {
-                return this.selected == null;
+                return this.selected === null;
             }
         },
 
@@ -48,7 +58,7 @@
 
             selectMedia() {
                 this.closeModal();
-                eventHub.$emit(events.MEDIA_MODAL_BROWSER_SELECT, this.selected.url);
+                window.eventHub.$emit(events.MEDIA_MODAL_BROWSER_SELECT, this.selected.url);
             }
         }
     }
@@ -66,8 +76,14 @@
                     <media-manager :readonly="true" v-if="modalOpened"></media-manager>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" :disabled="isNotSelected" @click.prevent="selectMedia">Select</button>
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">
+                        {{ lang.get('actions.close') }}
+                    </button>
+                    <transition name="fade">
+                        <button type="button" class="btn btn-primary" v-if="isSelected" @click.prevent="selectMedia">
+                            {{ lang.get('actions.select') }}
+                        </button>
+                    </transition>
                 </div>
             </div>
         </div>

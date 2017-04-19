@@ -1,12 +1,13 @@
 /**
  * Required the basic libraries
  */
-window._     = require('lodash');
-window.$     = window.jQuery = require('jquery');
-window.Vue   = require('vue');
-window.axios = require('axios');
+window._ = require('lodash');
 
-require('bootstrap-sass');
+try {
+    window.$ = window.jQuery = require('jquery');
+
+    require('bootstrap-sass');
+} catch (e) {}
 
 /**
  * Setup
@@ -15,12 +16,14 @@ window.App = {
     csrfToken: document.head.querySelector("meta[name=csrf-token]").content
 };
 
-window.axios.defaults.headers.common = {
-    'X-CSRF-TOKEN': window.App.csrfToken,
-    'X-Requested-With': 'XMLHttpRequest'
-};
+// AXIOS
+window.axios = require('axios');
+window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.App.csrfToken;
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-window.eventHub = new Vue();
+// VUE JS
+window.Vue   = require('vue');
+window.eventHub = new Vue;
 
 /**
  * Laravel Echo

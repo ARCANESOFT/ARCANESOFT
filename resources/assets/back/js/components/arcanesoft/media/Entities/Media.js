@@ -1,4 +1,4 @@
-import config from './../Config';
+import config from '../config';
 
 class Media {
     /**
@@ -43,7 +43,9 @@ class Media {
     /**
      * Get a readable file size.
      *
-     * @return {string}
+     * @todo: Export this into a mixin.
+     *
+     * @return {string|null}
      */
     humanFileSize() {
         if ( ! this.isFile())
@@ -56,7 +58,7 @@ class Media {
 
     // Check Methods
     isFile() {
-        return this.type == 'file';
+        return this.type === 'file';
     }
 
     isImage() {
@@ -75,7 +77,7 @@ class Media {
      * @return {boolean}
      */
     isDirectory() {
-        return this.type == 'directory';
+        return this.type === 'directory';
     }
 
     isPublic() {

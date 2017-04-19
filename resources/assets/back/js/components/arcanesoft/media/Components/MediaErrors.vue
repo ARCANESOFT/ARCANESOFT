@@ -1,24 +1,16 @@
 <script>
     export default {
-        props: ['errors'],
+        name: 'media-errors',
 
-        methods: {
-            hasErrors() {
-                return this.errors.length > 0
-            },
-
-            displayFirstError(error) {
-                return _.first(error)
-            },
-        }
+        props: ['errors']
     }
 </script>
 
 <template>
     <transition name="fade">
-        <ul class="list-unstyled" v-if="hasErrors">
-            <li v-for="error in errors">
-                <span class="label label-danger">{{ displayFirstError(error) }}</span>
+        <ul class="list-unstyled" v-if="errors.any()">
+            <li v-for="key in errors.keys()">
+                <span class="label label-danger" v-if="errors.has(key)">{{ errors.first(key) }}</span>
             </li>
         </ul>
     </transition>

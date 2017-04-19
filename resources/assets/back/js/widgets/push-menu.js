@@ -3,7 +3,7 @@
  * Adds the push menu functionality to the sidebar.
  */
 
-import Cookies from "js-cookie"
+import Cookies from 'js-cookie'
 
 export default {
     activate(toggleBtn) {

@@ -1,6 +1,6 @@
 <template>
     <ul class="todo-list">
-        <todo-item v-for="todo in todos" :todo="todo"
+        <todo-item v-for="todo in todos" :todo="todo" :key="todo.id"
                    @toggleTodo="toggleOne"
                    @deleteTodo="deleteOne"
         ></todo-item>
@@ -14,6 +14,8 @@
     Vue.component('todo-item', require('./TodoItem.vue'));
 
     export default {
+        name: 'todo-list',
+
         data () {
             return {
                 todos: [
@@ -80,7 +82,7 @@
                 //
             },
             deleteOne({todo}) {
-                this.todos = _.filter(this.todos, t => t.id != todo.id);
+                this.todos = _.filter(this.todos, t => t.id !== todo.id);
             },
             orderUpdated(e) {
                 // console.debug(e.oldIndex, e.newIndex, this.todos);

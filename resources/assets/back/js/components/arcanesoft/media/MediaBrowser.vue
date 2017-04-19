@@ -1,9 +1,14 @@
 <script>
-    import config from './Config';
-    import events from './Events';
-    import { coerce } from './Utils';
+    import config from './config';
+    import events from './events';
+    import { coerce } from './utilities';
+    import { translator } from './mixins';
 
     export default {
+        name: 'media-browser',
+
+        mixins: [translator],
+
         props: {
             name: {
                 type: String,
@@ -11,58 +16,58 @@
             },
             type: {
                 type: String,
-                default: 'text'
+                'default': 'text'
             },
             value: {
                 type: String,
-                default: ''
+                'default': ''
             },
             className: {
                 type: String,
-                default: 'form-control'
+                'default': 'form-control'
             },
             placeholder: {
                 type: String,
-                default: null
+                'default': null
             },
             disabled: {
                 type: Boolean,
                 coerce: coerce.boolean,
-                default: false
+                'default': false
             },
             readonly: {
                 type: Boolean,
                 coerce: coerce.boolean,
-                default: false
+                'default': false
             },
             required: {
                 type: Boolean,
                 coerce: coerce.boolean,
-                default: false
+                'default': false
             }
-        },
-
-        components: {
-            'browse-media-modal':   require('./Components/Modals/BrowseMediaModal.vue')
         },
 
         data() {
             return {
-                url: '',
+                url: ''
             }
+        },
+
+        components: {
+            'browse-media-modal':   require('./Modals/BrowseMediaModal.vue')
         },
 
         mounted() {
             this.url = this.value;
 
-            eventHub.$on(events.MEDIA_MODAL_BROWSER_SELECT, (url) => {
+            window.eventHub.$on(events.MEDIA_MODAL_BROWSER_SELECT, (url) => {
                 this.url = url;
             });
         },
 
         methods: {
             openBrowserModal() {
-                eventHub.$emit(events.MEDIA_MODAL_BROWSER_OPEN);
+                window.eventHub.$emit(events.MEDIA_MODAL_BROWSER_OPEN);
             }
         }
     }
@@ -76,7 +81,7 @@
 
             <span class="input-group-btn">
                 <button class="btn btn-default" type="button" @click.prevent="openBrowserModal">
-                    <slot>Browse Media</slot>
+                    <slot>{{ lang.get('actions.browse') }}</slot>
                 </button>
             </span>
         </div>

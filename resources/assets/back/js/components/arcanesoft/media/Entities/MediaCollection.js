@@ -55,7 +55,7 @@ class MediaCollection {
     /**
      * Get an item by index.
      *
-     * @param  {integer}  index
+     * @param  {number}  index
      *
      * @return {object}
      */
@@ -84,7 +84,7 @@ class MediaCollection {
     /**
      * Get the items count.
      *
-     * @return {integer}
+     * @return {number}
      */
     count() {
         return this.items.length;
@@ -96,7 +96,7 @@ class MediaCollection {
      * @return {boolean}
      */
     isEmpty() {
-        return this.count() == 0;
+        return this.count() === 0;
     }
 }
 

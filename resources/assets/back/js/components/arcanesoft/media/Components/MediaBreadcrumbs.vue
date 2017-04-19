@@ -1,8 +1,10 @@
 <script>
     import Breadcrumbs from './../Entities/Breadcrumbs';
-    import events from './../Events';
+    import events from '../events';
 
     export default {
+        name: 'media-breadcrumbs',
+
         data() {
             return {
                 breadcrumbs: new Breadcrumbs
@@ -10,12 +12,12 @@
         },
 
         mounted() {
-            eventHub.$on(events.MEDIA_DIRECTORY_OPENED, name => {
+            window.eventHub.$on(events.MEDIA_DIRECTORY_OPENED, name => {
                 this.breadcrumbs.push(name);
                 this.fireLocationChangedEvent();
             });
 
-            eventHub.$on(events.MEDIA_LOCATION_CLEARED, () => {
+            window.eventHub.$on(events.MEDIA_LOCATION_CLEARED, () => {
                 this.breadcrumbs.clear();
             });
         },
@@ -39,7 +41,7 @@
 
             // Other Methods
             fireLocationChangedEvent() {
-                eventHub.$emit(events.MEDIA_LOCATION_CHANGED,
+                window.eventHub.$emit(events.MEDIA_LOCATION_CHANGED,
                     this.breadcrumbs.location(),
                     this.breadcrumbs.uri()
                 );

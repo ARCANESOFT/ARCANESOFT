@@ -24,13 +24,16 @@ mix.sass('resources/assets/back/sass/admin.scss', '/assets/css')
 
 // Scripts
 //-------------------------------------------------------
+mix.autoload({
+    jquery: ['$', 'window.jQuery', 'jQuery']
+});
 
 mix.js('resources/assets/front/js/app.js', '/assets/js');
-mix.js('resources/assets/back/js/admin.js', '/assets/js')
-   .extract([
-       'axios', 'vue', 'jquery', 'bootstrap-sass', 'lodash', 'chart.js', 'simplemde', 'dropzone',
-       'eonasdan-bootstrap-datetimepicker', 'jquery-slimscroll', 'select2', 'js-cookie', 'fastclick'
-   ], '/assets/js/vendors.js');
+mix.js('resources/assets/back/js/admin.js', '/assets/js');
+mix.extract([
+   'axios', 'vue', 'jquery', 'bootstrap-sass', 'lodash', 'chart.js', 'simplemde', 'dropzone',
+   'eonasdan-bootstrap-datetimepicker', 'jquery-slimscroll', 'select2', 'js-cookie', 'fastclick'
+], '/assets/js/vendors.js');
 
 mix.copy('node_modules/pace-progress/pace.min.js', publicFolders.scripts + '/vendors/pace.min.js');
 
@@ -42,7 +45,7 @@ mix.copy([
     'node_modules/ionicons/dist/fonts',
     'node_modules/weathericons/font',
     'resources/assets/back/fonts',
-], publicFolders.fonts + '/fonts');
+], publicFolders.fonts);
 
 // Images
 //-------------------------------------------------------

@@ -21,17 +21,27 @@ window.App.widgets = {
 };
 
 /**
- * Register Vue components...
+ * Import Vue components...
  */
 require('./components/arcanesoft/media/main');
-Vue.component('seo-counter', require('./components/arcanesoft/seo/SeoCounter.vue'));
-Vue.component('todo-list', require('./components/TodoList/TodoList.vue'));
 
+import SeoCounter from './components/arcanesoft/seo/SeoCounter.vue';
+import TodoList from './components/TodoList/TodoList.vue';
+
+/**
+ * App Vue instance.
+ */
 const app = new Vue({
     el: '#app',
+
+    components: {
+        SeoCounter, TodoList
+    },
+
     data: {
         widgets: window.App.widgets
     },
+
     mounted() {
         $(() => {
             // Fix for IE page transitions
@@ -47,6 +57,7 @@ const app = new Vue({
             this.init()
         });
     },
+
     methods: {
         init() {
             let options = window.App.options;

@@ -18,7 +18,7 @@ class Breadcrumbs {
     }
 
     isRoot() {
-        return this.count() == 0;
+        return this.count() === 0;
     }
 
     count() {

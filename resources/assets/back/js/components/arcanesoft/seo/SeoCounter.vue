@@ -9,6 +9,8 @@
 
 <script>
     export default {
+        name: 'seo-counter',
+
         props: {
             name: {
                 type: String,
