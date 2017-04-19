@@ -17,12 +17,14 @@ class RegisterController extends AuthController
      |  Traits
      | -----------------------------------------------------------------
      */
+
     use RegistersUsers;
 
     /* -----------------------------------------------------------------
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * Create a new controller instance.
      */
@@ -37,6 +39,7 @@ class RegisterController extends AuthController
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -47,11 +50,11 @@ class RegisterController extends AuthController
     protected function validator(array $data)
     {
         return validator($data, [
-            'email'      => ['required', 'email', 'max:255', Rule::unique($this->getUsersTableName(), 'email')],
-            'password'   => ['required', 'confirmed', 'min:8', 'max:30'],
-            'username'   => ['required', 'max:30'],
-            'first_name' => ['required', 'max:30'],
-            'last_name'  => ['required', 'max:30'],
+            'email'      => ['required', 'string', 'email', 'max:255', Rule::unique($this->getUsersTableName(), 'email')],
+            'password'   => ['required', 'string', 'confirmed', 'min:8', 'max:30'],
+            'username'   => ['required', 'string', 'max:30'],
+            'first_name' => ['required', 'string', 'max:30'],
+            'last_name'  => ['required', 'string', 'max:30'],
         ]);
     }
 
@@ -59,6 +62,7 @@ class RegisterController extends AuthController
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Create a new user instance after a valid registration.
      *

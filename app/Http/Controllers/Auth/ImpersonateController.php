@@ -14,6 +14,7 @@ class ImpersonateController extends AuthController
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Stop the impersonation.
      *

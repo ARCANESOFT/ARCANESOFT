@@ -20,12 +20,13 @@ class LoginController extends AuthController
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
-     * Create a new controller instance.
+     * LoginController constructor.
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->middleware('guest')->except(['logout']);
 
         parent::__construct();
     }
@@ -34,6 +35,7 @@ class LoginController extends AuthController
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Get the post login redirect path.
      *

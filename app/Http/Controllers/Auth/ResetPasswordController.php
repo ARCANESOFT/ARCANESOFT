@@ -16,14 +16,16 @@ class ResetPasswordController extends Controller
      |  Traits
      | -----------------------------------------------------------------
      */
+
     use ResetsPasswords;
 
     /* -----------------------------------------------------------------
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
-     * Create a new controller instance.
+     * ResetPasswordController constructor.
      */
     public function __construct()
     {
@@ -36,6 +38,7 @@ class ResetPasswordController extends Controller
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Reset the given user's password.
      *
