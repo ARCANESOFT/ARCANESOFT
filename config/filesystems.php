@@ -8,14 +8,14 @@ return [
      | Supported: "local", "ftp", "s3", "rackspace"
      */
 
-    'default' => 'local',
+    'default' => env('FILESYSTEM_DRIVER', 'local'),
 
     /* -----------------------------------------------------------------
      |  Default Cloud Filesystem Disk
      | -----------------------------------------------------------------
      */
 
-    'cloud' => 's3',
+    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
 
     /* -----------------------------------------------------------------
      |  Filesystem Disks
