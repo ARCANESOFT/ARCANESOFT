@@ -1,6 +1,6 @@
 <script>
-    import config from '../config';
-    import events from '../events';
+    import config from './../config';
+    import events from './../events';
     import Dropzone from 'dropzone';
     import FormErrors from 'laravel-form-errors';
     import { translator } from './../mixins';

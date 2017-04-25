@@ -1,7 +1,7 @@
 <script>
-    import events from '../events';
+    import events from './../events';
     import { translator } from './../mixins';
-    import MediaManager from '../MediaManager.vue';
+    import MediaManager from './../MediaManager.vue';
 
     export default {
         name: 'media-browser-modal',

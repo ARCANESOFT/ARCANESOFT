@@ -1,6 +1,6 @@
 <script>
-    import config from '../config';
-    import events from '../events';
+    import config from './../config';
+    import events from './../events';
     import { translator } from './../mixins';
 
     export default {

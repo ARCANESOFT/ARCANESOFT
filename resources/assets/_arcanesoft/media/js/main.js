@@ -4,7 +4,7 @@
 import Vue from 'vue';
 
 if ( ! window.eventHub) {
-    window.eventHub = new Vue();
+    window.eventHub = new Vue;
 }
 
 Vue.component('media-manager',       require('./MediaManager.vue'));

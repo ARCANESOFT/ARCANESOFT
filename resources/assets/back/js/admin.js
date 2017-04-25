@@ -23,7 +23,7 @@ window.App.widgets = {
 /**
  * Import Vue components...
  */
-require('./components/arcanesoft/media/main');
+require('../../_arcanesoft/media/js/main');
 
 import SeoCounter from './components/arcanesoft/seo/SeoCounter.vue';
 import TodoList from './components/TodoList/TodoList.vue';

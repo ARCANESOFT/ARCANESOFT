@@ -35,7 +35,7 @@ mix.extract([
    'eonasdan-bootstrap-datetimepicker', 'jquery-slimscroll', 'select2', 'js-cookie', 'fastclick'
 ], '/assets/js/vendors.js');
 
-mix.copy('node_modules/pace-progress/pace.min.js', publicFolders.scripts + '/vendors/pace.min.js');
+mix.copy('node_modules/pace-progress/pace.min.js', `${publicFolders.scripts}/vendors/pace.min.js`);
 
 // Fonts
 //-------------------------------------------------------
@@ -50,14 +50,14 @@ mix.copy([
 // Images
 //-------------------------------------------------------
 
-mix.copy('node_modules/bootstrap-colorpicker/dist/img/bootstrap-colorpicker', publicFolders.images + '/bootstrap-colorpicker');
-mix.copy('node_modules/ion-rangeslider/img', publicFolders.images + '/ion-rangeslider');
+mix.copy('node_modules/bootstrap-colorpicker/dist/img/bootstrap-colorpicker', `${publicFolders.images}/bootstrap-colorpicker`);
+mix.copy('node_modules/ion-rangeslider/img', `${publicFolders.images}/ion-rangeslider`);
 mix.copy('resources/assets/back/img', publicFolders.images);
 
 // SVG
 //-------------------------------------------------------
 
-mix.copy('node_modules/flag-icon-css/flags', publicFolders.svg + '/flags');
+mix.copy('node_modules/flag-icon-css/flags', `${publicFolders.svg}/flags`);
 
 // Demo assets
 //-------------------------------------------------------

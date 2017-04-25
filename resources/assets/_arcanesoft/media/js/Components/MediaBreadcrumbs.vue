@@ -1,6 +1,6 @@
 <script>
     import Breadcrumbs from './../Entities/Breadcrumbs';
-    import events from '../events';
+    import events from './../events';
 
     export default {
         name: 'media-breadcrumbs',
