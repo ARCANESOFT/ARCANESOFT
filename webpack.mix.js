@@ -7,6 +7,7 @@ const publicFolders = {
     scripts: publicFolder + '/assets/js',
     svg: publicFolder + '/assets/svg'
 };
+const republishAssets = false;
 
 mix.disableNotifications();
 // mix.sourceMaps();
@@ -28,37 +29,48 @@ mix.autoload({
     jquery: ['$', 'window.jQuery', 'jQuery']
 });
 
-mix.js('resources/assets/front/js/app.js', '/assets/js');
-mix.js('resources/assets/back/js/admin.js', '/assets/js');
+mix.js('resources/assets/front/js/app.js', '/assets/js/app.js');
+mix.js('resources/assets/back/js/admin.js', '/assets/js/admin.js');
 mix.extract([
-   'axios', 'vue', 'jquery', 'bootstrap-sass', 'lodash', 'chart.js', 'simplemde', 'dropzone',
-   'eonasdan-bootstrap-datetimepicker', 'jquery-slimscroll', 'select2', 'js-cookie', 'fastclick'
+    // Common dependencies
+    'axios', 'vue', 'jquery', 'bootstrap-sass',
+
+    // Backend dependencies
+    'lodash', 'chart.js', 'simplemde', 'eonasdan-bootstrap-datetimepicker', 'jquery-slimscroll', 'select2',
+    'js-cookie', 'fastclick',
+
+    // Media manager dependencies
+    'dropzone', 'laravel-lang-js', 'laravel-form-errors'
 ], '/assets/js/vendors.js');
 
 mix.copy('node_modules/pace-progress/pace.min.js', `${publicFolders.scripts}/vendors/pace.min.js`);
 
-// Fonts
-//-------------------------------------------------------
-mix.copy([
-    'node_modules/bootstrap-sass/assets/fonts/bootstrap',
-    'node_modules/font-awesome/fonts',
-    'node_modules/ionicons/dist/fonts',
-    'node_modules/weathericons/font',
-    'resources/assets/back/fonts',
-], publicFolders.fonts);
-
-// Images
+// Publishes
 //-------------------------------------------------------
 
-mix.copy('node_modules/bootstrap-colorpicker/dist/img/bootstrap-colorpicker', `${publicFolders.images}/bootstrap-colorpicker`);
-mix.copy('node_modules/ion-rangeslider/img', `${publicFolders.images}/ion-rangeslider`);
-mix.copy('resources/assets/back/img', publicFolders.images);
+if (republishAssets) {
 
-// SVG
-//-------------------------------------------------------
+    // Fonts
+    //-------------------------------------------------------
 
-mix.copy('node_modules/flag-icon-css/flags', `${publicFolders.svg}/flags`);
+    mix.copy([
+        'node_modules/bootstrap-sass/assets/fonts/bootstrap',
+        'node_modules/font-awesome/fonts',
+        'node_modules/ionicons/dist/fonts',
+        'node_modules/weathericons/font',
+        'resources/assets/back/fonts',
+    ], publicFolders.fonts);
 
-// Demo assets
-//-------------------------------------------------------
-// mix.copy('resources/assets/demo/js/pages/dashboard.js', publicFolder + '/demo-assets/js/dashboard.js');
+    // Images
+    //-------------------------------------------------------
+
+    mix.copy('node_modules/bootstrap-colorpicker/dist/img/bootstrap-colorpicker', `${publicFolders.images}/bootstrap-colorpicker`);
+    mix.copy('node_modules/ion-rangeslider/img', `${publicFolders.images}/ion-rangeslider`);
+    mix.copy('resources/assets/back/img', publicFolders.images);
+
+    // SVG
+    //-------------------------------------------------------
+
+    mix.copy('node_modules/flag-icon-css/flags', `${publicFolders.svg}/flags`);
+
+}

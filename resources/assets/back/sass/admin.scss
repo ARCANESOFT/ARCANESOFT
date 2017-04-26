@@ -6,6 +6,7 @@
 
 // COMPONENTS
 //==========================================>
+
 @import "components/buttons";
 @import "components/dropdown";
 @import "components/forms";
@@ -34,6 +35,7 @@
 
 // PAGES
 //==========================================>
+
 @import "pages/mailbox";
 @import "pages/lockscreen";
 @import "pages/login-and-register";
@@ -44,10 +46,12 @@
 
 // ARCANESOFT Components
 //==========================================>
-@import "../../_arcanesoft/media/scss/media-manager";
+
+// @import "../../_arcanesoft/media/scss/media-manager";
 
 // Customized Plugins
 //==========================================>
+
 @import "overrides/pace";
 @import "overrides/bootstrap-datepicker";
 @import "overrides/bootstrap-slider";
@@ -58,9 +62,11 @@
 
 // Miscellaneous
 //==========================================>
+
 @import "miscellaneous";
 @import "print";
 
 // Skins
 //==========================================>
+
 @import "skins";
