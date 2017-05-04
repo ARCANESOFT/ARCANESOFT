@@ -34,6 +34,7 @@ class Handler extends ExceptionHandler
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Report or log an exception.
      *

@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * The Artisan commands provided by your application.
      *
@@ -28,6 +29,7 @@ class Kernel extends ConsoleKernel
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Define the application's command schedule.
      *
