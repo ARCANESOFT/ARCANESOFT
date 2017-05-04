@@ -56,7 +56,7 @@ return [
      | -----------------------------------------------------------------
      */
 
-    'key' => env('APP_KEY'),
+    'key'    => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
 
@@ -66,9 +66,11 @@ return [
      | Supported: "single", "daily", "syslog", "errorlog"
      */
 
-    'log' => env('APP_LOG', 'daily'),
+    'log'           => env('APP_LOG', 'daily'),
 
-    'log_level' => env('APP_LOG_LEVEL', 'debug'),
+    'log_level'     => env('APP_LOG_LEVEL', 'debug'),
+
+    'log_max_files' => 30, // days
 
     /* -----------------------------------------------------------------
      |  Autoloaded Service Providers
