@@ -1,14 +1,22 @@
 const { mix } = require('laravel-mix');
 
+// Configs & Options
+//-------------------------------------------------------
+
 const publicFolder  = 'public';
 const publicFolders = {
-    fonts: publicFolder + '/assets/fonts',
-    images: publicFolder + '/assets/img',
-    scripts: publicFolder + '/assets/js',
-    svg: publicFolder + '/assets/svg'
+    fonts: `${publicFolder}/assets/fonts`,
+    images: `${publicFolder}/assets/img`,
+    scripts: `${publicFolder}/assets/js`,
+    svg: `${publicFolder}/assets/svg`
 };
 const republishAssets = false;
 
+mix.options({
+    extractVueStyles: false,
+    processCssUrls: false,
+    clearConsole: true
+});
 mix.disableNotifications();
 // mix.sourceMaps();
 // mix.version();
@@ -17,11 +25,8 @@ mix.setPublicPath(publicFolder);
 // Styles
 //-------------------------------------------------------
 
-mix.sass('resources/assets/front/sass/app.scss', '/assets/css')
-    .options({ processCssUrls: false });
-
-mix.sass('resources/assets/back/sass/admin.scss', '/assets/css')
-    .options({ processCssUrls: false });
+mix.sass('resources/assets/front/sass/app.scss', '/assets/css');
+mix.sass('resources/assets/back/sass/admin.scss', '/assets/css');
 
 // Scripts
 //-------------------------------------------------------

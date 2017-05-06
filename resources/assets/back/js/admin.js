@@ -24,11 +24,10 @@ window.App.widgets = {
  * Import Vue components...
  */
 
-import SeoCounter from './components/arcanesoft/seo/SeoCounter.vue';
 import TodoList from './components/TodoList/TodoList.vue';
 
-// import MediaManagerPlugin from '../../_arcanesoft/media/js/main';
-// Vue.use(MediaManagerPlugin);
+// Vue.use(require('../../_arcanesoft/media/js/main').default);
+// Vue.use(require('../../_arcanesoft/seo/js/main').default);
 
 /**
  * App Vue instance.
@@ -37,7 +36,6 @@ const app = new Vue({
     el: '#app',
 
     components: {
-        SeoCounter,
         TodoList
     },
 
