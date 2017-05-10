@@ -47,7 +47,7 @@
                                 </li>
                                 <li class="divider"></li>
                             @endif
-                            @include('auth._includes.impersonation-nav-item')
+                            @includeWhen(impersonator()->isImpersonating(), 'auth._includes.impersonation-nav-item')
                             @include('auth._includes.logout-nav-item')
                         </ul>
                     </li>

@@ -2,7 +2,6 @@
 
 use App\Http\Routes;
 use Arcanedev\LaravelAuth\Services\SocialAuthenticator;
-use Arcanedev\LaravelAuth\Services\UserImpersonator;
 use Arcanedev\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 /**
@@ -33,7 +32,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var array
      */
     protected $webMiddlewares = [
-        'public'
+        'public',
     ];
 
     /* -----------------------------------------------------------------
@@ -63,10 +62,11 @@ class RouteServiceProvider extends ServiceProvider
         //
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Define the "web" routes for the application.
      *
@@ -98,7 +98,7 @@ class RouteServiceProvider extends ServiceProvider
                  Routes\Auth\RegisterRoutes::register();
                  Routes\Auth\PasswordResetRoutes::register();
 
-                 if (UserImpersonator::isEnabled())
+                 if (impersonator()->isEnabled())
                      Routes\Auth\ImpersonateRoutes::register();
 
                  if (SocialAuthenticator::isEnabled())

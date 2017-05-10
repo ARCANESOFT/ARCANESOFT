@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers\Auth;
 
-use Arcanedev\LaravelAuth\Services\UserImpersonator;
+use Arcanedev\LaravelImpersonator\Contracts\Impersonator;
 
 /**
  * Class     ImpersonateController
@@ -18,14 +18,16 @@ class ImpersonateController extends AuthController
     /**
      * Stop the impersonation.
      *
+     * @param  \Arcanedev\LaravelImpersonator\Contracts\Impersonator  $impersonator
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function stop()
+    public function stop(Impersonator $impersonator)
     {
-        if ( ! UserImpersonator::isImpersonating())
+        if ( ! $impersonator->isImpersonating())
             self::pageNotFound();
 
-        UserImpersonator::stop();
+        $impersonator->stop();
 
         return redirect()->route('public::home');
     }
