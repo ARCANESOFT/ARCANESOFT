@@ -12,14 +12,20 @@ try {
 /**
  * Setup
  */
-window.App = {
-    csrfToken: document.head.querySelector("meta[name=csrf-token]").content
-};
+
+let token = document.head.querySelector('meta[name="csrf-token"]');
 
 // AXIOS
 window.axios = require('axios');
-window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.App.csrfToken;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+// CSRF Token
+if (token) {
+    window.App = {csrfToken: token.content};
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+} else {
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+}
 
 // VUE JS
 window.Vue   = require('vue');
