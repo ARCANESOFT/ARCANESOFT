@@ -14,44 +14,15 @@
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <ul class="nav navbar-nav">
-                &nbsp;
+                {{----------------}}
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                @if (Auth::guest())
-                    @if (Route::has('auth::login.get'))
-                        <li>
-                            {{ link_to_route('auth::login.get', trans('auth::generals.login')) }}
-                        </li>
-                    @endif
-                    @if (Route::has('auth::register.get'))
-                        <li>
-                            {{ link_to_route('auth::register.get', trans('auth::generals.register')) }}
-                        </li>
-                    @endif
-                @else
-                    @php($user = Auth::user())
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ $user->full_name }} <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            @if (($user->isAdmin() || $user->isModerator()) && Route::has('admin::foundation.home'))
-                                <li>
-                                    {{ link_to_route('admin::foundation.home', 'Dashboard') }}
-                                </li>
-                                <li class="divider"></li>
-                            @elseif ($user->isMember())
-                                <li>
-                                    {{ link_to_route('account::index', 'Profile') }}
-                                </li>
-                                <li class="divider"></li>
-                            @endif
-                            @includeWhen(impersonator()->isImpersonating(), 'auth._includes.impersonation-nav-item')
-                            @include('auth._includes.logout-nav-item')
-                        </ul>
-                    </li>
+                @if (Route::has('public::blog.posts.index'))
+                    <li>{{ link_to_route('public::blog.posts.index', 'Blog') }}</li>
                 @endif
+
+                @include('auth._includes.navbar-items')
             </ul>
         </div>
     </div>
