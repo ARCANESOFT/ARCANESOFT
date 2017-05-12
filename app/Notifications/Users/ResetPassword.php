@@ -15,6 +15,7 @@ class ResetPassword extends Notification
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * The password reset token.
      *
@@ -26,6 +27,7 @@ class ResetPassword extends Notification
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * Create a notification instance.
      *
@@ -40,6 +42,7 @@ class ResetPassword extends Notification
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Get the notification's channels.
      *
@@ -63,7 +66,22 @@ class ResetPassword extends Notification
             ->markdown('notifications.email')
             ->subject(trans('auth.password-reset.email.subject', ['name' => config('app.name')]))
             ->line(trans('auth.password-reset.email.line-1'))
-            ->action(trans('auth.password-reset.email.action'), route('auth::password.reset', [$this->token]))
+            ->action(trans('auth.password-reset.email.action'), $this->getResetLink())
             ->line(trans('auth.password-reset.email.line-2'));
+    }
+
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Get the reset link.
+     *
+     * @return string
+     */
+    private function getResetLink()
+    {
+        return url(config('app.url').route('auth::password.reset', [$this->token], false));
     }
 }
