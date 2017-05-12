@@ -75,12 +75,15 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes()
     {
         $this->middleware($this->webMiddlewares)
-             ->namespace($this->namespace)
              ->group(function () {
-                 Routes\Front\PagesRoutes::register();
-                 Routes\Front\ProfileRoutes::register();
+                 $this->namespace($this->namespace)->group(function () {
+                     Routes\Front\PagesRoutes::register();
+                     Routes\Front\ProfileRoutes::register();
 
-                 require base_path('routes/web.php');
+                     require base_path('routes/web.php');
+                 });
+
+                 // \Arcanesoft\Blog\Blog::routes();
              });
     }
 
