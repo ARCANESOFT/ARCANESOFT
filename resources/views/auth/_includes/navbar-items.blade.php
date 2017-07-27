@@ -10,12 +10,12 @@
         <ul class="dropdown-menu" role="menu">
             @if (($user->isAdmin() || $user->isModerator()) && Route::has('admin::foundation.home'))
                 <li>
-                    {{ link_to_route('admin::foundation.home', 'Dashboard') }}
+                    {{ link_to_route('admin::foundation.home', trans('foundation::generals.dashboard')) }}
                 </li>
                 <li class="divider"></li>
             @elseif ($user->isMember())
                 <li>
-                    {{ link_to_route('account::index', 'Profile') }}
+                    {{ link_to_route('account::index', trans('auth::generals.profile')) }}
                 </li>
                 <li class="divider"></li>
             @endif

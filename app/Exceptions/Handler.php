@@ -16,6 +16,7 @@ class Handler extends ExceptionHandler
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * A list of the exception types that should not be reported.
      *
@@ -70,6 +71,7 @@ class Handler extends ExceptionHandler
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Convert an authentication exception into an unauthenticated response.
      *
@@ -81,7 +83,11 @@ class Handler extends ExceptionHandler
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         return $request->expectsJson()
-            ? response()->json(['error' => $exception->getMessage()], 401)
+            ? response()->json([
+                'code'    => 'unauthenticated',
+                'status'  => 401,
+                'message' => $exception->getMessage(),
+            ], 401)
             : redirect()->guest(route('auth::login.get'));
     }
 
@@ -97,6 +103,26 @@ class Handler extends ExceptionHandler
         return config('app.debug', false)
             ? $this->renderWhoopsPage($e)
             : parent::convertExceptionToResponse($e);
+    }
+
+    /**
+     * Create a response object from the given validation exception.
+     *
+     * @param  \Illuminate\Validation\ValidationException  $e
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function convertValidationExceptionToResponse(\Illuminate\Validation\ValidationException $e, $request)
+    {
+        if ( ! $request->expectsJson()) {
+            return parent::convertValidationExceptionToResponse($e, $request);
+        }
+
+        return response()->json([
+            'code'     => 'validation_failed',
+            'messages' => $e->validator->errors()->getMessages(),
+            'status'   => 422,
+        ], 422);
     }
 
     /**

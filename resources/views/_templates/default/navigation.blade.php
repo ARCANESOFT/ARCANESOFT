@@ -19,7 +19,9 @@
 
             <ul class="nav navbar-nav navbar-right">
                 @if (Route::has('public::blog.posts.index'))
-                    <li>{{ link_to_route('public::blog.posts.index', 'Blog') }}</li>
+                    <li class="{{ active(['public::blog.*']) }}">
+                        {{ link_to_route('public::blog.posts.index', 'Blog') }}
+                    </li>
                 @endif
 
                 @include('auth._includes.navbar-items')

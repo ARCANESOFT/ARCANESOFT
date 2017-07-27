@@ -62,7 +62,10 @@ return [
      | -----------------------------------------------------------------
      */
 
-    'cookie' => 'app_session',
+    'cookie' => env(
+        'SESSION_COOKIE',
+        str_slug(env('APP_NAME', 'app'), '_').'_session'
+    ),
 
     /* -----------------------------------------------------------------
      |  Session Cookie Path

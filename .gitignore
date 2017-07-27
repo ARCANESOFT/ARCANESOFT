@@ -1,5 +1,4 @@
 /build/
-/bower_components/
 /node_modules/
 /public/assets/
 /public/hot/
@@ -12,3 +11,4 @@
 /composer.lock
 /composer.phar
 /npm-debug.log
+/yarn-error.log

@@ -13,11 +13,19 @@ require('../../_shared/js/bootstrap');
  * the application, or feel free to tweak this setup for your needs.
  */
 
+import CookieLawBanner from './components/CookieLawBanner.vue';
+
 const app = new Vue({
     el: '#app',
+
+    components: {
+        CookieLawBanner
+    },
+
     mounted() {
         this.initTwitterBootstrap();
     },
+
     methods: {
         initTwitterBootstrap() {
             $(".dropdown-toggle").dropdown();

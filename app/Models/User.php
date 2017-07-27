@@ -28,19 +28,18 @@ class User extends Authenticatable
     /**
      * Create a user as a member.
      *
-     * @param  array  $data
+     * @param  array  $attributes
      *
      * @return self
      */
-    public static function createAsMember(array $data)
+    public static function createAsMember(array $attributes)
     {
-        $user = new self($data);
-        $user->is_active = true;
-        $user->save();
+        return tap(new self($attributes), function(User $user) {
+            $user->is_active = true;
+            $user->save();
 
-        $user->syncRoles([Role::MEMBER]);
-
-        return $user;
+            $user->syncRoles([Role::MEMBER]);
+        });
     }
 
     /* -----------------------------------------------------------------

@@ -1,16 +1,18 @@
-/* Ion.RangeSlider
-// css version 2.0.3
-// © 2013-2014 Denis Ineshin | IonDen.com
-// ===================================================================================================================*/
+// Skins
+//==========================================>
 
-@import "_variables";
-@import "_core";
+$range-slider-img-path: "#{$images-folder}/ion-rangeslider" !default;
+
+// Core
+//==========================================>
+
+@import '~ion-rangeslider/css/ion.rangeSlider';
 
 // Skins
 //==========================================>
 
-@import "skins/flat";
-@import "skins/html5";
-@import "skins/modern";
-@import "skins/nice";
-@import "skins/simple";
+//@import 'skins/flat';
+@import 'skins/html5';
+//@import 'skins/modern';
+//@import 'skins/nice';
+//@import 'skins/simple';

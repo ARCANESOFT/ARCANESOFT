@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ config('app.locale') }}">
+<html lang="{{ app()->getLocale() }}">
     <head>
         <meta charset="utf-8">
         {{ seo_helper()->renderHtml() }}
@@ -10,19 +10,19 @@
         @yield('styles')
     </head>
 <body>
-    <main id="app">
+    <div id="app">
         @include('_templates.default.navigation')
 
         @unless(route_is(['public::home', 'auth::*']))
             @include('_templates.default.page-header')
         @endunless
 
-        @yield('content')
-    </main>
+        <main class="main-container">
+            @yield('content')
+        </main>
 
-    <footer class="main-footer">
         @include('_templates.default.footer')
-    </footer>
+    </div>
 
     {{-- Scripts --}}
     {{ Html::script(mix('assets/js/manifest.js')) }}

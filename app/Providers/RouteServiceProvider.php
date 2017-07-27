@@ -32,7 +32,9 @@ class RouteServiceProvider extends ServiceProvider
      * @var array
      */
     protected $webMiddlewares = [
-        'public',
+        'web',
+//        'tracking',
+//        'impersonate',
     ];
 
     /* -----------------------------------------------------------------
@@ -83,7 +85,7 @@ class RouteServiceProvider extends ServiceProvider
                      require base_path('routes/web.php');
                  });
 
-                 // \Arcanesoft\Blog\Blog::routes();
+                 \Arcanesoft\Blog\Blog::routes();
              });
     }
 
