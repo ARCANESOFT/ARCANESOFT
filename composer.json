@@ -18,7 +18,7 @@
         "arcanedev/composer": "~1.4",
         "arcanedev/laravel-html": "~5.4",
         "arcanedev/laravel-markdown": "~1.2",
-        "arcanesoft/auth": "~2.2",
+        "arcanesoft/auth": "~3.0",
         "arcanesoft/backups": "^1.0",
         "arcanesoft/blog": "~2.2",
         "arcanesoft/foundation": "~2.2",
