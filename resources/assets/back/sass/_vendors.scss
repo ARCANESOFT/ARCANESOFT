@@ -1,0 +1,24 @@
+// Vendors
+//==========================================>
+
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import "~animate-sass/animate";
+
+@import "vendors/pace";
+
+@import "~bootstrap-colorpicker/src/sass/colorpicker";
+@import "~eonasdan-bootstrap-datetimepicker/src/sass/bootstrap-datetimepicker";
+@import "~bootstrap-slider/src/sass/bootstrap-slider";
+@import "~morris.js/morris";
+@import "~fullcalendar/dist/fullcalendar";
+//@import "~fullcalendar/dist/fullcalendar.print";
+@import "vendors/jquery-jvectormap";
+@import "vendors/daterangepicker";
+@import "vendors/ion-rangeslider/ion-rangeslider";
+@import "~select2/src/scss/core";
+@import "~select2-bootstrap-theme/src/select2-bootstrap";
+@import "vendors/datatables-bootstrap";
+@import "vendors/simplemde";
+@import "~toastr/toastr.scss";
+@import "~dropzone/src/dropzone";
+@import "~dropzone/src/basic";

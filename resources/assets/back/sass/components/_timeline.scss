@@ -1,0 +1,102 @@
+// Component: Timeline
+//==========================================>
+.timeline {
+    position: relative;
+    margin: 0 0 30px;
+    padding: 0;
+    list-style: none;
+
+    // The line
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: #DDD;
+        left: 13px;
+        margin: 0;
+        @include border-radius(2px);
+    }
+
+    & > li {
+        position: relative;
+        margin-bottom: 15px;
+        @include clearfix;
+
+        // The content
+        & > .timeline-item {
+            @include box-shadow($box-boxshadow);
+            @include border-radius($box-border-radius);
+            margin-top: 0;
+            background: #FFF;
+            color: #444;
+            margin-left: 42px;
+            padding: 0;
+            position: relative;
+
+            // The time and header
+            & > .time {
+                color: #999;
+                float: right;
+                padding: 10px;
+                font-size: 12px;
+            }
+
+            & > .timeline-header {
+                margin: 0;
+                color: #555;
+                border-bottom: 1px solid $box-border-color;
+                padding: 10px;
+                font-size: 16px;
+                line-height: 1.1;
+
+                & > a { font-weight: 600; }
+            }
+
+            // Item body and footer
+            & > .timeline-body,
+            & > .timeline-footer {
+                padding: 10px;
+            }
+        }
+
+        // The icons
+        & > .timeline-icon {
+            width: 30px;
+            height: 30px;
+            font-size: 15px;
+            line-height: 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #666;
+            background: $light-gray;
+            border-radius: 50%;
+            text-align: center;
+        }
+    }
+
+    // Time label
+    & > .time-label {
+        & > span {
+            font-weight: 600;
+            padding: 5px;
+            display: inline-block;
+            background-color: #FFF;
+            @include border-radius(4px);
+        }
+    }
+}
+
+.timeline-inverse {
+    & > li {
+        & > .timeline-item {
+            background: #F0F0F0;
+            border: 1px solid #DDD;
+            @include box-shadow(none);
+
+            & > .timeline-header { border-bottom-color: #DDD; }
+        }
+    }
+}

@@ -1,30 +1,30 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                <span class="sr-only">Toggle Navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-
-            {!! link_to_route('public::home', config('cms.name', 'ARCANESOFT'), [], ['class' => 'navbar-brand']) !!}
+            <a class="navbar-brand" href="{{ url('/') }}">
+                {{ config('app.name', 'Laravel') }}
+            </a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="{{ route_is('public::home') ? 'active' : '' }}">
-                    {!! link_to_route('public::home', 'Home') !!}
-                </li>
-                <li class="{{ route_is('public::about.us') ? 'active' : '' }}">
-                    {!! link_to_route('public::about.us', 'About us') !!}
-                </li>
-                <li class="{{ route_is('public::contact.get') ? 'active' : '' }}">
-                    {!! link_to_route('public::contact.get', 'Contact') !!}
-                </li>
 
-                @if (view()->exists('auth::public._partials.navigation'))
-                    @include('auth::public._partials.navigation')
+        <div class="collapse navbar-collapse" id="app-navbar-collapse">
+            <ul class="nav navbar-nav">
+                {{----------------}}
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                @if (Route::has('public::blog.posts.index'))
+                    <li class="{{ active(['public::blog.*']) }}">
+                        {{ link_to_route('public::blog.posts.index', 'Blog') }}
+                    </li>
                 @endif
+
+                @include('auth._includes.navbar-items')
             </ul>
         </div>
     </div>

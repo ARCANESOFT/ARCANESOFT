@@ -1,7 +1,6 @@
 <?php namespace App\Providers;
 
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
-use App\Bases\Providers\AuthServiceProvider as ServiceProvider;
+use Arcanedev\Support\Providers\AuthorizationServiceProvider as ServiceProvider;
 
 /**
  * Class     AuthServiceProvider
@@ -11,9 +10,9 @@ use App\Bases\Providers\AuthServiceProvider as ServiceProvider;
  */
 class AuthServiceProvider extends ServiceProvider
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     /**
      * The policy mappings for the application.
@@ -24,18 +23,16 @@ class AuthServiceProvider extends ServiceProvider
         'App\Model' => 'App\Policies\ModelPolicy',
     ];
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
     /**
-     * Register any application authentication / authorization services.
-     *
-     * @param  \Illuminate\Contracts\Auth\Access\Gate  $gate
+     * Register any authentication / authorization services.
      */
-    public function boot(GateContract $gate)
+    public function boot()
     {
-        parent::registerPolicies($gate);
+        $this->registerPolicies();
 
         //
     }

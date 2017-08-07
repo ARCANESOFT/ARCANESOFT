@@ -2,57 +2,71 @@
 
 return [
 
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Default Cache Store
-     | ------------------------------------------------------------------------------------------------
-     |  Supported : apc, array, database, file, memcached, redis
+     | -----------------------------------------------------------------
+     | Supported: "apc", "array", "database", "file", "memcached", "redis"
      */
+
     'default' => env('CACHE_DRIVER', 'file'),
 
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Cache Stores
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     'stores' => [
-        'apc'       => [
-            'driver'     => 'apc',
+
+        'apc' => [
+            'driver' => 'apc',
         ],
 
-        'array'     => [
-            'driver'     => 'array',
+        'array' => [
+            'driver' => 'array',
         ],
 
-        'database'  => [
+        'database' => [
             'driver'     => 'database',
             'table'      => 'cache',
             'connection' => null,
         ],
 
-        'file'      => [
-            'driver'     => 'file',
-            'path'       => storage_path('framework/cache'),
+        'file' => [
+            'driver' => 'file',
+            'path'   => storage_path('framework/cache/data'),
         ],
 
         'memcached' => [
-            'driver'     => 'memcached',
-            'servers'    => [
+            'driver'        => 'memcached',
+            'persistent_id' => env('MEMCACHED_PERSISTENT_ID'),
+            'sasl'          => [
+                env('MEMCACHED_USERNAME'),
+                env('MEMCACHED_PASSWORD'),
+            ],
+            'options'       => [
+                // Memcached::OPT_CONNECT_TIMEOUT  => 2000,
+            ],
+            'servers'       => [
                 [
-                    'host'   => '127.0.0.1',
-                    'port'   => 11211,
+                    'host'   => env('MEMCACHED_HOST', '127.0.0.1'),
+                    'port'   => env('MEMCACHED_PORT', 11211),
                     'weight' => 100,
                 ],
             ],
         ],
 
-        'redis'     => [
+        'redis' => [
             'driver'     => 'redis',
             'connection' => 'default',
         ],
+
     ],
 
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Cache Key Prefix
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
-    'prefix' => 'arcanesoft',
+
+    'prefix' => 'laravel',
+
 ];

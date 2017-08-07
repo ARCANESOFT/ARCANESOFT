@@ -1,31 +1,45 @@
 <?php
 
 return [
-    /* ------------------------------------------------------------------------------------------------
-     |  Default Broadcaster
-     | ------------------------------------------------------------------------------------------------
-     */
-    'default' => env('BROADCAST_DRIVER', 'pusher'),
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Broadcast Connections
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Default Broadcaster
+     | -----------------------------------------------------------------
+     | Supported: "pusher", "redis", "log", "null"
      */
+
+    'default' => env('BROADCAST_DRIVER', 'null'),
+
+    /* -----------------------------------------------------------------
+     |  Broadcast Connections
+     | -----------------------------------------------------------------
+     */
+
     'connections' => [
-        'pusher'    => [
-            'driver'    => 'pusher',
-            'key'       => env('PUSHER_KEY'),
-            'secret'    => env('PUSHER_SECRET'),
-            'app_id'    => env('PUSHER_APP_ID'),
+
+        'pusher' => [
+            'driver'  => 'pusher',
+            'key'     => env('PUSHER_APP_KEY'),
+            'secret'  => env('PUSHER_APP_SECRET'),
+            'app_id'  => env('PUSHER_APP_ID'),
+            'options' => [
+                //
+            ],
         ],
 
-        'redis'     => [
+        'redis' => [
             'driver'     => 'redis',
             'connection' => 'default',
         ],
 
-        'log'   => [
+        'log' => [
             'driver' => 'log',
         ],
+
+        'null' => [
+            'driver' => 'null',
+        ],
+
     ],
+
 ];

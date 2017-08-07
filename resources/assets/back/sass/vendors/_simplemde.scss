@@ -1,0 +1,19 @@
+@import "~codemirror/lib/codemirror";
+@import "~codemirror-spell-checker/src/css/spell-checker";
+@import "~simplemde/src/css/simplemde";
+
+.CodeMirror {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.editor-toolbar {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.editor-toolbar.fullscreen,
+.editor-preview-side,
+.CodeMirror-fullscreen {
+    z-index: 1040;
+}

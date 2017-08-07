@@ -1,0 +1,56 @@
+// Skin: Black
+//==========================================>
+
+.skin-black {
+    // Navbar & Logo
+    .main-header {
+        @include box-shadow(0px 1px 1px rgba(0, 0, 0, 0.05));
+
+        .navbar-toggle {
+            color: #333;
+        }
+
+        .navbar-brand {
+            color: #333;
+            border-right: 1px solid #EEE;
+        }
+
+        & > .navbar {
+            @include navbar-variant(#fff, #333, #999, #FFF);
+
+            & > .sidebar-toggle {
+                color: #333;
+                border-right: 1px solid #EEE;
+            }
+
+            .navbar-nav {
+                & > li > a { border-right: 1px solid #EEE; }
+            }
+
+            .navbar-custom-menu .navbar-nav,
+            .navbar-right {
+                & > li {
+                    & > a {
+                        border-left: 1px solid #EEE;
+                        border-right-width: 0;
+                    }
+                }
+            }
+        }
+
+        & > .logo {
+            @include logo-variant(#FFF, #333);
+            border-right: 1px solid #EEE;
+
+            @media (max-width: $screen-header-collapse) {
+                @include logo-variant(#222, #FFF);
+                border-right: none;
+            }
+        }
+
+        li.user-header { background-color: #222; }
+    }
+
+    // Create the sidebar skin
+    @include skin-dark-sidebar(#FFF);
+}

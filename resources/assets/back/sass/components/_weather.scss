@@ -1,0 +1,36 @@
+.weather {
+    .weather-header {
+        margin: 0 0 15px;
+    }
+
+    .temperature {
+    }
+
+    .weather-today {
+        .weather-icon {
+            font-size: 5em;
+            line-height: 1.8em;
+        }
+
+        .weather-text {
+            .weather-city,
+            .weather-status {
+                margin: 0 0 10px;
+            }
+
+            .weather-city {
+                font-size: 2em;
+                font-weight: 700;
+            }
+
+            .weather-status {
+                font-weight: 700;
+                font-size: 16px;
+            }
+
+            .weather-degrees {
+                font-size: 4em;
+            }
+        }
+    }
+}

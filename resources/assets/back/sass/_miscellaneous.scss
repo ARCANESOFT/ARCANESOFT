@@ -1,0 +1,42 @@
+// General: Miscellaneous
+//==========================================>
+
+@import "miscellaneous/helpers";
+@import "miscellaneous/blocks";
+@import "miscellaneous/backgrounds";
+@import "miscellaneous/typography";
+@import "miscellaneous/images";
+@import "miscellaneous/lists";
+@import "miscellaneous/fixes";
+
+.connectedSortable {
+    min-height: 100px;
+}
+
+.ui-helper-hidden-accessible {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.sort-highlight {
+    background: #f4f4f4;
+    border: 1px dashed #ddd;
+    margin-bottom: 10px;
+}
+
+// Charts
+.chart {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+
+    svg, canvas {
+        width: 100% !important;
+    }
+}

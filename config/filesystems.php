@@ -1,59 +1,53 @@
 <?php
 
 return [
-    /* ------------------------------------------------------------------------------------------------
+
+    /* -----------------------------------------------------------------
      |  Default Filesystem Disk
-     | ------------------------------------------------------------------------------------------------
-     | Supported: 'local', 'ftp', 's3', 'rackspace'
+     | -----------------------------------------------------------------
+     | Supported: "local", "ftp", "s3", "rackspace"
      */
-    'default' => 'local',
 
-    /* ------------------------------------------------------------------------------------------------
+    'default' => env('FILESYSTEM_DRIVER', 'local'),
+
+    /* -----------------------------------------------------------------
      |  Default Cloud Filesystem Disk
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
-    'cloud' => 's3',
 
-    /* ------------------------------------------------------------------------------------------------
+    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
+
+    /* -----------------------------------------------------------------
      |  Filesystem Disks
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     'disks' => [
-        'local' => [
+
+        'local'  => [
             'driver' => 'local',
             'root'   => storage_path('app'),
         ],
 
-        'ftp' => [
-            'driver'   => 'ftp',
-            'host'     => 'ftp.example.com',
-            'username' => 'your-username',
-            'password' => 'your-password',
-
-            // Optional FTP Settings...
-            // 'port'     => 21,
-            // 'root'     => '',
-            // 'passive'  => true,
-            // 'ssl'      => true,
-            // 'timeout'  => 30,
+        'public' => [
+            'driver'     => 'local',
+            'root'       => storage_path('app/public'),
+            'url'        => env('APP_URL').'/storage',
+            'visibility' => 'public',
         ],
 
-        's3' => [
+        's3'     => [
             'driver' => 's3',
-            'key'    => 'your-key',
-            'secret' => 'your-secret',
-            'region' => 'your-region',
-            'bucket' => 'your-bucket',
+            'key'    => env('AWS_KEY'),
+            'secret' => env('AWS_SECRET'),
+            'region' => env('AWS_REGION'),
+            'bucket' => env('AWS_BUCKET'),
         ],
 
-        'rackspace' => [
-            'driver'    => 'rackspace',
-            'username'  => 'your-username',
-            'key'       => 'your-key',
-            'container' => 'your-container',
-            'endpoint'  => 'https://identity.api.rackspacecloud.com/v2.0/',
-            'region'    => 'IAD',
-            'url_type'  => 'publicURL',
+        'backup'  => [
+            'driver' => 'local',
+            'root'   => storage_path('app/backups'),
         ],
     ],
+
 ];

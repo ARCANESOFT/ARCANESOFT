@@ -1,43 +1,8 @@
-<?php namespace App\Tests;
+<?php namespace Tests;
 
-use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Testing\TestCase as IlluminateTestCase;
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
-/**
- * Class     TestCase
- *
- * @package  App\Tests
- * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
- */
-abstract class TestCase extends IlluminateTestCase
+abstract class TestCase extends BaseTestCase
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Properties
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * The base URL to use while testing the application.
-     *
-     * @var string
-     */
-    protected $baseUrl = 'http://localhost';
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Creates the application.
-     *
-     * @return Application
-     */
-    public function createApplication()
-    {
-        $app = require __DIR__ . '/../bootstrap/app.php';
-
-        $app->make(Kernel::class)->bootstrap();
-
-        return $app;
-    }
+    use CreatesApplication;
 }

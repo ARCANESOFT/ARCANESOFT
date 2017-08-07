@@ -1,0 +1,69 @@
+/*
+ * Component: modal
+ * ----------------
+ */
+.modal { background: rgba(0, 0, 0, .3); }
+
+.modal-content {
+    border: 0;
+    @include border-radius(0);
+    @include box-shadow(0 2px 3px rgba(0, 0, 0, .125));
+
+    @media (min-width: $screen-sm-min) {
+        @include box-shadow(0 2px 3px rgba(0, 0, 0, .125));
+    }
+}
+
+.modal-header { border-bottom-color: $box-border-color; }
+.modal-footer { border-top-color: $box-border-color; }
+
+// Modal variants
+.modal-primary {
+    .modal-body { @extend .bg-light-blue; }
+
+    .modal-header,
+    .modal-footer {
+        @extend .bg-light-blue-active;
+        border-color: darken($brand-primary, 10%);
+    }
+}
+
+.modal-success {
+    .modal-body { @extend .bg-green; }
+
+    .modal-header,
+    .modal-footer {
+        @extend .bg-green-active;
+        border-color: darken($brand-success, 10%);
+    }
+}
+
+.modal-info {
+    .modal-body { @extend .bg-aqua; }
+
+    .modal-header,
+    .modal-footer {
+        @extend .bg-aqua-active;
+        border-color: darken($brand-info, 10%);
+    }
+}
+
+.modal-warning {
+    .modal-body { @extend .bg-yellow; }
+
+    .modal-header,
+    .modal-footer {
+        @extend .bg-yellow-active;
+        border-color: darken($brand-warning, 10%);
+    }
+}
+
+.modal-danger {
+    .modal-body { @extend .bg-red; }
+
+    .modal-header,
+    .modal-footer {
+        @extend .bg-red-active;
+        border-color: darken($brand-danger, 10%);
+    }
+}

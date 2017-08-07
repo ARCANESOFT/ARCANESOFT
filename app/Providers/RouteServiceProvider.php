@@ -1,9 +1,8 @@
 <?php namespace App\Providers;
 
-use App\Bases\Providers\RouteServiceProvider as ServiceProvider;
-use App\Http\Routes\ContactRoute;
-use App\Http\Routes\PagesRoute;
-use Illuminate\Routing\Router;
+use App\Http\Routes;
+use Arcanedev\LaravelAuth\Services\SocialAuthenticator;
+use Arcanedev\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 /**
  * Class     RouteServiceProvider
@@ -13,69 +12,118 @@ use Illuminate\Routing\Router;
  */
 class RouteServiceProvider extends ServiceProvider
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
-     * This namespace is applied to the controller routes in your routes file.
+     * This namespace is applied to your controller routes.
+     *
+     * In addition, it is set as the URL generator's root namespace.
      *
      * @var string
      */
     protected $namespace = 'App\\Http\\Controllers';
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /**
+     * The web middlewares.
+     *
+     * @var array
      */
+    protected $webMiddlewares = [
+        'web',
+//        'tracking',
+//        'impersonate',
+    ];
+
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
+     */
+
     /**
      * Define your route model bindings, pattern filters, etc.
-     *
-     * @param  \Illuminate\Routing\Router  $router
      */
-    public function boot(Router $router)
+    public function boot()
     {
-        $this->definePatternFilters($router);
+        //
 
-        parent::boot($router);
+        parent::boot();
     }
 
     /**
      * Define the routes for the application.
-     *
-     * @param  \Illuminate\Routing\Router  $router
      */
-    public function map(Router $router)
+    public function map()
     {
-        $attributes = [
-            'as'        => 'public::',
-            'namespace' => $this->namespace,
-        ];
+        $this->mapWebRoutes();
+        $this->mapAuthRoutes();
+        $this->mapApiRoutes();
 
-        $router->group($attributes, function (Router $router) {
-            PagesRoute::register($router);
-            ContactRoute::register($router);
-
-            require app_path('Http/routes.php');
-        });
+        //
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
+
     /**
-     * Define route pattern filters.
+     * Define the "web" routes for the application.
      *
-     * @param  Router  $router
+     * These routes all receive session state, CSRF protection, etc.
      */
-    private function definePatternFilters(Router $router)
+    protected function mapWebRoutes()
     {
-        $router->pattern('id',    '\d+');
-        $router->pattern('hash',  '[a-z0-9]+');
-        $router->pattern('uuid',  '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}');
-        $router->pattern('base',  '[a-zA-Z0-9]+');
-        $router->pattern('slug',  '[a-z0-9-]+');
-        $router->pattern('token', '[a-z0-9-]+');
+        $this->middleware($this->webMiddlewares)
+             ->group(function () {
+                 $this->namespace($this->namespace)->group(function () {
+                     Routes\Front\PagesRoutes::register();
+                     Routes\Front\ProfileRoutes::register();
+
+                     require base_path('routes/web.php');
+                 });
+
+                 \Arcanesoft\Blog\Blog::routes();
+             });
+    }
+
+    /**
+     * Define the auth routes for the application.
+     */
+    protected function mapAuthRoutes()
+    {
+        $this->middleware($this->webMiddlewares)
+             ->namespace($this->namespace.'\\Auth')
+             ->prefix('auth')
+             ->as('auth::')
+             ->group(function () {
+                 Routes\Auth\AuthenticationRoutes::register();
+                 Routes\Auth\RegisterRoutes::register();
+                 Routes\Auth\PasswordResetRoutes::register();
+
+                 if (impersonator()->isEnabled())
+                     Routes\Auth\ImpersonateRoutes::register();
+
+                 if (SocialAuthenticator::isEnabled())
+                     Routes\Auth\SocialiteRoutes::register();
+             });
+    }
+
+    /**
+     * Define the "api" routes for the application.
+     *
+     * These routes are typically stateless.
+     */
+    protected function mapApiRoutes()
+    {
+        $this->middleware('api')
+             ->namespace($this->namespace)
+             ->prefix('api')
+             ->as('api::')
+             ->group(function () {
+                 require base_path('routes/api.php');
+             });
     }
 }

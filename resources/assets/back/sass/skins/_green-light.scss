@@ -1,0 +1,41 @@
+// Skin: Green Light
+//==========================================>
+
+.skin-green-light {
+    // Navbar & Logo
+    .main-header {
+        .navbar {
+            @include navbar-variant($brand-success, #FFF);
+
+            .sidebar-toggle {
+                color: #FFF;
+
+                &:hover { background-color: darken($brand-success, 5%); }
+            }
+
+            @media (max-width: $screen-header-collapse) {
+                .dropdown-menu {
+                    li {
+                        &.divider { background-color: rgba(255, 255, 255, 0.1); }
+
+                        a {
+                            color: #FFF;
+
+                            &:hover { background: darken($brand-success, 5%); }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Logo
+        .logo { @include logo-variant($brand-success); }
+
+        li.user-header {
+            background-color: $brand-success;
+        }
+    }
+
+    // Create the sidebar skin
+    @include skin-light-sidebar($brand-success);
+}

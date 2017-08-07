@@ -5,13 +5,13 @@ use Illuminate\Foundation\Application as IlluminateApplication;
 /**
  * Class     Application
  *
- * @package  App\Bases
+ * @package  App
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Application extends IlluminateApplication
 {
     /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
+     |  Getters & Setters
      | ------------------------------------------------------------------------------------------------
      */
     /**
@@ -21,6 +21,6 @@ class Application extends IlluminateApplication
      */
     public function publicPath()
     {
-        return $this->basePath . DS . 'www';
+        return $this->basePath.DS.'public';
     }
 }

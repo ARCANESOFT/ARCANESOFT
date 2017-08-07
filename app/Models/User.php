@@ -1,49 +1,59 @@
 <?php namespace App\Models;
 
-use App\Bases\Model;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use App\Notifications\Users\ResetPassword as ResetPasswordNotification;
+use Arcanesoft\Auth\Models\Role;
+use Arcanesoft\Auth\Models\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 /**
- * Class User
- * @package App\Models
+ * Class     User
+ *
+ * @package  App\Models
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class User
-    extends Model
-    implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
+class User extends Authenticatable
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Traits
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
-    use Authenticatable, Authorizable, CanResetPassword;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Properties
-     | ------------------------------------------------------------------------------------------------
+    use Notifiable;
+
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'users';
 
     /**
-     * The attributes that are mass assignable.
+     * Create a user as a member.
      *
-     * @var array
+     * @param  array  $attributes
+     *
+     * @return self
      */
-    protected $fillable = ['name', 'email', 'password'];
+    public static function createAsMember(array $attributes)
+    {
+        return tap(new self($attributes), function(User $user) {
+            $user->is_active = true;
+            $user->save();
+
+            $user->syncRoles([Role::MEMBER]);
+        });
+    }
+
+    /* -----------------------------------------------------------------
+     |  Notification Methods
+     | -----------------------------------------------------------------
+     */
 
     /**
-     * The attributes excluded from the model's JSON form.
+     * Send the password reset notification.
      *
-     * @var array
+     * @param  string  $token
      */
-    protected $hidden = ['password', 'remember_token'];
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
+    }
 }

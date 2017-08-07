@@ -1,0 +1,121 @@
+// Background colors
+//==========================================>
+
+.bg,
+.bg-blue,
+.bg-light-blue, .bg-primary,
+.bg-green, .bg-success,
+.bg-aqua, .bg-info,
+.bg-inverse,
+.bg-yellow, .bg-warning,
+.bg-red, .bg-danger,
+.bg-navy,
+.bg-teal,
+.bg-olive,
+.bg-lime,
+.bg-orange,
+.bg-fuchsia,
+.bg-purple,
+.bg-maroon,
+.bg-black,
+.bg-red-active,
+.bg-yellow-active,
+.bg-aqua-active,
+.bg-blue-active,
+.bg-light-blue-active,
+.bg-green-active,
+.bg-navy-active,
+.bg-teal-active,
+.bg-olive-active,
+.bg-lime-active,
+.bg-orange-active,
+.bg-fuchsia-active,
+.bg-purple-active,
+.bg-maroon-active,
+.bg-black-active {
+    color: #fff !important;
+}
+
+.bg-gray       {
+    color: #000;
+}
+
+.bg-gray       { background-color: $light-gray !important; }
+.bg-gray-light { background-color: #f7f7f7; }
+.bg-black      { background-color: $black !important; }
+.bg-blue       { background-color: $blue !important; }
+.bg-navy       { background-color: $navy !important; }
+.bg-teal       { background-color: $teal !important; }
+.bg-olive      { background-color: $olive !important; }
+.bg-lime       { background-color: $lime !important; }
+.bg-orange     { background-color: $orange !important; }
+.bg-fuchsia    { background-color: $fuchsia !important; }
+.bg-purple     { background-color: $purple !important; }
+.bg-maroon     { background-color: $maroon !important; }
+
+.bg-light-blue,
+.bg-primary    { background-color: $brand-primary !important; }
+
+.bg-green,
+.bg-success    { background-color: $brand-success !important; }
+
+.bg-aqua,
+.bg-info       { background-color: $brand-info !important; }
+
+.bg-inverse    { background-color: $brand-inverse !important; }
+
+.bg-yellow,
+.bg-warning    { background-color: $brand-warning !important; }
+
+.bg-red,
+.bg-danger     { background-color: $brand-danger !important; }
+
+// Set of Active Background Colors
+.bg-gray-active { color: #000; }
+
+.bg-gray-active       { background-color: darken($light-gray, 10%) !important; }
+.bg-black-active      { background-color: darken($black, 10%) !important; }
+.bg-blue-active       { background-color: darken($blue , 10%) !important; }
+.bg-light-blue-active { background-color: darken($brand-primary , 6%) !important; }
+.bg-green-active      { background-color: darken($brand-success , 5%) !important; }
+.bg-aqua-active       { background-color: darken($brand-info , 6%) !important; }
+.bg-yellow-active     { background-color: darken($brand-warning , 6%) !important; }
+.bg-red-active        { background-color: darken($brand-danger, 6%) !important; }
+.bg-navy-active       { background-color: darken($navy , 2%) !important; }
+.bg-teal-active       { background-color: darken($teal , 5%) !important; }
+.bg-olive-active      { background-color: darken($olive , 5%) !important; }
+.bg-lime-active       { background-color: darken($lime , 5%) !important; }
+.bg-orange-active     { background-color: darken($orange , 5%) !important; }
+.bg-fuchsia-active    { background-color: darken($fuchsia , 5%) !important; }
+.bg-purple-active     { background-color: darken($purple , 5%) !important; }
+.bg-maroon-active     { background-color: darken($maroon , 3%) !important; }
+
+// Gradient Background colors
+.bg-teal-gradient,
+.bg-blue-gradient,
+.bg-light-blue-gradient,
+.bg-aqua-gradient,
+.bg-yellow-gradient,
+.bg-purple-gradient,
+.bg-green-gradient,
+.bg-red-gradient,
+.bg-black-gradient,
+.bg-maroon-gradient {
+    color: #fff;
+}
+
+.bg-teal-gradient       { @include bg-gradient($teal, $teal, lighten($teal, 16%)); }
+.bg-blue-gradient       { @include bg-gradient($blue, $blue, lighten($blue, 7%)); }
+.bg-light-blue-gradient { @include bg-gradient($brand-primary, $brand-primary, lighten($brand-primary, 12%)); }
+.bg-aqua-gradient       { @include bg-gradient($brand-info, $brand-info, lighten($brand-info, 7%)); }
+.bg-yellow-gradient     { @include bg-gradient($brand-warning, $brand-warning, lighten($brand-warning, 16%)); }
+.bg-purple-gradient     { @include bg-gradient($purple, $purple, lighten($purple, 16%)); }
+.bg-green-gradient      { @include bg-gradient($brand-success, $brand-success, lighten($brand-success, 7%)); }
+.bg-red-gradient        { @include bg-gradient($brand-danger, $brand-danger, lighten($brand-danger, 10%)); }
+.bg-black-gradient      { @include bg-gradient($black, $black, lighten($black, 10%)); }
+.bg-maroon-gradient     { @include bg-gradient($maroon, $maroon, lighten($maroon, 10%)); }
+
+// Disabled!
+[class^="bg-"].disabled {
+    @include opacity(.65);
+}

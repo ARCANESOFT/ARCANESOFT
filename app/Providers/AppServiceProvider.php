@@ -1,6 +1,7 @@
 <?php namespace App\Providers;
 
-use App\Bases\ServiceProvider;
+use Carbon\Carbon;
+use Illuminate\Support\ServiceProvider;
 
 /**
  * Class     AppServiceProvider
@@ -10,23 +11,39 @@ use App\Bases\ServiceProvider;
  */
 class AppServiceProvider extends ServiceProvider
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot()
-    {
-        //
-    }
-
     /**
      * Register any application services.
      */
     public function register()
     {
-        //
+        if ($this->app->environment('local', 'testing')) {
+            $this->registerDevServiceProvider();
+        }
+    }
+
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot()
+    {
+        Carbon::setLocale($this->app->getLocale());
+    }
+
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
+     */
+    /**
+     * Register the service provider.
+     */
+    private function registerDevServiceProvider()
+    {
+        foreach ($this->app['config']->get('app.providers-dev', []) as $provider) {
+            $this->app->register($provider);
+        }
     }
 }
