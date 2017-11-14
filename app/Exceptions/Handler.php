@@ -3,6 +3,7 @@
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Class     Handler
@@ -18,23 +19,23 @@ class Handler extends ExceptionHandler
      */
 
     /**
-     * A list of the exception types that should not be reported.
+     * A list of the exception types that are not reported.
      *
      * @var array
      */
     protected $dontReport = [
-        \Illuminate\Auth\AuthenticationException::class,
-        \Illuminate\Auth\Access\AuthorizationException::class,
-        \Symfony\Component\HttpKernel\Exception\HttpException::class,
-        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
-        \Illuminate\Session\TokenMismatchException::class,
-        \Illuminate\Validation\ValidationException::class,
+        //
     ];
 
-    /* -----------------------------------------------------------------
-     |  Main Methods
-     | -----------------------------------------------------------------
+    /**
+     * A list of the inputs that are never flashed for validation exceptions.
+     *
+     * @var array
      */
+    protected $dontFlash = [
+        'password',
+        'password_confirmation',
+    ];
 
     /**
      * Report or log an exception.
@@ -42,11 +43,18 @@ class Handler extends ExceptionHandler
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
      * @param  \Exception  $exception
+     *
+     * @return void
      */
     public function report(Exception $exception)
     {
         parent::report($exception);
     }
+
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
+     */
 
     /**
      * Render an exception into an HTTP response.
@@ -54,26 +62,37 @@ class Handler extends ExceptionHandler
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception                $exception
      *
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
     {
-        if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
-            return redirect()->back()
-                ->withInput($request->except('password'))
-                ->withErrors(trans('errors.token-mismatch.message'));
-        }
-
         return parent::render($request, $exception);
     }
 
     /* -----------------------------------------------------------------
-     |  Other Methods
+     |  Overridden Methods
      | -----------------------------------------------------------------
      */
 
     /**
-     * Convert an authentication exception into an unauthenticated response.
+     * Convert a validation exception into a JSON response.
+     *
+     * @param  \Illuminate\Http\Request                    $request
+     * @param  \Illuminate\Validation\ValidationException  $exception
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function invalidJson($request, ValidationException $exception)
+    {
+        return response()->json([
+            'code'     => 'validation_failed',
+            'status'   => $exception->status,
+            'messages' => $exception->errors(),
+        ], $exception->status);
+    }
+
+    /**
+     * Convert an authentication exception into a response.
      *
      * @param  \Illuminate\Http\Request                  $request
      * @param  \Illuminate\Auth\AuthenticationException  $exception
@@ -83,64 +102,7 @@ class Handler extends ExceptionHandler
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         return $request->expectsJson()
-            ? response()->json([
-                'code'    => 'unauthenticated',
-                'status'  => 401,
-                'message' => $exception->getMessage(),
-            ], 401)
+            ? json_response()->error(['message' => 'Unauthenticated.'], 401)
             : redirect()->guest(route('auth::login.get'));
-    }
-
-    /**
-     * Create a Symfony response for the given exception.
-     *
-     * @param  \Exception  $e
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    protected function convertExceptionToResponse(Exception $e)
-    {
-        return config('app.debug', false)
-            ? $this->renderWhoopsPage($e)
-            : parent::convertExceptionToResponse($e);
-    }
-
-    /**
-     * Create a response object from the given validation exception.
-     *
-     * @param  \Illuminate\Validation\ValidationException  $e
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    protected function convertValidationExceptionToResponse(\Illuminate\Validation\ValidationException $e, $request)
-    {
-        if ( ! $request->expectsJson()) {
-            return parent::convertValidationExceptionToResponse($e, $request);
-        }
-
-        return response()->json([
-            'code'     => 'validation_failed',
-            'messages' => $e->validator->errors()->getMessages(),
-            'status'   => 422,
-        ], 422);
-    }
-
-    /**
-     * Render Whoops page.
-     *
-     * @param  \Exception  $e
-     *
-     * @return \Illuminate\Http\Response
-     */
-    protected function renderWhoopsPage(Exception $e)
-    {
-        $whoops = new \Whoops\Run;
-        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-
-        return response()->make(
-            $whoops->handleException($e),
-            method_exists($e, 'getStatusCode') ? $e->getStatusCode() : 500,
-            method_exists($e, 'getHeaders') ? $e->getHeaders() : []
-        );
     }
 }

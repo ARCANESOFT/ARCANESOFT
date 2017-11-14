@@ -13,10 +13,22 @@ const assetsFolders = {
 };
 
 mix.options({
-    extractVueStyles: false,
     processCssUrls: false,
     clearConsole: true,
-    publicPath: publicFolder
+    publicPath: publicFolder,
+    cleanCss: {
+        level: {
+            1: {
+                specialComments: 'none'
+            }
+        }
+    },
+    postCss: [
+        require('postcss-discard-comments')({
+            removeAll: true
+        })
+    ],
+    purifyCss: false
 });
 
 mix.disableNotifications();
