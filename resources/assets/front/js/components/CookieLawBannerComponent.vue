@@ -1,25 +1,14 @@
 <script>
-    import Lang from 'laravel-lang-js';
-
-    const messages = {
-        'en': {
-            'message': 'This website uses cookies to ensure you get the best experience on our website.',
-            'button': 'Accept'
-        },
-
-        'fr': {
-            'message': 'Ce site web utilise des cookies pour vous assurer une meilleure expérience sur notre site.',
-            'button': 'Accepter'
-        }
-    };
+    import Lang from "laravel-lang-js";
+    import messages from "../lang/cookie-law-banner";
 
     export default {
-        name: 'cookie-law-banner',
+        name: "cookie-law-banner-component",
 
         props: {
             locale: {
                 type: String,
-                'default': 'fr'
+                "default": "fr"
             }
         },
 

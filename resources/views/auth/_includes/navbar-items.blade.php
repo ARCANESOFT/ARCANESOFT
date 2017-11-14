@@ -1,7 +1,4 @@
-@if (Auth::guest())
-    @includeWhen(Route::has('auth::login.get'), 'auth._includes.nav-items.login-nav-item')
-    @includeWhen(Route::has('auth::register.get'), 'auth._includes.nav-items.register-nav-item')
-@else
+@auth
     @php($user = Auth::user())
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -23,4 +20,7 @@
             @include('auth._includes.nav-items.logout-nav-item')
         </ul>
     </li>
-@endif
+@else
+    @includeWhen(Route::has('auth::login.get'), 'auth._includes.nav-items.login-nav-item')
+    @includeWhen(Route::has('auth::register.get'), 'auth._includes.nav-items.register-nav-item')
+@endauth

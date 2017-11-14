@@ -14,6 +14,7 @@ class LoginController extends AuthController
      |  Traits
      | -----------------------------------------------------------------
      */
+
     use AuthenticatesUsers;
 
     /* -----------------------------------------------------------------

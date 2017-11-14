@@ -13,13 +13,13 @@ require('../../_shared/js/bootstrap');
  * the application, or feel free to tweak this setup for your needs.
  */
 
-import CookieLawBanner from './components/CookieLawBanner.vue';
+import CookieLawBannerComponent from './components/CookieLawBannerComponent.vue';
 
 const app = new Vue({
     el: '#app',
 
     components: {
-        CookieLawBanner
+        CookieLawBannerComponent
     },
 
     mounted() {

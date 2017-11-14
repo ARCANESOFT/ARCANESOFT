@@ -15,7 +15,7 @@ return [
      | -----------------------------------------------------------------
      */
 
-    'lifetime' => 120, // minutes
+    'lifetime' => env('SESSION_LIFETIME', 120), // minutes
 
     'expire_on_close' => false,
 
@@ -94,5 +94,13 @@ return [
      */
 
     'http_only' => true,
+
+    /* -----------------------------------------------------------------
+     |  Same-Site Cookies
+     | -----------------------------------------------------------------
+     | Supported: "lax", "strict"
+     */
+
+    'same_site' => null,
 
 ];
