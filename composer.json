@@ -25,7 +25,7 @@
         "arcanesoft/media": "~2.4.0",
         "arcanesoft/seo": "~2.3.0",
         "arcanesoft/tracker": "~2.1.0",
-        "fideloper/proxy": "~3.3",
+        "fideloper/proxy": "~4.0",
         "laravel/framework": "~5.5.0",
         "laravel/tinker": "~1.0"
     },
