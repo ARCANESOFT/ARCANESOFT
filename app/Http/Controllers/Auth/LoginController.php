@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers\Auth;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 /**
  * Class     LoginController
@@ -38,17 +39,26 @@ class LoginController extends AuthController
      */
 
     /**
+     * Send the response after the user was authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\User          $user
+     *
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->isModerator() || $user->isAdmin())
+            return redirect()->route('admin::foundation.home');
+    }
+
+    /**
      * Get the post login redirect path.
      *
      * @return string
      */
     protected function redirectTo()
     {
-        /** @var  \App\Models\User  $user */
-        $user = $this->guard()->user();
-
-        return ($user->isAdmin() || $user->isModerator())
-            ? route('admin::foundation.home')
-            : route('account::index');
+        return route('account::index');
     }
 }
