@@ -1,14 +1,19 @@
-<?php namespace App\Tests\Unit;
+<?php
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+declare(strict_types=1);
 
+namespace Tests\Unit;
+
+/**
+ * Class     ExampleTest
+ *
+ * @package  Tests\Unit
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 class ExampleTest extends TestCase
 {
     /**
      * A basic test example.
-     *
-     * @return void
      */
     public function testBasicTest()
     {

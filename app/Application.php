@@ -1,27 +1,25 @@
-<?php namespace App;
+<?php
+
+declare(strict_types=1);
+
+namespace App;
 
 use Illuminate\Foundation\Application as IlluminateApplication;
 
 /**
  * Class     Application
  *
- * @package  App
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Application extends IlluminateApplication
 {
-    /* -----------------------------------------------------------------
-     |  Getters & Setters
-     | -----------------------------------------------------------------
-     */
-
     /**
-     * Get the path to the public / web directory.
+     * Get the path to the language files.
      *
      * @return string
      */
-    public function publicPath()
+    public function langPath(): string
     {
-        return $this->basePath.DS.'public';
+        return $this->basePath('translations');
     }
 }

@@ -1,0 +1,72 @@
+// 1. Abstract
+
+@import "abstracts/variables";
+
+// 2. Vendors & Modules
+
+@import "vendors/uppy";
+
+// 3. Layouts
+
+@import "layout/media-manager-card";
+
+.media-manager,
+.media-browser {
+    .media-manager-toolbar {
+        display: flex;
+        padding: 0.5rem;
+        background-color: var(--media-manager-toolbar-bg-color);
+    }
+
+    .media-manager-body {
+        .media-item {
+            display: flex;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.15s ease-in-out;
+
+            .media-item-name,
+            .media-item-icon {
+                transition: color 0.15s ease-in-out;
+            }
+
+            .media-item-name {
+                display: block;
+                white-space: nowrap;
+                overflow-x: hidden;
+                text-overflow: ellipsis;
+            }
+
+            &.selected {
+                background-color: rgb(0, 155, 255);
+
+                .media-item-name,
+                .media-item-icon {
+                    color: #FFF;
+                }
+            }
+        }
+    }
+
+    .media-manager-loading {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(#FFF, 0.4);
+        z-index: 1;
+    }
+}
+
+@import "layout/preview-mode",
+"layout/display-modes";
+
+// 4. Components
+
+@import "components/breadcrumbs";
+
+// 5. Themes
+
+@import "themes/light",
+"themes/dark";

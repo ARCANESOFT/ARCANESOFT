@@ -1,0 +1,31 @@
+{
+    "Or login using": "Ou se connecter en utilisant",
+    "Or sign up using": "Ou s'inscrire en utilisant",
+    "Don't have an account? Sign up": "Vous n'avez pas de compte? Inscrivez-vous",
+    "You have an account? Login": "Vous avez un compte? Connectez-vous",
+
+    "Email verification": "Vérification d'email",
+    "Please click the button below to verify your email address.": "Veuillez cliquer sur le bouton ci-dessous pour vérifier votre adresse email :",
+    "If you did not create an account, no further action is required.": "Si vous n'avez pas créé de compte, vous pouvez ignorer ce message.",
+    "Thanks for signing up!": "Merci de vous être inscrit",
+    "Before getting started, could you verify your email address by clicking on the link we just emailed to you?": "Avant de commencer, pourriez-vous vérifier votre adresse électronique en cliquant sur le lien que nous venons de vous envoyer par courrier électronique ?",
+    "If you didn't receive the email, we will gladly send you another.": "Si vous n'avez pas reçu le courriel, nous vous en enverrons un autre avec plaisir.",
+    "A new verification link has been sent to the email address you provided during registration.": "Un nouveau lien de vérification a été envoyé à l'adresse électronique que vous avez fournie lors de votre inscription.",
+    "Resend verification email": "Renvoyer l'e-mail de vérification",
+    "Verify Email Address": "Vérifiez l'adresse électronique",
+    "Verify Your Email Address": "Vérifiez votre adresse email",
+
+    "Forgot your password?": "Vous avez oublié votre mot de passe ?",
+    "No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.": "Pas de problème. Il vous suffit de nous communiquer votre adresse électronique et nous vous enverrons par courrier électronique un lien de réinitialisation du mot de passe qui vous permettra d'en choisir un nouveau.",
+    "Email Password Reset Link": "Envoyer l'email de réinitialisation du mot de passe",
+    "Just remember your password? Login": "Souvenez-vous de votre mot de passe? Connectez-vous",
+    "Reset Password Notification": "Notification de réinitialisation du mot de passe",
+    "You are receiving this email because we received a password reset request for your account.": "Vous recevez cet email car nous avons reçu une demande de réinitialisation de mot de passe pour votre compte.",
+    "This password reset link will expire in :count minutes.": "Ce lien de réinitialisation du mot de passe expirera dans :count minutes.",
+    "If you did not request a password reset, no further action is required.": "Si vous n'avez pas demandé de réinitialisation de mot de passe, vous pouvez ignorer ce message.",
+    "Reset Password": "Réinitialiser le mot de passe",
+
+    "Please confirm your password before continuing.": "Veuillez confirmer votre mot de passe avant de continuer.",
+    "The provided password was incorrect.": "Le mot de passe fourni était incorrect.",
+    "Confirm Password": "Confirmez votre mot de passe"
+}

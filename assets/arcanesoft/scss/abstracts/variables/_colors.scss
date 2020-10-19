@@ -1,0 +1,67 @@
+$white:            #FFF;
+$gray-100:         #F8F9FA;
+$gray-200:         #E9ECEF;
+$gray-300:         #DEE2E6;
+$gray-400:         #CED4DA;
+$gray-500:         #ADB5BD;
+$gray-600:         #6C757D;
+$gray-700:         #495057;
+$gray-800:         #343A40;
+$gray-900:         #212529;
+$black:            #000;
+
+$colors: (
+    "gray":          #434A54,
+    "gray-light":    #AAB2BD,
+    "gray-lighter":  #E8EFF4,
+    "gray-lightest": #E6E9ED,
+    "gray-dark":     $gray-900,
+);
+
+$blue:          #0d6efd;
+$indigo:        #6610f2;
+$purple:        #6f42c1;
+$pink:          #d63384;
+$red:           #dc3545;
+$orange:        #fd7e14;
+$yellow:        #ffc107;
+$green:         #198754;
+$teal:          #20c997;
+$cyan:          #0dcaf0;
+
+$primary:       $blue;
+$secondary:     $gray-600;
+$success:       $green;
+$info:          $cyan;
+$warning:       $yellow;
+$danger:        $red;
+$light:         $gray-100;
+$dark:          $gray-800;
+
+$social-colors: (
+    "behance":   #1769FF,
+    "dribbble":  #EA4C89,
+    "facebook":  #3B579D,
+    "github":    #333333,
+    "google":    #DC4A38,
+    "instagram": #E1306C,
+    "linkedin":  #0177B5,
+    "pinterest": #CC2127,
+    "reddit":    #FF4500,
+    "twitter":   #2CAAE1,
+    "youtube":   #E52D27,
+);
+
+$log-level-colors: (
+    'empty':     var(--skin-surface-1-bg-color),
+    'env':       #6A1B9A,
+    'all':       #605CA8,
+    'emergency': #B71C1C,
+    'alert':     #D32F2F,
+    'critical':  #F44336,
+    'error':     #FF5722,
+    'warning':   #FF9100,
+    'notice':    #4CAF50,
+    'info':      #1976D2,
+    'debug':     #90CAF9,
+);

@@ -1,87 +1,61 @@
-let mix = require('laravel-mix');
+const mix = require('laravel-mix');
+const glob = require('glob');
+const path = require('path');
+const workspaces = require('./package.json').workspaces;
 
-// Configs & Options
-//-------------------------------------------------------
+/*--------------------------------------------------------------------------
+ | Mix Configuration
+ |--------------------------------------------------------------------------
+ */
 
-const publicFolder  = 'public';
-const assetsFolders = {
-    styles: `${publicFolder}/assets/css`,
-    fonts: `${publicFolder}/assets/fonts`,
-    images: `${publicFolder}/assets/img`,
-    scripts: `${publicFolder}/assets/js`,
-    svg: `${publicFolder}/assets/svg`
-};
-
-mix.options({
-    processCssUrls: false,
-    clearConsole: true,
-    publicPath: publicFolder,
-    cleanCss: {
-        level: {
-            1: {
-                specialComments: 'none'
-            }
-        }
+const options = {
+    paths: {
+        public: path.normalize('public'),
+        assets: path.normalize('public/assets'),
+        vendor: path.normalize('public/vendor'),
     },
-    postCss: [
-        require('postcss-discard-comments')({
-            removeAll: true
-        })
-    ],
-    purifyCss: false
+}
+
+mix.setPublicPath(options.paths.assets);
+mix.setResourceRoot('../');
+
+mix.vue({
+    version: 3,
 });
 
-mix.disableNotifications();
-// mix.sourceMaps();
-// mix.version();
-
-// Scripts
-//-------------------------------------------------------
-mix.autoload({
-    jquery: ['$', 'window.jQuery', 'jQuery']
+mix.alias({
+    vue$: path.join(__dirname, 'node_modules/vue/dist/vue.esm-bundler.js'),
 });
 
-mix.js('resources/assets/front/js/app.js', `${assetsFolders.scripts}/app.js`);
-mix.js('resources/assets/back/js/admin.js', `${assetsFolders.scripts}/admin.js`);
-mix.extract([
-    // Common dependencies
-    'axios', 'vue', 'jquery', 'bootstrap-sass',
+mix.version();
+mix.disableSuccessNotifications();
 
-    // Backend dependencies
-    'lodash', 'chart.js', 'simplemde', 'eonasdan-bootstrap-datetimepicker', 'jquery-slimscroll', 'select2',
-    'js-cookie', 'fastclick',
+if (process.env.NODE_ENV === 'production') {
+    mix.options({
+        cssNano: {
+            discardComments: {
+                removeAll: true
+            },
+        },
+    });
+}
+else if (process.env.NODE_ENV === 'development') {
+    mix.sourceMaps();
+}
 
-    // Media manager dependencies
-    'dropzone', 'laravel-lang-js', 'laravel-form-errors'
-], `${assetsFolders.scripts}/vendors.js`);
+/*--------------------------------------------------------------------------
+ | Run Mixes
+ |--------------------------------------------------------------------------
+ */
 
-mix.copy('node_modules/pace-progress/pace.min.js', `${assetsFolders.scripts}/vendors/pace.min.js`);
+workspaces.forEach((workspace) => {
+    let mixFiles = glob.sync(`./${workspace}/webpack.mix.js`, {
+        'ignore': [
+            '**/node_modules/**',
+        ],
+    });
 
-// Styles
-//-------------------------------------------------------
-
-mix.sass('resources/assets/front/sass/app.scss', `${assetsFolders.styles}/app.css`);
-mix.sass('resources/assets/back/sass/admin.scss', `${assetsFolders.styles}/admin.css`);
-
-// Fonts
-//-------------------------------------------------------
-
-mix.copy([
-    'node_modules/bootstrap-sass/assets/fonts/bootstrap',
-    'node_modules/font-awesome/fonts',
-    'node_modules/ionicons/dist/fonts',
-    'node_modules/weathericons/font',
-    'resources/assets/back/fonts',
-], assetsFolders.fonts);
-
-// Images
-//-------------------------------------------------------
-
-mix.copy('node_modules/bootstrap-colorpicker/dist/img/bootstrap-colorpicker', `${assetsFolders.images}/bootstrap-colorpicker`);
-mix.copy('node_modules/ion-rangeslider/img', `${assetsFolders.images}/ion-rangeslider`);
-mix.copy('resources/assets/back/img', assetsFolders.images);
-
-// SVG
-//-------------------------------------------------------
-
-mix.copy('node_modules/flag-icon-css/flags', `${assetsFolders.svg}/flags`);
+    mixFiles.forEach((mixFile) => {
+        require(mixFile)(mix, options)
+    });
+});

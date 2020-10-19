@@ -1,0 +1,35 @@
+.impersonated {
+    position: fixed;
+    top: 4rem;
+    right: 0;
+    background-color: #7851A9;
+    display: flex;
+    flex-direction: row;
+    z-index: 10000;
+    color: #FFF;
+    text-decoration: none;
+    transform: translateX(calc(100% - 3rem));
+    transition: transform 0.25s ease-out;
+    cursor: pointer;
+
+    &:hover {
+        transform: translateX(0);
+    }
+
+    & > span {
+        display: flex;
+        height: 3rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    & > .impersonated-icon {
+        width: 3rem;
+        background-color: rgba(#000, 0.3);;
+    }
+
+    & > .impersonated-content {
+        padding-left: .75rem;
+        padding-right: .75rem;
+    }
+}

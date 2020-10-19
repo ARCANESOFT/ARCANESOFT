@@ -1,0 +1,41 @@
+{
+    "name":        "modules/auth",
+    "description": "ARCANESOFT - Authentication module.",
+    "keywords":    ["arcanedev", "arcanesoft", "auth", "authentication", "register", "login", "laravel"],
+    "license":     "MIT",
+    "type":        "project",
+    "authors":     [
+        {
+            "name":     "ARCANEDEV",
+            "email":    "arcanedev.maroc@gmail.com",
+            "homepage": "https://github.com/arcanedev-maroc",
+            "role":     "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.3",
+        "arcanedev/support": "^8.0",
+        "arcanesoft/foundation": "@dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Authentication\\": "src/",
+            "Authentication\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Authentication\\AuthenticationServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

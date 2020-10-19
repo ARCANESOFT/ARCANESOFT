@@ -1,0 +1,44 @@
+// VARIABLES
+
+$timeline-line-color: var(--skin-surface-1-bg-color) !default;
+$timeline-line-width: 0.25rem;
+
+$timeline-dot-border-width: 0.25rem;
+$timeline-dot-size: 2.5rem;
+
+$timeline-item-margin-left: 3.5rem;
+
+// STYLES
+
+.timeline-container {
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: calc((#{$timeline-dot-size} - #{$timeline-line-width}) / 2);
+        height: 100%;
+        width: $timeline-line-width;
+        background-image: linear-gradient($timeline-line-color 90%, transparent);
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-left: $timeline-item-margin-left;
+        border: none;
+
+        .timeline-dot {
+            position: absolute;
+            top: 0;
+            left: -#{$timeline-item-margin-left};
+            width: $timeline-dot-size;
+            height: $timeline-dot-size;
+            background-color: #D1D1D1;
+            border: $timeline-dot-border-width solid var(--skin-surface-1-bg-color);
+            border-radius: 50%;
+
+            @extend .d-flex, .justify-content-center, .align-items-center;
+        }
+    }
+}

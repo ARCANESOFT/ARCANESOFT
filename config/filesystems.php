@@ -5,7 +5,6 @@ return [
     /* -----------------------------------------------------------------
      |  Default Filesystem Disk
      | -----------------------------------------------------------------
-     | Supported: "local", "ftp", "s3", "rackspace"
      */
 
     'default' => env('FILESYSTEM_DRIVER', 'local'),
@@ -20,11 +19,12 @@ return [
     /* -----------------------------------------------------------------
      |  Filesystem Disks
      | -----------------------------------------------------------------
+     |  Supported Drivers: "local", "ftp", "sftp", "s3"
      */
 
     'disks' => [
 
-        'local'  => [
+        'local' => [
             'driver' => 'local',
             'root'   => storage_path('app'),
         ],
@@ -36,18 +36,28 @@ return [
             'visibility' => 'public',
         ],
 
-        's3'     => [
-            'driver' => 's3',
-            'key'    => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
+        's3' => [
+            'driver'   => 's3',
+            'key'      => env('AWS_ACCESS_KEY_ID'),
+            'secret'   => env('AWS_SECRET_ACCESS_KEY'),
+            'region'   => env('AWS_DEFAULT_REGION'),
+            'bucket'   => env('AWS_BUCKET'),
+            'url'      => env('AWS_URL'),
+            'endpoint' => env('AWS_ENDPOINT'),
         ],
 
-        'backup'  => [
-            'driver' => 'local',
-            'root'   => storage_path('app/backups'),
-        ],
+    ],
+
+    /* -----------------------------------------------------------------
+     |  Symbolic Links
+     | -----------------------------------------------------------------
+     |  Here you may configure the symbolic links that will be created when the
+     |  `storage:link` Artisan command is executed. The array keys should be
+     |  the locations of the links and the values should be their targets.
+     */
+
+    'links' => [
+        public_path('storage') => storage_path('app/public'),
     ],
 
 ];

@@ -1,56 +1,23 @@
 {
-    "name": "arcanesoft",
-    "version": "2.0.0",
     "private": true,
     "scripts": {
-        "dev": "npm run development",
-        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "watch-poll": "npm run watch -- --watch-poll",
-        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+        "dev": "mix",
+        "development": "npm run dev",
+        "prod": "mix --production",
+        "production": "npm run prod",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix --hot"
     },
+    "workspaces": [
+        "assets/*"
+    ],
     "devDependencies": {
-        "axios": "^0.17",
-        "bootstrap-sass": "^3.3.7",
-        "cross-env": "^5.1",
-        "jquery": "^3.5",
-        "laravel-mix": "^2.0",
-        "lodash": "^4.17.19",
-        "vue": "^2.5.7"
-    },
-    "dependencies": {
-        "animate-sass": "^0.6.6",
-        "bootstrap-colorpicker": "^2.5.0",
-        "bootstrap-daterangepicker": "^2.1.25",
-        "bootstrap-slider": "^9.7.1",
-        "chart.js": "^2.4.0",
-        "datatables.net-bs": "^1.10.13",
-        "dropzone": "^4.3.0",
-        "eonasdan-bootstrap-datetimepicker": "^4.17.46",
-        "fastclick": "^1.0.6",
-        "flag-icon-css": "^2.8.0",
-        "flot": "^0.8.0-alpha",
-        "font-awesome": "^4.7.0",
-        "fullcalendar": "^3.1.0",
-        "inputmask": "^3.3.5",
-        "ion-rangeslider": "^2.1.6",
-        "ionicons": "^3.0.0",
-        "jquery-knob": "^1.2.11",
-        "jquery-slimscroll": "^1.3.8",
-        "js-cookie": "^2.1.3",
-        "laravel-form-errors": "^1.0.0",
-        "laravel-lang-js": "^1.0.0",
-        "morris.js": "^0.5.0",
-        "pace-progress": "^1.0.2",
-        "raphael": "^2.2.7",
-        "select2": "^4.0.3",
-        "select2-bootstrap-theme": "^0.1.0-beta.9",
-        "simplemde": "^1.11.2",
-        "sortablejs": "^1.5.0-rc1",
-        "sweetalert": "^1.1.3",
-        "toastr": "^2.1.2",
-        "weathericons": "^2.1.0"
+        "cross-env": "^7.0",
+        "cssnano": "^4.1.10",
+        "glob": "^7.1.6",
+        "laravel-mix": "^6.0.0-beta.10",
+        "postcss": "^8.1.1",
+        "postcss-loader": "^4.0.3"
     }
 }

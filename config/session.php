@@ -1,11 +1,13 @@
 <?php
 
+use Illuminate\Support\Str;
+
 return [
 
     /* -----------------------------------------------------------------
      |  Default Session Driver
      | -----------------------------------------------------------------
-     | Supported: "file", "cookie", "database", "apc", "memcached", "redis", "array"
+     |  Supported: "file", "cookie", "database", "apc", "memcached", "redis", "dynamodb", "array"
      */
 
     'driver' => env('SESSION_DRIVER', 'file'),
@@ -15,7 +17,7 @@ return [
      | -----------------------------------------------------------------
      */
 
-    'lifetime' => env('SESSION_LIFETIME', 120), // minutes
+    'lifetime' => env('SESSION_LIFETIME', 120),
 
     'expire_on_close' => false,
 
@@ -34,21 +36,26 @@ return [
     'files' => storage_path('framework/sessions'),
 
     /* -----------------------------------------------------------------
-     |  Session Database Connection & Table
+     |  Session Database Connection
      | -----------------------------------------------------------------
      */
 
-    'connection' => null,
+    'connection' => env('SESSION_CONNECTION', null),
 
-    'table'      => 'sessions',
+    /* -----------------------------------------------------------------
+     |  Session Database Table
+     | -----------------------------------------------------------------
+     */
+
+    'table' => 'sessions',
 
     /* -----------------------------------------------------------------
      |  Session Cache Store
      | -----------------------------------------------------------------
-     | Note: For "apc" or "memcached" session drivers.
+     |  Affects: "apc", "dynamodb", "memcached", "redis"
      */
 
-    'store' => null,
+    'store' => env('SESSION_STORE', null),
 
     /* -----------------------------------------------------------------
      |  Session Sweeping Lottery
@@ -64,7 +71,7 @@ return [
 
     'cookie' => env(
         'SESSION_COOKIE',
-        str_slug(env('APP_NAME', 'app'), '_').'_session'
+        Str::slug(env('APP_NAME', 'laravel'), '_').'_session'
     ),
 
     /* -----------------------------------------------------------------
@@ -86,7 +93,7 @@ return [
      | -----------------------------------------------------------------
      */
 
-    'secure' => env('SESSION_SECURE_COOKIE', false),
+    'secure' => env('SESSION_SECURE_COOKIE'),
 
     /* -----------------------------------------------------------------
      |  HTTP Access Only
@@ -98,9 +105,9 @@ return [
     /* -----------------------------------------------------------------
      |  Same-Site Cookies
      | -----------------------------------------------------------------
-     | Supported: "lax", "strict"
+     |  Supported: "lax", "strict", "none", null
      */
 
-    'same_site' => null,
+    'same_site' => 'lax',
 
 ];

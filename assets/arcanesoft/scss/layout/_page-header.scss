@@ -1,0 +1,30 @@
+.page-header {
+    margin: 0;
+    padding: 0.5rem 1rem;
+    background-color: var(--skin-page-header-bg-color);
+
+    .page-title {
+        color: var(--skin-heading-text-color);
+        font-size: 1.5rem;
+        margin-bottom: .5rem;
+
+        small {
+            color: var(--skin-heading-muted-color);
+            font-size: 75%;
+        }
+    }
+
+    .breadcrumb-container .breadcrumb {
+        padding: 0;
+        margin-bottom: 0;
+
+        .breadcrumb-item {
+            font-size: 0.8rem;
+
+            a {
+                text-decoration: none;
+                font-weight: 600;
+            }
+        }
+    }
+}

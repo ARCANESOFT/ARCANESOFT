@@ -1,55 +1,73 @@
-# ARCANESOFT [![Packagist License][badge_license]](LICENSE.md)
+<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
-[![Packagist][badge_package]](https://packagist.org/packages/arcanesoft/arcanesoft)
-[![Packagist Release][badge_release]](https://packagist.org/packages/arcanesoft/arcanesoft)
-[![Packagist Downloads][badge_downloads]](https://packagist.org/packages/arcanesoft/arcanesoft)
+<p align="center">
+<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+</p>
 
-[badge_license]:   http://img.shields.io/packagist/l/arcanesoft/arcanesoft.svg?style=flat-square
+## About Laravel
 
-[badge_package]:   https://img.shields.io/badge/package-arcanesoft/arcanesoft-blue.svg?style=flat-square
-[badge_release]:   https://img.shields.io/packagist/v/arcanesoft/arcanesoft.svg?style=flat-square
-[badge_downloads]: https://img.shields.io/packagist/dt/arcanesoft/arcanesoft.svg?style=flat-square
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-CMS built with Laravel Framework.
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-*By [ARCANEDEV&copy;](http://www.arcanedev.net/)*
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-### Available Packages
+## Learning Laravel
 
-##### Production
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-| Package                                                            | Description                                                          |
-| ------------------------------------------------------------------ | -------------------------------------------------------------------- |
-| [arcanedev/breadcrumbs](https://github.com/ARCANEDEV/Breadcrumbs)  | A simple &amp; easy way to create breadcrumbs                        |
-| [arcanedev/composer](https://github.com/ARCANEDEV/Composer)        | Composer plugin for ARCANESOFT                                       |
-| [arcanedev/hasher](https://github.com/ARCANEDEV/Hasher)            | Provides a flexible hash manager for Laravel.                        |
-| [arcanedev/gravatar](https://github.com/ARCANEDEV/Gravatar)        | Gravatar Helper &amp; Generator                                      |
-| [arcanedev/laravel-html](https://github.com/ARCANEDEV/LaravelHtml) | HTML and Form Builders for the Laravel Framework.                    |
-| [arcanedev/log-viewer](https://github.com/ARCANEDEV/LogViewer)     | Provides a log viewer                                                |
-| [arcanedev/menus](https://github.com/ARCANEDEV/Menus)              | Menu builder for Laravel 5                                           |
-| [arcanedev/no-captcha](https://github.com/ARCANEDEV/noCAPTCHA)     | Helper for Google's new reCAPTCHA                                    |
-| [arcanedev/notify](https://github.com/ARCANEDEV/Notify)            | Flash notifications Helper                                           |
-| [arcanedev/robots](https://github.com/ARCANEDEV/Robots)            | Robots.txt Generator                                                 |
-| [arcanedev/sanitizer](https://github.com/ARCANEDEV/Sanitizer)      | Sanitizer provides an easy way to sanitize/format user inputs        |
-| [arcanedev/seo-helper](https://github.com/ARCANEDEV/SEO-Helper)    | SEO Helper provides tools and helpers for Search Engine Optimization |
-| [arcanedev/support](https://github.com/ARCANEDEV/Support)          | ARCANEDEV Support Library                                            |
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-##### Development
+## Laravel Sponsors
 
-| Package                                                                       | Description                                                                                      |
-| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar)     | PHP Debugbar integration for Laravel                                                             |
-| [barryvdh/laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper) | Laravel IDE Helper, generates correct PHPDocs for all Facade classes, to improve auto-completion |
-| [fzaninotto/faker](https://github.com/fzaninotto/Faker)                       | Faker is a PHP library that generates fake data for you                                          |
-| [phpunit/phpcov](https://github.com/sebastianbergmann/phpcov)                 | A command-line frontend for the PHP_CodeCoverage library                                         |
-| [phpunit/phpunit](https://github.com/sebastianbergmann/phpunit)               | The PHP Unit Testing framework                                                                   |
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Suggested Packages
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Cubet Techno Labs](https://cubettech.com)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[British Software Development](https://www.britishsoftware.co)**
+- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
+- **[DevSquad](https://devsquad.com)**
+- [UserInsights](https://userinsights.com)
+- [Fragrantica](https://www.fragrantica.com)
+- [SOFTonSOFA](https://softonsofa.com/)
+- [User10](https://user10.com)
+- [Soumettre.fr](https://soumettre.fr/)
+- [CodeBrisk](https://codebrisk.com)
+- [1Forge](https://1forge.com)
+- [TECPRESSO](https://tecpresso.co.jp/)
+- [Runtime Converter](http://runtimeconverter.com/)
+- [WebL'Agence](https://weblagence.com/)
+- [Invoice Ninja](https://www.invoiceninja.com)
+- [iMi digital](https://www.imi-digital.de/)
+- [Earthlink](https://www.earthlink.ro/)
+- [Steadfast Collective](https://steadfastcollective.com/)
+- [We Are The Robots Inc.](https://watr.mx/)
+- [Understand.io](https://www.understand.io/)
+- [Abdel Elrafa](https://abdelelrafa.com)
+- [Hyper Host](https://hyper.host)
+- [Appoly](https://www.appoly.co.uk)
 
-| Package                                                            | Description                                                                                  |
-| ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
-| [arcanedev/laravel-lang](https://github.com/ARCANEDEV/LaravelLang) | Translations manager and checker for Laravel 5 based on 'caouecs/Laravel-lang' translations. |
+## Contributing
 
-## Security
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-If you discover any security related issues, please email arcanedev-maroc@gmail.com instead of using the issue tracker.
+## Security Vulnerabilities
+
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+
+## License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

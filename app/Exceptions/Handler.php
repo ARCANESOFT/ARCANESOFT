@@ -1,9 +1,10 @@
-<?php namespace App\Exceptions;
+<?php
 
-use Exception;
-use Illuminate\Auth\AuthenticationException;
+declare(strict_types=1);
+
+namespace App\Exceptions;
+
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Validation\ValidationException;
 
 /**
  * Class     Handler
@@ -37,72 +38,16 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
-    /**
-     * Report or log an exception.
-     *
-     * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
-     *
-     * @param  \Exception  $exception
-     *
-     * @return void
-     */
-    public function report(Exception $exception)
-    {
-        parent::report($exception);
-    }
-
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
 
     /**
-     * Render an exception into an HTTP response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception                $exception
-     *
-     * @return \Illuminate\Http\Response
+     * Register the exception handling callbacks for the application.
      */
-    public function render($request, Exception $exception)
+    public function register(): void
     {
-        return parent::render($request, $exception);
-    }
-
-    /* -----------------------------------------------------------------
-     |  Overridden Methods
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Convert a validation exception into a JSON response.
-     *
-     * @param  \Illuminate\Http\Request                    $request
-     * @param  \Illuminate\Validation\ValidationException  $exception
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function invalidJson($request, ValidationException $exception)
-    {
-        return response()->json([
-            'code'     => 'validation_failed',
-            'status'   => $exception->status,
-            'messages' => $exception->errors(),
-        ], $exception->status);
-    }
-
-    /**
-     * Convert an authentication exception into a response.
-     *
-     * @param  \Illuminate\Http\Request                  $request
-     * @param  \Illuminate\Auth\AuthenticationException  $exception
-     *
-     * @return \Illuminate\Http\Response
-     */
-    protected function unauthenticated($request, AuthenticationException $exception)
-    {
-        return $request->expectsJson()
-            ? json_response()->error(['message' => 'Unauthenticated.'], 401)
-            : redirect()->guest(route('auth::login.get'));
+        //
     }
 }

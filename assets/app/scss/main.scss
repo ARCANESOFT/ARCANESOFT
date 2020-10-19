@@ -1,0 +1,58 @@
+// 1- Abstract
+@import "abstracts/functions";
+@import "abstracts/variables";
+@import "abstracts/mixins";
+@import "abstracts/utilities";
+
+// 2- Vendors
+@import "vendors/fonts";
+@import "vendors/fontawesome";
+
+// 3- Base
+@import "base/root";
+@import "base/reboot";
+@import "base/type";
+@import "base/images";
+@import "base/transitions";
+@import "base/animations";
+
+// 4- Layout
+@import "layout/containers";
+@import "layout/grid";
+@import "layout/page";
+
+// 5- Components
+@import "components/alert";
+@import "components/badge";
+@import "components/breadcrumb";
+@import "components/button-group";
+@import "components/button-social";
+@import "components/buttons";
+@import "components/card";
+@import "components/carousel";
+@import "components/close";
+@import "components/dropdown";
+@import "components/forms";
+@import "components/list-group";
+@import "components/modal";
+@import "components/nav";
+@import "components/navbar";
+@import "components/pagination";
+@import "components/popover";
+@import "components/progress";
+@import "components/spinners";
+@import "components/tables";
+@import "components/toasts";
+@import "components/tooltip";
+
+@import "components/impersonated-badge";
+
+// 6- Pages
+@import "pages/auth";
+
+// 7- Themes
+// ...
+
+// 8- Utilities
+@import "utilities/helpers";
+@import "utilities/api";

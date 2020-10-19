@@ -1,0 +1,98 @@
+@import "~bootstrap/scss/forms";
+
+// Colors
+@each $color, $value in $theme-colors {
+    // Checks
+    .form-check-input.bg-#{$color}:checked {
+        border-color: $value;
+    }
+
+    .form-check-input[type="checkbox"],
+    .form-check-input[type="radio"] {
+        &.bg-#{$color}:not(:checked) {
+            background-color: $form-check-input-bg !important;
+        }
+    }
+
+    // Range
+    .form-range.bg-#{$color} {
+        background-color: transparent !important;
+
+        &::-webkit-slider-thumb {
+            background-color: $value;
+        }
+        &::-moz-range-thumb {
+            background-color: $value;
+        }
+        &::-ms-thumb {
+            background-color: $value;
+        }
+    }
+}
+
+// FORM LABEL GROUP
+.form-label-group {
+    position: relative;
+
+    & > input,
+    & > label {
+        height: 3.125rem;
+        padding: .75rem;
+    }
+
+    & > label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        margin-bottom: 0; /* Override default `<label>` margin */
+        line-height: 1.5;
+        color: #495057;
+        pointer-events: none;
+        cursor: text; /* Match the input under the label */
+        border: 1px solid transparent;
+        border-radius: .25rem;
+        transition: all .1s ease-in-out;
+    }
+
+    input::-webkit-input-placeholder { color: transparent; }
+    input:-ms-input-placeholder { color: transparent; }
+    input::-ms-input-placeholder { color: transparent; }
+    input::-moz-placeholder { color: transparent; }
+    input::placeholder { color: transparent; }
+
+    input:not(:placeholder-shown) {
+        padding-top: 1.25rem;
+        padding-bottom: .25rem;
+
+        & ~ label {
+            padding-top: .25rem;
+            padding-bottom: .25rem;
+            font-size: 12px;
+            color: #777;
+        }
+    }
+
+    // Fallback for Edge
+    @supports (-ms-ime-align: auto) {
+        & > label {
+            display: none;
+        }
+
+        input::-ms-input-placeholder {
+            color: #777;
+        }
+    }
+
+    // Fallback for IE
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        & > label {
+            display: none;
+        }
+
+        input:-ms-input-placeholder {
+            color: #777;
+        }
+    }
+}

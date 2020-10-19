@@ -1,4 +1,8 @@
-<?php namespace App\Http\Controllers;
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Controllers;
 
 /**
  * Class     PagesController
@@ -13,13 +17,8 @@ class PagesController extends Controller
      | -----------------------------------------------------------------
      */
 
-    /**
-     * Show the home page.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function home()
+    public function index()
     {
-        return $this->view('home');
+        return view('welcome');
     }
 }

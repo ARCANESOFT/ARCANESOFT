@@ -1,9 +1,13 @@
-<?php namespace App\Models;
+<?php
 
-use App\Notifications\Users\ResetPassword as ResetPasswordNotification;
-use Arcanesoft\Auth\Models\Role;
-use Arcanesoft\Auth\Models\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+declare(strict_types=1);
+
+namespace App\Models;
+
+use Arcanesoft\Foundation\Auth\Models\User as Authenticatable;
+use Authentication\Notifications\VerifyEmailNotification;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class     User
@@ -11,49 +15,25 @@ use Illuminate\Notifications\Notifiable;
  * @package  App\Models
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     /* -----------------------------------------------------------------
      |  Traits
      | -----------------------------------------------------------------
      */
 
-    use Notifiable;
+    use HasFactory;
 
     /* -----------------------------------------------------------------
-     |  Main Methods
+     |  Notifications
      | -----------------------------------------------------------------
      */
 
     /**
-     * Create a user as a member.
-     *
-     * @param  array  $attributes
-     *
-     * @return self
+     * Send the email verification notification.
      */
-    public static function createAsMember(array $attributes)
+    public function sendEmailVerificationNotification(): void
     {
-        return tap(new self($attributes), function(User $user) {
-            $user->is_active = true;
-            $user->save();
-
-            $user->syncRoles([Role::MEMBER]);
-        });
-    }
-
-    /* -----------------------------------------------------------------
-     |  Notification Methods
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Send the password reset notification.
-     *
-     * @param  string  $token
-     */
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new ResetPasswordNotification($token));
+        $this->notify(new VerifyEmailNotification);
     }
 }

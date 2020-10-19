@@ -1,0 +1,50 @@
+@import "~bootstrap/scss/navbar";
+
+.main-navbar.navbar {
+    background-color: var(--skin-navbar-bg-color);
+    transition-property: top;
+
+    .page-scrolled & {
+        top: -$navbar-height;
+    }
+
+    .navbar-link-item {
+        display: flex;
+        align-items: center;
+        padding-left: 0.8rem;
+        padding-right: 0.8rem;
+        height: $navbar-height;
+        color: inherit;
+        transition: background-color 0.2s ease-in-out;
+        text-decoration: none;
+        cursor: pointer;
+
+        @include media-breakpoint-up(md) {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        &:hover, &:focus {
+            background: rgba($black, 0.03);
+        }
+
+        &.navbar-link-icon {
+            &, i {
+                font-size: $navbar-icon-font-size;
+            }
+        }
+    }
+
+    .dropdown .dropdown-menu {
+        border-radius: 2px;
+        box-shadow: 0 4px 4px -4px rgba($black, 0.2);
+        @extend %dropdown-animation;
+    }
+}
+
+.dropdown-toggle {
+    &.no-caret:after {
+        display: none;
+    }
+}
+

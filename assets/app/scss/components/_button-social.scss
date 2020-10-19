@@ -1,0 +1,12 @@
+.btn-social {
+    & + .btn-social {
+        margin-top: 0.5rem;
+    }
+
+    @include media-breakpoint-up(md) {
+        & + .btn-social {
+            margin-top: 0;
+            margin-left: 0.5rem;
+        }
+    }
+}

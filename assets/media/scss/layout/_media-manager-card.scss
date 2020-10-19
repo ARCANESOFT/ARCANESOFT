@@ -1,0 +1,32 @@
+.media-manager {
+    position: relative;
+    overflow: hidden;
+    border-radius: $border-radius;
+    background-color: var(--foundation-surface-bg-color);
+    color: var(--foundation-surface-text-normal-color);
+
+    .media-manager-header {
+        //
+    }
+
+    .media-manager-body {
+        display: flex;
+        flex-direction: row;
+        min-height: 10rem;
+        box-shadow: inset 0 2px 4px -4px $black;
+
+        .media-items-container {
+            padding: .5rem;
+            flex: 3;
+        }
+
+        .media-item-preview {
+            flex: 1;
+        }
+    }
+
+    .media-manager-footer {
+        padding: 0.5rem;
+        box-shadow: 0 0 4px rgba($black, 0.2);
+    }
+}

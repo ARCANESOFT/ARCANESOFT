@@ -1,0 +1,87 @@
+.accordion {
+    .card {
+        border: none;
+
+        .card-header {
+            padding: 0;
+            background-color: transparent;
+            border-bottom: none;
+
+            a {
+                position: relative;
+                display: block;
+                padding: 1.25rem;
+                color: inherit;
+                font-size: inherit;
+                transition: color .5s ease;
+
+                &:before {
+                    display: block;
+                    position: absolute;
+                    top: 50%;
+                    left: 0;
+                    font-family: "Material Design Icons";
+                    font-size: 18px;
+                    transform: translateY(-50%);
+                }
+
+                &[aria-expanded="true"]:before {
+                    color: theme-color("primary");
+                    content: "\F143";
+                }
+
+                &[aria-expanded="false"]:before {
+                    content: "\F140";
+                }
+
+                &:hover, &:focus {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+
+    &.accordion-bordered {
+        .card {
+            border-top: 1px solid rgba(0, 0, 0, 0.125);
+            border-left: 1px solid rgba(0, 0, 0, 0.125);
+            border-right: 1px solid rgba(0, 0, 0, 0.125);
+
+            &:last-of-type {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+            }
+        }
+    }
+
+    &.accordion-primary-headers {
+        .card {
+            .card-header {
+                a {
+                    transition: all 0.2s linear;
+
+                    &[aria-expanded="true"] {
+                        background: theme-color("primary");
+
+                        &, &:before {
+                            color: $white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.accordion-primary-contents {
+        .card {
+            .card-body {
+                background: theme-color("primary");
+                color: $white;
+            }
+        }
+    }
+
+    &.accordion-primary-filled {
+        @extend .accordion-primary-headers;
+        @extend .accordion-primary-contents;
+    }
+}

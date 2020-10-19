@@ -1,0 +1,43 @@
+@import "~bootstrap/scss/breadcrumb";
+
+// STYLES
+.breadcrumb-container .breadcrumb {
+    border: 0;
+}
+
+.breadcrumb {
+    border: $border-width solid $border-color;
+
+    .breadcrumb-item {
+        font-size: $breadcrumb-font-size;
+
+        a {
+            color: var(--skin-breadcrumb-item-color);
+
+            &:hover, &:focus {
+                color: var(--skin-breadcrumb-item-hover-color);
+            }
+        }
+    }
+
+    &.bg-primary,
+    &.bg-info,
+    &.bg-success,
+    &.bg-danger,
+    &.bg-warning,
+    &.bg-dark {
+        border: none;
+
+        .breadcrumb-item {
+            color: $white;
+
+            &:before {
+                color: inherit;
+            }
+
+            a, span {
+                color: inherit;
+            }
+        }
+    }
+}

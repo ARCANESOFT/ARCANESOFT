@@ -1,0 +1,14 @@
+{
+    "name": "@arcanesoft/helpers",
+    "private": true,
+    "version": "1.0.0",
+    "main": "js/index.ts",
+    "dependencies": {
+        "axios": "^0.19"
+    },
+    "devDependencies": {
+        "@types/node": "^12.7",
+        "ts-loader": "^8.0.4",
+        "typescript": "^4.0.3"
+    }
+}

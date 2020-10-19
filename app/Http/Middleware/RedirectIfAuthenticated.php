@@ -1,35 +1,59 @@
-<?php namespace App\Http\Middleware;
+<?php
 
+declare(strict_types=1);
+
+namespace App\Http\Middleware;
+
+use App\Http\Routes\PagesRoutes;
 use Closure;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 /**
  * Class     RedirectIfAuthenticated
  *
- * @package  App\Http\Middleware
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class RedirectIfAuthenticated
 {
-    /* -----------------------------------------------------------------
-     |  Main Methods
-     | -----------------------------------------------------------------
-     */
     /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure                  $next
-     * @param  string|null               $guard
+     * @param  string|null               ...$guards
      *
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle(Request $request, Closure $next, ...$guards)
     {
-        if (Auth::guard($guard)->check()) {
-            return redirect()->route('public::home');
+        $guards = empty($guards) ? [null] : $guards;
+
+        foreach ($guards as $guard) {
+            if (Auth::guard($guard)->check()) {
+                return $this->getRedirectResponse($request);
+            }
         }
 
         return $next($request);
+    }
+
+    /**
+     * Get the redirect response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return mixed
+     */
+    protected function getRedirectResponse(Request $request)
+    {
+        if ($request->wantsJson()) {
+            return new JsonResponse([
+                'message' => __('You are already authenticated.'),
+            ], JsonResponse::HTTP_BAD_REQUEST);
+        }
+
+        return redirect()->to(PagesRoutes::index());
     }
 }

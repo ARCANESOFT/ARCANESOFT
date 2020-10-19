@@ -1,0 +1,74 @@
+@import "~bootstrap/scss/card";
+
+// Styles
+.card {
+    .card-title {
+        text-transform: capitalize;
+        font-size: 1.125rem;
+    }
+
+    .card-subtitle {
+        @extend .text-gray !optional;
+        margin-top: 0.625rem;
+        margin-bottom: 0.625rem;
+    }
+
+    .card-description {
+        color: $card-description-color;
+    }
+
+    .card-locked {
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        min-height: 6rem;
+        color: #d9d9d9;
+    }
+
+    &.border-danger .card-header {
+        border-bottom-color: $danger;
+    }
+
+    &.card-rounded {
+        @include border-radius(5px);
+    }
+
+    &.card-faded {
+        background: #b5b0b2;
+        border-color: #b5b0b2;
+    }
+
+    &.card-circle-progress {
+        color: $white;
+        text-align: center;
+    }
+
+    &.card-borderless {
+        @extend .border-0;
+
+        .card-header {
+            @extend .border-bottom-0;
+        }
+
+        .card-footer {
+            @extend .border-top-0;
+        }
+    }
+
+    &.card-loading {
+        max-height: 10rem;
+        min-height: 8rem;
+        overflow: hidden;
+    }
+}
+
+@each $color, $value in $theme-colors {
+    .card-inverse-#{$color} {
+        @include card-inverse-variant(rgba($value, .2), color-level($value, 1), color-level($value, 3));
+    }
+
+    .card.border-#{$color} .card-header {
+        background-color: rgba($value, 0.1);
+        border-bottom-color: $value;
+    }
+}
