@@ -9,6 +9,19 @@ const uppy = {
             // allowedFileTypes: ["image/*", "video/*"],
         },
     },
+    dashboard: {
+        inline: true,
+        width: '100%',
+        height: 300,
+        replaceTargetContent: true,
+        showProgressDetails: true,
+        browserBackButtonClose: true,
+        proudlyDisplayPoweredByUppy: false,
+    },
+    xhr: {
+        formData: true,
+        bundle: false,
+    }
 }
 
 export default uppy

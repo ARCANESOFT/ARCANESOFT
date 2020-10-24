@@ -1,4 +1,6 @@
 import { defineComponent } from 'vue'
+import arcanesoft from '../../../../helpers/arcanesoft'
+import tap from "@arcanesoft/core/src/functions/tap"
 
 const EVENT_CLASS = 'Arcanesoft\\Foundation\\Core\\Events\\UI\\SidebarToggled'
 
@@ -15,16 +17,18 @@ export default defineComponent({
         function save(visible: string): void {
             document.body.dataset.sidebarVisible = visible
 
-            window['request']().post('/admin/api/events', {
-                class: EVENT_CLASS,
-                options: {visible},
-            })
+            tap(arcanesoft(), (arcanesoft) => {
+                arcanesoft.request().post('/admin/api/events', {
+                    class: EVENT_CLASS,
+                    options: {visible},
+                }).then()
 
-            window['Foundation'].$emit('foundation.ui.sidebar', {visible})
+                arcanesoft.emit('foundation.ui.sidebar', {visible})
+            })
         }
 
         return {
-            toggle
+            toggle,
         }
     },
 

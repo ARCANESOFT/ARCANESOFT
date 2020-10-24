@@ -29,6 +29,9 @@ $timeline-item-margin-left: 3.5rem;
         border: none;
 
         .timeline-dot {
+            display: flex;
+            align-items: center;
+            align-content: center;
             position: absolute;
             top: 0;
             left: -#{$timeline-item-margin-left};
@@ -38,7 +41,7 @@ $timeline-item-margin-left: 3.5rem;
             border: $timeline-dot-border-width solid var(--skin-surface-1-bg-color);
             border-radius: 50%;
 
-            @extend .d-flex, .justify-content-center, .align-items-center;
+            //@extend .d-flex, .justify-content-center, .align-items-center;
         }
     }
 }

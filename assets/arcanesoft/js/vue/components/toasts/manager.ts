@@ -1,8 +1,8 @@
 import { defineComponent, ref, onMounted, onUnmounted } from 'vue'
+import arcanesoft from '../../../helpers/arcanesoft'
 import ToastComponent from './toast-component'
 import Toast from './toast'
 import events from './events'
-import arcanesoft from '../../../helpers/arcanesoft'
 
 export default defineComponent({
     name: 'v-toasts-manager',
@@ -27,18 +27,21 @@ export default defineComponent({
         }
 
         onMounted(() => {
-            arcanesoft().$on(events.UI_TOASTS_NOTIFY, ({type, title, body, options}) => {
-                pushToast(type, title, body, options || {})
-            })
-
-            arcanesoft().$on(events.UI_TOASTS_HIDDEN, (toast) => {
-                removeToast(toast)
-            })
+            arcanesoft()
+                .on(
+                    events.UI_TOASTS_NOTIFY,
+                    ({type, title, body, options}) => pushToast(type, title, body, options || {})
+                )
+                .on(
+                    events.UI_TOASTS_HIDDEN,
+                    (toast) => removeToast(toast)
+                )
         })
 
         onUnmounted(() => {
-            arcanesoft().$off(events.UI_TOASTS_NOTIFY)
-            arcanesoft().$off(events.UI_TOASTS_HIDDEN)
+            arcanesoft()
+                .off(events.UI_TOASTS_NOTIFY)
+                .off(events.UI_TOASTS_HIDDEN)
         })
 
         return {

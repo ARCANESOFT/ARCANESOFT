@@ -7,7 +7,6 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 use Livewire\Livewire;
-use Livewire\LivewireManager;
 
 /**
  * Class     ViewServiceProvider

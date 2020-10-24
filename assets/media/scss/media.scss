@@ -12,10 +12,8 @@
 
 .media-manager,
 .media-browser {
-    .media-manager-toolbar {
-        display: flex;
-        padding: 0.5rem;
-        background-color: var(--media-manager-toolbar-bg-color);
+    .media-manager-header {
+        user-select: none;
     }
 
     .media-manager-body {
@@ -31,10 +29,14 @@
             }
 
             .media-item-name {
-                display: block;
-                white-space: nowrap;
-                overflow-x: hidden;
-                text-overflow: ellipsis;
+                min-width: 0;
+
+                span {
+                    display: block;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
             }
 
             &.selected {
@@ -59,12 +61,14 @@
     }
 }
 
-@import "layout/preview-mode",
-"layout/display-modes";
+@import "layout/preview-mode";
+@import "layout/display-modes";
 
 // 4. Components
 
-@import "components/breadcrumbs";
+.media-manager-toolbar + .media-manager-breadcrumb {
+    margin-top: 1rem;
+}
 
 // 5. Themes
 

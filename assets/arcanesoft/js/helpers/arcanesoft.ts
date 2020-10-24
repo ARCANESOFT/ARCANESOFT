@@ -1,3 +1,3 @@
-import Arcanesoft from '../classes/Arcanesoft'
+import arcanesoft from '@arcanesoft/core/src/helpers/arcanesoft'
 
-export default (): Arcanesoft => window['Foundation']
+export default arcanesoft

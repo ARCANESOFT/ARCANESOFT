@@ -1,11 +1,11 @@
 import { App } from '@vue/runtime-core'
 
-import MediaManager from './components/MediaManager'
-import MediaBrowser from './components/MediaBrowser'
+import MediaManager from './components/media-manager'
+import MediaBrowser from './components/media-browser'
 
 export default {
     install: (app: App): void  => {
-        app.component('v-media-manager', MediaManager)
-        app.component('v-media-browser', MediaBrowser)
+        app.component(`${MediaManager.name}`, MediaManager)
+        app.component(`${MediaBrowser.name}`, MediaBrowser)
     }
 }

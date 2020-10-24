@@ -1,7 +1,8 @@
 import { defineComponent, onMounted, ref, watch, nextTick } from 'vue'
+import arcanesoft from '../../../helpers/arcanesoft'
+import debounce from '../../../helpers/debounce'
 import Component from './component'
 import morphdom from 'morphdom'
-import debounce from '../../../helpers/debounce'
 
 export default defineComponent({
     name: 'v-datatable',
@@ -17,12 +18,13 @@ export default defineComponent({
         let loading = ref(false)
         let component = ref(null)
         let actions = ref([])
-        let dom     = ref(null)
+        let dom = ref(null)
 
         function fetch(params: Object = {}): void {
             loading.value = true
 
-            window['request']()
+            arcanesoft()
+                .request()
                 .post('/admin/api/components', {
                     ...params,
                     component: component.value.toArray()
@@ -34,7 +36,7 @@ export default defineComponent({
 
                         nextTick().then(() => {
                             component.value.scan(dom.value)
-                            window['Foundation'].initComponents(dom.value)
+                            arcanesoft().bootComponents(dom.value)
                         })
 
                         actions.value = []
@@ -50,7 +52,7 @@ export default defineComponent({
 
             fetch()
 
-            window['Foundation'].$on('arcanesoft::components.action', ({component, action}) => {
+            arcanesoft().on('arcanesoft::components.action', ({component, action}) => {
                 if (component.name === props.name)
                     actions.value.push(action)
             })

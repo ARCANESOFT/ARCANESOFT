@@ -1,5 +1,5 @@
 import { defineComponent, onMounted, ref, computed } from 'vue'
-import request from '../../../../mixins/request'
+import tap from '@arcanesoft/core/src/functions/tap'
 import arcanesoft from '../../../../helpers/arcanesoft'
 
 const EVENT_CLASS = 'Arcanesoft\\Foundation\\Core\\Events\\UI\\SkinModeToggled'
@@ -30,12 +30,14 @@ export default defineComponent({
 
             document.body.dataset.skinMode = mode
 
-            request().post('/admin/api/events', {
-                class: EVENT_CLASS,
-                options: {mode},
-            }).then()
+            tap(arcanesoft(), function (arcanesoft) {
+                arcanesoft.request().post('/admin/api/events', {
+                    class: EVENT_CLASS,
+                    options: {mode},
+                }).then()
 
-            arcanesoft().$emit('foundation.ui.skin', {mode})
+                arcanesoft.emit('foundation.ui.skin', {mode})
+            })
         }
 
         return {

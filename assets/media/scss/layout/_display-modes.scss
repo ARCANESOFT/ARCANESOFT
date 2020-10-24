@@ -29,6 +29,8 @@ $media-grid-items-gap: 1rem;
         }
     }
 
+    // LIST MODE
+    //------------------------------------
     &.display-mode-list {
         grid-auto-columns: 1fr;
         grid-auto-rows: 2rem;
@@ -42,9 +44,24 @@ $media-grid-items-gap: 1rem;
         }
     }
 
+    // GRID MODE
+    //------------------------------------
+
     &.display-mode-grid {
         grid-template-columns: repeat(4, minmax(0, 1fr));
         grid-auto-rows: 4rem;
+
+        .media-item {
+            .media-item-icon {
+                i {
+                    font-size: 2rem;
+                }
+            }
+
+            .media-item-name {
+                padding-right: .5rem;
+            }
+        }
     }
 
     // ICONS & THUMBNAILS MODE
@@ -76,7 +93,7 @@ $media-grid-items-gap: 1rem;
 
     &.display-mode-icons {
         grid-template-columns: repeat(10, minmax(0, 1fr));
-        grid-template-rows: 4.5rem;
+        grid-auto-rows: 4.5rem;
 
         .media-item {
             .media-item-icon i {
@@ -106,9 +123,7 @@ $media-grid-items-gap: 1rem;
 
             .media-item-thumbnail {
                 flex-grow: 1;
-                background-size: cover;
-                background-position: center center;
-                background-repeat: no-repeat;
+                height: 0; // Dirty fix for the thumbnail image
             }
         }
 

@@ -2,8 +2,8 @@
  * Vendors
  */
 
-import './lodash'
+// import './lodash'
 import './popper'
 import './twitter-bootstrap'
-import './http-request'
-import './laravel-echo'
+import './request'
+// import './laravel-echo'

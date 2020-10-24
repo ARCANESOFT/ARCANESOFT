@@ -15,7 +15,7 @@ export default defineComponent({
             sf.toggle().then(() => {
                 isFullscreen.value = (sf as sf.Screenfull).isFullscreen
 
-                arcanesoft().$emit('foundation.ui.fullscreen', {
+                arcanesoft().emit('foundation.ui.fullscreen', {
                     isFullscreen: isFullscreen.value
                 })
             })

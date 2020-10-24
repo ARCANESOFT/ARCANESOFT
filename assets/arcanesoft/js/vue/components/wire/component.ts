@@ -1,3 +1,5 @@
+import arcanesoft from '../../../helpers/arcanesoft'
+
 import Action from './actions/action'
 import MethodAction from './actions/method'
 import ModelAction from './actions/model'
@@ -5,7 +7,6 @@ import ComponentPayload from './types/component-payload'
 import Directive from './dom/directive'
 import DirectiveExtractor from './dom/directive-extractor'
 import QuerySelector from './dom/query-selector'
-import arcanesoft from '../../../helpers/arcanesoft'
 
 const COMPONENT_NAMESPACE = 'arc'
 const COMPONENT_ACTION_EVENT = 'arcanesoft::components.action'
@@ -101,7 +102,7 @@ export default class Component {
     }
 
     private emitActionEvent(action: Action|any): void {
-        arcanesoft().$emit(COMPONENT_ACTION_EVENT, {
+        arcanesoft().emit(COMPONENT_ACTION_EVENT, {
             component: this,
             action: action.toArray(),
         })

@@ -4,6 +4,10 @@
     background-color: var(--skin-navbar-bg-color);
     transition-property: top;
 
+    .brand-container {
+        width: $sidebar-width;
+    }
+
     .page-scrolled & {
         top: -$navbar-height;
     }

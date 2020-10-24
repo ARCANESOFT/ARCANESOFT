@@ -1,9 +1,8 @@
 /**
  * @jest-environment jsdom
  */
-
 import DirectiveExtractor from '../../../../../js/vue/components/wire/dom/directive-extractor'
-import tap from "../../../../../../helpers/js/functions/tap"
+import tap from '@arcanesoft/core/src/functions/tap'
 
 it('can extract directives from a DOM element', () => {
     const anchor = tap(document.createElement('a'), (elt) => {

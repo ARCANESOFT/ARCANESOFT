@@ -1,4 +1,6 @@
-const _notifications = [
+import { Notification, Notifications } from '../types/notifications'
+
+const notifications = [
     {
         id: 1,
         title: "Event today",
@@ -27,10 +29,37 @@ const _notifications = [
         type: "success",
         read: true
     }
-];
+]
 
-export default {
-    getNotifications (callback) {
-        setTimeout(() => callback(_notifications), 100)
+export type NotificationsResponse = {
+    data: {
+        notifications: Notifications,
+    }
+}
+
+export default () => {
+    function fakeApiCall(callback: Function): Promise<any> {
+        return new Promise((resolve) => {
+            setTimeout(() => resolve(callback()), 100)
+        })
+    }
+
+    const getNotifications = (): Promise<NotificationsResponse> => fakeApiCall(() => ({
+        status: 200,
+        data: {
+            notifications,
+        },
+    }))
+
+    const markAsRead = (notification: Notification): Promise<void> => fakeApiCall(() => ({
+        status: 200,
+        data: {
+            message: `Notification with id ${notification.id} was marked as read!`,
+        },
+    }))
+
+    return {
+        getNotifications,
+        markAsRead,
     }
 }

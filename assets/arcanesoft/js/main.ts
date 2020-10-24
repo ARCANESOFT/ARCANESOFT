@@ -1,13 +1,11 @@
-import './_components'
-import './_vendors'
-import './_helpers'
+import './vendors'
+import './helpers'
+import './components'
 
-/**
- * Init the APP
- */
+import Arcanesoft from './classes/arcanesoft'
 
-import Arcanesoft from './classes/Arcanesoft'
-
-window['Foundation'] = new Arcanesoft({
-    rootContainer: '#arcanesoft',
+Arcanesoft({
+    vue: {
+        rootContainer: '#arcanesoft',
+    },
 })

@@ -1,11 +1,14 @@
-// https://github.com/flatpickr/flatpickr
+/**
+ * @link https://github.com/flatpickr/flatpickr
+ */
 
 import flatpickr from 'flatpickr'
-import fpLanguages from '../lang/plugins/flatpickr'
+import arcanesoft from '../helpers/arcanesoft'
+import fpLanguages from '../translations/vendors/flatpickr'
 
 export default (selector: string, options?: Object) => {
-    options = window['_'].merge(options, {
-        locale: fpLanguages[options["locale"] || window['Foundation'].getLocale()]
+    options = Object.assign({}, options, {
+        locale: fpLanguages[options['locale'] || arcanesoft().getLocale()]
     })
 
     return flatpickr(selector, options)

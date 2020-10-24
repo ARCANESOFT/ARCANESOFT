@@ -1,0 +1,32 @@
+import { Modal as BaseModal } from 'bootstrap/js/index.esm'
+
+const EVENT_KEY = `.bs.modal`
+
+class Modal extends BaseModal {
+    public _element: HTMLElement
+
+    constructor(element: HTMLElement | string, config?: Object) {
+        if (typeof element === 'string')
+            element = <HTMLElement> document.querySelector(element)
+
+        super(element, config)
+    }
+
+    public elt(): HTMLElement {
+        return this._element
+    }
+
+    public on(event: string, callback: EventListenerOrEventListenerObject): this {
+        this.elt().addEventListener(`${event}${EVENT_KEY}`, callback)
+
+        return this
+    }
+}
+
+const modal = (elt: HTMLElement | string): Modal => new Modal(elt)
+
+export {
+    modal,
+}
+
+export default Modal

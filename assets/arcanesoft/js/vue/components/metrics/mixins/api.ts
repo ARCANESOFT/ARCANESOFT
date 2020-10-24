@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 import { MetricResult } from '../types/metric-result'
-import request from '../../../../mixins/request'
+import request from '../../../../helpers/request'
 import config from '../config'
 
 export default () => {
@@ -11,8 +11,10 @@ export default () => {
     function fetch(metric: string, data: Object): Promise<MetricResult> {
         loading.value = true
 
+        data = Object.assign({}, data, {metric})
+
         return request()
-            .post(config.endpoint, Object.assign({}, data, {metric}))
+            .post(config.endpoint, data)
             .then(({data}) => {
                 result.value = data
 

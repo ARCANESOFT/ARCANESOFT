@@ -1,5 +1,5 @@
-import Translator from "@arcanesoft/helpers/js/Utilities/Translator"
-import translations from "../translations";
+import Translator from '@arcanesoft/core/src/helpers/translator'
+import translations from '../translations'
 
 const translator = new Translator({translations})
 
@@ -15,7 +15,10 @@ const trans = {
     }
 }
 
-export {request, trans}
+export {
+    request,
+    trans,
+}
 
 export default [
     request,

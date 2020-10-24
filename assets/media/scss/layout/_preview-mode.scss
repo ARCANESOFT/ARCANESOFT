@@ -2,24 +2,16 @@
     box-shadow: -4px 0 2px -2px rgba(0, 0, 0, 0.1);
 
     .item-preview-thumbnail {
-        padding-top: (10 / 16) * 100%;
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
+        display: flex;
+        height: 15rem;
+
+        img {
+            object-fit: contain;
+        }
     }
 
     .item-preview-video {
-        position: relative;
-        padding-top: (9 / 16) * 100%;
-
-        video {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-        }
+        //
     }
 
     .item-preview-icon {
