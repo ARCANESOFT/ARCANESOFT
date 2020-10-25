@@ -2,9 +2,9 @@ import './vendors'
 import './helpers'
 import './components'
 
-import Arcanesoft from './classes/arcanesoft'
+import arcanesoft from './classes/arcanesoft'
 
-Arcanesoft({
+arcanesoft({
     vue: {
         rootContainer: '#arcanesoft',
     },

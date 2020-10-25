@@ -23,10 +23,4 @@ class Modal extends BaseModal {
     }
 }
 
-const modal = (elt: HTMLElement | string): Modal => new Modal(elt)
-
-export {
-    modal,
-}
-
-export default Modal
+export default (elt: HTMLElement | string): Modal => new Modal(elt)

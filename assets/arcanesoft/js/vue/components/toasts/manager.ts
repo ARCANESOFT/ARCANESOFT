@@ -14,34 +14,28 @@ export default defineComponent({
     setup() {
         const toasts = ref([])
 
-        function pushToast(type, title, body, options): void {
+        const pushToast = ({type, title, body, options: {time, delay}}): void => {
             toasts.value.push(
                 Toast.make(
-                    type, title, body, options.time || Date.now(), options.delay || 5000
+                    type, title, body, time || Date.now(), delay || 5000
                 )
             )
         }
 
-        function removeToast(toast: Toast): void {
+        const removeToast = (toast: Toast): void => {
             toasts.value = toasts.value.filter((t) => t.id !== toast.id)
         }
 
         onMounted(() => {
             arcanesoft()
-                .on(
-                    events.UI_TOASTS_NOTIFY,
-                    ({type, title, body, options}) => pushToast(type, title, body, options || {})
-                )
-                .on(
-                    events.UI_TOASTS_HIDDEN,
-                    (toast) => removeToast(toast)
-                )
+                .on(events.UI_TOASTS_NOTIFY, pushToast)
+                .on(events.UI_TOASTS_HIDDEN, removeToast)
         })
 
         onUnmounted(() => {
             arcanesoft()
-                .off(events.UI_TOASTS_NOTIFY)
-                .off(events.UI_TOASTS_HIDDEN)
+                .off(events.UI_TOASTS_NOTIFY, pushToast)
+                .off(events.UI_TOASTS_HIDDEN, removeToast)
         })
 
         return {
@@ -50,8 +44,10 @@ export default defineComponent({
     },
 
     template: `
-        <div class="toasts-container">
-            <ToastComponent v-for="toast in toasts" :key="toast.id" :toast="toast" />
-        </div>
+        <teleport to="body">
+            <div class="toasts-container">
+                <ToastComponent v-for="toast in toasts" :key="toast.id" :toast="toast" />
+            </div>
+        </teleport>
     `,
 })

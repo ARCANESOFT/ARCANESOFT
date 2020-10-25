@@ -1,6 +1,7 @@
 import { App } from '@vue/runtime-core'
 import emitter, { EmitterInterface, EventType, WildcardHandler } from '@arcanesoft/core/src/helpers/event-emitter'
 import { RequestInstance, RequestConfig } from '@arcanesoft/core/src/helpers/request'
+import Csrf from '@arcanesoft/core/src/helpers/csrf'
 import { Arcanesoft as ArcanesoftContract } from '@arcanesoft/core/src/contracts/arcanesoft'
 import { ArcanesoftConfig } from './types'
 import request from '../../helpers/request'
@@ -96,14 +97,7 @@ class Arcanesoft implements ArcanesoftContract {
      * Get the CSRF Token.
      */
     public csrf(): string {
-        const token = document.head.querySelector('meta[name="csrf-token"]')
-
-        if (token !== undefined)
-            return token.getAttribute('content');
-
-        console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token')
-
-        return null
+        return Csrf.token()
     }
 
     // Other Methods
@@ -113,7 +107,7 @@ class Arcanesoft implements ArcanesoftContract {
         this.ui.initToasts(dom)
         this.ui.initTooltips(dom)
         this.ui.initPageScrolled()
-        this.ui.initTextAutosize()
+        // this.ui.initTextAutosize()
     }
 }
 
@@ -123,6 +117,6 @@ export {
     ArcanesoftConfig,
 }
 
-export default (config: ArcanesoftConfig): void => {
-    window['ARCANESOFT'] = new Arcanesoft(config)
+export default (config: ArcanesoftConfig): ArcanesoftContract => {
+    return window['ARCANESOFT'] = new Arcanesoft(config)
 }

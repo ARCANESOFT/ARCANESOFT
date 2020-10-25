@@ -40,9 +40,9 @@ class UI {
         })
     }
 
-    initTextAutosize() {
-        return window['plugins'].autosize('textarea')
-    }
+    // initTextAutosize() {
+    //     return window['plugins'].autosize('textarea')
+    // }
 }
 
 export default UI

@@ -69,7 +69,4 @@ class LoadingButton {
     }
 }
 
-const loadingButton = (elt, options): LoadingButton => new LoadingButton(elt, options)
-
-export { loadingButton }
-export default LoadingButton;
+export default (elt, options): LoadingButton => new LoadingButton(elt, options)

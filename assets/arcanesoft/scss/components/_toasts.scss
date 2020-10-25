@@ -7,32 +7,5 @@
 }
 
 .toast-footer {
-    display: flex;
-    align-items: center;
     padding: 0.25rem 0.75rem;
-    color: #6C757D;
-    background-color: rgba($white, 0.85);
-    background-clip: padding-box;
-    border-top: 1px solid rgba($black, 0.05);
-}
-
-@each $color, $value in $theme-colors {
-    .toast.toast-#{$color} {
-        border-color: rgba(darken($value, 10%), 0.1);
-
-        .toast-header,
-        .toast-footer {
-            border-color: rgba(darken($value, 10%), 0.4);
-        }
-
-        .toast-header {
-            color: if($color == 'light', #6C757D, $white);
-            background-color: rgba($value, 0.85);
-        }
-
-        .toast-body,
-        .toast-footer {
-            background-color: rgb($value, 0.3);
-        }
-    }
 }

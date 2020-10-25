@@ -7,24 +7,30 @@ import ComponentPayload from './types/component-payload'
 import Directive from './dom/directive'
 import DirectiveExtractor from './dom/directive-extractor'
 import QuerySelector from './dom/query-selector'
+import { COMPONENT_ACTION_EVENT } from './events'
 
 const COMPONENT_NAMESPACE = 'arc'
-const COMPONENT_ACTION_EVENT = 'arcanesoft::components.action'
 
 export default class Component {
     public name: string
     public data: Object
     protected dom: HTMLElement
-    private actions: Array<MethodAction|ModelAction>
+    private actions: Array<MethodAction | ModelAction>
 
     constructor(name: string, data?: Object) {
-        this.name = name
-        this.actions = []
+        this.setName(name)
         this.setData(data)
+        this.actions = []
     }
 
     protected setDOM(dom: HTMLElement): this {
         this.dom = dom
+
+        return this
+    }
+
+    public setName(name: string): this {
+        this.name = name
 
         return this
     }

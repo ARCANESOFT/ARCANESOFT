@@ -1,13 +1,13 @@
-import { form } from './form'
-import { modal } from './modal'
-import { loadingButton } from './buttons/loading-button'
+import datatable from '../vue/components/wire/helpers/datatable'
+import form from './form'
+import modal from './modal'
+import loadingButton from './buttons/loading-button'
 
-const components = {
+window['components'] = {
+    datatable,
     form,
     modal,
     loadingButton,
 }
 
-window['components'] = components
-
-export default () => components
+export default () => window['components']
