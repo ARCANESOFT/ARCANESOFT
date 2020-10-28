@@ -7,6 +7,12 @@ import MediaToolbar from './elements/media-toolbar'
 import MediaBreadcrumbs from './elements/media-breadcrumbs'
 import MediaItemsContainer from './elements/media-items-container'
 
+type MediaBrowserModal = {
+    elt: any,
+    isOpen: boolean,
+    ref: HTMLElement | undefined,
+}
+
 export default defineComponent({
     name: 'v-media-browser',
 
@@ -47,15 +53,15 @@ export default defineComponent({
         const { items: selectedItems } = selectedMediaItems()
 
         const urls = ref(null)
-        const modalRef = ref(null)
-        const modal = reactive({
+        const modal = reactive<MediaBrowserModal>({
             elt: null,
             isOpen: false,
+            ref: null,
         })
 
-        onMounted(() => {
+        onMounted((): void => {
             urls.value = props.value
-            modal.elt = window['twbs'].Modal.make(modalRef.value)
+            modal.elt = window['components'].modal(modal.ref)
                 .on('hidden', (): void => { modal.isOpen = false })
                 .on('shown', (): void => { modal.isOpen = true })
         })
@@ -78,7 +84,6 @@ export default defineComponent({
         return {
             trans,
             urls,
-            modalRef,
             modal,
             openBrowser,
             select,
@@ -94,7 +99,7 @@ export default defineComponent({
         </div>
 
         <teleport to="body">
-            <div ref="modalRef" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div ref="modal.ref" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-body">
