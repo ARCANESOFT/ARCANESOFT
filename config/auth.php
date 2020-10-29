@@ -52,7 +52,7 @@ return [
 
         'administrators' => [
             'driver' => 'eloquent',
-            'model'  => Arcanesoft\Foundation\Auth\Models\Administrator::class,
+            'model'  => Arcanesoft\Foundation\Authorization\Models\Administrator::class,
         ],
 
         // 'users' => [

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Authentication\Tests\Feature;
 
-use Arcanesoft\Foundation\Auth\Models\PasswordReset as PasswordResetModel;
-use Arcanesoft\Foundation\Auth\Notifications\Authentication\ResetPassword as ResetPasswordNotification;
-use Arcanesoft\Foundation\Fortify\Http\Controllers\Concerns\HasPasswordBroker;
+use Arcanesoft\Foundation\Authorization\Models\PasswordReset as PasswordResetModel;
+use Arcanesoft\Foundation\Authorization\Notifications\Authentication\ResetPassword as ResetPasswordNotification;
+use Arcanesoft\Foundation\Fortify\Concerns\HasPasswordBroker;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\{Event, Hash, Notification};
@@ -180,7 +180,7 @@ class ResetPasswordTest extends TestCase
              ->assertRedirect(static::indexPageUrl())
              ->assertSessionHas('status', __('We have emailed your password reset link!'));
 
-        /** @var  \Arcanesoft\Foundation\Auth\Models\PasswordReset  $pwdReset */
+        /** @var  \Arcanesoft\Foundation\Authorization\Models\PasswordReset  $pwdReset */
         $pwdReset = PasswordResetModel::query()->where('email', $user->email)->first();
 
         static::assertNotNull($pwdReset);

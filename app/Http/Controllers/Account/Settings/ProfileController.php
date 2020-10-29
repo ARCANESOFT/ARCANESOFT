@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Account\Settings;
 
 use App\Http\Requests\Account\Settings\UpdateProfileRequest;
-use Arcanesoft\Foundation\Auth\Repositories\UsersRepository;
+use Arcanesoft\Foundation\Authorization\Repositories\UsersRepository;
 
 /**
  * Class     ProfileController
@@ -33,7 +33,7 @@ class ProfileController extends Controller
 
     /**
      * @param  \App\Http\Requests\Account\Settings\UpdateProfileRequest  $request
-     * @param  \Arcanesoft\Foundation\Auth\Repositories\UsersRepository  $repo
+     * @param  \Arcanesoft\Foundation\Authorization\Repositories\UsersRepository  $repo
      *
      * @return \Illuminate\Http\RedirectResponse
      */

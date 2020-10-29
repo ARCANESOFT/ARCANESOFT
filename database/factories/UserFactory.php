@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use App\Models\User;
-use Arcanesoft\Foundation\Auth\Database\Factories\UserFactory as Factory;
+use Arcanesoft\Foundation\Authorization\Database\Factories\UserFactory as Factory;
 
 /**
  * Class     UserFactory

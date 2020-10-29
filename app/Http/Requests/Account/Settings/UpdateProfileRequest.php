@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Account\Settings;
 
-use Arcanesoft\Foundation\Auth\Rules\Users\EmailRule;
+use Arcanesoft\Foundation\Authorization\Rules\Users\EmailRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**

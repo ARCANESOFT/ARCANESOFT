@@ -41,7 +41,7 @@ class UpdatePasswordRequest extends FormRequest
     /**
      * Get the authenticated user.
      *
-     * @return \Arcanesoft\Foundation\Auth\Models\User|mixed|null
+     * @return \Arcanesoft\Foundation\Authorization\Models\User|mixed|null
      */
     protected function authenticatedUser()
     {

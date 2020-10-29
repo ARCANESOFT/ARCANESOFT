@@ -6,7 +6,7 @@ namespace Authentication\Http\Routes;
 
 use Authentication\Http\Controllers\{LoginController, SocialiteLoginController, TwoFactorLoginController};
 use App\Http\Routes\AbstractRouteRegistrar;
-use Arcanesoft\Foundation\Auth\Auth;
+use Arcanesoft\Foundation\Authorization\Auth;
 use Arcanesoft\Foundation\Fortify\LoginRateLimiter;
 
 /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Arcanesoft\Foundation\Auth\Models\User as Authenticatable;
+use Arcanesoft\Foundation\Authorization\Models\User as Authenticatable;
 use Authentication\Notifications\VerifyEmailNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

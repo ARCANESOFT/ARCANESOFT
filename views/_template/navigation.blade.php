@@ -35,7 +35,7 @@
                 </li>
             @elseauth(Arcanesoft\Foundation\Authentication\Guard::WEB_ADMINISTRATOR)
                 <?php
-                    /** @var  Arcanesoft\Foundation\Auth\Models\Administrator  $admin */
+                    /** @var  Arcanesoft\Foundation\Authorization\Models\Administrator  $admin */
                     $admin = auth(Arcanesoft\Foundation\Authentication\Guard::WEB_ADMINISTRATOR)->user();
                 ?>
                 <li class="nav-item dropdown">

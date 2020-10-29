@@ -1,5 +1,5 @@
 <?php
-/** @var  Arcanesoft\Foundation\Auth\Models\User  $user */
+/** @var  Arcanesoft\Foundation\Authorization\Models\User  $user */
 $user = auth()->user();
 ?>
 

@@ -6,8 +6,8 @@ namespace Authentication\Http\Controllers;
 
 use App\Events\Auth\UserLoggedIn;
 use App\Http\Routes\PagesRoutes;
-use Arcanesoft\Foundation\Auth\Repositories\SocialiteUsersRepository;
-use Arcanesoft\Foundation\Auth\Socialite;
+use Arcanesoft\Foundation\Authorization\Repositories\SocialiteUsersRepository;
+use Arcanesoft\Foundation\Authorization\Socialite;
 
 /**
  * Class     SocialiteLoginController
@@ -39,7 +39,7 @@ class SocialiteLoginController
      * Obtain the user information from the provider.
      *
      * @param  string                                                             $provider
-     * @param  \Arcanesoft\Foundation\Auth\Repositories\SocialiteUsersRepository  $repo
+     * @param  \Arcanesoft\Foundation\Authorization\Repositories\SocialiteUsersRepository  $repo
      *
      * @return \Illuminate\Http\RedirectResponse
      */

@@ -7,7 +7,7 @@
             <div class="mt-3">
                 <div class="row g-3">
                     @foreach ($this->sessions as $session)
-                        <?php /** @var  Arcanesoft\Foundation\Auth\Models\Session  $session */ ?>
+                        <?php /** @var  Arcanesoft\Foundation\Authorization\Models\Session  $session */ ?>
                         <div class="col-12">
                             <div class="d-flex align-items-center">
                                 <div class="text-black-50" style="height: 2.5rem; width: 2.5rem;">

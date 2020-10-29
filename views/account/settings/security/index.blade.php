@@ -11,7 +11,7 @@
                 @include('account.settings.security._components.edit-password')
             </section>
 
-            @if(Arcanesoft\Foundation\Auth\Auth::isTwoFactorEnabled())
+            @if(Arcanesoft\Foundation\Authorization\Auth::isTwoFactorEnabled())
                 <section class="mb-5">
                     <h2 class="h4">@lang('Two Factor Authentication')</h2>
                     @livewire(App\Http\Livewire\Account\Settings\Security\TwoFactorAuthentication::VIEW)

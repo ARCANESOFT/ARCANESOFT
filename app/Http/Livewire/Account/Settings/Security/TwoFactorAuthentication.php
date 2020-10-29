@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Account\Settings\Security;
 
-use Arcanesoft\Foundation\Auth\Repositories\Authentication\TwoFactorAuthenticationRepository;
+use Arcanesoft\Foundation\Authorization\Repositories\Authentication\TwoFactorAuthenticationRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\HtmlString;
 use Livewire\Component;
@@ -57,7 +57,7 @@ class TwoFactorAuthentication extends Component
     /**
      * Enable two factor authentication for the user.
      *
-     * @param  \Arcanesoft\Foundation\Auth\Repositories\Authentication\TwoFactorAuthenticationRepository  $repo
+     * @param  \Arcanesoft\Foundation\Authorization\Repositories\Authentication\TwoFactorAuthenticationRepository  $repo
      */
     public function enableTwoFactorAuthentication(TwoFactorAuthenticationRepository $repo)
     {
@@ -72,7 +72,7 @@ class TwoFactorAuthentication extends Component
     /**
      * Generate new recovery codes for the user.
      *
-     * @param  \Arcanesoft\Foundation\Auth\Repositories\Authentication\TwoFactorAuthenticationRepository  $repo
+     * @param  \Arcanesoft\Foundation\Authorization\Repositories\Authentication\TwoFactorAuthenticationRepository  $repo
      */
     public function regenerateRecoveryCodes(TwoFactorAuthenticationRepository $repo)
     {
@@ -86,7 +86,7 @@ class TwoFactorAuthentication extends Component
     /**
      * Disable two factor authentication for the user.
      *
-     * @param  \Arcanesoft\Foundation\Auth\Repositories\Authentication\TwoFactorAuthenticationRepository  $repo
+     * @param  \Arcanesoft\Foundation\Authorization\Repositories\Authentication\TwoFactorAuthenticationRepository  $repo
      */
     public function disableTwoFactorAuthentication(TwoFactorAuthenticationRepository $repo)
     {
@@ -163,7 +163,7 @@ class TwoFactorAuthentication extends Component
     /**
      * Get the two factor authentication instance.
      *
-     * @return \Arcanesoft\Foundation\Auth\Models\TwoFactor|null
+     * @return \Arcanesoft\Foundation\Authorization\Models\TwoFactor|null
      */
     protected function getTwoFactory()
     {

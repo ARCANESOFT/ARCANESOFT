@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Account\Settings;
 
 use App\Http\Requests\Account\Settings\UpdatePasswordRequest;
-use Arcanesoft\Foundation\Auth\Repositories\UsersRepository;
+use Arcanesoft\Foundation\Authorization\Repositories\UsersRepository;
 
 /**
  * Class     SecurityController
@@ -35,7 +35,7 @@ class SecurityController extends Controller
      * Update the password.
      *
      * @param  \App\Http\Requests\Account\Settings\UpdatePasswordRequest  $request
-     * @param  \Arcanesoft\Foundation\Auth\Repositories\UsersRepository   $repo
+     * @param  \Arcanesoft\Foundation\Authorization\Repositories\UsersRepository   $repo
      *
      * @return \Illuminate\Http\RedirectResponse
      */

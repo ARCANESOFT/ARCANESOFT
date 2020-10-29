@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Authentication\Http\Controllers;
 
 use App\Http\Routes\PagesRoutes;
-use Arcanesoft\Foundation\Auth\Auth;
-use Arcanesoft\Foundation\Auth\Repositories\UsersRepository;
+use Arcanesoft\Foundation\Authorization\Auth;
+use Arcanesoft\Foundation\Authorization\Repositories\UsersRepository;
 use Arcanesoft\Foundation\Authentication\Concerns\UseUserGuard;
-use Arcanesoft\Foundation\Fortify\Http\Controllers\RegisterController as Controller;
+use Arcanesoft\Foundation\Fortify\Auth\RegistersUsers;
 use Authentication\Http\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 
@@ -18,13 +18,14 @@ use Illuminate\Http\Request;
  * @package  App\Http\Controllers\Authentication
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class RegisterController extends Controller
+class RegisterController
 {
     /* -----------------------------------------------------------------
      |  Traits
      | -----------------------------------------------------------------
      */
 
+    use RegistersUsers;
     use UseUserGuard;
 
     /* -----------------------------------------------------------------
@@ -32,7 +33,7 @@ class RegisterController extends Controller
      | -----------------------------------------------------------------
      */
 
-    /** @var  \Arcanesoft\Foundation\Auth\Repositories\UsersRepository */
+    /** @var  \Arcanesoft\Foundation\Authorization\Repositories\UsersRepository */
     private $repo;
 
     /* -----------------------------------------------------------------
@@ -43,7 +44,7 @@ class RegisterController extends Controller
     /**
      * RegisterController constructor.
      *
-     * @param  \Arcanesoft\Foundation\Auth\Repositories\UsersRepository  $repo
+     * @param  \Arcanesoft\Foundation\Authorization\Repositories\UsersRepository  $repo
      */
     public function __construct(UsersRepository $repo)
     {

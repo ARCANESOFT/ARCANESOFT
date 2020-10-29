@@ -6,7 +6,7 @@ namespace Authentication\Http\Controllers;
 
 use App\Http\Routes\PagesRoutes;
 use Arcanesoft\Foundation\Authentication\Concerns\UseUserGuard;
-use Arcanesoft\Foundation\Fortify\Http\Controllers\ConfirmPasswordController as Controller;
+use Arcanesoft\Foundation\Fortify\Auth\ConfirmsPasswords;
 use Illuminate\Http\Request;
 
 /**
@@ -14,13 +14,14 @@ use Illuminate\Http\Request;
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class ConfirmPasswordController extends Controller
+class ConfirmPasswordController
 {
     /* -----------------------------------------------------------------
      |  Traits
      | -----------------------------------------------------------------
      */
 
+    use ConfirmsPasswords;
     use UseUserGuard;
 
     /* -----------------------------------------------------------------

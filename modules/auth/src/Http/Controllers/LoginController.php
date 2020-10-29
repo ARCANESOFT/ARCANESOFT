@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Authentication\Http\Controllers;
 
 use App\Http\Routes\PagesRoutes;
-use Arcanesoft\Foundation\Auth\Auth;
 use Arcanesoft\Foundation\Authentication\Concerns\UseUserGuard;
-use Arcanesoft\Foundation\Fortify\Http\Controllers\LoginController as Controller;
-use Authentication\Actions\Login\AttemptToAuthenticate;
-use Authentication\Actions\Login\EnsureLoginIsNotThrottled;
-use Authentication\Actions\Login\PrepareAuthenticatedSession;
-use Authentication\Actions\Login\RedirectIfTwoFactorWasEnabled;
+use Arcanesoft\Foundation\Authorization\Auth;
+use Arcanesoft\Foundation\Fortify\Auth\AuthenticatesUsers;
+use Authentication\Actions\Login\{
+    AttemptToAuthenticate, EnsureLoginIsNotThrottled, PrepareAuthenticatedSession, RedirectIfTwoFactorWasEnabled
+};
 use Authentication\Http\Requests\LoginRequest;
 use Illuminate\Http\{Request, Response};
 
@@ -21,13 +20,14 @@ use Illuminate\Http\{Request, Response};
  * @package  App\Http\Controllers\Authentication
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class LoginController extends Controller
+class LoginController
 {
     /* -----------------------------------------------------------------
      |  Traits
      | -----------------------------------------------------------------
      */
 
+    use AuthenticatesUsers;
     use UseUserGuard;
 
     /* -----------------------------------------------------------------

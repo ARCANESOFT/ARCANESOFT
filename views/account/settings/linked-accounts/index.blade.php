@@ -1,6 +1,6 @@
 @extends('_template.master')
 
-<?php /** @var  Arcanesoft\Foundation\Auth\Models\User  $account */ ?>
+<?php /** @var  Arcanesoft\Foundation\Authorization\Models\User  $account */ ?>
 
 @section('content')
     <h1>@lang('Settings')</h1>
@@ -20,7 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach(Arcanesoft\Foundation\Auth\Socialite::getEnabledProviders() as $key => $provider)
+                    @foreach(Arcanesoft\Foundation\Authorization\Socialite::getEnabledProviders() as $key => $provider)
                         <tr>
                             <td>{{ $provider['name'] }}</td>
                             <td class="text-right">

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Authentication\Tests\Feature;
 
-use Arcanesoft\Foundation\Auth\Models\PasswordReset as PasswordResetModel;
-use Arcanesoft\Foundation\Auth\Notifications\Authentication\ResetPassword as ResetPasswordNotification;
+use Arcanesoft\Foundation\Authorization\Models\PasswordReset as PasswordResetModel;
+use Arcanesoft\Foundation\Authorization\Notifications\Authentication\ResetPassword as ResetPasswordNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\{Hash, Notification};
 

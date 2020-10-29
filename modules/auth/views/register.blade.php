@@ -89,7 +89,7 @@
                     </form>
                 </div>
 
-                @if (Arcanesoft\Foundation\Auth\Auth::isSocialiteEnabled())
+                @if (Arcanesoft\Foundation\Authorization\Auth::isSocialiteEnabled())
                 <div class="card-body pt-2">
                     <h6 class="text-center text-uppercase text-muted mb-3">@lang('Or sign up using')</h6>
                     @include('auth::_partials.social-providers-buttons')

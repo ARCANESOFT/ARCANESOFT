@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Authentication\Http\Requests;
 
-use Arcanesoft\Foundation\Auth\Auth;
+use Arcanesoft\Foundation\Authorization\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**

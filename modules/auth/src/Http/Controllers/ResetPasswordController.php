@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Authentication\Http\Controllers;
 
-use Arcanesoft\Foundation\Fortify\Http\Controllers\ResetPasswordController as Controller;
+use Arcanesoft\Foundation\Fortify\Auth\ResetsPasswords;
 use Authentication\Http\Requests\ResetPasswordRequest;
 use Authentication\Http\Routes\LoginRoutes;
 use Illuminate\Http\Request;
@@ -14,8 +14,15 @@ use Illuminate\Http\Request;
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class ResetPasswordController extends Controller
+class ResetPasswordController
 {
+    /* -----------------------------------------------------------------
+     |  Traits
+     | -----------------------------------------------------------------
+     */
+
+    use ResetsPasswords;
+
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
@@ -30,7 +37,7 @@ class ResetPasswordController extends Controller
      */
     public function edit(Request $request)
     {
-        return view('auth::passwords.reset', [
+        return view()->make('auth::passwords.reset', [
             'token' => $request->route('token'),
             'email' => $request->input('email'),
         ]);

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Authentication\Http\Requests;
 
-use Arcanesoft\Foundation\Auth\Auth;
-use Arcanesoft\Foundation\Auth\Rules\Users\EmailRule;
+use Arcanesoft\Foundation\Authorization\Auth;
+use Arcanesoft\Foundation\Authorization\Rules\Users\EmailRule;
 use Arcanesoft\Foundation\Fortify\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 

@@ -62,7 +62,7 @@
                     @endif
                 </div>
 
-                @if (Arcanesoft\Foundation\Auth\Socialite::isEnabled())
+                @if (Arcanesoft\Foundation\Authorization\Socialite::isEnabled())
                     <div class="card-body pt-2">
                         <h6 class="text-center text-uppercase text-muted mb-3">@lang('Or login using')</h6>
                         @include('modules.auth.views._partials.social-providers-buttons')

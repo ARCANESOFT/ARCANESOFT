@@ -22,7 +22,7 @@ abstract class Controller extends BaseController
     /**
      * Get the authenticated user.
      *
-     * @return \Arcanesoft\Foundation\Auth\Models\User|mixed|null
+     * @return \Arcanesoft\Foundation\Authorization\Models\User|mixed|null
      */
     protected static function user()
     {

@@ -6,7 +6,7 @@ namespace Authentication\Http\Controllers;
 
 use App\Http\Routes\PagesRoutes;
 use Arcanesoft\Foundation\Authentication\Concerns\UseUserGuard;
-use Arcanesoft\Foundation\Fortify\Http\Controllers\TwoFactorLoginController as Controller;
+use Arcanesoft\Foundation\Fortify\Auth\AuthenticatesWithTwoFactorChallenge;
 use Authentication\Http\Requests\TwoFactorLoginRequest;
 use Authentication\Http\Routes\LoginRoutes;
 use Illuminate\Http\Request;
@@ -16,13 +16,14 @@ use Illuminate\Http\Request;
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class TwoFactorLoginController extends Controller
+class TwoFactorLoginController
 {
     /* -----------------------------------------------------------------
      |  Traits
      | -----------------------------------------------------------------
      */
 
+    use AuthenticatesWithTwoFactorChallenge;
     use UseUserGuard;
 
     /* -----------------------------------------------------------------
