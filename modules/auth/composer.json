@@ -13,7 +13,7 @@
         }
     ],
     "require": {
-        "php": ">=7.3",
+        "php": "^7.3",
         "arcanedev/support": "^8.0",
         "arcanesoft/foundation": "@dev"
     },

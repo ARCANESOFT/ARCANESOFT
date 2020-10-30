@@ -41,12 +41,12 @@ class EmailVerificationRoutes extends AbstractRouteRegistrar
 
                 // auth::email.verification.resend
                 $this->post('/', [EmailVerificationController::class, 'resend'])
-                     ->middleware(['throttle:6,1'])
+                     ->middleware(['throttle:6,1']) // TODO: Make the throttle configurable
                      ->name('resend');
 
                 // auth::email.verification.verify
                 $this->get('{id}/{hash}', [EmailVerificationController::class, 'verify'])
-                     ->middleware(['signed', 'throttle:6,1'])
+                     ->middleware(['signed', 'throttle:6,1']) // TODO: Make the throttle configurable
                      ->name('verify');
             });
     }

@@ -37,9 +37,6 @@ class RouteServiceProvider extends ServiceProvider
         return [
             // Public
             Routes\PagesRoutes::class,
-
-            // Account
-            Routes\AccountRoutes::class,
         ];
     }
 

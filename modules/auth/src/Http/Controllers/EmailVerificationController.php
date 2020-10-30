@@ -6,9 +6,12 @@ namespace Authentication\Http\Controllers;
 
 use App\Http\Routes\PagesRoutes;
 use Arcanesoft\Foundation\Authentication\Concerns\UseUserGuard;
+use Arcanesoft\Foundation\Fortify\Auth\PromptsEmailVerification;
+use Arcanesoft\Foundation\Fortify\Auth\SendsEmailVerificationNotification;
+use Arcanesoft\Foundation\Fortify\Auth\VerifiesEmails;
+use Arcanesoft\Foundation\Fortify\Concerns\RetrievesUserFromRequest;
 use Authentication\Http\Requests\VerifyEmailRequest;
-use Illuminate\Auth\Events\Verified;
-use Illuminate\Http\{RedirectResponse, Request, Response};
+use Illuminate\Http\{RedirectResponse, Request};
 
 /**
  * Class     EmailVerificationController
@@ -22,7 +25,11 @@ class EmailVerificationController
      | -----------------------------------------------------------------
      */
 
+    use RetrievesUserFromRequest;
     use UseUserGuard;
+    use SendsEmailVerificationNotification;
+    use PromptsEmailVerification;
+    use VerifiesEmails;
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -30,7 +37,7 @@ class EmailVerificationController
      */
 
     /**
-     * Show the email verification notice.
+     * Display the email verification prompt.
      *
      * @param  \Illuminate\Http\Request  $request
      *
@@ -38,17 +45,13 @@ class EmailVerificationController
      */
     public function show(Request $request)
     {
-        $user = $this->getUserFromRequest($request);
-
-        if ($user->hasVerifiedEmail()) {
-            return $this->redirectHome();
-        }
-
-        return view('auth::verify-email');
+        return $this->promptEmailVerification($request, function () {
+            return view()->make('auth::verify-email');
+        });
     }
 
     /**
-     * Resend the email verification notification.
+     * Send a new email verification notification.
      *
      * @param  \Illuminate\Http\Request  $request
      *
@@ -56,15 +59,7 @@ class EmailVerificationController
      */
     public function resend(Request $request)
     {
-        $user = $this->getUserFromRequest($request);
-
-        if ($user->hasVerifiedEmail()) {
-            return $this->getResendSkippedResponse($request);
-        }
-
-        $user->sendEmailVerificationNotification();
-
-        return $this->getResendSuccessResponse($request);
+        return $this->sendEmailVerification($request);
     }
 
     /**
@@ -76,17 +71,7 @@ class EmailVerificationController
      */
     public function verify(VerifyEmailRequest $request)
     {
-        $user = $this->getUserFromRequest($request);
-
-        if ($user->hasVerifiedEmail()) {
-            return $this->redirectHome(['verified' => '1']);
-        }
-
-        if ($user->markEmailAsVerified()) {
-            event(new Verified($user));
-        }
-
-        return $this->redirectHome(['verified' => '1']);
+        return $this->verifyEmail($request);
     }
 
     /* -----------------------------------------------------------------
@@ -95,60 +80,15 @@ class EmailVerificationController
      */
 
     /**
-     * Get the authenticated user from request.
+     * Redirected to a specific page if verified.
      *
      * @param  \Illuminate\Http\Request  $request
-     *
-     * @return \App\Models\User|mixed
-     */
-    protected function getUserFromRequest(Request $request)
-    {
-        return $request->user($this->getGuardName());
-    }
-
-    /**
-     * Get the 'skipped' success response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
-     */
-    protected function getResendSkippedResponse(Request $request)
-    {
-        if ($request->wantsJson()) {
-            return new Response('', Response::HTTP_NO_CONTENT);
-        }
-
-        return $this->redirectHome();
-    }
-
-    /**
-     * Get the 'resend' success response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
-     */
-    protected function getResendSuccessResponse(Request $request)
-    {
-        if ($request->wantsJson()) {
-            return new Response('', Response::HTTP_ACCEPTED);
-        }
-
-        return redirect()
-            ->back()
-            ->with('status', 'verification-link-sent');
-    }
-
-    /**
-     * Redirected to home page.
-     *
-     * @param  array  $parameters
+     * @param  array                     $parameters
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function redirectHome(array $parameters = []): RedirectResponse
+    protected function redirectTo(Request $request, array $parameters = []): RedirectResponse
     {
-        return redirect()->to(PagesRoutes::home($parameters));
+        return redirect()->intended(PagesRoutes::home($parameters));
     }
 }

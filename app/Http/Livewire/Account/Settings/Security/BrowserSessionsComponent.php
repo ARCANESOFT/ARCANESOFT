@@ -19,7 +19,7 @@ class BrowserSessionsComponent extends Component
      | -----------------------------------------------------------------
      */
 
-    const VIEW = 'account.settings.security._components.browser-sessions';
+    const VIEW = 'account::settings.security._components.browser-sessions';
 
     /* -----------------------------------------------------------------
      |  Properties

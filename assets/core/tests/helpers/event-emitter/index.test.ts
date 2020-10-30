@@ -217,5 +217,31 @@ describe('instance', () => {
                 expect(all).nthCalledWith(1, 'bar', eb)
             })
         })
+
+        describe('once()', () => {
+            it('should be a function', () => {
+                expect(instance).toHaveProperty('once')
+                expect(instance.emit).toBeInstanceOf(Function)
+            })
+
+            it('should invoke once', () => {
+                let onFoo = jest.fn()
+                let onBar = jest.fn()
+
+                instance.on('foo', onFoo)
+                instance.once('bar', onBar)
+
+                let args = {a: 'b'}
+
+                Array.from(['foo', 'bar']).map((type) => {
+                    instance.emit(type, args)
+                    instance.emit(type, args)
+                    instance.emit(type, args)
+                })
+
+                expect(onFoo).nthCalledWith(3, args)
+                expect(onBar).nthCalledWith(1, args)
+            })
+        })
     })
 })

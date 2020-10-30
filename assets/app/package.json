@@ -4,6 +4,7 @@
     "version": "1.0.0",
     "dependencies": {
         "@arcanesoft/core": "^1.0",
+        "@modules/account": "^1.0",
         "@fortawesome/fontawesome-free": "^5.11",
         "axios": "^0.19",
         "bootstrap": "twbs/bootstrap#main",

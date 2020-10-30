@@ -6,7 +6,7 @@ const app = createApp({
     mixins,
 
     setup() {
-        function logout(url: string) {
+        function logout(url: string): void {
             this.request()
                 .delete(url)
                 .then((response) => response.data.redirect)
@@ -19,11 +19,19 @@ const app = createApp({
         }
 
         return {
-            logout
+            logout,
         }
     },
 })
 
+// Plugins
+import plugins from './plugins'
+
+plugins.forEach((plugin) => {
+    app.use(plugin)
+})
+
+// Components
 import components from './components'
 
 for (const [name, component] of Object.entries(components)) {

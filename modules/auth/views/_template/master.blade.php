@@ -19,7 +19,7 @@
         <main role="main" class="container">
             <div class="text-center mb-4">
                 <a href="{{ route('public::index') }}" class="d-block">
-                    <img src="{{ asset('assets/svg/logo.svg') }}" alt="{{ config('app.name') }}" role="presentation"
+                    <img src="{{ asset('assets/svg/app/logo.svg') }}" alt="{{ config('app.name') }}" role="presentation"
                          width="72" height="72">
                 </a>
             </div>
