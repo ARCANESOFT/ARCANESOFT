@@ -1,4 +1,4 @@
-export default class Csrf {
+class Csrf {
     public static token(): string | null {
         const token = document.head.querySelector('meta[name="csrf-token"]')
 
@@ -10,3 +10,5 @@ export default class Csrf {
         return null
     }
 }
+
+export default Csrf

@@ -7,33 +7,40 @@
             </p>
         @endunless
 
-        <div class="row g-3 w-50 mb-3">
+        <div class="row row-cols-1 g-3 w-50 mb-3">
             @if($user->hasPassword())
-                <div class="col-12">
-                    <label for="current_password" class="form-label">@lang('Current Password')</label>
-                    <input type="password" class="form-control{{ $errors->first('current_password', ' is-invalid') }}"
-                           name="current_password" id="current_password" required autocomplete="current-password">
-                    @error('current_password')
-                    <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                    @enderror
+                <div class="col">
+                    <div class="form-floating">
+                        <input type="password" name="current_password" id="current_password" autocomplete="current-password" required
+                               class="form-control{{ $errors->first('current_password', ' is-invalid') }}" placeholder="@lang('Current Password')">
+                        <label for="current_password">@lang('Current Password')</label>
+                        @error('current_password')
+                        <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                        @enderror
+                    </div>
                 </div>
             @endif
 
-            <div class="col-12">
-                <label for="password" class="form-label">@lang('Password')</label>
-                <input type="password" class="form-control{{ $errors->first('password', ' is-invalid') }}"
-                       name="password" id="password" required autocomplete="new-password">
-                @error('password')
-                <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                @enderror
+            <div class="col">
+                <div class="form-floating">
+                    <input type="password" name="password" id="password" autocomplete="new-password" required
+                           class="form-control{{ $errors->first('password', ' is-invalid') }}" placeholder="@lang('Password')">
+                    <label for="password">@lang('Password')</label>
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                    @enderror
+                </div>
             </div>
-            <div class="col-12">
-                <label for="password_confirmation" class="form-label">@lang('Confirm Password')</label>
-                <input type="password" class="form-control{{ $errors->first('password_confirmation', ' is-invalid') }}"
-                       name="password_confirmation" id="password_confirmation" required autocomplete="new-password">
-                @error('password_confirmation')
-                <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                @enderror
+
+            <div class="col">
+                <div class="form-floating">
+                    <input type="password" name="password_confirmation" id="password_confirmation" autocomplete="new-password" required
+                           class="form-control{{ $errors->first('password_confirmation', ' is-invalid') }}" placeholder="@lang('Confirm Password')">
+                    <label for="password_confirmation">@lang('Confirm Password')</label>
+                    @error('password_confirmation')
+                    <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                    @enderror
+                </div>
             </div>
         </div>
 

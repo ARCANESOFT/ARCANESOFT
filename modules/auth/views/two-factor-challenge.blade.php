@@ -9,7 +9,8 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-5">
-            <v-auth-two-factor-authentication action="{{ route('auth::login.two-factor.store') }}"/>
+            <v-page-auth-two-factor-authentication-form
+                action="{{ route('auth::login.two-factor.store') }}"/>
         </div>
     </div>
 @endsection

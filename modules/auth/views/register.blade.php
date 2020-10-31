@@ -18,65 +18,63 @@
                         <div class="row g-3">
                             {{-- FIRST NAME --}}
                             <div class="col-md-6">
-                                <div class="form-label-group">
-                                    <input type="text" id="first-name" name="first_name" value="{{ old('first_name') }}"
-                                           class="form-control {{ $errors->first('first_name', 'is-invalid') }}"
+                                <div class="form-floating">
+                                    <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}"
+                                           class="form-control{{ $errors->first('first_name', ' is-invalid') }}"
                                            placeholder="@lang('First Name')" required autofocus>
-                                    <label for="first-name">@lang('First Name')</label>
+                                    <label for="first_name">@lang('First Name')</label>
                                     @error('first_name')
-                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                    <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
 
                             {{-- LAST NAME --}}
                             <div class="col-md-6">
-                                <div class="form-label-group">
-                                    <input type="text" id="last-name" name="last_name" value="{{ old('last_name') }}"
-                                           class="form-control {{ $errors->first('last_name', 'is-invalid') }}"
+                                <div class="form-floating">
+                                    <input type="text" id="last_name" name="last_name" value="{{ old('last_name') }}"
+                                           class="form-control{{ $errors->first('last_name', ' is-invalid') }}"
                                            placeholder="@lang('Last Name')" required autofocus>
-                                    <label for="last-name">@lang('Last Name')</label>
+                                    <label for="last_name">@lang('Last Name')</label>
                                     @error('last_name')
-                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                    <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
 
                             {{-- EMAIL --}}
                             <div class="col-12">
-                                <div class="form-label-group">
+                                <div class="form-floating">
                                     <input type="email" id="email" name="email" value="{{ old('email') }}"
-                                           class="form-control {{ $errors->first('email', 'is-invalid') }}"
+                                           class="form-control{{ $errors->first('email', ' is-invalid') }}"
                                            placeholder="@lang('E-Mail Address')" required autofocus>
                                     <label for="email">@lang('E-Mail Address')</label>
                                     @error('email')
-                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                    <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
 
                             {{-- PASSWORD --}}
                             <div class="col-md-6">
-                                <div class="form-label-group">
-                                    <input type="password" id="password" name="password"
-                                           class="form-control {{ $errors->first('password', 'is-invalid') }}"
-                                           placeholder="@lang('Password')" required autocomplete="new-password">
+                                <div class="form-floating">
+                                    <input type="password" name="password" id="password" autocomplete="new-password" required
+                                           class="form-control{{ $errors->first('password', ' is-invalid') }}" placeholder="@lang('Password')">
                                     <label for="password">@lang('Password')</label>
                                     @error('password')
-                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                    <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
 
                             {{-- PASSWORD CONFIRMATION --}}
                             <div class="col-md-6">
-                                <div class="form-label-group">
-                                    <input type="password" id="password-confirm" name="password_confirmation"
-                                           class="form-control {{ $errors->first('password_confirmation', 'is-invalid') }}"
-                                           placeholder="@lang('Confirm Password')" required autocomplete="new-password">
-                                    <label for="password-confirm">@lang('Confirm Password')</label>
+                                <div class="form-floating">
+                                    <input type="password" name="password_confirmation" id="password_confirmation" autocomplete="new-password" required
+                                           class="form-control{{ $errors->first('password_confirmation', ' is-invalid') }}" placeholder="@lang('Confirm Password')">
+                                    <label for="password_confirmation">@lang('Confirm Password')</label>
                                     @error('password_confirmation')
-                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                    <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>

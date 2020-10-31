@@ -23,7 +23,10 @@ class SettingsRoutes extends AbstractRouteRegistrar
      */
     public function map(): void
     {
-        $this->prefix('settings')->name('settings.')->middleware(['password.confirm'])->group(function () {
+        $this->prefix('settings')
+            ->name('settings.')
+//            ->middleware(['password.confirm'])
+            ->group(function () {
             static::mapRouteClasses([
                 Settings\ProfileRoutes::class,
                 Settings\SecurityRoutes::class,

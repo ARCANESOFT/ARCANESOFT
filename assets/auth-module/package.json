@@ -1,5 +1,5 @@
 {
-    "name": "@modules/account",
+    "name": "@modules/auth",
     "private": true,
     "version": "1.0.0",
     "main": "src/index.ts",

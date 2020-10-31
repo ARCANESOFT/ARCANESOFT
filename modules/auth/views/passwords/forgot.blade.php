@@ -21,20 +21,20 @@
                     <form action="{{ route(Authentication\Http\Routes\PasswordResetRoutes::EMAIL) }}" method="POST">
                         @csrf
 
-                        <div class="row g-3">
-                            <div class="col-lg-12">
+                        <div class="row row-cols-1 g-3">
+                            <div class="col">
                                 {{-- EMAIL --}}
-                                <div class="form-label-group">
+                                <div class="form-floating">
                                     <input type="email" id="email" name="email" value="{{ old('email') }}"
-                                           class="form-control {{ $errors->first('email', 'is-invalid') }}"
-                                           placeholder="{{ __('E-Mail Address') }}" required autofocus>
+                                           class="form-control{{ $errors->first('email', ' is-invalid') }}"
+                                           placeholder="@lang('E-Mail Address')" required autofocus autocomplete="username">
                                     <label for="email">@lang('E-Mail Address')</label>
                                     @error('email')
-                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                    <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col">
                                 <button class="btn btn-primary btn-block" type="submit">@lang('Email Password Reset Link')</button>
                             </div>
                         </div>

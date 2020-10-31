@@ -19,42 +19,41 @@
                     <form action="{{ route(Authentication\Http\Routes\LoginRoutes::LOGIN_STORE) }}" method="POST">
                         @csrf
 
-                        <div class="row g-3">
-                            <div class="col-lg-12">
-                                {{-- EMAIL --}}
-                                <div class="form-label-group">
+                        <div class="row row-cols-1 g-3">
+                            {{-- EMAIL --}}
+                            <div class="col">
+                                <div class="form-floating">
                                     <input type="email" id="email" name="email" value="{{ old('email') }}"
                                            class="form-control{{ $errors->first('email', ' is-invalid') }}"
                                            placeholder="@lang('E-Mail Address')" required autofocus autocomplete="username">
                                     <label for="email">@lang('E-Mail Address')</label>
                                     @error('email')
-                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                    <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
 
-                            <div class="col-lg-12">
-                                {{-- PASSWORD --}}
-                                <div class="form-label-group">
-                                    <input type="password" id="password" name="password"
-                                           class="form-control{{ $errors->first('email', ' is-invalid') }}"
-                                           placeholder="@lang('Password')" required autocomplete="current-password">
+                            {{-- PASSWORD --}}
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="password" name="password" id="password" autocomplete="current-password" required
+                                           class="form-control{{ $errors->first('password', ' is-invalid') }}" placeholder="@lang('Password')">
                                     <label for="password">@lang('Password')</label>
                                     @error('password')
-                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                    <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
 
-                            <div class="col-lg-12">
-                                {{-- REMEMBER ME --}}
+                            {{-- REMEMBER ME --}}
+                            <div class="col">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="yes" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                     <label class="form-check-label" for="remember">@lang('Remember Me')</label>
                                 </div>
                             </div>
 
-                            <div class="col-lg-12">
+                            <div class="col">
                                 <button class="btn btn-lg btn-primary btn-block" type="submit">@lang('Login')</button>
                             </div>
                         </div>

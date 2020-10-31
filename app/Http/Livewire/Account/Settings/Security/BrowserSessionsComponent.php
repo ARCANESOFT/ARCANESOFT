@@ -103,7 +103,7 @@ class BrowserSessionsComponent extends Component
      */
     public function render()
     {
-        return view(static::VIEW);
+        return view()->make(static::VIEW);
     }
 
     /* -----------------------------------------------------------------

@@ -12,7 +12,6 @@
     {{-- Styles --}}
     <link rel="stylesheet" href="{{ mix('css/app.css', 'assets') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    @livewireStyles
 
     @stack('head')
 </head>
@@ -27,7 +26,9 @@
         @include('_template.footer')
 
         @if (auth()->check() && impersonator()->isImpersonating())
-            <v-impersonated-user url="{{ route('auth::impersonate.stop') }}" title="{{ __('Stop Impersonation') }}"/>
+            <v-impersonated-user
+                url="{{ route('auth::impersonate.stop') }}"
+                title="@lang('Stop Impersonation')"/>
         @endif
 
         @stack('modals')
@@ -35,6 +36,5 @@
 
     <script src="{{ mix('js/app.js', 'assets') }}"></script>
     @stack('scripts')
-    @livewireScripts
 </body>
 </html>

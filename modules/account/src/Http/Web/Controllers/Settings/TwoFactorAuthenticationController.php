@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Account\Http\Web\Controllers\Settings;
 
 use Account\Http\Web\Controllers\Controller;
-use Arcanesoft\Foundation\Authorization\Repositories\Authentication\TwoFactorAuthenticationRepository;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use Arcanesoft\Foundation\Fortify\Repositories\TwoFactorAuthenticationRepository;
+use Illuminate\Http\{JsonResponse, Request};
 
 /**
  * Class     TwoFactorAuthenticationController
@@ -41,7 +40,7 @@ class TwoFactorAuthenticationController extends Controller
 
         return new JsonResponse([
             'enabled'       => true,
-            'recoveryCodes' => $user->two_factor->decrypted_recovery_codes,
+            'recoveryCodes' => $user->twoFactor->decrypted_recovery_codes,
         ]);
     }
 
@@ -53,8 +52,8 @@ class TwoFactorAuthenticationController extends Controller
 
         return new JsonResponse([
             'enabled'       => $user->isTwoFactorEnabled(),
-            'recoveryCodes' => $user->two_factor->decrypted_recovery_codes,
-            'qrCode'        => $user->two_factor->qr_code_svg->toHtml(),
+            'recoveryCodes' => $user->twoFactor->decrypted_recovery_codes,
+            'qrCode'        => $user->twoFactor->qr_code_svg->toHtml(),
         ]);
     }
 
@@ -66,7 +65,7 @@ class TwoFactorAuthenticationController extends Controller
 
         return new JsonResponse([
             'enabled'       => $user->isTwoFactorEnabled(),
-            'recoveryCodes' => $user->two_factor->decrypted_recovery_codes,
+            'recoveryCodes' => $user->twoFactor->decrypted_recovery_codes,
         ]);
     }
 

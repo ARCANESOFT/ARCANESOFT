@@ -1,5 +1,5 @@
 import { defineComponent, onMounted, ref, reactive } from 'vue'
-import translator from '../../../mixins/translator'
+import translator from '../../../../mixins/translator'
 
 export default defineComponent({
     name: 'v-account-settings-two-factor-authentication',
