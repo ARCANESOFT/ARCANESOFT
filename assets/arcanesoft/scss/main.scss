@@ -68,6 +68,9 @@
 @import "components/loading-spinners";
 
 // VUE COMPONENTS
+[v-cloak] {
+    display: none;
+}
 @import "vue-components/rating";
 @import "vue-components/nav-link-logout";
 

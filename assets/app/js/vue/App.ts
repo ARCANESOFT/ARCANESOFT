@@ -1,22 +1,9 @@
 import { createApp } from 'vue'
-
-import mixins from '../mixins'
+import auth from '@modules/auth/src/functions'
 
 const app = createApp({
-    mixins,
-
     setup() {
-        function logout(url: string): void {
-            this.request()
-                .delete(url)
-                .then((response) => response.data.redirect)
-                .then((redirectUrl) => {
-                    location.replace(redirectUrl)
-                })
-                .catch(() => {
-                    location.reload()
-                })
-        }
+        const { logout } = auth()
 
         return {
             logout,
@@ -34,8 +21,8 @@ plugins.forEach((plugin) => {
 // Components
 import components from './components'
 
-for (const [name, component] of Object.entries(components)) {
-    app.component(name, component);
-}
+components.forEach((component) => {
+    app.component(component.name, component);
+})
 
 export default app

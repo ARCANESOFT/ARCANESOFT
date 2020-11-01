@@ -79,7 +79,7 @@
                                 </div>
                             </div>
 
-                            {{-- REGISTER BUTTON --}}
+                            {{-- SUBMIT BUTTON --}}
                             <div class="col-12">
                                 <button class="btn btn-lg btn-primary btn-block" type="submit">@lang('Register')</button>
                             </div>
@@ -96,7 +96,7 @@
 
                 @if (app('router')->has($route = Authentication\Http\Routes\LoginRoutes::LOGIN_CREATE))
                 <div class="card-footer py-3 text-center">
-                    <a href="{{ route($route) }}" class="text-decoration-none">@lang("You have an account? Login")</a>
+                    <a href="{{ route($route) }}" class="text-decoration-none">@lang('You have an account? Login')</a>
                 </div>
                 @endif
             </div>

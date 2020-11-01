@@ -24,7 +24,13 @@ class WebRoutes extends RouteRegistrar
      */
     public function map(): void
     {
-        $this->prefix('account')->name('account::')->middleware(['web', 'auth', 'verified'])->group(function () {
+        $middleware = [
+            'web',
+            'auth',
+            //'verified',
+        ];
+
+        $this->prefix('account')->name('account::')->middleware($middleware)->group(function () {
             static::mapRouteClasses([
                 Routes\ProfileRoutes::class,
                 Routes\SettingsRoutes::class,

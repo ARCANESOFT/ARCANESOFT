@@ -75,7 +75,7 @@
                             <p class="mb-0">@lang('Please verify your email address so we know that it\'s really you.')</p>
                         </div>
 
-                        <a href="{{ route('auth::verification.notice') }}"
+                        <a href="{{ route(Authentication\Http\Routes\EmailVerificationRoutes::NOTICE) }}"
                            class="btn btn-primary">@lang('Verify my email address')</a>
                     </div>
                 </div>
@@ -87,12 +87,12 @@
                 <div class="card">
                     <div class="card-body">
                         <p class="small font-weight-bold">
-                            @lang("Once your account is deleted, all of its resources and data will be permanently deleted.")
-                            @lang("Before deleting your account, please download any data or information that you wish to retain.")
+                            @lang('Once your account is deleted, all of its resources and data will be permanently deleted.')
+                            @lang('Before deleting your account, please download any data or information that you wish to retain.')
                         </p>
 
                         <p class="small">
-                            @lang("There is some data that we are legally required to keep.")
+                            @lang('There is some data that we are legally required to keep.')
                             <a href="#" class="text-decoration-none">@lang('Learn more about deleting your account')</a>
                         </p>
 

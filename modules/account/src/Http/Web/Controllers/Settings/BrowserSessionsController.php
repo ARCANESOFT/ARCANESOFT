@@ -6,6 +6,7 @@ namespace Account\Http\Web\Controllers\Settings;
 
 use Account\Http\Web\Controllers\Controller;
 use Account\Http\Web\Resources\BrowserSessionCollection;
+use Arcanesoft\Foundation\Fortify\Repositories\BrowserSessionsRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -27,35 +28,47 @@ class BrowserSessionsController extends Controller
     /**
      * Get the Two Factor authentication status.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request                                               $request
+     * @param  \Arcanesoft\Foundation\Fortify\Repositories\BrowserSessionsRepository  $repo
      *
      * @return \Illuminate\Http\Resources\Json\ResourceCollection
      */
-    public function status(Request $request): ResourceCollection
+    public function status(Request $request, BrowserSessionsRepository $repo): ResourceCollection
     {
-        return new BrowserSessionCollection($this->getSessions($request));
+        if ( ! $repo->isValidDriver()) {
+            return new BrowserSessionCollection(collect());
+        }
+
+        $sessions = $repo->fromRequest($request)->all();
+
+        return new BrowserSessionCollection($sessions);
     }
 
     /**
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request                                               $request
+     * @param  \Arcanesoft\Foundation\Fortify\Repositories\BrowserSessionsRepository  $repo
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function logout(Request $request): JsonResponse
+    public function logout(Request $request, BrowserSessionsRepository $repo): JsonResponse
     {
+        $repo->fromRequest($request)
+             ->logoutOne($request->get('id'));
+
         return new JsonResponse('', JsonResponse::HTTP_NO_CONTENT);
     }
 
     /**
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request                                               $request
+     * @param  \Arcanesoft\Foundation\Fortify\Repositories\BrowserSessionsRepository  $repo
      *
      * @return \Illuminate\Http\JsonResponse
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function logoutOthers(Request $request): JsonResponse
+    public function logoutOthers(Request $request, BrowserSessionsRepository $repo): JsonResponse
     {
-        $user = $this->getUserFromRequest($request);
+        $user = $repo->fromRequest($request)->user();
 
         if ( ! Hash::check($request->get('password'), $user->password)) {
             throw ValidationException::withMessages([
@@ -65,63 +78,10 @@ class BrowserSessionsController extends Controller
             ]);
         }
 
-        if ( ! $this->isValidSessionDriver()) {
-            return new JsonResponse('', JsonResponse::HTTP_NO_CONTENT);
+        if ($repo->isValidDriver()) {
+            $repo->logoutOthers();
         }
-
-        $user->sessions()
-             ->where('id', '!=', session()->getId())
-             ->delete();
 
         return new JsonResponse('', JsonResponse::HTTP_NO_CONTENT);
-    }
-
-    /* -----------------------------------------------------------------
-     |  Other Methods
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Retrieve the authenticated user from request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return \App\Models\User|mixed
-     */
-    protected function getUserFromRequest(Request $request)
-    {
-        return $request->user();
-    }
-
-    /**
-     * Get the user's browser sessions.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|mixed
-     */
-    protected function getSessions(Request $request)
-    {
-        if ( ! $this->isValidSessionDriver()) {
-            return collect();
-        }
-
-        return $this->getUserFromRequest($request)
-            ->sessions()
-            ->orderBy('last_activity', 'desc')
-            ->get();
-    }
-
-    /**
-     * Determine if valid session was used.
-     *
-     * @return bool
-     */
-    protected function isValidSessionDriver(): bool
-    {
-        return in_array(config('session.driver'), [
-            'database',
-            'arcanesoft',
-        ]);
     }
 }

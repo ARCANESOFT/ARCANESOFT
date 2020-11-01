@@ -38,7 +38,7 @@ class ConfirmPasswordController
      */
     public function show(Request $request)
     {
-        return view('auth::passwords.confirm');
+        return view()->make('auth::passwords.confirm');
     }
 
     /**

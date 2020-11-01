@@ -21,6 +21,7 @@ class ConfirmPasswordRoutes extends AbstractRouteRegistrar
 
     public const SHOW  = 'auth::password.confirm.show';
     public const STORE = 'auth::password.confirm.store';
+    public const STATUS = 'auth::password.confirm.status';
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -32,17 +33,18 @@ class ConfirmPasswordRoutes extends AbstractRouteRegistrar
      */
     public function map(): void
     {
-        $this->prefix('password/confirm')
-             ->name('password.confirm.')
-             ->middleware(['auth'])
-             ->group(function () {
-                // auth::password.confirm.show
-                $this->get('/', [ConfirmPasswordController::class, 'show'])
-                     ->name('show');
+        $this->prefix('password/confirm')->name('password.confirm.')->middleware(['auth'])->group(function () {
+            // auth::password.confirm.show
+            $this->get('/', [ConfirmPasswordController::class, 'show'])
+                 ->name('show');
 
-                // auth::password.confirm.store
-                $this->post('/', [ConfirmPasswordController::class, 'store'])
-                     ->name('store');
-            });
+            // auth::password.confirm.store
+            $this->post('/', [ConfirmPasswordController::class, 'store'])
+                 ->name('store');
+
+            // auth::password.confirm.status
+            $this->get('status', [ConfirmPasswordController::class, 'status'])
+                 ->name('status');
+        });
     }
 }

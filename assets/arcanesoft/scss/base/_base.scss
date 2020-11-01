@@ -7,6 +7,10 @@ body {
     @extend %scrollable;
 }
 
+[v-cloak] {
+    display: none;
+}
+
 *:-moz-full-screen,
 *:-webkit-full-screen,
 *:fullscreen *:-ms-fullscreen {

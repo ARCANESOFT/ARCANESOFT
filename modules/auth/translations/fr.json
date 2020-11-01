@@ -27,5 +27,7 @@
 
     "Please confirm your password before continuing.": "Veuillez confirmer votre mot de passe avant de continuer.",
     "The provided password was incorrect.": "Le mot de passe fourni était incorrect.",
-    "Confirm Password": "Confirmez votre mot de passe"
+    "Confirm Password": "Confirmez votre mot de passe",
+
+    "The provided two factor authentication code was invalid.": "Le code d'authentification à deux facteurs fourni était invalide."
 }

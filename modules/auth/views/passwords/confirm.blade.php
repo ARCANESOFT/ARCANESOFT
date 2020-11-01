@@ -17,19 +17,22 @@
 
                         <p class="small">@lang('Please confirm your password before continuing.')</p>
 
-                        <div class="row g-3">
-                            <div class="col-12">
-                                <div class="form-label-group">
+                        <div class="row row-cols-1 g-3">
+                            {{-- PASSWORD --}}
+                            <div class="col">
+                                <div class="form-floating">
                                     <input type="password" id="password" name="password"
                                            class="form-control{{ $errors->first('password', ' is-invalid') }}"
                                            placeholder="@lang('Password')" required autofocus autocomplete="current-password">
                                     <label for="password">@lang('Password')</label>
                                     @error('password')
-                                    <span class="invalid-feedback font-weight-bold" role="alert">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-12">
+
+                            {{-- SUBMIT BUTTON --}}
+                            <div class="col">
                                 <button class="btn btn-lg btn-primary btn-block" type="submit">@lang('Confirm Password')</button>
                             </div>
                         </div>

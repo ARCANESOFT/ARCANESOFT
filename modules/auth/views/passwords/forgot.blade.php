@@ -22,8 +22,8 @@
                         @csrf
 
                         <div class="row row-cols-1 g-3">
+                            {{-- EMAIL --}}
                             <div class="col">
-                                {{-- EMAIL --}}
                                 <div class="form-floating">
                                     <input type="email" id="email" name="email" value="{{ old('email') }}"
                                            class="form-control{{ $errors->first('email', ' is-invalid') }}"
@@ -34,6 +34,8 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            {{-- SUBMIT BUTTON --}}
                             <div class="col">
                                 <button class="btn btn-primary btn-block" type="submit">@lang('Email Password Reset Link')</button>
                             </div>
@@ -42,7 +44,7 @@
                 </div>
                 @if (app('router')->has($route = Authentication\Http\Routes\LoginRoutes::LOGIN_CREATE))
                     <div class="card-footer py-3 text-center">
-                        <a href="{{ route($route) }}" class="text-decoration-none">@lang("Just remember your password? Login")</a>
+                        <a href="{{ route($route) }}" class="text-decoration-none">@lang('Just remember your password? Login')</a>
                     </div>
                 @endif
             </div>

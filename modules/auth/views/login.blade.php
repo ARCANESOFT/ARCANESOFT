@@ -53,6 +53,7 @@
                                 </div>
                             </div>
 
+                            {{-- SUBMIT BUTTON --}}
                             <div class="col">
                                 <button class="btn btn-lg btn-primary btn-block" type="submit">@lang('Login')</button>
                             </div>

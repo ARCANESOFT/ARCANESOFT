@@ -8,8 +8,8 @@
                 <h4 class="card-header text-center">@lang('Email verification')</h4>
                 <div class="card-body">
                     <p class="small">
-                        @lang("Thanks for signing up!")
-                        @lang("Before getting started, could you verify your email address by clicking on the link we just emailed to you?")
+                        @lang('Thanks for signing up!')
+                        @lang('Before getting started, could you verify your email address by clicking on the link we just emailed to you?')
                         @lang("If you didn't receive the email, we will gladly send you another.")
                     </p>
                     @if (session('status') == 'verification-link-sent')
