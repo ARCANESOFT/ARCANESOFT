@@ -33,21 +33,20 @@ class EmailVerificationRoutes extends AbstractRouteRegistrar
      */
     public function map(): void
     {
-        $this->prefix('email/verification')
-             ->name('email.verification.')->middleware(['auth'])->group(function () {
-                // auth::email.verification.notice
-                $this->get('/', [EmailVerificationController::class, 'show'])
-                     ->name('notice');
+        $this->prefix('email/verification')->name('email.verification.')->middleware(['auth'])->group(function () {
+            // auth::email.verification.notice
+            $this->get('/', [EmailVerificationController::class, 'show'])
+                 ->name('notice');
 
-                // auth::email.verification.resend
-                $this->post('/', [EmailVerificationController::class, 'resend'])
-                     ->middleware(['throttle:6,1']) // TODO: Make the throttle configurable
-                     ->name('resend');
+            // auth::email.verification.resend
+            $this->post('/', [EmailVerificationController::class, 'resend'])
+                 ->middleware(['throttle:6,1']) // TODO: Make the throttle configurable
+                 ->name('resend');
 
-                // auth::email.verification.verify
-                $this->get('{id}/{hash}', [EmailVerificationController::class, 'verify'])
-                     ->middleware(['signed', 'throttle:6,1']) // TODO: Make the throttle configurable
-                     ->name('verify');
-            });
+            // auth::email.verification.verify
+            $this->get('{id}/{hash}', [EmailVerificationController::class, 'verify'])
+                 ->middleware(['signed', 'throttle:6,1']) // TODO: Make the throttle configurable
+                 ->name('verify');
+        });
     }
 }

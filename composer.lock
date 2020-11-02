@@ -1243,7 +1243,7 @@
             "dist": {
                 "type": "path",
                 "url": "../Foundation",
-                "reference": "a39f4ff27385338097270cb8b37004d0f74129ba"
+                "reference": "32ee69d7b36eb97240d6dfb192a7f9807909e21e"
             },
             "require": {
                 "arcanedev/breadcrumbs": "^6.0",

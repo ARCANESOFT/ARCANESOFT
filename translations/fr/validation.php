@@ -153,6 +153,7 @@ return [
         'email'                 => 'adresse email',
         'first_name'            => 'prénom',
         'last_name'             => 'nom',
+        'current_password'      => 'mot de passe actuel',
         'password'              => 'mot de passe',
         'password_confirmation' => 'confirmation du mot de passe',
         'city'                  => 'ville',

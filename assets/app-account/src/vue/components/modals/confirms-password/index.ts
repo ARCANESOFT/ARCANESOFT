@@ -2,7 +2,7 @@ import { computed, defineComponent, nextTick, ref } from 'vue'
 import api from './api'
 import translator from '../../../../mixins/translator'
 import Modal from '../modal'
-import FormErrors from '@arcanesoft/core/src/helpers/form/errors'
+import errors, { FormErrors } from '@arcanesoft/core/src/helpers/form-errors'
 
 export default defineComponent({
     name: 'v-confirms-password-modal',
@@ -35,7 +35,7 @@ export default defineComponent({
         const confirmingPassword = ref<boolean>(false)
         const password = ref<string>('')
         const passwordRef = ref<any>(null)
-        const formErrors = ref<FormErrors>(new FormErrors({}))
+        const formErrors = ref<FormErrors>(errors())
 
         const startConfirming = async () => {
             formErrors.value.reset()
@@ -54,15 +54,18 @@ export default defineComponent({
         const confirm = async () => {
             formErrors.value.reset()
 
-            await request.confirm({ password: password.value }).then(() => {
-                confirmingPassword.value = false
-                password.value = ''
+            await request
+                .confirm({ password: password.value }).then(() => {
+                    confirmingPassword.value = false
+                    password.value = ''
 
-                nextTick().then(() => ctx.emit('confirmed'))
-            })
-            .catch(({ response }) => {
-                formErrors.value.setMessages(response.data.errors)
-            })
+                    nextTick().then(() => ctx.emit('confirmed'))
+                })
+                .catch(({ response }) => {
+                    if (response && response.status === 422) {
+                        formErrors.value.setErrors(response.data.errors)
+                    }
+                })
         }
 
         const isLoading = computed<boolean>(() => request.isLoading.value)

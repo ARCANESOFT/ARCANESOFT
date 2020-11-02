@@ -1,5 +1,5 @@
 import { defineComponent, onMounted, nextTick, ref, computed } from 'vue'
-import FormErrors from '@arcanesoft/core/src/helpers/form/errors'
+import errors, { FormErrors } from '@arcanesoft/core/src/helpers/form-errors'
 import translator from '../../../../mixins/translator'
 import api from './api'
 import { Modal } from 'bootstrap/js/index.esm.js'
@@ -43,7 +43,7 @@ export default defineComponent({
         const confirmModalRef = ref(null)
         const confirmPassword = ref<string>('')
         const confirmPasswordRef = ref(null)
-        const confirmErrors = ref<FormErrors>(new FormErrors({}))
+        const confirmErrors = ref<FormErrors>(errors())
 
         const fetchSessions = () => {
             isLoading.value = true
@@ -91,7 +91,7 @@ export default defineComponent({
                 })
                 .catch(({ response }) => {
                     if (response && response.status === 422) {
-                        confirmErrors.value.setMessages(response.data.errors)
+                        confirmErrors.value.setErrors(response.data.errors)
                     }
                 })
                 .finally(() => {
