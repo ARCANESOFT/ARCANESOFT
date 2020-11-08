@@ -1,0 +1,15 @@
+.v-datatable-row-actions {
+    @extend .text-right;
+
+    .v-datatable-row-action {
+        @extend .btn, .btn-sm, .btn-light;
+
+        & + .v-datatable-row-action {
+            margin-left: 0.25rem;
+        }
+
+        &.destructive {
+            @extend .text-danger;
+        }
+    }
+}

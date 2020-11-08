@@ -67,12 +67,8 @@
 // CUSTOM COMPONENTS
 @import "components/loading-spinners";
 
-// VUE COMPONENTS
-[v-cloak] {
-    display: none;
-}
-@import "vue-components/rating";
-@import "vue-components/nav-link-logout";
+// VUE
+@import "vue";
 
 // 7- Page
 @import "pages/auth";

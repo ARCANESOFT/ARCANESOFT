@@ -1,13 +1,19 @@
-import datatable from '../vue/components/wire/helpers/datatable'
+import datatable from './datatable'
 import form from './form'
 import modal from './modal'
+import toast from './toast'
+import tooltip from './tooltip'
 import loadingButton from './buttons/loading-button'
 
-window['components'] = {
+const components = {
     datatable,
     form,
     modal,
+    toast,
+    tooltip,
     loadingButton,
 }
 
-export default () => window['components']
+window['components'] = components
+
+export default () => components

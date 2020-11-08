@@ -1,0 +1,4 @@
+.v-datatable-table {
+    @extend .table, .table-hover, .table-borderless;
+    margin-bottom: 0;
+}

@@ -1,21 +1,22 @@
 import arcanesoft from '../../helpers/arcanesoft'
 import toastEvents from '../../vue/components/toasts/events'
+import components from '../../components'
 
 class UI {
     toast(toast) {
         arcanesoft().emit(toastEvents.UI_TOASTS_NOTIFY, toast)
     }
 
-    initToasts(dom: Document|Element): any[] {
+    initToasts(dom: Document): any[] {
         return Array
             .from(dom.querySelectorAll('.toast'))
-            .map((elt) => new window['twbs'].Toast(elt))
+            .map((elt: HTMLElement) => components().toast(elt))
     }
 
-    initTooltips(dom: Document|Element): any[] {
+    initTooltips(dom: Document): any[] {
         return Array
             .from(dom.querySelectorAll('[data-toggle="tooltip"]'))
-            .map((elt) => new window['twbs'].Tooltip(elt, {boundary: 'window'}))
+            .map((elt: HTMLElement) => components().tooltip(elt, {boundary: 'window'}))
     }
 
     initPageScrolled(): void {

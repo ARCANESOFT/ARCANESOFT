@@ -1,0 +1,17 @@
+.v-datatable-pagination-info {
+    @extend .text-muted, .small;
+}
+
+.v-datatable-pagination {
+    @extend .pagination;
+
+    margin-bottom: 0;
+}
+
+.v-datatable-page-item {
+    @extend .page-item;
+}
+
+.v-datatable-page-link {
+    @extend .page-link;
+}

@@ -1,0 +1,33 @@
+.v-datatable-card {
+    @extend .card, .card-borderless, .shadow-sm;
+
+    .v-datatable-card-overlay {
+        @extend .d-flex, .justify-content-center, .align-items-center;
+
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        min-height: 8rem;
+        background-color: rgba($white, 0.25);
+        z-index: 1;
+
+        .v-datatable-card-spinner {
+            color: #34314F; // TODO: Extract this color to variable
+            border-width: .5rem;
+            width: 4rem;
+            height: 4rem;
+        }
+    }
+
+    .v-datatable-card-header {
+        @extend .card-header, .p-2;
+    }
+
+    .v-datatable-card-body {
+        @extend .card-body;
+    }
+
+    .v-datatable-card-footer {
+        @extend .card-footer, .p-2;
+    }
+}

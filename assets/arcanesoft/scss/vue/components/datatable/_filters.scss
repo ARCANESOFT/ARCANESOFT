@@ -1,0 +1,13 @@
+.v-datatable-filters {
+    &.v-datatable-filters-applied {
+        button#v-datatable-filters-menu {
+            i {
+                color: $primary
+            }
+        }
+    }
+
+    .v-datatable-filters-menu {
+        min-width: 15rem;
+    }
+}

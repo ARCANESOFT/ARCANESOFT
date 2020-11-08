@@ -1,0 +1,46 @@
+.v-datatable-column {
+    &.v-datatable-column-sortable {
+        position: relative;
+        cursor: pointer;
+        user-select: none;
+
+        &:after {
+            position: absolute;
+            top: 50%;
+            right: 8px;
+            display: block;
+            opacity: 0.5;
+            font-size: 1rem;
+            transform: translateY(-50%);
+
+            @extend %fa-icon;
+            @extend .fas;
+
+            transition: opacity .25s ease-in-out;
+        }
+
+        &.v-datatable-column-sort-asc:after,
+        &.v-datatable-column-sort-desc:after {
+            color: $primary;
+            opacity: 0.75;
+        }
+
+        &.v-datatable-column-sort-asc:after {
+            content: fa-content($fa-var-sort-amount-up);
+        }
+
+        &.v-datatable-column-sort-desc:after {
+            content: fa-content($fa-var-sort-amount-down);
+        }
+
+        &:not(.v-datatable-column-sort-asc):not(.v-datatable-column-sort-desc):after {
+            content: fa-content($fa-var-sort);
+        }
+
+        &:hover {
+            &:after {
+                opacity: 1;
+            }
+        }
+    }
+}

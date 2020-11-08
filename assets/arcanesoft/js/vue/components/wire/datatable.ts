@@ -6,7 +6,7 @@ import morphdom from 'morphdom'
 import { COMPONENT_ACTION_EVENT, COMPONENT_RELOAD_EVENT } from './events'
 
 export default defineComponent({
-    name: 'v-datatable',
+    name: 'w-datatable',
 
     props: {
         name: {

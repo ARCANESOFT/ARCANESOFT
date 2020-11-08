@@ -103,7 +103,7 @@ class Arcanesoft implements ArcanesoftContract {
     // Other Methods
     //----------------------------------
 
-    public bootComponents(dom: Document|Element): void {
+    public bootComponents(dom: Document): void {
         this.ui.initToasts(dom)
         this.ui.initTooltips(dom)
         this.ui.initPageScrolled()
