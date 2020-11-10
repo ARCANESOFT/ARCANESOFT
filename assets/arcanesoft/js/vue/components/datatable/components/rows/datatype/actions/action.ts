@@ -1,8 +1,8 @@
-import { defineComponent, computed, PropType } from 'vue'
-import { DatatableRowAction } from '../../types'
+import { defineComponent, computed, PropType} from 'vue'
+import { DatatableRowAction } from '../../../../types'
 
-import ButtonAction from './actions/button'
-import LinkAction from './actions/link'
+import ButtonAction from './button'
+import LinkAction from './link'
 
 export default defineComponent({
     name: 'v-datatable-row-action',
@@ -30,7 +30,7 @@ export default defineComponent({
     },
 
     template: `
-        <ButtonAction v-if="isButton" :action="action" />
-        <LinkAction v-if="isLink" :action="action" />
+        <ButtonAction v-if="isButton" :action="action"/>
+        <LinkAction v-if="isLink" :action="action"/>
     `,
 })

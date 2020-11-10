@@ -1,5 +1,5 @@
 import { defineComponent, PropType } from 'vue'
-import { DatatableRowActions } from '../../types'
+import { DatatableRowAction } from '../../../../types'
 import Action from './action'
 
 export default defineComponent({
@@ -7,13 +7,19 @@ export default defineComponent({
 
     props: {
         actions: {
-            type: Object as PropType<DatatableRowActions>,
+            type: Object as PropType<DatatableRowAction[]>,
             required: true,
         },
     },
 
     components: {
         Action,
+    },
+
+    setup() {
+        return {
+            //
+        }
     },
 
     template: `

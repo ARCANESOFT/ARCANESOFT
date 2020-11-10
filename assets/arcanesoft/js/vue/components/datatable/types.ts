@@ -19,7 +19,12 @@ export type DatatablePagination = {
     total:        number
 }
 
-export type DatatableRow = Object
+export type DatatableRow = DatatableRowColumn[]
+
+export type DatatableRowColumn = {
+    column: DatatableColumn,
+    value:  any
+}
 
 export type DatatableColumn = {
     key:      string
@@ -27,6 +32,7 @@ export type DatatableColumn = {
     align:    ENUMS.COLUMN_ALIGNMENT
     sortable: boolean
     escaped:  boolean
+    datatype: ENUMS.COLUMN_DATATYPE
 }
 
 export type DatatableRowAction = {
@@ -36,10 +42,6 @@ export type DatatableRowAction = {
     label:   string
     name:    string
     type:    ENUMS.ACTION_TYPE
-}
-
-export type DatatableRowActions = {
-    [key: string]: DatatableRowAction
 }
 
 export type PerPageOption = {
@@ -87,7 +89,7 @@ export type DatatableLinks = {
 }
 
 export type DatatableResponse = {
-    items:  DatatableRow[]
+    items:  Object[],
     links?: DatatableLinks
     metas:  DatatableResponseMeta
 }

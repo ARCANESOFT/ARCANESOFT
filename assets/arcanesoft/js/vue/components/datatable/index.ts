@@ -32,7 +32,7 @@ export default defineComponent({
     },
 
     setup(props) {
-        const { load, reload, isLoading, markAsReady, isReady, hasPagination } = useStore()
+        const { load, reload, isLoading, isReady, isEmpty, markAsReady, hasPagination } = useStore()
         const arcanesoft = useArcanesoft()
 
         const onReload = async ({name}) => {
@@ -56,6 +56,7 @@ export default defineComponent({
             hasPagination,
             isLoading,
             isReady,
+            isEmpty,
         }
     },
 
@@ -64,12 +65,16 @@ export default defineComponent({
             <DatatableOverlay v-if="isLoading"/>
 
             <div class="v-datatable-card-header">
+                <span v-if=" ! isReady">Loading...</span>
                 <DatatableHeader v-if="isReady"/>
-                <span v-else>Loading...</span>
             </div>
 
-            <DatatableTable v-if="isReady"/>
-            <div v-else style="min-height: 10rem;"></div>
+            <div v-if="isReady && isEmpty" class="card-body">
+                <h4 class="fw-light text-center text-muted">There is no entires to show</h4>
+            </div>
+
+            <div v-if=" ! isReady" style="min-height: 10rem;"></div>
+            <DatatableTable v-if="isReady && ! isEmpty"/>
 
             <div class="v-datatable-card-footer" v-if="isReady && hasPagination">
                 <DatatableFooter/>

@@ -5,9 +5,11 @@ export default defineComponent({
     name: 'v-pagination-info',
 
     setup() {
-        const { pagination } = getters()
+        const { pagination, isEmpty } = getters()
         const info = computed<string>(() =>
-            `Showing ${pagination.value.from} to ${pagination.value.to} out of ${pagination.value.total} entries`
+            isEmpty.value
+                ? `Showing ${pagination.value.total} entries`
+                : `Showing ${pagination.value.from} to ${pagination.value.to} out of ${pagination.value.total} entries`
         )
 
         return {

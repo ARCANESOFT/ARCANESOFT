@@ -1,5 +1,5 @@
 import { computed } from 'vue'
-import { DatatableRowAction } from '../../../../types'
+import { DatatableRowAction } from '../../../../../types'
 
 export default (action: DatatableRowAction) => ({
     onlyIcon: computed<boolean>(() => action.icon !== null),

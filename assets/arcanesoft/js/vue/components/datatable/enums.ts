@@ -4,6 +4,11 @@ export enum COLUMN_ALIGNMENT {
     RIGHT  = 'right',
 }
 
+export enum COLUMN_DATATYPE {
+    ACTIONS = 'actions',
+    PLAIN   = 'plain',
+}
+
 export enum ACTION_TYPE {
     LINK   = 'link',
     BUTTON = 'button',

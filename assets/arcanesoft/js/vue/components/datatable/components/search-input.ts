@@ -1,4 +1,5 @@
 import { defineComponent, ref } from 'vue'
+import debounce from '@arcanesoft/core/src/functions/debounce'
 import useStore from '../store'
 
 export default defineComponent({
@@ -10,13 +11,12 @@ export default defineComponent({
         const query = ref<string>('')
         const oldQuery = ref<string>('')
 
-        const search = async (): Promise<void> => {
+        const search = debounce(async () => {
             if (query.value !== oldQuery.value) {
                 await searchQuery(query.value)
-
                 oldQuery.value = query.value
             }
-        }
+        }, 800)
 
         return {
             query,
@@ -25,7 +25,7 @@ export default defineComponent({
     },
 
     template: `
-        <input v-model="query" @keyup.enter="search" @blur="search"
+        <input v-model="query" @input="search"
                type="search" class="v-datatable-search-input" placeholder="Search...">
     `,
 })

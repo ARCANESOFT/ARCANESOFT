@@ -19,11 +19,12 @@ export default defineComponent({
     },
 
     setup() {
-        const { hasFilters, hasPagination } = useStore()
+        const { hasFilters, hasPagination, isEmpty } = useStore()
 
         return {
             hasFilters,
             hasPagination,
+            isEmpty,
         }
     },
 
@@ -39,11 +40,11 @@ export default defineComponent({
                 </div>
             </div>
 
-            <div class="w-100 m-0" v-if="hasPagination"></div>
-            <div class="col-auto" v-if="hasPagination">
+            <div v-if="hasPagination" class="w-100 m-0"></div>
+            <div v-if="hasPagination" class="col-auto">
                 <DatatablePerPageSelect/>
             </div>
-            <div class="col d-flex justify-content-end" v-if="hasPagination">
+            <div v-if="hasPagination && ! isEmpty" class="col d-flex justify-content-end">
                 <DatatablePagination/>
             </div>
         </div>

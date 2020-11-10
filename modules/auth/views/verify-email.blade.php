@@ -17,7 +17,9 @@
                     @endif
                     <form action="{{ route('auth::email.verification.resend') }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-primary btn-block">@lang('Resend verification email')</button>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">@lang('Resend verification email')</button>
+                        </div>
                     </form>
                 </div>
                 <div class="card-footer">

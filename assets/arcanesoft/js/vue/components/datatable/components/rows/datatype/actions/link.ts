@@ -1,6 +1,6 @@
-import {defineComponent, ref, onMounted, onBeforeUnmount, PropType} from 'vue'
-import { DatatableRowAction } from '../../../types'
-import useTooltip from '../../../../../../components/tooltip'
+import { defineComponent, onMounted, PropType, ref } from 'vue'
+import { DatatableRowAction } from '../../../../types'
+import useTooltip from '../../../../../../../components/tooltip'
 import computedAction from './_shared/computed-action'
 
 export default defineComponent({
@@ -20,11 +20,7 @@ export default defineComponent({
         const { onlyIcon, isDisabled, isDestructive } = computedAction(action)
 
         onMounted(() => {
-            tooltip = useTooltip(actionRef.value)
-        })
-
-        onBeforeUnmount(() => {
-            tooltip.dispose()
+            tooltip = useTooltip(actionRef.value, { container: 'body' })
         })
 
         return {
@@ -41,6 +37,7 @@ export default defineComponent({
            :title="action.label"
            :data-original-title="action.label"
            :data-toggle="onlyIcon ? 'tooltip' : null"
+           :data-container="onlyIcon ? 'body' : null"
            :ariaDisabled="isDisabled ? 'true' : null"
            class="v-datatable-row-action" :class="{ 'destructive': isDestructive, 'disabled': isDisabled }">
             <i v-if="onlyIcon" :class="action.icon"></i>

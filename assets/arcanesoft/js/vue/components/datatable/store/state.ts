@@ -2,6 +2,7 @@ import { reactive, UnwrapRef } from 'vue'
 import { ApiPayload, DatatableResponse } from '../types'
 
 export type State = {
+    draw:    number,
     results: DatatableResponse,
     payload: ApiPayload
     loading: boolean
@@ -9,8 +10,9 @@ export type State = {
 }
 
 const state = reactive<State>({
+    draw:    0,
     results: <DatatableResponse> {},
-    ready: false,
+    ready:   false,
     loading: false,
     payload: {
         url: null,

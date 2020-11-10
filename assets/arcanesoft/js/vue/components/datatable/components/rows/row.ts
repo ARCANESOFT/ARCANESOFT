@@ -1,17 +1,20 @@
-import { defineComponent, computed, PropType } from 'vue'
-import { DatatableColumn } from '../../types'
-import Actions from './actions'
+import { defineComponent, PropType } from 'vue'
+import { DatatableColumn, DatatableRow } from '../../types'
+import { COLUMN_DATATYPE } from '../../enums'
+
+import Actions from './datatype/actions'
+
+type RowColumn = {
+    column: DatatableColumn
+    value:  any
+}
 
 export default defineComponent({
     name: 'v-datatable-row',
 
     props: {
         row: {
-            required: true,
-        },
-
-        columns: {
-            type: Object as PropType<DatatableColumn[]>,
+            type: Object as PropType<DatatableRow>,
             required: true,
         },
     },
@@ -20,12 +23,14 @@ export default defineComponent({
         Actions,
     },
 
-    setup(props) {
-        const columnClasses = (key: string): string[] => {
-            if (key === 'actions')
-                return ['v-datatable-row-actions']
+    setup() {
+        const isActionDatatype = (column: DatatableColumn): boolean => column.datatype === COLUMN_DATATYPE.ACTIONS
 
-            const column = <DatatableColumn> props.columns.filter((column: DatatableColumn) => column.key === key)[0]
+        const columnClasses = (rowColumn: RowColumn): string[] => {
+            const column = rowColumn.column
+
+            if (isActionDatatype(column))
+                return ['v-datatable-row-actions']
 
             return [
                 'v-datatable-row-col',
@@ -33,29 +38,19 @@ export default defineComponent({
             ]
         }
 
-        const filteredColumns = computed(() => {
-            let row = {}
-
-            props.columns.map(column => column.key).forEach((key) => {
-                row[key] = props.row[key]
-            })
-
-            return row
-        })
-
         return {
-            filteredColumns,
             columnClasses,
+            isActionDatatype,
         }
     },
 
     template: `
         <tr class="v-datatable-row">
-            <td v-for="(column, name) in filteredColumns"
+            <td v-for="rowCol in row"
                 class="small"
-                :class="columnClasses(name)">
-                <Actions v-if="name === 'actions'" :actions="column"/>
-                <span v-else v-html="column"></span>
+                :class="columnClasses(rowCol)">
+                <Actions v-if="isActionDatatype(rowCol.column)" :actions="rowCol.value"/>
+                <span v-else v-html="rowCol.value"></span>
             </td>
         </tr>
     `,

@@ -1,11 +1,12 @@
 .v-datatable-column {
+    @extend .fw-light, .text-uppercase, .text-muted;
+
     &.v-datatable-column-sortable {
-        position: relative;
-        cursor: pointer;
-        user-select: none;
+        @extend .position-relative, .cursor-pointer, .user-select-none;
 
         &:after {
-            position: absolute;
+            @extend .position-absolute;
+
             top: 50%;
             right: 8px;
             display: block;

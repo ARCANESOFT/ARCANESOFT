@@ -15,7 +15,7 @@ export default defineComponent({
     setup() {
         const { trans } = translator()
 
-        const csrf = ref<string | null>(null)
+        const csrf = ref<string>(null)
         const recoveryShown = ref<boolean>(false)
         const codeRef = ref(null)
         const recoveryCodeRef = ref(null)
@@ -85,20 +85,20 @@ export default defineComponent({
                             </div>
                         </div>
 
-                        <div class="col">
+                        <div class="col d-grid gap-2">
                             <button v-if="recoveryShown" type="button"
                                     @click.prevent="toggleToCode"
                                     v-text="trans('Use an authentication code')"
-                                    class="btn btn-block btn-light"></button>
+                                    class="btn btn-light"></button>
 
                             <button v-else type="button"
                                     @click.prevent="toggleToRecovery"
                                     v-text="trans('Use a recovery code')"
-                                    class="btn btn-block btn-light"></button>
+                                    class="btn btn-light"></button>
 
                             <button type="submit"
                                     v-text="trans('Login')"
-                                    class="btn btn-block btn-primary"></button>
+                                    class="btn btn-primary"></button>
                         </div>
                     </div>
                 </form>

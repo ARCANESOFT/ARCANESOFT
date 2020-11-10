@@ -36,8 +36,8 @@
                             </div>
 
                             {{-- SUBMIT BUTTON --}}
-                            <div class="col">
-                                <button class="btn btn-primary btn-block" type="submit">@lang('Email Password Reset Link')</button>
+                            <div class="d-grid col">
+                                <button class="btn btn-primary" type="submit">@lang('Email Password Reset Link')</button>
                             </div>
                         </div>
                     </form>

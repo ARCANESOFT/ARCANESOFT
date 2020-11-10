@@ -15,7 +15,7 @@ export default defineComponent({
     setup() {
         const { paginationLinks, goToPage } = useStore()
 
-        const isDisabled = (link) => link.url === null
+        const isDisabled = (link: DatatablePageLink) => link.url === null
         const isNavLink = (link: DatatablePageLink, url: string | null): boolean => {
             if (typeof link.label !== 'string')
                 return false
@@ -26,10 +26,10 @@ export default defineComponent({
             return link.url === url
         }
 
-        const isPreviousLink = ((link) => isNavLink(link, paginationLinks.value.prev))
-        const isNextLink = ((link) => isNavLink(link, paginationLinks.value.next))
+        const isPreviousLink = ((link: DatatablePageLink) => isNavLink(link, paginationLinks.value.prev))
+        const isNextLink = ((link: DatatablePageLink) => isNavLink(link, paginationLinks.value.next))
 
-        const ariaLabel = (link) => {
+        const ariaLabel = (link: DatatablePageLink) => {
             if (isPreviousLink(link))
                 return 'Previous'
 
@@ -39,7 +39,7 @@ export default defineComponent({
             return null
         }
 
-        const linkRel = (link): string | null => {
+        const linkRel = (link: DatatablePageLink): string | null => {
             if (isDisabled(link))
                 return null
 
@@ -52,8 +52,13 @@ export default defineComponent({
             return null
         }
 
+        const onClick = async (link: DatatablePageLink): Promise<void> => {
+            if ( ! isDisabled(link))
+                await goToPage(link)
+        }
+
         return {
-            goToPage,
+            onClick,
             isDisabled,
             isPreviousLink,
             isNextLink,
@@ -71,7 +76,7 @@ export default defineComponent({
             </span>
             <button
                 v-else
-                @click.prevent="goToPage(link)"
+                @click.prevent="onClick(link)"
                 class="v-datatable-page-link page-link"
                 :class="{'d-none d-md-block': ! (isPreviousLink(link) || isNextLink(link))}"
                 :ariaDisabled="isDisabled(link) ? 'true' : null"

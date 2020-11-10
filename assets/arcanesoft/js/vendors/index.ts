@@ -18,12 +18,10 @@ window['TuiEditor'] = require('@toast-ui/editor')
 
 import chart from './chart-js'
 import flatpickr from './flatpickr'
-import select2 from './select2'
 import autosize from './autosize'
 
 window['plugins'] = {
     chart,
     flatpickr,
-    select2,
     autosize,
 }

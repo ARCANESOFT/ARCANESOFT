@@ -1,11 +1,11 @@
-import getters, { Getters } from './getters'
-import actions, { Actions } from './actions'
-import mutations, { Mutations } from './mutations'
+import useGetters, { Getters } from './getters'
+import useActions, { Actions } from './actions'
+import useMutations, { Mutations } from './mutations'
 
 type Store = Getters & Actions & Mutations
 
 export default (): Store => ({
-    ...actions(),
-    ...getters(),
-    ...mutations(),
+    ...useActions(),
+    ...useGetters(),
+    ...useMutations(),
 })

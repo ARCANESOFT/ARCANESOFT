@@ -1,5 +1,5 @@
-import { computed, ComputedRef } from 'vue'
-import useState from './state'
+import {computed, ComputedRef, UnwrapRef} from 'vue'
+import useState, { State } from './state'
 import {
     DatatableColumn,
     DatatableFilter,
@@ -8,10 +8,15 @@ import {
     DatatablePerPage,
     DatatableResponseMeta,
     DatatableRow,
+    DatatableRowColumn,
     DatatableSortByColumn
 } from '../types'
 
 export type Getters = {
+    state: UnwrapRef<State>,
+    draw: ComputedRef<number>,
+    payloadUrl: ComputedRef<string>,
+    payloadParams: ComputedRef<Object>,
     isLoading: ComputedRef<boolean>,
     isReady: ComputedRef<boolean>,
     isEmpty: ComputedRef<boolean>,
@@ -28,17 +33,26 @@ export type Getters = {
     sortedByColumns: ComputedRef<DatatableSortByColumn[]>
 }
 
+const state = useState()
+
 export default (): Getters => {
-    const state = useState()
+    const draw = computed<number>((): number => state.draw)
+    const payloadUrl = computed<string>((): string => state.payload.url)
+    const payloadParams = computed<Object>((): Object => state.payload.params)
 
-    const rows = computed<DatatableRow[]>(() => state.results.items || [])
+    const columns = computed<DatatableColumn[]>(() => state.results.metas?.columns ?? [])
+    const rows = computed<DatatableRow[]>(
+        () => (state.results.items || []).map((row) => columns.value.map((column) => ({
+            column: column,
+            value:  row[column.key],
+        })))
+    )
     const metas = computed<DatatableResponseMeta>(() => state.results.metas)
-    const columns = computed<DatatableColumn[]>(() => metas.value?.columns ?? [])
 
-    const filters = computed<DatatableFilter[]>(() => metas.value?.filters ?? [])
+    const filters = computed<DatatableFilter[]>(() => state.results.metas?.filters ?? [])
     const hasFilters = computed<boolean>(() => filters.value.length > 0)
     const isFiltersApplied = computed<boolean>(() => {
-        const filteredBy = metas.value?.query?.filter_by ?? []
+        const filteredBy = state.results.metas?.query?.filter_by ?? []
 
         if (filteredBy.length === 0)
             return false
@@ -64,6 +78,10 @@ export default (): Getters => {
     const isEmpty = computed<boolean>(() => rows.value.length === 0)
 
     return {
+        state,
+        draw,
+        payloadUrl,
+        payloadParams,
         isLoading,
         isReady,
         isEmpty,
