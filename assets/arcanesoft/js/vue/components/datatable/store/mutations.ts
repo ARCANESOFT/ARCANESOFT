@@ -1,4 +1,4 @@
-import useState from './state'
+import { useState } from './state'
 import { DatatableResponse } from '../types'
 
 export type Mutations = {
@@ -9,6 +9,7 @@ export type Mutations = {
     setResults: (results: DatatableResponse) => void
     setPayloadUrl: (url: string) => void
     setPayloadParams: (params: Object) => void
+    setPayloadQuery: (query: Object) => void
     resetPaginationUrl: () => void
 }
 
@@ -43,6 +44,15 @@ export default (): Mutations => {
         state.payload.params = params
     }
 
+    const setPayloadQuery = (query: Object): void => {
+        setPayloadParams({
+            query: {
+                ...(state.payload.params['query'] || {}),
+                ...query,
+            }
+        })
+    }
+
     const resetPaginationUrl = (): void => {
         let parts = state.payload.url.split('?')
         let params = new URLSearchParams(parts[1])
@@ -59,6 +69,7 @@ export default (): Mutations => {
         setResults,
         setPayloadUrl,
         setPayloadParams,
+        setPayloadQuery,
         resetPaginationUrl,
     }
 }

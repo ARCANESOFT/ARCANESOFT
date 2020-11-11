@@ -1,4 +1,4 @@
-import { reactive, UnwrapRef } from 'vue'
+import { reactive, provide, inject, UnwrapRef } from 'vue'
 import { ApiPayload, DatatableResponse } from '../types'
 
 export type State = {
@@ -9,15 +9,21 @@ export type State = {
     ready:   boolean
 }
 
-const state = reactive<State>({
+export const stateSymbol = Symbol('state')
+
+export const createState = (): UnwrapRef<State> => reactive({
     draw:    0,
     results: <DatatableResponse> {},
     ready:   false,
     loading: false,
     payload: {
         url: null,
-        params: {},
+        params: {
+            query: {},
+        },
     }
 })
 
-export default (): UnwrapRef<State> => state
+export const useState = (): State => inject(stateSymbol)
+
+export const provideState = (): void => provide(stateSymbol, createState())

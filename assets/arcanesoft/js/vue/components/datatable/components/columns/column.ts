@@ -1,7 +1,8 @@
 import { defineComponent, computed, PropType } from 'vue'
-import useStore from '../../store'
+import useGetters from '../../store/getters'
+import useActions from '../../store/actions'
 import { DatatableColumn, DatatableSortByColumn } from '../../types'
-import { COLUMN_ALIGNMENT, SORT_BY_DIRECTION } from '../../enums'
+import { COLUMN_ALIGNMENT, SORT_DIRECTION } from '../../enums'
 
 export default defineComponent({
     name: 'v-datatable-column',
@@ -13,13 +14,14 @@ export default defineComponent({
         },
     },
 
-    setup({ column }) {
-        const { changeSortBy, sortedByColumns } = useStore()
+    setup(props) {
+        const { sortedByColumns } = useGetters()
+        const { changeSortBy } = useActions()
 
-        const isSortable = computed<boolean>(() => column.sortable)
-        const sortDirection = computed<SORT_BY_DIRECTION | null>(() => {
+        const isSortable = computed<boolean>(() => props.column.sortable)
+        const sortDirection = computed<SORT_DIRECTION | null>(() => {
             const sortedColumn = sortedByColumns.value.find(
-                (sortedColumn: DatatableSortByColumn) => sortedColumn.key === column.key
+                (sortedColumn: DatatableSortByColumn) => sortedColumn.key === props.column.key
             )
 
             return sortedColumn !== undefined
@@ -27,45 +29,49 @@ export default defineComponent({
                 : null
         })
         const columnClasses = computed<string[] | Object>(() => {
-            if (column.key === 'actions')
+            if (props.column.key === 'actions')
                 return ['text-right']
 
             return {
-                'text-left'   : column.align === COLUMN_ALIGNMENT.LEFT,
-                'text-center' : column.align === COLUMN_ALIGNMENT.CENTER,
-                'text-right'  : column.align === COLUMN_ALIGNMENT.RIGHT,
+                'text-left'   : props.column.align === COLUMN_ALIGNMENT.LEFT,
+                'text-center' : props.column.align === COLUMN_ALIGNMENT.CENTER,
+                'text-right'  : props.column.align === COLUMN_ALIGNMENT.RIGHT,
 
                 'v-datatable-column-sortable':  isSortable.value,
-                'v-datatable-column-sort-asc':  sortDirection.value === SORT_BY_DIRECTION.ASC,
-                'v-datatable-column-sort-desc': sortDirection.value === SORT_BY_DIRECTION.DESC,
+                'v-datatable-column-sort-asc':  sortDirection.value === SORT_DIRECTION.ASC,
+                'v-datatable-column-sort-desc': sortDirection.value === SORT_DIRECTION.DESC,
             }
         })
 
         const changeSortDirection = (direction: string | null) => {
             switch (direction) {
-                case SORT_BY_DIRECTION.ASC:
-                    return SORT_BY_DIRECTION.DESC
-                case SORT_BY_DIRECTION.DESC:
+                case SORT_DIRECTION.ASC:
+                    return SORT_DIRECTION.DESC
+                case SORT_DIRECTION.DESC:
                     return null
                 case null:
                 default:
-                    return SORT_BY_DIRECTION.ASC
+                    return SORT_DIRECTION.ASC
             }
         }
 
         const getNewSortedColumnDirection = () => ({
-            key: column.key,
+            key:       props.column.key,
             direction: changeSortDirection(sortDirection.value),
         })
 
-        const setSortBy = async (): Promise<void> => await sortBy((): DatatableSortByColumn[] => [
-            getNewSortedColumnDirection()
-        ])
+        const onClick = async (event): Promise<void> => await sortBy(
+            (): DatatableSortByColumn[] => event.shiftKey ? toggleMultiple() : toggleSingle()
+        )
 
-        const toggleSortBy = async (): Promise<void> => await sortBy((): DatatableSortByColumn[] => {
+        const toggleSingle = (): DatatableSortByColumn[] => [
+            getNewSortedColumnDirection()
+        ]
+
+        const toggleMultiple = (): DatatableSortByColumn[] => {
             const sortedColumns = sortedByColumns.value
             const exists = sortedColumns.find(
-                (sortedColumn) => sortedColumn.key === column.key
+                (sortedColumn) => sortedColumn.key === props.column.key
             )
 
             if (exists === undefined) {
@@ -76,32 +82,31 @@ export default defineComponent({
             }
 
             return sortedColumns.map((sortedColumn) => {
-                return (sortedColumn.key !== column.key)
+                return (sortedColumn.key !== props.column.key)
                     ? sortedColumn
                     : getNewSortedColumnDirection()
             })
-        })
+        }
 
         const sortBy = async (sortByCallback: () => DatatableSortByColumn[]): Promise<void> => {
             if (isSortable.value === false)
                 return
 
             return await changeSortBy(
-                sortByCallback().filter((column: DatatableSortByColumn) => column.direction !== null)
+                sortByCallback()
+                    .filter((column: DatatableSortByColumn) => column.direction !== null)
             )
         }
 
         return {
             columnClasses,
-            setSortBy,
-            toggleSortBy,
+            onClick,
         }
     },
 
     template: `
         <th class="v-datatable-column"
             :class="columnClasses"
-            @click.prevent="setSortBy"
-            @click.shift.prevent="toggleSortBy">{{ column.label }}</th>
+            @click.prevent="onClick">{{ column.label }}</th>
     `,
 })

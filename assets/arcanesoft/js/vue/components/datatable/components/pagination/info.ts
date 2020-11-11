@@ -18,6 +18,6 @@ export default defineComponent({
     },
 
     template: `
-        <div class="v-datatable-pagination-info">{{ info }}</div>
+        <div class="v-datatable-pagination-info small text-muted">{{ info }}</div>
     `,
 })

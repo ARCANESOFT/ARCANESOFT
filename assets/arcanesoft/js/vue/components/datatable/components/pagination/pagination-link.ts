@@ -1,6 +1,7 @@
 import { defineComponent, PropType } from 'vue'
 import { DatatablePageLink } from '../../types'
-import useStore from '../../store'
+import useActions from '../../store/actions'
+import useGetters from '../../store/getters'
 
 export default defineComponent({
     name: 'v-datatable-pagination-link',
@@ -13,7 +14,8 @@ export default defineComponent({
     },
 
     setup() {
-        const { paginationLinks, goToPage } = useStore()
+        const { paginationLinks } = useGetters()
+        const { goToPage } = useActions()
 
         const isDisabled = (link: DatatablePageLink) => link.url === null
         const isNavLink = (link: DatatablePageLink, url: string | null): boolean => {

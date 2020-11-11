@@ -1,13 +1,15 @@
 import { defineComponent } from 'vue'
-import useStore from '../../store'
+import useActions from '../../store/actions'
+import useGetters from '../../store/getters'
 
 export default defineComponent({
     name: 'v-datatable-reload-button',
 
     setup() {
-        const { reload, isLoading } = useStore()
+        const { reload } = useActions()
+        const { isLoading } = useGetters()
 
-        const click = async () => await reload()
+        const click = async (): Promise<void> => await reload()
 
         return {
             isLoading,

@@ -1,3 +1,8 @@
+export enum ACTION_TYPE {
+    LINK   = 'link',
+    BUTTON = 'button',
+}
+
 export enum COLUMN_ALIGNMENT {
     LEFT   = 'left' ,
     CENTER = 'center' ,
@@ -5,22 +10,20 @@ export enum COLUMN_ALIGNMENT {
 }
 
 export enum COLUMN_DATATYPE {
-    ACTIONS = 'actions',
-    PLAIN   = 'plain',
-}
-
-export enum ACTION_TYPE {
-    LINK   = 'link',
-    BUTTON = 'button',
-}
-
-export enum SORT_BY_DIRECTION {
-    ASC  = 'asc',
-    DESC = 'desc',
+    ACTIONS      = 'actions',
+    AVATAR       = 'avatar',
+    BADGE_ACTIVE = 'badge-active',
+    BADGE_COUNT  = 'badge-count',
+    PLAIN        = 'plain',
 }
 
 export enum FILTER_TYPE {
     SELECT   = 'select',
     CHECKBOX = 'checkbox',
     DATE     = 'date',
+}
+
+export enum SORT_DIRECTION {
+    ASC  = 'asc',
+    DESC = 'desc',
 }

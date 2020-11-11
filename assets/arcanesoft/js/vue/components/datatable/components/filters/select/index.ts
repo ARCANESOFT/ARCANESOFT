@@ -1,6 +1,6 @@
-import { defineComponent, reactive, onMounted, PropType } from 'vue'
+import { defineComponent, computed, reactive, onMounted, PropType } from 'vue'
 import { DatatableFilter } from '../../../types'
-import useStore from '../../../store'
+import useActions from '../../../store/actions'
 
 export default defineComponent({
     name: 'v-datatable-filter-select',
@@ -12,19 +12,20 @@ export default defineComponent({
         },
     },
 
-    setup({ filter }) {
-        const { applyFilter } = useStore()
+    setup(props) {
+        const { applyFilter } = useActions()
+
         const value = reactive({
             selected: null,
             original: null,
         })
 
         onMounted(() => {
-            value.selected = filter.value
-            value.original = filter.value
+            value.selected = props.filter.value
+            value.original = props.filter.value
         })
 
-        const filterChanged = async (): Promise<void> => await applyFilter(filter.name, value.selected)
+        const filterChanged = async (): Promise<void> => await applyFilter(props.filter.name, value.selected)
 
         return {
             value,

@@ -1,23 +1,30 @@
-import { defineComponent, onMounted, PropType, ref } from 'vue'
-import { DatatableRowAction } from '../../../../types'
+import {computed, defineComponent, onMounted, PropType, ref} from 'vue'
+import { DatatypeAction } from '../../../../types/column-datatype'
 import useTooltip from '../../../../../../../components/tooltip'
-import computedAction from './_shared/computed-action'
 
 export default defineComponent({
     name: 'v-datatable-row-button-action',
 
     props: {
         action: {
-            type: Object as PropType<DatatableRowAction>,
+            type: Object as PropType<DatatypeAction>,
             required: true,
         },
     },
 
-    setup({ action }, ctx) {
+    setup(props, ctx) {
         const actionRef = ref<HTMLElement>(null)
         let tooltip = null
 
-        const { onlyIcon, isDisabled, isDestructive } = computedAction(action)
+        const onlyIcon = computed<boolean>(() => props.action.icon !== null)
+        const isDisabled =  computed<boolean>(() => props.action.allowed === false)
+        const isDestructive =  computed<boolean>(() => props.action.name === 'delete')
+
+        const actionClass = computed<Object>(() => ({
+            'destructive': isDestructive.value,
+            'text-danger': isDestructive.value,
+            'disabled': isDisabled.value,
+        }))
 
         onMounted(() => {
             tooltip = useTooltip(actionRef.value, { container: 'body' })
@@ -27,7 +34,7 @@ export default defineComponent({
             actionRef,
             onlyIcon,
             isDisabled,
-            isDestructive,
+            actionClass,
         }
     },
 
@@ -39,7 +46,7 @@ export default defineComponent({
                 :data-toggle="onlyIcon ? 'tooltip' : null"
                 :data-container="onlyIcon ? 'body' : null"
                 :ariaDisabled="isDisabled ? 'true' : null"
-                class="v-datatable-row-action" :class="{ 'destructive': isDestructive, 'disabled': isDisabled }">
+                class="v-datatable-row-action" :class="actionClass">
             <i v-if="onlyIcon" :class="action.icon"></i>
             <span v-else>{{ action.label }}</span>
         </button>

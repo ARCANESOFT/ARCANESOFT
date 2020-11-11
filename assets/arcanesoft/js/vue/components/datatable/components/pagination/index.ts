@@ -1,6 +1,6 @@
 import { defineComponent, computed } from 'vue'
 import { DatatablePageLink } from '../../types'
-import useStore from '../../store'
+import useGetters from '../../store/getters'
 
 import PaginationLink from './pagination-link'
 
@@ -12,7 +12,7 @@ export default defineComponent({
     },
 
     setup() {
-        const { pagination } = useStore()
+        const { pagination } = useGetters()
 
         const links = computed<DatatablePageLink[]>(() => pagination.value.links)
 
@@ -23,7 +23,7 @@ export default defineComponent({
 
     template: `
         <nav aria-label="...">
-            <ul class="v-datatable-pagination">
+            <ul class="v-datatable-pagination justify-content-end mb-0">
                 <PaginationLink v-for="link in links" :link="link"/>
             </ul>
         </nav>

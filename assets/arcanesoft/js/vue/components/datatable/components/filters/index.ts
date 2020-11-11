@@ -1,7 +1,7 @@
 import { defineComponent, ref, onMounted, onUnmounted, UnwrapRef } from 'vue'
 import { DatatableFilter } from '../../types'
 import { FILTER_TYPE } from '../../enums'
-import useStore from '../../store'
+import useGetters from '../../store/getters'
 
 import SelectFilter from './select'
 
@@ -13,7 +13,7 @@ export default defineComponent({
     },
 
     setup() {
-        const { filters, isFiltersApplied } = useStore()
+        const { filters, isFiltersApplied } = useGetters()
         const dropdownMenu = ref(null)
         const isSelectFilter = (filter: UnwrapRef<DatatableFilter>): boolean => filter.type === FILTER_TYPE.SELECT
 

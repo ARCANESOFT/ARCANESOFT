@@ -1,5 +1,5 @@
 import { defineComponent, computed, PropType} from 'vue'
-import { DatatableRowAction } from '../../../../types'
+import { DatatypeAction } from '../../../../types/column-datatype'
 
 import ButtonAction from './button'
 import LinkAction from './link'
@@ -9,7 +9,7 @@ export default defineComponent({
 
     props: {
         action: {
-            type: Object as PropType<DatatableRowAction>,
+            type: Object as PropType<DatatypeAction>,
             required: true,
         },
     },
@@ -19,9 +19,9 @@ export default defineComponent({
         LinkAction,
     },
 
-    setup({ action }) {
-        const isButton = computed<boolean>(() => action.type === 'button')
-        const isLink = computed<boolean>(() => action.type === 'link')
+    setup(props) {
+        const isButton = computed<boolean>(() => props.action.type === 'button')
+        const isLink = computed<boolean>(() => props.action.type === 'link')
 
         return {
             isButton,

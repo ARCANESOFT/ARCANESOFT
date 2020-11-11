@@ -1,23 +1,24 @@
-import { defineComponent, onMounted, PropType, ref } from 'vue'
-import { DatatableRowAction } from '../../../../types'
+import {computed, defineComponent, onMounted, PropType, ref} from 'vue'
+import { DatatypeAction } from '../../../../types/column-datatype'
 import useTooltip from '../../../../../../../components/tooltip'
-import computedAction from './_shared/computed-action'
 
 export default defineComponent({
     name: 'v-datatable-row-link-action',
 
     props: {
         action: {
-            type: Object as PropType<DatatableRowAction>,
+            type: Object as PropType<DatatypeAction>,
             required: true,
         },
     },
 
-    setup({ action }) {
+    setup(props) {
         const actionRef = ref<HTMLElement>(null)
         let tooltip = null
 
-        const { onlyIcon, isDisabled, isDestructive } = computedAction(action)
+        const onlyIcon = computed<boolean>(() => props.action.icon !== null)
+        const isDisabled =  computed<boolean>(() => props.action.allowed === false)
+        const isDestructive =  computed<boolean>(() => props.action.name === 'delete')
 
         onMounted(() => {
             tooltip = useTooltip(actionRef.value, { container: 'body' })

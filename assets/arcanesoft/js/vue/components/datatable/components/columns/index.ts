@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue'
-import useStore from '../../store'
+import useGetters from '../../store/getters'
 import Column from './column'
 
 export default defineComponent({
@@ -10,7 +10,7 @@ export default defineComponent({
     },
 
     setup() {
-        const { columns } = useStore()
+        const { columns } = useGetters()
 
         return {
             columns,

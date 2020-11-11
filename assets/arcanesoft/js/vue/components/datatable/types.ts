@@ -1,11 +1,10 @@
 import * as ENUMS from './enums'
-
-type NullableString = string | null
+import ColumnDatatype from './types/column-datatype'
 
 export type DatatablePageLink = {
     active: boolean
     label:  string | number
-    url:    NullableString
+    url:    string | null
 }
 
 export type DatatablePagination = {
@@ -23,7 +22,7 @@ export type DatatableRow = DatatableRowColumn[]
 
 export type DatatableRowColumn = {
     column: DatatableColumn,
-    value:  any
+    value:  ColumnDatatype
 }
 
 export type DatatableColumn = {
@@ -33,15 +32,6 @@ export type DatatableColumn = {
     sortable: boolean
     escaped:  boolean
     datatype: ENUMS.COLUMN_DATATYPE
-}
-
-export type DatatableRowAction = {
-    action:  string
-    allowed: boolean
-    icon:    NullableString
-    label:   string
-    name:    string
-    type:    ENUMS.ACTION_TYPE
 }
 
 export type PerPageOption = {
@@ -56,18 +46,17 @@ export type DatatablePerPage = {
 
 export type DatatableSortByColumn = {
     key:       string
-    direction: ENUMS.SORT_BY_DIRECTION
+    direction: ENUMS.SORT_DIRECTION
 }
+
+export type DatatableFilterSelectOptions = {} // filter component options
 
 export type DatatableFilter = {
     type:    ENUMS.FILTER_TYPE
     name:    string
     label:   string
     value:   any
-    options: DatatableFilterSelectOptions | Object // filter component options
-}
-
-export type DatatableFilterSelectOptions = {
+    options: DatatableFilterSelectOptions
 }
 
 export type DatatableResponseMeta = {
@@ -75,7 +64,7 @@ export type DatatableResponseMeta = {
     query: {
         sort_by:   DatatableSortByColumn[]
         filter_by: Array<any>
-        search:    NullableString
+        search:    string | null
     }
     filters:     DatatableFilter[]
     pagination?: DatatablePagination
@@ -84,8 +73,8 @@ export type DatatableResponseMeta = {
 export type DatatableLinks = {
     first: string
     last:  string
-    next:  NullableString
-    prev:  NullableString
+    next:  string | null
+    prev:  string | null
 }
 
 export type DatatableResponse = {

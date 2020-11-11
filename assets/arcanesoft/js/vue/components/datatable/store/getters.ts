@@ -1,5 +1,5 @@
-import {computed, ComputedRef, UnwrapRef} from 'vue'
-import useState, { State } from './state'
+import { computed, ComputedRef } from 'vue'
+import { useState } from './state'
 import {
     DatatableColumn,
     DatatableFilter,
@@ -8,12 +8,10 @@ import {
     DatatablePerPage,
     DatatableResponseMeta,
     DatatableRow,
-    DatatableRowColumn,
     DatatableSortByColumn
 } from '../types'
 
 export type Getters = {
-    state: UnwrapRef<State>,
     draw: ComputedRef<number>,
     payloadUrl: ComputedRef<string>,
     payloadParams: ComputedRef<Object>,
@@ -33,9 +31,9 @@ export type Getters = {
     sortedByColumns: ComputedRef<DatatableSortByColumn[]>
 }
 
-const state = useState()
-
 export default (): Getters => {
+    const state = useState()
+
     const draw = computed<number>((): number => state.draw)
     const payloadUrl = computed<string>((): string => state.payload.url)
     const payloadParams = computed<Object>((): Object => state.payload.params)
@@ -78,7 +76,6 @@ export default (): Getters => {
     const isEmpty = computed<boolean>(() => rows.value.length === 0)
 
     return {
-        state,
         draw,
         payloadUrl,
         payloadParams,

@@ -1,9 +1,8 @@
 import { defineComponent, PropType } from 'vue'
 import { DatatableRowColumn } from '../../../../types'
-import Action from './action'
 
 export default defineComponent({
-    name: 'v-datatable-row-col-actions',
+    name: 'v-datatable-row-col-plain',
 
     props: {
         rowColumn: {
@@ -12,11 +11,5 @@ export default defineComponent({
         },
     },
 
-    components: {
-        Action,
-    },
-
-    template: `
-        <Action v-for="action in rowColumn.value" :action="action" :key="action.name"/>
-    `,
+    template: `<span v-html="rowColumn.value"></span>`,
 })

@@ -1,5 +1,5 @@
 .v-datatable-row-actions {
-    @extend .text-right;
+    text-align: right;
 
     .v-datatable-row-action {
         @extend .btn, .btn-sm, .btn-light;
@@ -9,7 +9,7 @@
         }
 
         &.destructive {
-            @extend .text-danger;
+            //
         }
     }
 }

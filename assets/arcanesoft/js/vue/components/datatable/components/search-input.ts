@@ -1,12 +1,12 @@
 import { defineComponent, ref } from 'vue'
 import debounce from '@arcanesoft/core/src/functions/debounce'
-import useStore from '../store'
+import useActions from '../store/actions'
 
 export default defineComponent({
     name: 'v-search-input',
 
     setup() {
-        const { searchQuery } = useStore()
+        const { searchQuery } = useActions()
 
         const query = ref<string>('')
         const oldQuery = ref<string>('')

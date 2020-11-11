@@ -1,12 +1,15 @@
 import { defineComponent, ref } from 'vue'
 import { PerPageOption } from '../types'
-import useStore from '../store'
+import useActions from '../store/actions'
+import useGetters from '../store/getters'
 
 export default defineComponent({
     name: 'v-per-page-select',
 
     setup() {
-        const { perPage, changePerPage } = useStore()
+        const { changePerPage } = useActions()
+        const { perPage } = useGetters()
+
         const selected = ref<number>(perPage.value.selected)
         const options = ref<PerPageOption[]>(perPage.value.options)
 
