@@ -7,7 +7,6 @@ import NavbarNotifications from './navbar/notifications'
 import Datatable from './datatable'
 import ToastsManager from './toasts/manager'
 import Metric from './metrics'
-import WiredDatatable from './wire/datatable'
 
 export default [
     // Navbar
@@ -24,6 +23,4 @@ export default [
     Metric,
     Datatable,
     ToastsManager,
-
-    WiredDatatable, // TODO: To Delete
 ]
