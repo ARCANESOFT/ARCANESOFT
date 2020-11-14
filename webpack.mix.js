@@ -49,7 +49,7 @@ else if (process.env.NODE_ENV === 'development') {
  */
 
 workspaces.forEach((workspace) => {
-    let mixFiles = glob.sync(`./${workspace}/webpack.mix.js`, {
+    let mixFiles = glob.sync(path.join(__dirname, workspace, 'webpack.mix.js'), {
         'ignore': [
             '**/node_modules/**',
         ],
