@@ -2261,7 +2261,7 @@ boolbase@^1.0.0, boolbase@~1.0.0:
 
 bootstrap@twbs/bootstrap#main:
   version "5.0.0-alpha3"
-  resolved "https://codeload.github.com/twbs/bootstrap/tar.gz/fe961c192d951bde610cdcd4817f4d8548d33141"
+  resolved "https://codeload.github.com/twbs/bootstrap/tar.gz/4f8b243ac1a7ccd13c6bb485463ae365010d2620"
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -3394,9 +3394,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.3.591:
-  version "1.3.595"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.595.tgz#e8a9e7c6919963419f892ea981d7b3438ccb834d"
-  integrity sha512-JpaBIhdBkF9FLG7x06ONfe0f5bxPrxRcq0X+Sc8vsCt+OPWIzxOD+qM71NEHLGbDfN9Q6hbtHRv4/dnvcOxo6g==
+  version "1.3.596"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.596.tgz#c7ed98512c7ff36ddcbfed9e54e6355335c35257"
+  integrity sha512-nLO2Wd2yU42eSoNJVQKNf89CcEGqeFZd++QsnN2XIgje1s/19AgctfjLIbPORlvcCO8sYjLwX4iUgDdusOY8Sg==
 
 emittery@^0.7.1:
   version "0.7.2"
@@ -5325,7 +5325,7 @@ jsbn@~0.1.0:
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
   integrity sha1-peZUwuWi3rXyAdls77yoDA7y9RM=
 
-jsdom@^16.3.0, jsdom@^16.4.0:
+jsdom@^16.4.0:
   version "16.4.0"
   resolved "https://registry.yarnpkg.com/jsdom/-/jsdom-16.4.0.tgz#36005bde2d136f73eee1a830c6d45e55408edddb"
   integrity sha512-lYMm3wYdgPhrl7pDcRmvzPhhrGVBeVhPIqeHjzeiHN3DFmD1RBpbExbi8vU7BJdH8VAZYovR8DMt0PNNDM7k8w==
@@ -5474,7 +5474,7 @@ klona@^2.0.4:
   resolved "https://registry.yarnpkg.com/klona/-/klona-2.0.4.tgz#7bb1e3affb0cb8624547ef7e8f6708ea2e39dfc0"
   integrity sha512-ZRbnvdg/NxqzC7L9Uyqzf4psi1OM4Cuc+sJAkQPjO6XkQIJTNbfK2Rsmbw8fx1p2mkZdp2FZYo2+LwXYY/uwIA==
 
-laravel-mix@JeffreyWay/laravel-mix#master:
+laravel-mix@JeffreyWay/laravel-mix#master, laravel-mix@^6.0.0-beta.14:
   version "6.0.0-beta.14"
   resolved "https://codeload.github.com/JeffreyWay/laravel-mix/tar.gz/a557b55c796ceb7349fb3c8a875bc452602b7e90"
   dependencies:
@@ -7412,7 +7412,7 @@ sass-loader@^10.0.1:
     schema-utils "^3.0.0"
     semver "^7.3.2"
 
-sass@^1.26.11:
+sass@^1.27.0:
   version "1.29.0"
   resolved "https://registry.yarnpkg.com/sass/-/sass-1.29.0.tgz#ec4e1842c146d8ea9258c28c141b8c2b7c6ab7f1"
   integrity sha512-ZpwAUFgnvAUCdkjwPREny+17BpUj8nh5Yr6zKPGtLNTLrmtoRYIjm7njP24COhjJldjwW1dcv52Lpf4tNZVVRA==

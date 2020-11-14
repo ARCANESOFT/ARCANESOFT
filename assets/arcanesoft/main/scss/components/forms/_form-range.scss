@@ -1,0 +1,21 @@
+@import "~bootstrap/scss/forms/form-range";
+
+// Colors
+.form-range {
+    @each $color, $value in $theme-colors {
+        &.bg-#{$color} {
+            background-color: transparent !important;
+
+            &::-webkit-slider-thumb {
+                background-color: $value;
+            }
+            &::-moz-range-thumb {
+                background-color: $value;
+            }
+            &::-ms-thumb {
+                background-color: $value;
+            }
+        }
+    }
+}
+
