@@ -5,7 +5,7 @@ import { DatatableColumn, DatatableSortByColumn } from '../../types'
 import { COLUMN_ALIGNMENT, SORT_DIRECTION } from '../../enums'
 
 export default defineComponent({
-    name: 'v-datatable-column',
+    name: 'v-dt-column',
 
     props: {
         column: {
@@ -37,9 +37,9 @@ export default defineComponent({
                 'text-center' : props.column.align === COLUMN_ALIGNMENT.CENTER,
                 'text-right'  : props.column.align === COLUMN_ALIGNMENT.RIGHT,
 
-                'v-datatable-column-sortable':  isSortable.value,
-                'v-datatable-column-sort-asc':  sortDirection.value === SORT_DIRECTION.ASC,
-                'v-datatable-column-sort-desc': sortDirection.value === SORT_DIRECTION.DESC,
+                'v-dt-column-sortable':  isSortable.value,
+                'v-dt-column-sort-asc':  sortDirection.value === SORT_DIRECTION.ASC,
+                'v-dt-column-sort-desc': sortDirection.value === SORT_DIRECTION.DESC,
             }
         })
 
@@ -105,7 +105,7 @@ export default defineComponent({
     },
 
     template: `
-        <th class="v-datatable-column"
+        <th class="v-dt-column"
             :class="columnClasses"
             @click.prevent="onClick">{{ column.label }}</th>
     `,

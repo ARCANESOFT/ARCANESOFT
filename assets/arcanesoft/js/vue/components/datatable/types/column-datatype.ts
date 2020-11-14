@@ -1,5 +1,4 @@
 import { ACTION_TYPE } from '../enums'
-import {DatatableColumn} from "../types";
 
 export type DatatypeAction = {
     action:  string
@@ -23,8 +22,27 @@ export type DatatypeBadgeActive = {
 
 export type DatatypeBadgeCount = number
 
+export type DatatypeDetail = {
+    term: string
+    description: any
+}
+
+export type DatatypeDetails = DatatypeDetail[]
+
+export type DatatypeStatus = {
+    type: string
+    label: string
+}
+
+export type DatatypeTag = {
+    color: string
+    label: string
+}
+
+export type DatatypeTags = DatatypeTag[]
+
 export type DatatypePlain = string | number | boolean | null
 
-type DatatableColumnDatatype = DatatypePlain | DatatypeBadgeActive | DatatypeBadgeCount | DatatypeAvatar | DatatypeAction[]
+type DatatableColumnDatatype = DatatypeAction[] | DatatypeAvatar | DatatypeBadgeActive | DatatypeBadgeCount | DatatypeDetails | DatatypePlain | DatatypeStatus | DatatypeTags
 
 export default DatatableColumnDatatype

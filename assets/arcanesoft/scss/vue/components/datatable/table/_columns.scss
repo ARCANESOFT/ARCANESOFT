@@ -1,7 +1,7 @@
-.v-datatable-column {
+.v-dt-column {
     @extend .fw-light, .text-uppercase, .text-muted;
 
-    &.v-datatable-column-sortable {
+    &.v-dt-column-sortable {
         @extend .position-relative, .cursor-pointer, .user-select-none;
 
         &:after {
@@ -20,21 +20,21 @@
             transition: opacity .25s ease-in-out;
         }
 
-        &.v-datatable-column-sort-asc:after,
-        &.v-datatable-column-sort-desc:after {
+        &.v-dt-column-sort-asc:after,
+        &.v-dt-column-sort-desc:after {
             color: $primary;
             opacity: 0.75;
         }
 
-        &.v-datatable-column-sort-asc:after {
+        &.v-dt-column-sort-asc:after {
             content: fa-content($fa-var-sort-amount-up);
         }
 
-        &.v-datatable-column-sort-desc:after {
+        &.v-dt-column-sort-desc:after {
             content: fa-content($fa-var-sort-amount-down);
         }
 
-        &:not(.v-datatable-column-sort-asc):not(.v-datatable-column-sort-desc):after {
+        &:not(.v-dt-column-sort-asc):not(.v-dt-column-sort-desc):after {
             content: fa-content($fa-var-sort);
         }
 

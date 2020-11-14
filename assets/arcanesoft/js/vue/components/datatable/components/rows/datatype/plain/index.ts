@@ -2,7 +2,7 @@ import { defineComponent, PropType } from 'vue'
 import { DatatableRowColumn } from '../../../../types'
 
 export default defineComponent({
-    name: 'v-datatable-row-col-plain',
+    name: 'v-dt-row-col-plain',
 
     props: {
         rowColumn: {

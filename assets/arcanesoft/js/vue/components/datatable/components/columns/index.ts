@@ -3,7 +3,7 @@ import useGetters from '../../store/getters'
 import Column from './column'
 
 export default defineComponent({
-    name: 'v-datatable-columns',
+    name: 'v-dt-columns',
 
     components: {
         Column,
@@ -19,7 +19,7 @@ export default defineComponent({
 
     template: `
         <thead>
-            <tr class="v-datatable-columns">
+            <tr class="v-dt-columns">
                 <Column v-for="column in columns" :key="column.key" :column="column"/>
             </tr>
         </thead>

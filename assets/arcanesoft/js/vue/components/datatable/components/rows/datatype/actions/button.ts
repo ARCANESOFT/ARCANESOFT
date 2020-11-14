@@ -3,7 +3,7 @@ import { DatatypeAction } from '../../../../types/column-datatype'
 import useTooltip from '../../../../../../../components/tooltip'
 
 export default defineComponent({
-    name: 'v-datatable-row-button-action',
+    name: 'v-dt-datatype-action-button',
 
     props: {
         action: {
@@ -46,7 +46,7 @@ export default defineComponent({
                 :data-toggle="onlyIcon ? 'tooltip' : null"
                 :data-container="onlyIcon ? 'body' : null"
                 :ariaDisabled="isDisabled ? 'true' : null"
-                class="v-datatable-row-action" :class="actionClass">
+                class="v-dt-datatype-action" :class="actionClass">
             <i v-if="onlyIcon" :class="action.icon"></i>
             <span v-else>{{ action.label }}</span>
         </button>

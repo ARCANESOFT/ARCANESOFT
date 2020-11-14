@@ -3,7 +3,7 @@ import { DatatableRowColumn } from '../../../../types'
 import Action from './action'
 
 export default defineComponent({
-    name: 'v-datatable-row-col-actions',
+    name: 'v-dt-row-col-actions',
 
     props: {
         rowColumn: {

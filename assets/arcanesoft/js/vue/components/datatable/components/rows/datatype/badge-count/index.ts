@@ -3,7 +3,7 @@ import { DatatableRowColumn } from '../../../../types'
 import { DatatypeBadgeCount } from '../../../../types/column-datatype'
 
 export default defineComponent({
-    name: 'v-datatable-row-col-badge-count',
+    name: 'v-dt-row-col-badge-count',
 
     props: {
         rowColumn: {

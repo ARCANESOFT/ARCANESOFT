@@ -19,7 +19,6 @@
         "lodash-es": "^4.17",
         "moment": "^2.24",
         "moment-timezone": "^0.5",
-        "morphdom": "^2.6.1",
         "numeral": "^2.0.6",
         "popper.js": "^1.16",
         "select2": "^4.0.13",

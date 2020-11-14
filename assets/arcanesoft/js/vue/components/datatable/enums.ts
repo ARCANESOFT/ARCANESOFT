@@ -10,11 +10,14 @@ export enum COLUMN_ALIGNMENT {
 }
 
 export enum COLUMN_DATATYPE {
-    ACTIONS      = 'actions',
-    AVATAR       = 'avatar',
-    BADGE_ACTIVE = 'badge-active',
-    BADGE_COUNT  = 'badge-count',
-    PLAIN        = 'plain',
+    ACTIONS          = 'actions',
+    AVATAR           = 'avatar',
+    BADGE_ACTIVE     = 'badge-active',
+    BADGE_COUNT      = 'badge-count',
+    DESCRIPTION_LIST = 'description-list',
+    PLAIN            = 'plain',
+    STATUS           = 'status',
+    TAGS             = 'tags',
 }
 
 export enum FILTER_TYPE {

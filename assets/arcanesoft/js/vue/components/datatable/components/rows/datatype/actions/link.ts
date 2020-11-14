@@ -1,9 +1,9 @@
-import {computed, defineComponent, onMounted, PropType, ref} from 'vue'
+import { computed, defineComponent, onMounted, PropType, ref } from 'vue'
 import { DatatypeAction } from '../../../../types/column-datatype'
 import useTooltip from '../../../../../../../components/tooltip'
 
 export default defineComponent({
-    name: 'v-datatable-row-link-action',
+    name: 'v-dt-row-link-action',
 
     props: {
         action: {
@@ -40,7 +40,7 @@ export default defineComponent({
            :data-toggle="onlyIcon ? 'tooltip' : null"
            :data-container="onlyIcon ? 'body' : null"
            :ariaDisabled="isDisabled ? 'true' : null"
-           class="v-datatable-row-action" :class="{ 'destructive': isDestructive, 'disabled': isDisabled }">
+           class="v-dt-datatype-action" :class="{ 'destructive': isDestructive, 'disabled': isDisabled }">
             <i v-if="onlyIcon" :class="action.icon"></i>
             <span v-else>{{ action.label }}</span>
         </a>

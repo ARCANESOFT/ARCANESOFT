@@ -31,7 +31,7 @@ export default defineComponent({
     },
 
     template: `
-        <div class="v-datatable-container">
+        <div class="v-dt-container">
             <Datatable :name="name" :url="url"/>
         </div>
     `,

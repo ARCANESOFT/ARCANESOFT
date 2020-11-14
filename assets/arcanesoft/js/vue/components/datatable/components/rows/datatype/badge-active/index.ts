@@ -4,7 +4,7 @@ import { DatatypeBadgeActive } from "../../../../types/column-datatype"
 import useTooltip from "../../../../../../../components/tooltip";
 
 export default defineComponent({
-    name: 'v-datatable-row-col-badge-active',
+    name: 'v-dt-row-col-badge-active',
 
     props: {
         rowColumn: {

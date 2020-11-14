@@ -78,10 +78,10 @@ export default defineComponent({
     },
 
     template: `
-        <div class="v-datatable-card" :class="{'v-card-loading': isLoading}">
+        <div class="v-dt-card" :class="{'v-card-loading': isLoading}">
             <DatatableOverlay v-if="isLoading"/>
 
-            <div class="v-datatable-card-header">
+            <div class="v-dt-card-header">
                 <span v-if=" ! isReady">Loading...</span>
                 <div v-if="isReady" class="v-datatable-toolbar d-grid gap-2">
                     <div class="row g-2">
@@ -108,15 +108,15 @@ export default defineComponent({
             </div>
 
             <div v-if=" ! isReady" style="min-height: 10rem;"></div>
-            <div v-if="isReady && isEmpty" class="v-datatable-card-body">
+            <div v-if="isReady && isEmpty" class="v-dt-card-body">
                 <h4 class="fw-light text-center text-muted m-0">There is no entries to show</h4>
             </div>
-            <table v-if="isReady && ! isEmpty" class="v-datatable-table">
+            <table v-if="isReady && ! isEmpty" class="v-dt-table">
                 <DatatableColumns/>
                 <DatatableRows/>
             </table>
 
-            <div class="v-datatable-card-footer d-flex justify-content-between align-items-center" v-if="isReady">
+            <div class="v-dt-card-footer d-flex justify-content-between align-items-center" v-if="isReady">
                 <DatatablePaginationInfo/>
                 <DatatablePagination v-if="hasPagination && ! isEmpty"/>
             </div>

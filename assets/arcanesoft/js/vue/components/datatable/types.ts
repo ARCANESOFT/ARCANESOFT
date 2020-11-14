@@ -21,7 +21,7 @@ export type DatatablePagination = {
 export type DatatableRow = DatatableRowColumn[]
 
 export type DatatableRowColumn = {
-    column: DatatableColumn,
+    column: DatatableColumn
     value:  ColumnDatatype
 }
 

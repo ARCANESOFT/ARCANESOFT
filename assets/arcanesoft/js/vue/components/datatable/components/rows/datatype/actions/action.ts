@@ -5,7 +5,7 @@ import ButtonAction from './button'
 import LinkAction from './link'
 
 export default defineComponent({
-    name: 'v-datatable-row-action',
+    name: 'v-dt-datatype-action',
 
     props: {
         action: {
