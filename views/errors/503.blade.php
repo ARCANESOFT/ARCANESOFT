@@ -5,7 +5,7 @@ $hasException = isset($exception);
 
 @extends($hasException ? 'errors._template.illustrated' : 'errors._template.minimal')
 
-@section('title', __($title))
+@section('title', __($title ?? 'Service Unavailable'))
 @section('code', '503')
 @section('message', __(($hasException ? $exception->getMessage() : null) ?: 'Service Unavailable'))
 
