@@ -1,10 +1,6 @@
 import { defineComponent, onMounted, onUnmounted } from 'vue'
+import { useGetters } from '../store'
 import { EVENTS } from '../enums'
-import loading from '../store/modules/loading'
-import location from '../store/modules/location'
-import previewMode from '../store/modules/preview-mode'
-import mediaTools from '../store/modules/media-tools'
-import mediaItems from '../store/modules/media-items'
 import arcanesoft from '@arcanesoft/core/src/helpers/arcanesoft';
 import { trans } from '../helpers/translator'
 
@@ -26,11 +22,14 @@ export default defineComponent({
     },
 
     setup() {
-        const { isLoading } = loading()
-        const { current: currentLocation } = location()
-        const { hasActive: hasActiveMediaTool } = mediaTools()
-        const { shown: isPreviewModeShown } = previewMode()
-        const { directoriesCount, filesCount } = mediaItems()
+        const {
+            isLoading,
+            currentLocation,
+            hasActiveMediaTool,
+            isPreviewModeShown,
+            directoriesCount,
+            filesCount,
+        } = useGetters()
 
         let keyUpListener = (event): void => {
             arcanesoft().emit(EVENTS.KEYBOARD_EVENT_KEYUP, event)
@@ -66,8 +65,8 @@ export default defineComponent({
 
             <MediaItemTools v-if="hasActiveMediaTool"/>
 
-            <div class="media-manager-body card-body p-0" v-if=" ! hasActiveMediaTool">
-                <MediaItemsContainer/>
+            <div class="media-manager-body card-body p-0" v-show=" ! hasActiveMediaTool">
+                <MediaItemsContainer :multiple="true"/>
                 <MediaItemPreview v-if="isPreviewModeShown"/>
             </div>
 

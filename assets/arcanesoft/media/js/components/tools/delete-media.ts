@@ -1,35 +1,28 @@
 import { defineComponent } from 'vue'
+import { useActions, useGetters } from '../../store'
 import { MediaItem } from '../../types'
-import loading from '../../store/modules/loading'
-import mediaTools from '../../store/modules/media-tools'
-import mediaItems from '../../store/modules/media-items'
-import selectedMediaItems from '../../store/modules/selected-media-items'
 import { trans } from '../../helpers/translator'
 
 export default defineComponent({
     name: 'v-media-delete-item',
 
     setup() {
-        const { isLoading, handleLoading } = loading()
-        const { close: closeMediaTool } = mediaTools()
-        const { loadItems: loadMediaItems, deleteItem: deleteMediaItem } = mediaItems()
-        const { items: selectedItems } = selectedMediaItems()
+        const { deleteItem, loadItems, closeMediaTool } = useActions()
+        const { isLoading, selectedItems } = useGetters()
 
-        const deleteItems = (): Promise<void> => handleLoading(async (): Promise<void> => {
-            const requests = selectedItems.value.map((item: MediaItem) => deleteMediaItem(item));
+        const onClick = async (): Promise<void> => {
+            const requests = selectedItems.value.map((item: MediaItem) => deleteItem(item));
 
             await Promise.all(requests).then(() => {
-                loadMediaItems().then(() => {
-                    closeMediaTool()
-                })
+                loadItems().then(() => { closeMediaTool() })
             })
-        })
+        }
 
         return {
             trans,
             isLoading,
             selectedItems,
-            deleteItems,
+            onClick,
         }
     },
 
@@ -42,7 +35,7 @@ export default defineComponent({
             </ul>
 
             <div class="text-right">
-                <button @click.prevent="deleteItems" type="button" :disabled="isLoading"
+                <button @click.prevent="onClick" type="button" :disabled="isLoading"
                         class="btn btn-danger">
                     <i class="far fa-fw fa-trash-alt"></i> {{ trans(isLoading ? 'Loading...' : 'Delete') }}
                 </button>

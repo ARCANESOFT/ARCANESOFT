@@ -1,13 +1,13 @@
 import { defineComponent, computed, watch, PropType } from 'vue'
+import { useActions, useHelpers } from '../../../store'
 import { MediaItem } from '../../../types'
-import mediaItems from '../../../store/modules/media-items'
 import { trans } from '../../../helpers/translator'
 import { saveAs } from 'file-saver'
 import {
     getFileIcon,
     getHumanFileSize,
     isImageType,
-    isVideoType
+    isVideoType,
 } from '../../../utilities'
 
 export default defineComponent({
@@ -21,7 +21,8 @@ export default defineComponent({
     },
 
     setup(props) {
-        const { downloadItem, isMediaFile, isMediaDirectory } = mediaItems()
+        const { downloadItem } = useActions()
+        const { isMediaFile, isMediaDirectory } = useHelpers()
 
         const isDirectory = computed<boolean>(() => isMediaDirectory(props.item))
         const isFile = computed<boolean>(() => isMediaFile(props.item))
@@ -41,8 +42,8 @@ export default defineComponent({
             () => isDirectory.value ? 'fa fa-fw fa-folder' : getFileIcon(props.item.mimetype)
         )
 
-        const download = async (): Promise<void> => await downloadItem(props.item).then((response) => {
-            saveAs(response.data, props.item.name)
+        const download = async (): Promise<void> => await downloadItem(props.item).then(({ data }) => {
+            saveAs(data, props.item.name)
         })
 
         return {

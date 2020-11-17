@@ -8,6 +8,7 @@
     },
     "dependencies": {
         "@arcanescripts/eventter": "^1.0",
+        "@arcanescripts/request": "^1.0",
         "@arcanescripts/translator": "^1.0",
         "@arcanesoft/core": "^1.0",
         "@arcanesoft/media": "^1.0",

@@ -1,11 +1,8 @@
 import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
+import { useActions, useGetters } from '../../store'
+import arcanesoft from '@arcanesoft/core/src/helpers/arcanesoft'
 import { EVENTS } from '../../enums'
 import config from '../../config'
-import loading from '../../store/modules/loading'
-import location from '../../store/modules/location'
-import mediaTools from '../../store/modules/media-tools'
-import mediaItems from '../../store/modules/media-items/actions'
-import arcanesoft from '@arcanesoft/core/src/helpers/arcanesoft'
 import { trans } from '../../helpers/translator'
 
 import * as Core from '@uppy/core'
@@ -16,10 +13,8 @@ export default defineComponent({
     name: 'v-media-files-uploader',
 
     setup() {
-        const { handleLoading } = loading()
-        const { current: currentLocation } = location()
-        const { close: closeMediaTool } = mediaTools()
-        const { loadItems: loadMediaItems } = mediaItems()
+        const { closeMediaTool, loadItems } = useActions()
+        const { currentLocation } = useGetters()
 
         const uppy = ref(null)
         const uploading = ref<boolean>(false)
@@ -68,10 +63,8 @@ export default defineComponent({
                 uppy.value = null
             }
 
-            if ( ! filesUploaded.value)
-                return
-
-            return handleLoading(async (): Promise<void> => await loadMediaItems())
+            if (filesUploaded.value)
+                await loadItems(currentLocation.value)
         })
 
         return {
@@ -81,9 +74,9 @@ export default defineComponent({
     },
 
     template: `
-        <label class="checkbox-inline">
-            <input type="checkbox" name="hash_name" id="hash-name" value="1"> {{ trans('Hash names') }}
-        </label>
+<!--        <label class="checkbox-inline">-->
+<!--            <input type="checkbox" name="hash_name" id="hash-name" value="1"> {{ trans('Hash names') }}-->
+<!--        </label>-->
 
         <div ref="uppyDashboardRef" class="media-files-uploader"></div>
     `,

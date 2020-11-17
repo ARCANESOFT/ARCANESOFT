@@ -1,7 +1,7 @@
 import { defineComponent, PropType } from 'vue'
-import displayMode from '../../store/modules/display-mode'
-import { trans } from '../../helpers/translator'
 import { DisplayMode } from '../../types'
+import { useHelpers, useMutations } from '../../store'
+import { trans } from '../../helpers/translator'
 
 export default defineComponent({
     name: 'v-display-mode-button',
@@ -14,11 +14,12 @@ export default defineComponent({
     },
 
     setup(props) {
-        const { isSelected: isSelectedMode, setSelected: setSelectedDisplayMode } = displayMode()
+        const { setSelectedDisplayMode } = useMutations()
+        const { isDisplayModeSelected } = useHelpers()
 
-        const isSelected = isSelectedMode(props.mode.key)
+        const isSelected = isDisplayModeSelected(props.mode.key)
 
-        function changeDisplayMode(): void {
+        const onClick = (): void => {
             if ( ! isSelected.value)
                 setSelectedDisplayMode(props.mode.key)
         }
@@ -26,12 +27,12 @@ export default defineComponent({
         return {
             trans,
             isSelected,
-            changeDisplayMode,
+            onClick,
         }
     },
 
     template: `
-        <button @click.prevent="changeDisplayMode" :title="trans(mode.title)" type="button"
+        <button @click.prevent="onClick" :title="trans(mode.title)" type="button"
             class="display-mode btn btn-outline-secondary" :class="{'active': isSelected}">
             <i :class="mode.icon"></i>
         </button>

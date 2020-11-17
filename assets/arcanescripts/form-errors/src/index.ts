@@ -1,8 +1,7 @@
-type ErrorMessages = {
-    [key: string]: string[]
-}
+import { ErrorMessages } from './types'
+import FormErrorsInterface from './interface'
 
-class FormErrors {
+class FormErrors implements FormErrorsInterface {
     // Properties
     //--------------------------
 
@@ -241,9 +240,10 @@ class FormErrors {
     }
 }
 
-export default (errors?: ErrorMessages) => new FormErrors(errors)
-
 export {
     FormErrors,
+    FormErrorsInterface,
     ErrorMessages,
 }
+
+export default (errors?: ErrorMessages): FormErrorsInterface => new FormErrors(errors)

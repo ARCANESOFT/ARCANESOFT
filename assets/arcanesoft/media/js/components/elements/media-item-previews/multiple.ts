@@ -12,7 +12,7 @@ export default defineComponent({
     },
 
     setup: (props) => ({
-        total: computed((): number => props.items.length),
+        total: computed<number>(() => props.items.length),
     }),
 
     template: `

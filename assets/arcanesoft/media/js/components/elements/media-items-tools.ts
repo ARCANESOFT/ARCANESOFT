@@ -1,5 +1,5 @@
-import { defineComponent } from 'vue'
-import mediaTools from '../../store/modules/media-tools'
+import { defineComponent, computed, ComputedRef } from 'vue'
+import useGetters from '../../store/getters'
 import MediaTool from '../../enums/MEDIA_TOOLS'
 
 import DeleteMedia from '../tools/delete-media'
@@ -20,14 +20,18 @@ export default defineComponent({
     },
 
     setup() {
-        const { isSelected: isToolSelected } = mediaTools()
+        const { activeMediaTool } = useGetters()
+
+        const isMediaToolSelected = (tool: MediaTool): ComputedRef<boolean> => {
+            return computed<boolean>(() => activeMediaTool.value === tool)
+        }
 
         return {
-            isFileUploaderToolSelected: isToolSelected(MediaTool.FILE_UPLOADER),
-            isNewFolderToolSelected:    isToolSelected(MediaTool.NEW_FOLDER),
-            isMoveMediaToolSelected:    isToolSelected(MediaTool.MOVE_MEDIA),
-            isRenameMediaToolSelected:  isToolSelected(MediaTool.MOVE_MEDIA),
-            isDeleteMediaToolSelected:  isToolSelected(MediaTool.MOVE_MEDIA),
+            isFileUploaderToolSelected: isMediaToolSelected(MediaTool.FILE_UPLOADER),
+            isNewFolderToolSelected:    isMediaToolSelected(MediaTool.NEW_FOLDER),
+            isMoveMediaToolSelected:    isMediaToolSelected(MediaTool.MOVE_MEDIA),
+            isRenameMediaToolSelected:  isMediaToolSelected(MediaTool.RENAME_MEDIA),
+            isDeleteMediaToolSelected:  isMediaToolSelected(MediaTool.DELETE_MEDIA),
         }
     },
 

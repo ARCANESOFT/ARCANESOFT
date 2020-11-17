@@ -1,27 +1,26 @@
 import { defineComponent } from 'vue'
-import loading from '../../store/modules/loading'
-import mediaItems from '../../store/modules/media-items'
+import { useActions, useGetters } from '../../store'
 import { trans } from '../../helpers/translator'
 
 export default defineComponent({
     name: 'v-media-refresh-button',
 
     setup() {
-        const { isLoading, handleLoading } = loading()
-        const { loadItems } = mediaItems()
+        const { isLoading } = useGetters()
+        const { loadItems } = useActions()
 
-        const refresh = (): Promise<void> => handleLoading(async () => await loadItems())
+        const onClick = async (): Promise<void> => await loadItems()
 
         return {
             trans,
             isLoading,
-            refresh,
+            onClick,
         };
     },
 
     template: `
-        <button @click.prevent="refresh" type="button"
-                :title="trans('Refresh [R]')" :disabled="isLoading"
+        <button @click.prevent="onClick" type="button"
+                :title="trans('Refresh')" :disabled="isLoading"
                 class="btn btn-outline-secondary">
             <i class="fas fa-fw fa-sync-alt" :class="{'fa-spin': isLoading}"></i>
         </button>
