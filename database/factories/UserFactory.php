@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Authorization\Database\Factories\UserFactory as Factor
 /**
  * Class     UserFactory
  *
- * @package  Database\Factories
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class UserFactory extends Factory

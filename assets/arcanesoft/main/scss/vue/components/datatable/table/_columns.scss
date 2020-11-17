@@ -1,0 +1,47 @@
+.v-dt-column {
+    @extend .fw-light, .text-uppercase, .text-muted;
+
+    &.v-dt-column-sortable {
+        @extend .position-relative, .cursor-pointer, .user-select-none;
+
+        &:after {
+            @extend .position-absolute;
+
+            top: 50%;
+            right: 8px;
+            display: block;
+            opacity: 0.5;
+            font-size: 1rem;
+            transform: translateY(-50%);
+
+            @extend %fa-icon;
+            @extend .fas;
+
+            transition: opacity .25s ease-in-out;
+        }
+
+        &.v-dt-column-sort-asc:after,
+        &.v-dt-column-sort-desc:after {
+            color: $primary;
+            opacity: 0.75;
+        }
+
+        &.v-dt-column-sort-asc:after {
+            content: fa-content($fa-var-sort-amount-up);
+        }
+
+        &.v-dt-column-sort-desc:after {
+            content: fa-content($fa-var-sort-amount-down);
+        }
+
+        &:not(.v-dt-column-sort-asc):not(.v-dt-column-sort-desc):after {
+            content: fa-content($fa-var-sort);
+        }
+
+        &:hover {
+            &:after {
+                opacity: 1;
+            }
+        }
+    }
+}

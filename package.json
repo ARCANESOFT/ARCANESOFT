@@ -10,7 +10,7 @@
         "hot": "mix --hot"
     },
     "workspaces": [
-        "assets/*"
+        "assets/**"
     ],
     "devDependencies": {
         "cross-env": "^7.0",

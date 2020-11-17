@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "module": "es6",
+        "target": "es6",
+        "lib": ["dom", "esnext"],
+        "moduleResolution": "node",
+        "noEmit": false,
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "types": [
+            "jest",
+            "node"
+        ]
+    },
+    "include": [
+        "src/**/*",
+        "tests/**/*.test.ts"
+    ]
+}

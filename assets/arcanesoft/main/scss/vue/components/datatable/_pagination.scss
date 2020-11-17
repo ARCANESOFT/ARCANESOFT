@@ -1,0 +1,15 @@
+.v-datatable-pagination-info {
+    //
+}
+
+.v-datatable-pagination {
+    @extend .pagination;
+}
+
+.v-datatable-page-item {
+    @extend .page-item;
+}
+
+.v-datatable-page-link {
+    @extend .page-link;
+}

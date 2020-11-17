@@ -32,8 +32,8 @@
                             </div>
 
                             {{-- SUBMIT BUTTON --}}
-                            <div class="col">
-                                <button class="btn btn-lg btn-primary btn-block" type="submit">@lang('Confirm Password')</button>
+                            <div class="d-grid col">
+                                <button class="btn btn-lg btn-primary" type="submit">@lang('Confirm Password')</button>
                             </div>
                         </div>
                     </form>
