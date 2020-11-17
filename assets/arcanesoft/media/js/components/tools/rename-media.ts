@@ -1,46 +1,27 @@
 import { defineComponent, computed, ref } from 'vue'
+import { useActions, useGetters, useHelpers } from '../../store'
 import { MediaItem } from '../../types'
-import location from '../../store/modules/location'
-import loading from '../../store/modules/loading'
-import mediaTools from '../../store/modules/media-tools'
-import mediaItems from '../../store/modules/media-items'
-import selectedMediaItems from '../../store/modules/selected-media-items'
 import { trans } from '../../helpers/translator'
+import formErrors, { FormErrorsInterface } from '@arcanescripts/form-errors'
 
 export default defineComponent({
     name: 'v-media-rename-item',
 
     setup() {
-        const { normalize: normalizeLocation} = location()
-        const { handleLoading, isLoading } = loading()
-        const { close: closeMediaTool } = mediaTools()
-        const { loadItems, renameItem: renameMediaItem } = mediaItems()
-        const { items } = selectedMediaItems()
+        const { loadItems, renameItem, closeMediaTool } = useActions()
+        const { isLoading, selectedItems } = useGetters()
+        const { normalizeLocation } = useHelpers()
 
-        const item = computed<MediaItem>(() => items.value[0])
+        const item = computed<MediaItem>(() => selectedItems.value[0])
         const name = ref<string>(item.value.name)
-
-        // TODO: Replace with the validation messages helper
-        const errors = ref({
-            'new_name': []
-        })
-
-        const resetErrors = (): void => {
-            errors.value = {
-                'new_name': []
-            }
-        }
-
+        const errors = ref<FormErrorsInterface>(formErrors())
         const hasChanged = computed<boolean>(() => name.value !== item.value.name);
-        const nameError = computed<string | null>(() => errors.value['new_name'][0] || null);
-        const hasNameError = computed<boolean>(() => nameError.value !== null)
         const newPath = computed<string>(() => normalizeLocation(name.value))
 
+        const onSubmit = async (): Promise<void> => {
+            errors.value.reset()
 
-        const rename = async (): Promise<void> => handleLoading(async (): Promise<void> => {
-            resetErrors()
-
-            return await renameMediaItem(item.value.path, name.value)
+            return await renameItem(item.value.path, name.value)
                 .then((response) => {
                     if (response.status !== 200)
                         return
@@ -48,20 +29,18 @@ export default defineComponent({
                     closeMediaTool()
                     loadItems()
                 })
-                .catch((error) => {
-                    if (error.response && error.response.status === 422)
-                        errors.value = error.response.data.errors || {}
+                .catch(({ response }) => {
+                    if (response && response.status === 422)
+                        errors.value.setErrors(response.data.errors || {})
                 })
-        })
+        }
 
         return {
             trans,
             name,
-            rename,
+            onSubmit,
             isLoading,
             hasChanged,
-            nameError,
-            hasNameError,
             newPath,
         }
     },
@@ -70,13 +49,14 @@ export default defineComponent({
         <div class="bg-white p-3">
             <label for="name">{{ trans('Rename') }}</label>
             <div class="input-group">
-                <input type="text" v-model="name" @keyup.enter="rename" id="name" required
-                       class="form-control" :class="{'is-invalid': hasNameError}" :readonly="isLoading">
+                <input type="text" v-model="name" @keyup.enter="onSubmit" id="name" required
+                       class="form-control" :class="{'is-invalid': errors.has('new_name')}" :readonly="isLoading">
                 <div class="input-group-append">
-                    <button @click.prevent="rename" :disabled=" ! hasChanged || isLoading"
+                    <button @click.prevent="onSubmit" :disabled=" ! hasChanged || isLoading"
                             class="btn btn-warning" type="button">{{ trans(isLoading ? 'Loading...' : 'Rename') }}</button>
                 </div>
-                <div class="invalid-feedback" v-if="hasNameError">{{ nameError }}</div>
+                <div class="invalid-feedback"
+                     v-if="errors.has('new_name')" v-text="errors.first('new_name')"></div>
             </div>
         </div>
     `,

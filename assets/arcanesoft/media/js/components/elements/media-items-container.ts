@@ -1,9 +1,6 @@
 import { defineComponent, onMounted, computed } from 'vue'
-import { EVENTS, DISPLAY_MODES } from '../../enums'
-import displayMode from '../../store/modules/display-mode'
-import loading from '../../store/modules/loading'
-import mediaItems from '../../store/modules/media-items'
-import previewMode from '../../store/modules/preview-mode'
+import { useActions, useGetters, useHelpers } from '../../store'
+import { DISPLAY_MODES } from '../../enums'
 
 import MediaItem from './media-item'
 
@@ -30,36 +27,23 @@ export default defineComponent({
     },
 
     setup(props) {
-        const { isSelected: isSelectedMode } = displayMode()
-        const { handleLoading } = loading()
-        const { items, loadItems: loadMediaItems } = mediaItems()
-        const { shown: isPreviewModeShown } = previewMode()
+        const { loadItems } = useActions()
+        const { items, isPreviewModeShown } = useGetters()
+        const { isDisplayModeSelected } = useHelpers()
 
         // Computed
-        // const hasActiveMediaTool = computed((): boolean => getters.getActiveMediaTool() !== null)
         const containerClasses = computed<Object>(() => ({
-            'display-mode-grid':       isSelectedMode(DISPLAY_MODES.GRID).value,
-            'display-mode-icons':      isSelectedMode(DISPLAY_MODES.ICONS).value,
-            'display-mode-list':       isSelectedMode(DISPLAY_MODES.LIST).value,
-            'display-mode-thumbnails': isSelectedMode(DISPLAY_MODES.THUMBNAILS).value,
+            'display-mode-grid':       isDisplayModeSelected(DISPLAY_MODES.GRID).value,
+            'display-mode-icons':      isDisplayModeSelected(DISPLAY_MODES.ICONS).value,
+            'display-mode-list':       isDisplayModeSelected(DISPLAY_MODES.LIST).value,
+            'display-mode-thumbnails': isDisplayModeSelected(DISPLAY_MODES.THUMBNAILS).value,
             'with-preview-mode':       ! props.readonly && isPreviewModeShown.value,
         }))
 
 
-        onMounted((): Promise<void> => handleLoading(async (): Promise<void> => {
-            await loadMediaItems()
-
-            // arcanesoft().on(EVENTS.KEYBOARD_EVENT_KEYUP, (event) => {
-            //     if (event.code === 'Delete')
-            //         actions.openDeleteMediaTool()
-            //
-            //     if (event.code === 'Escape')
-            //         actions.clearSelectedItems()
-            //
-            //     if (event.code === 'KeyR' && ! hasActiveMediaTool.value)
-            //         actions.loadMediaItems()
-            // })
-        }))
+        onMounted(async (): Promise<void> => {
+            await loadItems()
+        })
 
         return {
             items,

@@ -1,7 +1,5 @@
 import { defineComponent, computed } from 'vue'
-import loading from '../../store/modules/loading'
-import location from '../../store/modules/location'
-import mediaItems from '../../store/modules/media-items'
+import { useActions, useGetters } from '../../store'
 import { trans } from '../../helpers/translator'
 
 type Location = {
@@ -14,9 +12,8 @@ export default defineComponent({
     name: 'v-media-breadcrumbs',
 
     setup() {
-        const { current: currentLocation, setCurrent: changeCurrentLocation, isRoot } = location()
-        const { handleLoading } = loading()
-        const { loadItems: loadMediaItems } = mediaItems()
+        const { changeCurrentLocation } = useActions()
+        const { currentLocation, isRootLocation } = useGetters()
 
         const locationLinks = computed<Location[]>(() => {
             const locations = [
@@ -27,7 +24,7 @@ export default defineComponent({
                 },
             ]
 
-            if (isRoot.value)
+            if (isRootLocation.value)
                 return locations
 
             let lastLocation = ''
@@ -47,13 +44,10 @@ export default defineComponent({
 
         const isLastLinkIndex = (index: number): boolean => (locationLinks.value.length - 1) === index
 
-        const changeLocation = (location: string): Promise<void> => handleLoading(async (): Promise<void> => {
-            changeCurrentLocation(location)
-            await loadMediaItems(location)
-        })
+        const onClick = async (location: string): Promise<void> => await changeCurrentLocation(location)
 
         return {
-            changeLocation,
+            onClick,
             isLastLinkIndex,
             locationLinks,
         }
@@ -68,7 +62,7 @@ export default defineComponent({
                         <i class="fas fa-fw fa-home" v-if="link.isRoot"></i>
                         <span v-else>{{ link.name }}</span>
                     </span>
-                    <a v-else href="#" @click.prevent="changeLocation(link.path)">
+                    <a v-else href="#" @click.prevent="onClick(link.path)">
                         <i class="fas fa-fw fa-home" v-if="link.isRoot"></i>
                         <span v-else>{{ link.name }}</span>
                     </a>

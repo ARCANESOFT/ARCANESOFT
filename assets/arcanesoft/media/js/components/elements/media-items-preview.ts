@@ -1,5 +1,5 @@
 import { defineComponent, computed } from 'vue'
-import selectedMediaItems from '../../store/modules/selected-media-items'
+import { useGetters } from '../../store'
 
 import PreviewMultipleMediaItems from './media-item-previews/multiple'
 import PreviewNoSelectedMediaItem from './media-item-previews/no-selected'
@@ -15,10 +15,10 @@ export default defineComponent({
     },
 
     setup() {
-        const { items: selectedItems, count } = selectedMediaItems()
+        const { selectedItems, selectedItemsCount } = useGetters()
 
-        const isSingle = computed<boolean>(() => count.value === 1)
-        const isMultiple = computed<boolean>(() => count.value > 1)
+        const isSingle = computed<boolean>(() => selectedItemsCount.value === 1)
+        const isMultiple = computed<boolean>(() => selectedItemsCount.value > 1)
 
         return {
             selectedItems,

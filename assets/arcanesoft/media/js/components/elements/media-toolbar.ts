@@ -1,5 +1,5 @@
 import { defineComponent, ref } from 'vue'
-import mediaTools from '../../store/modules/media-tools'
+import useGetters from '../../store/getters'
 import config from '../../config'
 
 import CloseToolButton from '../buttons/close-tool'
@@ -35,7 +35,7 @@ export default defineComponent({
     },
 
     setup() {
-        const { hasActive: hasActiveMediaTool } = mediaTools()
+        const { hasActiveMediaTool } = useGetters()
 
         const modes = ref(config.displayModes)
 

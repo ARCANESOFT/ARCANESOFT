@@ -1,24 +1,27 @@
 import { defineComponent } from 'vue'
-import previewMode from '../../store/modules/preview-mode'
+import { useActions, useGetters } from '../../store'
 import { trans } from '../../helpers/translator'
 
 export default defineComponent({
     name: 'v-preview-mode-button',
 
     setup() {
-        const { shown: isShown, toggle } = previewMode()
+        const { togglePreviewMode } = useActions()
+        const { isPreviewModeShown } = useGetters()
+
+        const onClick = (): void => togglePreviewMode()
 
         return {
             trans,
-            isShown,
-            toggle,
+            isPreviewModeShown,
+            onClick,
         };
     },
 
     template: `
-        <button @click.prevent="toggle" type="button"
+        <button @click.prevent="onClick" type="button"
                 :title="trans('Preview Mode')"
-                class="btn btn-outline-secondary" :class="{'active': isShown}">
+                class="btn btn-outline-secondary" :class="{'active': isPreviewModeShown}">
             <i class="fas fa-fw fa-info-circle"></i>
         </button>
     `,

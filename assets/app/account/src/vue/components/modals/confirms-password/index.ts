@@ -2,7 +2,7 @@ import { computed, defineComponent, nextTick, ref } from 'vue'
 import api from './api'
 import translator from '../../../../mixins/translator'
 import Modal from '../modal'
-import errors, { FormErrors } from '@arcanescripts/form-errors'
+import errors, { FormErrorsInterface } from '@arcanescripts/form-errors'
 
 export default defineComponent({
     name: 'v-confirms-password-modal',
@@ -35,7 +35,7 @@ export default defineComponent({
         const confirmingPassword = ref<boolean>(false)
         const password = ref<string>('')
         const passwordRef = ref<any>(null)
-        const formErrors = ref<FormErrors>(errors())
+        const formErrors = ref<FormErrorsInterface>(errors())
 
         const startConfirming = async () => {
             formErrors.value.reset()

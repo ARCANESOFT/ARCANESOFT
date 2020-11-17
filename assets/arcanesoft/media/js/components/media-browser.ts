@@ -1,6 +1,6 @@
 import { defineComponent, reactive, ref, onMounted, onUnmounted } from 'vue'
 import { MediaItem } from '../types'
-import selectedMediaItems from '../store/modules/selected-media-items'
+import { useGetters } from '../store'
 import { trans } from '../helpers/translator'
 
 import MediaToolbar from './elements/media-toolbar'
@@ -50,7 +50,7 @@ export default defineComponent({
     },
 
     setup(props) {
-        const { items: selectedItems } = selectedMediaItems()
+        const { selectedItems } = useGetters()
 
         const urls = ref(null)
         const modal = reactive<MediaBrowserModal>({

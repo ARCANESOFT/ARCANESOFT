@@ -1,5 +1,5 @@
 import { defineComponent, onMounted, nextTick, ref, computed } from 'vue'
-import errors, { FormErrors } from '@arcanescripts/form-errors'
+import errors, { FormErrorsInterface } from '@arcanescripts/form-errors'
 import translator from '../../../../mixins/translator'
 import api from './api'
 import { Modal } from 'bootstrap/js/index.esm.js'
@@ -42,7 +42,7 @@ export default defineComponent({
         const confirmModalRef = ref(null)
         const confirmPassword = ref<string>('')
         const confirmPasswordRef = ref(null)
-        const confirmErrors = ref<FormErrors>(errors())
+        const confirmErrors = ref<FormErrorsInterface>(errors())
 
         const fetchSessions = () => {
             isLoading.value = true
