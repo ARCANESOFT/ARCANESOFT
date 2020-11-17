@@ -1330,7 +1330,7 @@
             "dist": {
                 "type": "path",
                 "url": "../Media",
-                "reference": "9683709a74f04d8d705ef9b96ed2cad600e89c98"
+                "reference": "7026d6f06ffebaa2d3da5fb1385062a24bf9abf8"
             },
             "require": {
                 "arcanesoft/foundation": "^4.0",
@@ -3675,7 +3675,7 @@
         },
         {
             "name": "modules/account",
-            "version": "dev-fixing-media-manager",
+            "version": "dev-develop",
             "dist": {
                 "type": "path",
                 "url": "./modules/account",
@@ -3730,7 +3730,7 @@
         },
         {
             "name": "modules/api",
-            "version": "dev-fixing-media-manager",
+            "version": "dev-develop",
             "dist": {
                 "type": "path",
                 "url": "./modules/api",
@@ -3787,7 +3787,7 @@
         },
         {
             "name": "modules/auth",
-            "version": "dev-fixing-media-manager",
+            "version": "dev-develop",
             "dist": {
                 "type": "path",
                 "url": "./modules/auth",
@@ -8490,7 +8490,7 @@
         },
         {
             "name": "modules/demo",
-            "version": "dev-fixing-media-manager",
+            "version": "dev-develop",
             "dist": {
                 "type": "path",
                 "url": "./modules/demo",
