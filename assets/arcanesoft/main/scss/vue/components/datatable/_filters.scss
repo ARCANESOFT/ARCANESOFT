@@ -1,13 +1,17 @@
-.v-datatable-filters {
-    &.v-datatable-filters-applied {
-        button#v-datatable-filters-menu {
+.v-dt-filters {
+    .v-dt-filters-dropdown-btn {
+
+    }
+
+    .v-dt-filters-menu {
+        min-width: 15rem;
+    }
+
+    &.v-dt-filters-applied {
+        .v-dt-filters-dropdown-btn {
             i {
                 color: $primary
             }
         }
-    }
-
-    .v-datatable-filters-menu {
-        min-width: 15rem;
     }
 }

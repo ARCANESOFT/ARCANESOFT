@@ -1,4 +1,4 @@
-import {computed, defineComponent, onMounted, PropType, ref} from 'vue'
+import { computed, defineComponent, onMounted, PropType, ref } from 'vue'
 import { DatatypeAction } from '../../../../types/column-datatype'
 import useTooltip from '../../../../../../../components/tooltip'
 

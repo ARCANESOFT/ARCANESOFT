@@ -1,7 +1,7 @@
 import api from './api'
 import useGetters from './getters'
 import useMutations from './mutations'
-import { MediaItem } from '../types'
+import { MediaItem, MediaItems } from '../types'
 import { MEDIA_TOOLS } from '../enums'
 
 export type Actions = {
@@ -9,6 +9,7 @@ export type Actions = {
     changeCurrentLocation: (location?: string) => Promise<void>
     deleteItem:            (item: MediaItem) => Promise<void>
     renameItem:            (from: string, to: string) => Promise<any>
+    moveItems:             (items: MediaItems, to: string) => Promise<any>
     moveItem:              (from: string, to: string) => Promise<any>
     downloadItem:          (item: MediaItem) => Promise<any>
     createNewFolder:       (path: string) => Promise<any>
@@ -20,6 +21,14 @@ export type Actions = {
 export default (): Actions => {
     const { currentLocation, isPreviewModeShown } = useGetters()
     const { clearSelectedItems, setItems, setCurrentLocation, stopLoading, startLoading, setMediaTool, setPreviewMode } = useMutations()
+
+    const handleLoading = async (callback: Function): Promise <any> => {
+        startLoading()
+        const response = await callback()
+        stopLoading()
+
+        return response
+    }
 
     const loadItems = async (location?: string): Promise<void> => {
         startLoading()
@@ -38,25 +47,27 @@ export default (): Actions => {
         await loadItems(location)
     }
 
-    const deleteItem = async (item: MediaItem): Promise<void> => {
-        startLoading()
-
-        await api.deleteItem(item)
-
-        stopLoading()
-    }
+    const deleteItem = async (item: MediaItem): Promise<void> => handleLoading(async () => await api.deleteItem(item))
 
     const renameItem = async (from: string, to: string): Promise<any> => {
         return await api.renameItem(from, to)
     }
 
-    const moveItem = async (from: string, to: string): Promise<void> => {
+    const moveItems = async (items: MediaItems, to: string): Promise<any> => {
         startLoading()
 
-        await api.moveItem(from, to)
+        const requests = items.map((item: MediaItem) => moveItem(item.path, to))
 
-        stopLoading()
+        return await Promise.all(requests)
+            .then(async () => {
+                closeMediaTool()
+            })
+            .finally(() => {
+                stopLoading()
+            })
     }
+
+    const moveItem = async (from: string, to: string): Promise<any> => await api.moveItem(from, to)
 
     const downloadItem = async (item: MediaItem): Promise<any> => {
         return await api.downloadItem(item)
@@ -80,6 +91,7 @@ export default (): Actions => {
         changeCurrentLocation,
         deleteItem,
         renameItem,
+        moveItems,
         moveItem,
         downloadItem,
         createNewFolder,

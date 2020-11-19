@@ -1,6 +1,6 @@
 import { defineComponent } from 'vue'
+import { useGetters } from '../../store'
 import { DatatableRowColumn } from '../../types'
-import useGetters from '../../store/getters'
 
 import components, { datatypeComponent } from './datatype'
 

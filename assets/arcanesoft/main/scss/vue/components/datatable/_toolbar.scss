@@ -1,3 +1,17 @@
-.v-datatable-toolbar {
-    //
+.v-dt-toolbar {
+    .v-dt-toolbar-button {
+        @extend .btn;
+        color: $link-color;
+        background-color: var(--skin-surface-1-bg-color);
+        border: $btn-border-width solid var(--skin-input-border-color);
+
+        &:hover, &:focus {
+            color: $link-hover-color;
+            background-color: var(--skin-surface-2-bg-color);
+        }
+
+        &:hover {
+            border-color: var(--skin-input-border-color);
+        }
+    }
 }

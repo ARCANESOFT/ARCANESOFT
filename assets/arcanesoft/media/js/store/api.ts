@@ -23,7 +23,7 @@ export default {
         path,
     }),
 
-    moveItem: (destination: string, path: string): Promise<any> => request().put(`/move`, {
+    moveItem: (path: string, destination: string): Promise<any> => request().put(`/move`, {
         destination,
         path,
     }),

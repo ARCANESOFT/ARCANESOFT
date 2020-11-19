@@ -1,19 +1,21 @@
 import { defineComponent, onMounted, onUnmounted } from 'vue'
-
-import useActions from './store/actions'
-import useGetters from './store/getters'
-import useMutations from './store/mutations'
+import { useActions, useGetters, useMutations } from './store'
 import useArcanesoft from '../../../helpers/arcanesoft'
+import useTranslator from '../../../mixins/translator'
 
-import DatatableFilters from './components/filters'
-import DatatableColumns from './components/columns'
-import DatatableOverlay from './components/overlay'
-import DatatablePagination from './components/pagination'
-import DatatablePaginationInfo from './components/pagination/info'
-import DatatablePerPageSelect from './components/per-page-select'
-import DatatableReloadButton from './components/buttons/reload'
-import DatatableRows from './components/rows'
-import DatatableSearchInput from './components/search-input'
+import {
+    DatatableFilters,
+    DatatableColumns,
+    DatatableOverlay,
+    DatatablePagination,
+    DatatablePaginationInfo,
+    DatatablePerPageSelect,
+    DatatableReloadButton,
+    DatatableRows,
+    DatatableSearchInput,
+    DatatableStateEmpty,
+    DatatableStateLoading,
+} from './components'
 
 const EVENT_RELOAD = 'arcanesoft::datatable.reload'
 
@@ -42,12 +44,15 @@ export default defineComponent({
         DatatableReloadButton,
         DatatableRows,
         DatatableSearchInput,
+        DatatableStateEmpty,
+        DatatableStateLoading,
     },
 
     setup(props) {
         const { isEmpty, isLoading, isReady, hasFilters, hasPagination } = useGetters()
         const { load, reload } = useActions()
         const { markAsReady } = useMutations()
+        const { trans } = useTranslator()
 
         const arcanesoft = useArcanesoft()
 
@@ -74,6 +79,7 @@ export default defineComponent({
             isLoading,
             isReady,
             isEmpty,
+            trans,
         }
     },
 
@@ -82,17 +88,17 @@ export default defineComponent({
             <DatatableOverlay v-if="isLoading"/>
 
             <div class="v-dt-card-header">
-                <span v-if=" ! isReady">Loading...</span>
-                <div v-if="isReady" class="v-datatable-toolbar d-grid gap-2">
+                <span v-if=" ! isReady" v-text="trans('Loading...')"></span>
+                <div v-if="isReady" class="v-dt-toolbar d-grid gap-2">
                     <div class="row g-2">
                         <div class="col">
                             <DatatableSearchInput/>
                         </div>
                         <div class="col-auto">
-                            <div class="btn-group" role="group">
-                                <DatatableReloadButton/>
-                                <DatatableFilters v-if="hasFilters"/>
-                            </div>
+                            <DatatableReloadButton/>
+                        </div>
+                        <div class="col-auto" v-if="hasFilters">
+                            <DatatableFilters/>
                         </div>
                     </div>
 
@@ -107,10 +113,9 @@ export default defineComponent({
                 </div>
             </div>
 
-            <div v-if=" ! isReady" style="min-height: 10rem;"></div>
-            <div v-if="isReady && isEmpty" class="v-dt-card-body">
-                <h4 class="fw-light text-center text-muted m-0">There is no entries to show</h4>
-            </div>
+            <DatatableStateLoading v-if=" ! isReady"/>
+            <DatatableStateEmpty v-else-if="isEmpty"/>
+
             <table v-if="isReady && ! isEmpty" class="v-dt-table">
                 <DatatableColumns/>
                 <DatatableRows/>

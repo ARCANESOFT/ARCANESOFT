@@ -1,4 +1,4 @@
-import { defineComponent, computed, PropType} from 'vue'
+import { defineComponent, computed, PropType } from 'vue'
 import { DatatypeAction } from '../../../../types/column-datatype'
 
 import ButtonAction from './button'

@@ -1,6 +1,5 @@
 import { defineComponent, computed, PropType } from 'vue'
-import useGetters from '../../store/getters'
-import useActions from '../../store/actions'
+import { useActions, useGetters } from '../../store'
 import { DatatableColumn, DatatableSortByColumn } from '../../types'
 import { COLUMN_ALIGNMENT, SORT_DIRECTION } from '../../enums'
 

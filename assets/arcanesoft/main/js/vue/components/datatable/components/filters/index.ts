@@ -1,7 +1,8 @@
 import { defineComponent, ref, onMounted, onUnmounted, UnwrapRef } from 'vue'
+import { useGetters } from '../../store'
+import useTranslator from '../../../../../mixins/translator'
 import { DatatableFilter } from '../../types'
 import { FILTER_TYPE } from '../../enums'
-import useGetters from '../../store/getters'
 
 import SelectFilter from './select'
 
@@ -14,37 +15,42 @@ export default defineComponent({
 
     setup() {
         const { filters, isFiltersApplied } = useGetters()
-        const dropdownMenu = ref(null)
+        const { trans } = useTranslator()
+
+        const dropdownMenuRef = ref(null)
         const isSelectFilter = (filter: UnwrapRef<DatatableFilter>): boolean => filter.type === FILTER_TYPE.SELECT
 
         const stopPropagationHandler = (e) => { e.stopPropagation() }
 
         onMounted(() => {
-            dropdownMenu.value.addEventListener('click', stopPropagationHandler)
+            dropdownMenuRef.value.addEventListener('click', stopPropagationHandler)
         })
 
         onUnmounted(() => {
-            dropdownMenu.value.removeEventListener('click', stopPropagationHandler)
+            dropdownMenuRef.value.removeEventListener('click', stopPropagationHandler)
         })
 
         return {
-            dropdownMenu,
+            dropdownMenuRef,
             filters,
             isFiltersApplied,
             isSelectFilter,
+            trans,
         }
     },
 
     template: `
-        <div class="v-datatable-filters btn-group" :class="{'v-datatable-filters-applied': isFiltersApplied}" role="group">
+        <div class="v-dt-filters btn-group" :class="{'v-dt-filters-applied': isFiltersApplied}" role="group">
             <button
-                id="v-datatable-filters-menu"
-                class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" type="button"
-                data-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-fw fa-filter"></i> <span class="visually-hidden">Toggle Filters Dropdown</span>
-            </button>
-            <div ref="dropdownMenu" class="v-datatable-filters-menu dropdown-menu dropdown-menu-right"
-                 aria-labelledby="v-datatable-filters-menu">
+                id="v-dt-filters-menu"
+                class="v-dt-toolbar-button v-dt-filters-dropdown-btn dropdown-toggle" type="button"
+                data-toggle="dropdown" aria-expanded="false"
+                :aria-label="trans('Toggle Filters Dropdown')"><i class="fas fa-fw fa-filter"></i></button>
+            <div ref="dropdownMenuRef" class="v-dt-filters-menu dropdown-menu dropdown-menu-right"
+                 aria-labelledby="v-dt-filters-menu">
+                <div>
+                    <h6 class="dropdown-header fw-bold" v-text="trans('Filters')"></h6>
+                </div>
                 <div class="px-3 py-2">
                     <div class="row row-cols-1 g-3">
                         <div class="col" v-for="filter in filters" :key="filter.name">

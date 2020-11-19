@@ -23,11 +23,16 @@ export default (): Mutations => {
     const { isMediaItemSelected } = useHelpers()
 
     const startLoading = (): void => {
-        state.loading = true
+        setLoading(true)
     }
 
     const stopLoading = (): void => {
-        state.loading = false
+        setLoading(false)
+    }
+
+    const setLoading = (loading: boolean): void => {
+        if (state.loading !== loading)
+            state.loading = loading
     }
 
     const setCurrentLocation = (location: string): void => {

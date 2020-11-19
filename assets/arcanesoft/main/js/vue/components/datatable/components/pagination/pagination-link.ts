@@ -1,7 +1,7 @@
 import { defineComponent, PropType } from 'vue'
+import { useActions, useGetters } from '../../store'
+import useTranslator from '../../../../../mixins/translator'
 import { DatatablePageLink } from '../../types'
-import useActions from '../../store/actions'
-import useGetters from '../../store/getters'
 
 export default defineComponent({
     name: 'v-datatable-pagination-link',
@@ -16,6 +16,7 @@ export default defineComponent({
     setup() {
         const { paginationLinks } = useGetters()
         const { goToPage } = useActions()
+        const { trans } = useTranslator()
 
         const isDisabled = (link: DatatablePageLink) => link.url === null
         const isNavLink = (link: DatatablePageLink, url: string | null): boolean => {
@@ -31,12 +32,12 @@ export default defineComponent({
         const isPreviousLink = ((link: DatatablePageLink) => isNavLink(link, paginationLinks.value.prev))
         const isNextLink = ((link: DatatablePageLink) => isNavLink(link, paginationLinks.value.next))
 
-        const ariaLabel = (link: DatatablePageLink) => {
+        const ariaLabel = (link: DatatablePageLink): string | null => {
             if (isPreviousLink(link))
-                return 'Previous'
+                return trans('Previous')
 
             if (isNextLink(link))
-                return 'Next'
+                return trans('Next')
 
             return null
         }
@@ -70,16 +71,16 @@ export default defineComponent({
     },
 
     template: `
-        <li class="v-datatable-page-item"
+        <li class="v-dt-page-item"
             :class="{'active': link.active, 'disabled': isDisabled(link)}"
             :ariaCurrent="link.active ? 'page' : null">
-            <span v-if="link.active" class="v-datatable-page-link page-link">
+            <span v-if="link.active" class="v-dt-page-link page-link">
                 {{ link.label }} <span class="visually-hidden">(current)</span>
             </span>
             <button
                 v-else
                 @click.prevent="onClick(link)"
-                class="v-datatable-page-link page-link"
+                class="v-dt-page-link page-link"
                 :class="{'d-none d-md-block': ! (isPreviousLink(link) || isNextLink(link))}"
                 :ariaDisabled="isDisabled(link) ? 'true' : null"
                 :ariaLabel="ariaLabel(link)"

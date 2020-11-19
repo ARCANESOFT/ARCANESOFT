@@ -1,7 +1,6 @@
 import { defineComponent, computed, reactive, onMounted, PropType } from 'vue'
+import { useActions, useGetters } from '../../../store'
 import { DatatableFilter } from '../../../types'
-import useActions from '../../../store/actions'
-import useGetters from '../../../store/getters'
 
 export default defineComponent({
     name: 'v-datatable-filter-select',

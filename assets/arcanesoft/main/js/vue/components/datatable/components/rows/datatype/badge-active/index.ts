@@ -1,7 +1,7 @@
 import { defineComponent, ref, computed, onMounted, PropType } from 'vue'
 import { DatatableRowColumn } from '../../../../types'
 import { DatatypeBadgeActive } from "../../../../types/column-datatype"
-import useTooltip from "../../../../../../../components/tooltip";
+import useTooltip from '../../../../../../../components/tooltip'
 
 export default defineComponent({
     name: 'v-dt-row-col-badge-active',

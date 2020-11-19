@@ -1,5 +1,6 @@
 import { defineComponent } from 'vue'
-import useGetters from '../../store/getters'
+import { useGetters } from '../../store'
+
 import Column from './column'
 
 export default defineComponent({

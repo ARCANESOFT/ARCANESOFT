@@ -8,10 +8,11 @@ export default defineComponent({
     name: 'v-media-move-item',
 
     setup() {
-        const { closeMediaTool, loadItems: loadMediaItems, moveItem: moveMediaItem } = useActions()
+        const { moveItems } = useActions()
         const { isLoading, isRootLocation, directories, selectedItems } = useGetters()
         const { isMediaType } = useHelpers()
 
+        // Refs
         const destination = ref<string | null>(null)
         const results = ref<any[]>([])
 
@@ -26,24 +27,11 @@ export default defineComponent({
             return directories.value.filter((item: MediaItem) => ! destinationsToExclude.includes(item.name));
         })
 
-        const moveMedia = async (): Promise<void> => {
-            if ( ! hasSelectedDestination.value)
-                return
+        // Methods
 
-            const requests = selectedItems.value.map(
-                (item: MediaItem) => moveMediaItem(item.path, destination.value).then(({ status }) => {
-                    results.value.push({
-                        item,
-                        status: status === 200 ? 'success' : 'failed',
-                    })
-                })
-            )
-
-            await Promise.all(requests).then(() => {
-                loadMediaItems().then(() => {
-                    closeMediaTool()
-                })
-            })
+        const onClick = async (): Promise<void> => {
+            if (hasSelectedDestination.value)
+                results.value = await moveItems(selectedItems.value, destination.value)
         }
 
         return {
@@ -51,8 +39,7 @@ export default defineComponent({
             isLoading,
             destination,
             directories,
-            results,
-            moveMedia,
+            onClick,
             selectedItems,
             hasSelectedDestination,
             showParentDestination,
@@ -62,21 +49,21 @@ export default defineComponent({
 
     template: `
         <div class="bg-white p-3">
-            <label for="destination">{{ trans('Select a Destination') }}</label>
+            <label for="destination" class="form-label">{{ trans('Select a Destination') }}</label>
             <div class="input-group mb-3">
-                <select v-model="destination" id="destination" class="form-control" :readonly="isLoading">
+                <select v-model="destination" id="destination" class="form-select" :readonly="isLoading"
+                        :aria-label="trans('Choose a destination')">
+                    <option :value="null">{{ trans('Choose...') }}</option>
                     <option value=".." v-if="showParentDestination">..</option>
                     <option v-for="destination in destinations"
                             :value="destination.name"
                             v-text="destination.name"></option>
                 </select>
-                <div class="input-group-append">
-                    <button @click.prevent="moveMedia" type="button"
-                            class="btn btn-primary"
-                            :disabled="isLoading || ! hasSelectedDestination">
-                        {{ trans(isLoading ? 'Loading...' : 'Move') }}
-                    </button>
-                </div>
+                <button @click.prevent="onClick" type="button"
+                        class="btn btn-primary"
+                        :disabled="isLoading || ! hasSelectedDestination">
+                    {{ trans(isLoading ? 'Loading...' : 'Move') }}
+                </button>
             </div>
 
             <ul class="pl-3 mb-0">

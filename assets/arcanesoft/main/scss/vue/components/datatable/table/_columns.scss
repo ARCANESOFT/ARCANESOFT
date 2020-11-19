@@ -2,11 +2,13 @@
     @extend .fw-light, .text-uppercase, .text-muted;
 
     &.v-dt-column-sortable {
-        @extend .position-relative, .cursor-pointer, .user-select-none;
+        position: relative;
+        padding-right: 1.5rem;
+        user-select: none;
+        cursor: pointer;
 
         &:after {
-            @extend .position-absolute;
-
+            position: absolute;
             top: 50%;
             right: 8px;
             display: block;

@@ -1,15 +1,15 @@
-.v-datatable-pagination-info {
+.v-dt-pagination-info {
     //
 }
 
-.v-datatable-pagination {
+.v-dt-pagination {
     @extend .pagination;
 }
 
-.v-datatable-page-item {
+.v-dt-page-item {
     @extend .page-item;
 }
 
-.v-datatable-page-link {
+.v-dt-page-link {
     @extend .page-link;
 }

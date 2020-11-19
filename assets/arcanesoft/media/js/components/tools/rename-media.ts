@@ -1,5 +1,5 @@
 import { defineComponent, computed, ref } from 'vue'
-import { useActions, useGetters, useHelpers } from '../../store'
+import { useActions, useGetters, useHelpers, useMutations } from '../../store'
 import { MediaItem } from '../../types'
 import { trans } from '../../helpers/translator'
 import formErrors, { FormErrorsInterface } from '@arcanescripts/form-errors'
@@ -10,6 +10,7 @@ export default defineComponent({
     setup() {
         const { loadItems, renameItem, closeMediaTool } = useActions()
         const { isLoading, selectedItems } = useGetters()
+        const { startLoading, stopLoading } = useMutations()
         const { normalizeLocation } = useHelpers()
 
         const item = computed<MediaItem>(() => selectedItems.value[0])
@@ -19,19 +20,23 @@ export default defineComponent({
         const newPath = computed<string>(() => normalizeLocation(name.value))
 
         const onSubmit = async (): Promise<void> => {
+            startLoading()
+
             errors.value.reset()
 
-            return await renameItem(item.value.path, name.value)
-                .then((response) => {
-                    if (response.status !== 200)
-                        return
-
-                    closeMediaTool()
-                    loadItems()
+            return await renameItem(item.value.path, newPath.value)
+                .then(({ status }) => {
+                    if (status === 200) {
+                        closeMediaTool()
+                        loadItems()
+                    }
                 })
                 .catch(({ response }) => {
                     if (response && response.status === 422)
                         errors.value.setErrors(response.data.errors || {})
+                })
+                .finally(() => {
+                    stopLoading()
                 })
         }
 
@@ -42,6 +47,7 @@ export default defineComponent({
             isLoading,
             hasChanged,
             newPath,
+            errors,
         }
     },
 
@@ -50,13 +56,13 @@ export default defineComponent({
             <label for="name">{{ trans('Rename') }}</label>
             <div class="input-group">
                 <input type="text" v-model="name" @keyup.enter="onSubmit" id="name" required
-                       class="form-control" :class="{'is-invalid': errors.has('new_name')}" :readonly="isLoading">
+                       class="form-control" :class="{'is-invalid': errors.has('new_path')}" :readonly="isLoading">
                 <div class="input-group-append">
                     <button @click.prevent="onSubmit" :disabled=" ! hasChanged || isLoading"
                             class="btn btn-warning" type="button">{{ trans(isLoading ? 'Loading...' : 'Rename') }}</button>
                 </div>
                 <div class="invalid-feedback"
-                     v-if="errors.has('new_name')" v-text="errors.first('new_name')"></div>
+                     v-if="errors.has('new_path')" v-text="errors.first('new_path')"></div>
             </div>
         </div>
     `,

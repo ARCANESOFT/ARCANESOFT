@@ -1,17 +1,12 @@
-import { defineComponent, reactive, ref, onMounted, onUnmounted } from 'vue'
+import { defineComponent, ref, onMounted, onUnmounted } from 'vue'
 import { MediaItem } from '../types'
 import { useGetters } from '../store'
 import { trans } from '../helpers/translator'
+import useModal from '@arcanesoft/main/js/components/modal'
 
 import MediaToolbar from './elements/media-toolbar'
 import MediaBreadcrumbs from './elements/media-breadcrumbs'
 import MediaItemsContainer from './elements/media-items-container'
-
-type MediaBrowserModal = {
-    elt: any,
-    isOpen: boolean,
-    ref: HTMLElement | undefined,
-}
 
 export default defineComponent({
     name: 'v-media-browser',
@@ -53,40 +48,42 @@ export default defineComponent({
         const { selectedItems } = useGetters()
 
         const urls = ref(null)
-        const modal = reactive<MediaBrowserModal>({
-            elt: null,
-            isOpen: false,
-            ref: null,
-        })
+
+        const modalRef = ref<HTMLElement>(null)
+        const isOpen = ref<boolean>(false)
+        const modal = ref<any>(null)
 
         onMounted((): void => {
             urls.value = props.value
-            modal.elt = window['components'].modal(modal.ref)
-                .on('hidden', (): void => { modal.isOpen = false })
-                .on('shown', (): void => { modal.isOpen = true })
+
+            modal.value = useModal(modalRef.value)
+                .on('hidden', (): void => { isOpen.value = false })
+                .on('shown', (): void => { isOpen.value = true })
         })
 
         onUnmounted((): void => {
-            modal.elt.hide()
-            modal.elt.dispose()
+            modal.value.hide()
+            modal.value.dispose()
         })
 
-        const openBrowser = (): void => {
-            modal.elt.show()
+        const onBrowseClick = (): void => {
+            modal.value.show()
         }
 
-        const select = (): void => {
+        const onSelectClick = (): void => {
             urls.value = selectedItems.value.map((item: MediaItem) => item.url).join(', ')
 
-            modal.elt.hide()
+            modal.value.hide()
         }
 
         return {
             trans,
             urls,
             modal,
-            openBrowser,
-            select,
+            modalRef,
+            isOpen,
+            onBrowseClick,
+            onSelectClick,
         }
     },
 
@@ -94,17 +91,19 @@ export default defineComponent({
         <div class="input-group">
             <input type="text" v-model="urls" :name="name" :id="id || name" class="form-control" :class="this.inputClass"
                    aria-label="Browse Media Items" aria-describedby="browse-medias-button">
-            <button @click="openBrowser" id="browse-medias-button"
+            <button @click.prevent="onBrowseClick" id="browse-medias-button"
                     class="btn btn-outline-secondary" type="button">{{ trans('Browse') }}</button>
         </div>
 
         <teleport to="body">
-            <div ref="modal.ref" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+            <div ref="modalRef" class="modal fade"
+                 data-backdrop="static" data-keyboard="false" tabindex="-1"
+                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-fullscreen">
                     <div class="modal-content">
                         <div class="modal-body">
-                            <div v-if="modal.isOpen" class="media-browser">
-                                <div class="media-manager-header">
+                            <div v-if="isOpen" class="media-browser">
+                                <div class="media-manager-header mb-3">
                                     <MediaToolbar :readonly="true"/>
                                     <MediaBreadcrumbs/>
                                 </div>
@@ -116,7 +115,7 @@ export default defineComponent({
                         <div class="modal-footer justify-content-between">
                             <button type="button" data-dismiss="modal"
                                     class="btn btn-outline-secondary">{{ trans('Close') }}</button>
-                            <button type="button" @click.prevent="select"
+                            <button type="button" @click.prevent="onSelectClick"
                                     class="btn btn-primary">{{ trans('Select') }}</button>
                         </div>
                     </div>

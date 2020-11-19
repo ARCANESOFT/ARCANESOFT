@@ -65,7 +65,7 @@ export default defineComponent({
 
             <MediaItemTools v-if="hasActiveMediaTool"/>
 
-            <div class="media-manager-body card-body p-0" v-show=" ! hasActiveMediaTool">
+            <div class="media-manager-body card-body p-0" v-if=" ! hasActiveMediaTool">
                 <MediaItemsContainer :multiple="true"/>
                 <MediaItemPreview v-if="isPreviewModeShown"/>
             </div>

@@ -87,7 +87,7 @@ class Translator implements TranslatorInterface {
     private static _applyReplacements(translation: string, replacers: Object): string {
         for (let replacer in replacers) {
             translation = translation.replace(
-                new RegExp(`:${replacer}`, 'g'),
+                new RegExp(`:${replacer}\\b`, 'g'),
                 replacers[replacer]
             )
         }
