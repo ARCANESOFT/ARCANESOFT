@@ -11,7 +11,6 @@
     "require": {
         "php": "^7.3|^8.0",
         "ext-json": "*",
-        "arcanedev/agent": "^9.0",
         "arcanesoft/analytics": "@dev",
         "arcanesoft/backups": "@dev",
         "arcanesoft/blog": "@dev",
@@ -19,8 +18,8 @@
         "arcanesoft/media": "@dev",
         "arcanesoft/passport": "@dev",
         "arcanesoft/seo": "@dev",
-        "fideloper/proxy": "^4.4",
-        "fruitcake/laravel-cors": "^2.0",
+        "fideloper/proxy": "^4.4.1",
+        "fruitcake/laravel-cors": "^2.0.3",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",

@@ -5,7 +5,7 @@ return [
     /* -----------------------------------------------------------------
      |  Default Broadcaster
      | -----------------------------------------------------------------
-     |  Supported: "pusher", "redis", "log", "null"
+     |  Supported: "pusher", "ably", "redis", "log", "null"
      */
 
     'default' => env('BROADCAST_DRIVER', 'null'),
@@ -26,6 +26,11 @@ return [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
                 'useTLS' => true,
             ],
+        ],
+
+        'ably' => [
+            'driver' => 'ably',
+            'key' => env('ABLY_KEY'),
         ],
 
         'redis' => [

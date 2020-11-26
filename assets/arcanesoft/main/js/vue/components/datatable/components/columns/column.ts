@@ -63,9 +63,7 @@ export default defineComponent({
             (): DatatableSortByColumn[] => event.shiftKey ? toggleMultiple() : toggleSingle()
         )
 
-        const toggleSingle = (): DatatableSortByColumn[] => [
-            getNewSortedColumnDirection()
-        ]
+        const toggleSingle = (): DatatableSortByColumn[] => [getNewSortedColumnDirection()]
 
         const toggleMultiple = (): DatatableSortByColumn[] => {
             const sortedColumns = sortedByColumns.value
@@ -104,8 +102,7 @@ export default defineComponent({
     },
 
     template: `
-        <th class="v-dt-column"
-            :class="columnClasses"
-            @click.prevent="onClick">{{ column.label }}</th>
+        <th class="v-dt-column" :class="columnClasses"
+            @click.prevent="onClick" scope="col" v-text="column.label"></th>
     `,
 })

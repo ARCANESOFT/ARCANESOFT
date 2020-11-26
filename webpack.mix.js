@@ -19,10 +19,6 @@ const options = {
 mix.setPublicPath(options.paths.assets);
 mix.setResourceRoot('../');
 
-mix.vue({
-    version: 3,
-});
-
 mix.alias({
     vue$: path.join(__dirname, 'node_modules/vue/dist/vue.esm-bundler.js'),
 });
