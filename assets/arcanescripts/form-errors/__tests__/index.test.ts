@@ -1,4 +1,4 @@
-import formErrors, { ErrorMessages, FormErrors } from '../src'
+import formErrors, { ErrorMessages, FormErrorsInterface } from '../src'
 
 describe('function', () => {
     it('should import default as a function', () => {
@@ -13,7 +13,7 @@ describe('function', () => {
 
 describe('instance', () => {
     let errors: ErrorMessages
-    let instance: FormErrors
+    let instance: FormErrorsInterface
 
     beforeEach( () => {
         errors = {
