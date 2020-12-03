@@ -1,7 +1,9 @@
-FROM php:7-fpm-alpine
+ARG PHP_VERSION=8.0
+
+FROM php:${PHP_VERSION}-fpm-alpine
 
 # ENV
-ENV REDIS_VERSION 5.0.2
+ENV REDIS_VERSION 5.3.2
 
 # Cleaning...
 RUN rm -rf /var/cache/apk/* /tmp/*
@@ -38,7 +40,7 @@ RUN docker-php-ext-install \
     zip
 
 # Installing Redis
-RUN curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/$REDIS_VERSION.tar.gz && \
+RUN curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/${REDIS_VERSION}.tar.gz && \
     tar xfz /tmp/redis.tar.gz && \
     rm -r /tmp/redis.tar.gz && \
     mkdir -p /usr/src/php/ext && \
