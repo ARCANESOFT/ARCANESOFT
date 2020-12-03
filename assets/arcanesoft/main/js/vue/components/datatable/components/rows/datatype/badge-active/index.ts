@@ -46,8 +46,7 @@ export default defineComponent({
     template: `
         <span ref="badgeRef"
               class="badge border text-muted"
-              v-bind="badgeAttributes"
-              :data-toggle="badge.icon ? 'tooltip' : null">
+              v-bind="badgeAttributes">
             <i v-if="badge.icon" v-bind="iconAttributes"></i>
         </span>
     `,

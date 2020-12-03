@@ -20,7 +20,10 @@ export type DatatypeBadgeActive = {
     icon:   boolean,
 }
 
-export type DatatypeBadgeCount = number
+export type DatatypeBadgeCount = {
+    count: number,
+    label: string | null,
+}
 
 export type DatatypeDetail = {
     term: string

@@ -1,6 +1,7 @@
-import { defineComponent, computed, PropType } from 'vue'
+import { defineComponent, ref, onMounted, computed, PropType } from 'vue'
 import { DatatableRowColumn } from '../../../../types'
 import { DatatypeBadgeCount } from '../../../../types/column-datatype'
+import useTooltip from '../../../../../../../components/tooltip'
 
 export default defineComponent({
     name: 'v-dt-row-col-badge-count',
@@ -13,15 +14,34 @@ export default defineComponent({
     },
 
     setup(props) {
-        const count = computed(() => <DatatypeBadgeCount> props.rowColumn.value)
+        let tooltip = null
+        const badgeRef = ref<HTMLElement>(null)
+
+        const badge = computed(() => <DatatypeBadgeCount> props.rowColumn.value)
+
+        const badgeAttributes = computed(() => ({
+            'class':               badge.value.count > 0 ? 'border-info' : (badge.value.count < 0 ? 'border-danger' : 'border-secondary'),
+            'title':               badge.value.label,
+            'data-toggle':         badge.value.label ? 'tooltip' : null,
+            'data-original-title': badge.value.label,
+            'data-container':      badge.value.label ? 'body' : null,
+        }))
+
+        onMounted(() => {
+            tooltip = useTooltip(badgeRef.value, { container: 'body' })
+        })
 
         return {
-            count,
+            badge,
+            badgeRef,
+            badgeAttributes,
         }
     },
 
     template: `
-        <span class="badge border rounded-pill text-muted"
-              :class="{'border-info': count > 0, 'border-danger': count < 0}">{{ count }}</span>
+        <span ref="badgeRef"
+              class="badge border rounded-pill text-muted"
+              v-bind="badgeAttributes"
+              v-text="badge.count"></span>
     `,
 })
