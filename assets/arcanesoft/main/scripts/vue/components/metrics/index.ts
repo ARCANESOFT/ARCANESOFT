@@ -45,15 +45,14 @@ export default defineComponent({
             await loadMetric()
         })
 
-        async function changeSelectedRange(event): Promise<void> {
+        const changeSelectedRange = async (event): Promise<void> => {
             selectedRange.value = parseInt(event.target.value, 10)
-
             await loadMetric()
         }
 
-        function isMetricType(type: MetricType): ComputedRef<boolean> {
-            return computed((): boolean => props.metric.type === type)
-        }
+        const isMetricType = (type: MetricType): ComputedRef<boolean> => computed<boolean>(
+            () => isReady.value && props.metric.type === type
+        )
 
         return {
             result,
@@ -85,21 +84,13 @@ export default defineComponent({
                 <i class="fas fa-3x fa-lock"></i>
             </div>
 
-            <h6 class="card-header font-weight-semibold text-muted p-3">{{ metric.title }}</h6>
-            <div v-if="isReady" class="card-body p-3">
-                <PartitionMetric
-                    v-if="isPartitionMetric"
-                    :result="result"/>
-                <RangedValueMetric
-                    v-if="isRangedValueMetric"
-                    :result="result"/>
-                <TrendMetric
-                    v-if="isTrendMetric"
-                    :result="result"/>
-                <ValueMetric
-                    v-if="isValueMetric"
-                    :result="result"/>
-            </div>
+            <h6 class="card-header fw-semibold text-muted p-3">{{ metric.title }}</h6>
+
+            <PartitionMetric v-if="isPartitionMetric" :result="result"/>
+            <RangedValueMetric v-if="isRangedValueMetric" :result="result"/>
+            <TrendMetric v-if="isTrendMetric" :result="result"/>
+            <ValueMetric v-if="isValueMetric" :result="result"/>
+
             <div v-if="hasRanges && isReady" class="card-footer p-2">
                 <select class="form-select form-control-xs" @change="changeSelectedRange">
                     <option v-for="range in ranges" :key="range.value"

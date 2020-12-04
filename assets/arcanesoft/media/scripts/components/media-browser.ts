@@ -2,7 +2,7 @@ import { defineComponent, ref, onMounted, onUnmounted } from 'vue'
 import { MediaItem } from '../types'
 import { useGetters } from '../store'
 import { trans } from '../helpers/translator'
-import useModal from '@arcanesoft/main/js/components/modal'
+import useModal from '@arcanesoft/main/scripts/components/modal'
 
 import MediaToolbar from './elements/media-toolbar'
 import MediaBreadcrumbs from './elements/media-breadcrumbs'

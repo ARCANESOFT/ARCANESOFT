@@ -38,7 +38,8 @@ export default defineComponent({
                 options: {
                     layout: {
                         padding: {
-                            top: 10,
+                            top: 5,
+                            bottom: 5,
                         },
                     },
                     legend: {
@@ -66,7 +67,7 @@ export default defineComponent({
     },
 
     template: `
-        <div class="card-chart" style="height: 8rem;">
+        <div class="card-chart position-relative" style="min-height: 8rem;">
             <canvas ref="chartRef"></canvas>
         </div>
     `,

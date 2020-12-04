@@ -26,6 +26,8 @@ export default defineComponent({
     },
 
     template: `
-        <h3 class="mb-0">{{ formattedValue }}</h3>
+        <div class="card-body p-3">
+            <h3 class="mb-0">{{ formattedValue }}</h3>
+        </div>
     `,
 })

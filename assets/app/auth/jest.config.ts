@@ -6,14 +6,11 @@ const config: Config.InitialOptions = {
     clearMocks: true,
     testEnvironment: 'node',
     collectCoverageFrom: [
-        "<rootDir>/src/**/*.{ts,tsx}",
-    ],
-    testMatch: [
-        "**/tests/**/?(*.)+(spec|test).[jt]s?(x)",
+        "<rootDir>/src/**/*.ts",
     ],
     moduleFileExtensions: [
-        'ts', 'tsx', 'js',
+        'ts', 'js',
     ],
 }
 
-export default config;
+export default config

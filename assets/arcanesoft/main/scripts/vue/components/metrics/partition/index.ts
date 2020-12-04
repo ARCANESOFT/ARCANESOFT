@@ -25,9 +25,9 @@ export default defineComponent({
     },
 
     setup(props) {
-        function computedItems(cb: (item: MetricPartitionValue, index: number) => any): ComputedRef<Array<any>> {
-            return computed(() => props.result.value.map(cb))
-        }
+        const computedItems = (cb: (item: MetricPartitionValue, index: number) => any): ComputedRef<Array<any>> => computed(
+            () => props.result.value.map(cb)
+        )
 
         const values = computedItems((item: MetricPartitionValue) => item.value)
         const labels = computedItems((item: MetricPartitionValue) => item.label)
@@ -38,29 +38,32 @@ export default defineComponent({
             color: color.get(item, color.getByIndex(index)),
         }))
 
+        const isEmpty = computed<boolean>(() => values.value && values.value.length < 1)
+
         return {
             values,
             labels,
             colors,
 
-            isEmpty: computed(() => values.value && values.value.length < 1),
+            isEmpty,
             formattedItems,
         }
     },
 
     template: `
-        <div v-if="isEmpty">No data</div>
+        <div class="card-body p-3">
+            <div v-if="isEmpty">No data</div>
+            <div v-else class="d-flex justify-content-between flex-nowrap">
+                <ul class="list-unstyled mb-0">
+                    <li v-for="item in formattedItems">
+                        <span class="status mr-1" :style="['background-color:'+item.color]"></span>
+                        <small>{{ item.label }} ({{ item.value }})</small>
+                    </li>
+                </ul>
 
-        <div v-else class="d-flex justify-content-between flex-nowrap">
-            <ul class="list-unstyled mb-0">
-                <li v-for="item in formattedItems">
-                    <span class="status mr-1" :style="['background-color:'+item.color]"></span>
-                    <small>{{ item.label }} ({{ item.value }})</small>
-                </li>
-            </ul>
-
-            <div class="position-relative" style="max-height: 100px; width: 100px;">
-                <Chart :data="values" :labels="labels" :colors="colors"/>
+                <div class="position-relative" style="max-height: 100px; width: 100px;">
+                    <Chart :data="values" :labels="labels" :colors="colors"/>
+                </div>
             </div>
         </div>
     `,

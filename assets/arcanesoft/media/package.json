@@ -2,7 +2,7 @@
     "name": "@arcanesoft/media",
     "private": true,
     "version": "1.0.0",
-    "main": "js/index.ts",
+    "main": "scripts/index.ts",
     "dependencies": {
         "@arcanescripts/translator": "^1.0",
         "@arcanesoft/core": "^1.0",

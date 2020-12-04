@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import auth from '@app/auth/src/functions'
+import auth from '@app/auth/scripts/functions'
 
 const app = createApp({
     setup() {

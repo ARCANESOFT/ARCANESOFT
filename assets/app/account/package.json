@@ -2,7 +2,7 @@
     "name": "@app/account",
     "private": true,
     "version": "1.0.0",
-    "main": "src/index.ts",
+    "main": "scripts/index.ts",
     "scripts": {
         "test": "jest",
         "test:cov": "jest --coverage"

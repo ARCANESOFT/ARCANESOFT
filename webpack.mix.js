@@ -23,10 +23,10 @@ mix.alias({
     vue$: path.join(__dirname, 'node_modules/vue/dist/vue.esm-bundler.js'),
 });
 
-mix.version();
 mix.disableSuccessNotifications();
 
-if (process.env.NODE_ENV === 'production') {
+if (mix.inProduction()) {
+    mix.version();
     mix.options({
         cssNano: {
             discardComments: {
@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === 'production') {
         },
     });
 }
-else if (process.env.NODE_ENV === 'development') {
+else {
     mix.sourceMaps();
 }
 

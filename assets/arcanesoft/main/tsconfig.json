@@ -14,7 +14,7 @@
         ]
     },
     "include": [
-      "js/**/*",
+        "scripts/**/*",
         "tests/**/*.test.ts"
     ]
 }
