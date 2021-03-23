@@ -104,6 +104,9 @@ return [
     'required_with_all'    => 'Ce champ est obligatoire quand :values sont présents.',
     'required_without'     => "Ce champ est obligatoire quand :values n'est pas présent.",
     'required_without_all' => "Ce champ est requis quand aucun de :values n'est présent.",
+    'prohibited'           => 'Ce champ est interdit',
+    'prohibited_if'        => 'Ce champ est interdit lorsque :other est :value.',
+    'prohibited_unless'    => 'Ce champ est interdit sauf si :other est présent dans :values.',
     'same'                 => 'Ce champ doit être identique à :other.',
     'size'                 => [
         'numeric' => 'La valeur doit être :size.',

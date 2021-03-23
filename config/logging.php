@@ -46,7 +46,7 @@ return [
 
         'papertrail' => [
             'driver'       => 'monolog',
-            'level'        => 'debug',
+            'level'        => env('LOG_LEVEL', 'debug'),
             'handler'      => SyslogUdpHandler::class,
             'handler_with' => [
                 'host' => env('PAPERTRAIL_URL'),
@@ -56,6 +56,7 @@ return [
 
         'stderr' => [
             'driver'    => 'monolog',
+            'level'     => env('LOG_LEVEL', 'debug'),
             'handler'   => StreamHandler::class,
             'formatter' => env('LOG_STDERR_FORMATTER'),
             'with'      => [

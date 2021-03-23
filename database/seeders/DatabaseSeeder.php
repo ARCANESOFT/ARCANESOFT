@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use Arcanesoft\Foundation\Authorization\Database\Factories\AdministratorFactory;
-use Arcanesoft\Foundation\Authorization\Models\Administrator;
-use Carbon\Carbon;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 
 /**
  * Class     DatabaseSeeder

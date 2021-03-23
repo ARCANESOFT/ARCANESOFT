@@ -12,10 +12,8 @@ namespace Tests\Unit;
  */
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     */
-    public function testBasicTest()
+    /** @test */
+    public function it_check_true_is_true(): void
     {
         $this->assertTrue(true);
     }

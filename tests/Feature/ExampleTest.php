@@ -21,7 +21,7 @@ class ExampleTest extends TestCase
      */
 
     /** @test */
-    public function it_can_sees_index_page(): void
+    public function it_ensure_the_app_returns_a_successful_response(): void
     {
         $this->get('/')
              ->assertStatus(200);

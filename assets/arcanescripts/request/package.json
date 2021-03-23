@@ -8,7 +8,7 @@
         "test:cov": "jest --coverage"
     },
     "dependencies": {
-        "axios": "^0.19"
+        "axios": "^0.21"
     },
     "devDependencies": {
         "@types/jest": "^26.0.15",
