@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Authentication\Http\Routes;
 
-use Authentication\Http\Controllers\{LoginController, SocialiteLoginController, TwoFactorLoginController};
 use App\Http\Routes\AbstractRouteRegistrar;
 use Arcanesoft\Foundation\Authorization\Auth;
-use Arcanesoft\Foundation\Fortify\LoginRateLimiter;
+use Arcanesoft\Foundation\Fortify\Http\Limiters\{LoginRateLimiter, TwoFactorRateLimiter};
+use Authentication\Http\Controllers\{LoginController, SocialiteLoginController, TwoFactorLoginController};
 
 /**
  * Class     LoginRoutes
@@ -21,9 +21,11 @@ class LoginRoutes extends AbstractRouteRegistrar
      | -----------------------------------------------------------------
      */
 
-    public const LOGIN_CREATE = 'auth::login.create';
-    public const LOGIN_STORE  = 'auth::login.store';
-    public const LOGOUT       = 'auth::logout';
+    public const LOGIN_CREATE      = 'auth::login.create';
+    public const LOGIN_STORE       = 'auth::login.store';
+    public const LOGOUT            = 'auth::logout';
+    public const TWO_FACTOR_CREATE = 'auth::login.two-factor.create';
+    public const TWO_FACTOR_STORE  = 'auth::login.two-factor.store';
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -57,13 +59,15 @@ class LoginRoutes extends AbstractRouteRegistrar
     private function mapLoginRoutes(): void
     {
         // auth::login.create
-        $this->get('/', [LoginController::class, 'create'])
-             ->name('create');
+        $this->middleware(['guest:web'])->group(function () {
+            $this->get('/', [LoginController::class, 'create'])
+                 ->name('create');
 
-        // auth::login.store
-        $this->post('/', [LoginController::class, 'store'])
-             ->middleware([LoginRateLimiter::middleware()])
-             ->name('store');
+            // auth::login.store
+            $this->post('/', [LoginController::class, 'store'])
+                 ->middleware(array_filter([LoginRateLimiter::middleware()]))
+                 ->name('store');
+        });
     }
 
     /**
@@ -84,15 +88,16 @@ class LoginRoutes extends AbstractRouteRegistrar
         if ( ! Auth::isTwoFactorEnabled())
             return;
 
-        $this->prefix('two-factor-challenge')->name('two-factor.')->group(function () {
-            // auth::login.two-factor.create
-            $this->get('/', [TwoFactorLoginController::class, 'create'])
-                 ->name('create');
+        $this->prefix('two-factor-challenge')->name('two-factor.')->middleware(['guest:web'])->group(function () {
+             // auth::login.two-factor.create
+             $this->get('/', [TwoFactorLoginController::class, 'create'])
+                  ->name('create');
 
-            // auth::login.two-factor.store
-            $this->post('/', [TwoFactorLoginController::class, 'store'])
-                 ->name('store');
-        });
+             // auth::login.two-factor.store
+             $this->post('/', [TwoFactorLoginController::class, 'store'])
+                  ->middleware(array_filter([TwoFactorRateLimiter::middleware()]))
+                  ->name('store');
+         });
     }
 
     /**

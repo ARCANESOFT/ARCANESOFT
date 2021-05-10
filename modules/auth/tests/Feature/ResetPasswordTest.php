@@ -4,12 +4,21 @@ declare(strict_types=1);
 
 namespace Authentication\Tests\Feature;
 
+use Arcanesoft\Foundation\Authorization\Auth;
 use Arcanesoft\Foundation\Authorization\Models\PasswordReset as PasswordResetModel;
 use Arcanesoft\Foundation\Authorization\Notifications\Authentication\ResetPassword as ResetPasswordNotification;
 use Arcanesoft\Foundation\Fortify\Concerns\HasPasswordBroker;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\PasswordBroker;
+use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\{Event, Hash, Notification};
+use Illuminate\Support\Facades\{
+    Event,
+    Hash,
+    Notification,
+    Password};
+use Mockery;
 
 /**
  * Class     ResetPasswordTest
@@ -166,6 +175,18 @@ class ResetPasswordTest extends TestCase
         $this->assertGuest();
     }
 
+
+    /** @test */
+    public function test_password_is_required(): void
+    {
+        $this->post(static::passwordResetPostUrl(), [
+            'token' => 'token',
+            'email' => 'taylor@laravel.com',
+        ])
+            ->assertStatus(302)
+            ->assertSessionHasErrors(['password']);
+    }
+
     /** @test */
     public function it_send_an_email_with_a_password_reset_link(): void
     {
@@ -190,6 +211,58 @@ class ResetPasswordTest extends TestCase
 
             return Hash::check($notification->token, $pwdReset->token) === true;
         });
+    }
+
+    /** @test */
+    public function test_password_can_be_reset_with_customized_email_address_field(): void
+    {
+        config()->set('arcanesoft.foundation.auth.username', 'emailAddress');
+
+        Password::shouldReceive('broker')->andReturn($broker = Mockery::mock(PasswordBroker::class));
+
+        $guard = $this->mock(StatefulGuard::class);
+        $guard->shouldReceive('login')->never();
+
+        $user = tap(Mockery::mock(Authenticatable::class), function (Mockery\MockInterface $user) {
+            $user->shouldReceive('setRememberToken')->once();
+            $user->shouldReceive('fill')->once()->andReturnSelf();
+            $user->shouldReceive('save')->once();
+        });
+
+        $broker->shouldReceive('reset')->andReturnUsing(function ($input, $callback) use ($user) {
+            $callback($user, 'password');
+
+            return Password::PASSWORD_RESET;
+        });
+
+        $this->withoutExceptionHandling()
+             ->post(static::passwordResetPostUrl(), [
+                 'token' => 'token',
+                 'emailAddress' => 'taylor@laravel.com',
+                 'password' => 'password',
+                 'password_confirmation' => 'password',
+             ])
+             ->assertStatus(302)
+             ->assertRedirect(static::loginCreateUrl());
+    }
+
+    /** @test */
+    public function test_reset_link_can_be_successfully_requested_with_customized_email_field(): void
+    {
+        config()->set('arcanesoft.foundation.auth.username', 'emailAddress');
+
+        tap(Mockery::mock(PasswordBroker::class), function (Mockery\MockInterface $broker) {
+            $broker->shouldReceive('sendResetLink')->andReturn(Password::RESET_LINK_SENT);
+
+            Password::shouldReceive('broker')->andReturn($broker);
+        });
+
+        $this->from(route('auth::password.request'))
+             ->post(route('auth::password.email'), ['emailAddress' => 'taylor@laravel.com'])
+             ->assertStatus(302)
+             ->assertRedirect(route('auth::password.request'))
+             ->assertSessionHasNoErrors()
+             ->assertSessionHas('status', trans(Password::RESET_LINK_SENT));
     }
 
     /* -----------------------------------------------------------------

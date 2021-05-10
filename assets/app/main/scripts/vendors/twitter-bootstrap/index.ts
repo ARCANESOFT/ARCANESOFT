@@ -1,8 +1,6 @@
+import { Toast, Tooltip } from 'bootstrap/dist/js/bootstrap.esm'
+
 import Modal from './Modal'
-import {
-    Toast,
-    Tooltip,
-} from 'bootstrap/js/index.esm'
 
 window['twbs'] = {
     Modal,

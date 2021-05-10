@@ -19,8 +19,8 @@ class ConfirmPasswordRoutes extends AbstractRouteRegistrar
      | -----------------------------------------------------------------
      */
 
-    public const SHOW  = 'auth::password.confirm.show';
-    public const STORE = 'auth::password.confirm.store';
+    public const SHOW   = 'auth::password.confirm.show';
+    public const STORE  = 'auth::password.confirm.store';
     public const STATUS = 'auth::password.confirm.status';
 
     /* -----------------------------------------------------------------

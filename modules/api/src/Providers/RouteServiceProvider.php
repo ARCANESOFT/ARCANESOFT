@@ -85,7 +85,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapRoutes(): void
     {
-        $this->middleware(['api'])->prefix('api')->group(function (): void {
+        $this->middleware(['api'])->prefix('api')->name('api::')->group(function (): void {
             static::mapRouteClasses($this->getRouteClasses());
 
             $this->loadRoutesFrom(base_path('routes/api.php'));

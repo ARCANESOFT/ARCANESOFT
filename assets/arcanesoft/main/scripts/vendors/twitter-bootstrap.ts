@@ -1,4 +1,4 @@
-import { Toast, Tooltip } from 'bootstrap/js/index.esm'
+import { Toast, Tooltip } from 'bootstrap/dist/js/bootstrap.esm'
 
 window['twbs'] = {
     Toast,

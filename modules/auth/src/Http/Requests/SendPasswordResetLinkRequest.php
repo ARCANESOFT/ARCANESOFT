@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Authentication\Http\Requests;
 
+use Arcanesoft\Foundation\Authorization\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -26,7 +27,7 @@ class SendPasswordResetLinkRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'email'],
+            Auth::username() => ['required', 'email'],
         ];
     }
 }

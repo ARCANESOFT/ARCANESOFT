@@ -1,3 +1,3 @@
-import Popper from 'popper.js'
+import * as Popper from '@popperjs/core'
 
 window['Popper'] = Popper

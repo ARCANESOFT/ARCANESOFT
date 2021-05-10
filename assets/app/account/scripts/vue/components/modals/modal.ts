@@ -1,6 +1,7 @@
 import { defineComponent, onMounted, onUnmounted, ref, watch } from 'vue'
 import translator from '../../../mixins/translator'
-import { Modal } from 'bootstrap/js/index.esm.js'
+// import { Modal } from 'bootstrap/dist/js/bootstrap.esm.js'
+import Modal from 'bootstrap/js/src/modal.js'
 
 export default defineComponent({
     name: 'v-modal',

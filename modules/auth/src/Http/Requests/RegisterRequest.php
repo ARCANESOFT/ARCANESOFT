@@ -43,7 +43,7 @@ class RegisterRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:50'],
             'last_name'  => ['required', 'string', 'max:50'],
             'email'      => ['required', 'string', 'email', 'max:255', EmailRule::unique()],
-            'password'   => Password::make()->confirmed()->rules(),
+            'password'   => Password::make()->confirmed()->rules(), // TODO: Use the new password rule instead?
         ];
     }
 }

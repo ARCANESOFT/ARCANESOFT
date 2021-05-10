@@ -18,12 +18,8 @@ const options = {
 
 mix.setPublicPath(options.paths.assets);
 mix.setResourceRoot('../');
-
-mix.alias({
-    vue$: path.join(__dirname, 'node_modules/vue/dist/vue.esm-bundler.js'),
-});
-
 mix.disableSuccessNotifications();
+mix.webpackConfig(require('./webpack.config'));
 
 if (mix.inProduction()) {
     mix.version();
@@ -35,9 +31,8 @@ if (mix.inProduction()) {
         },
     });
 }
-else {
+else
     mix.sourceMaps();
-}
 
 /*--------------------------------------------------------------------------
  | Run Mixes

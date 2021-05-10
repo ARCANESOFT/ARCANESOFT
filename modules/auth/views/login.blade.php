@@ -10,7 +10,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-5">
             <div class="card shadow-sm">
-                <h4 class="card-header text-center">@lang('Login')</h4>
+                <h4 class="card-header text-center">@lang('Log in')</h4>
                 <div class="card-body">
                     @if (session('status'))
                         <p class="font-weight-bold small text-success">{{ session('status') }}</p>

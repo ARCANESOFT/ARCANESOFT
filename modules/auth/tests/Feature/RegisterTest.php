@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace Authentication\Tests\Feature;
 
 use App\Models\User;
-use Authentication\Http\Routes\RegisterRoutes;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\{Event, Hash};
+use Illuminate\Support\Facades\{
+    Auth,
+    Event,
+    Hash};
 
 /**
  * Class     RegisterTest
@@ -230,6 +233,21 @@ class RegisterTest extends TestCase
         static::assertFalse($resp->getSession()->hasOldInput('password'));
 
         $this->assertGuest();
+    }
+
+    public function test_users_can_be_created_and_redirected_to_intended_url()
+    {
+        $data = [
+            'first_name'            => 'John',
+            'last_name'             => 'DOE',
+            'email'                 => 'john.doe@example.com',
+            'password'              => 'password',
+            'password_confirmation' => 'password',
+        ];
+
+        $this->withSession(['url.intended' => 'http://foo.com/bar'])
+             ->post(static::registerPostUrl(), $data)
+             ->assertRedirect('http://foo.com/bar');
     }
 
     /* -----------------------------------------------------------------

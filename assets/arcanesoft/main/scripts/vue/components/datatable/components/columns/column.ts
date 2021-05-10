@@ -32,9 +32,9 @@ export default defineComponent({
                 return ['text-right']
 
             return {
-                'text-left'   : props.column.align === COLUMN_ALIGNMENT.LEFT,
+                'text-start'  : props.column.align === COLUMN_ALIGNMENT.LEFT,
                 'text-center' : props.column.align === COLUMN_ALIGNMENT.CENTER,
-                'text-right'  : props.column.align === COLUMN_ALIGNMENT.RIGHT,
+                'text-end'    : props.column.align === COLUMN_ALIGNMENT.RIGHT,
 
                 'v-dt-column-sortable':  isSortable.value,
                 'v-dt-column-sort-asc':  sortDirection.value === SORT_DIRECTION.ASC,

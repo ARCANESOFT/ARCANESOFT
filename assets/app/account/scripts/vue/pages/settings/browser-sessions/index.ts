@@ -2,7 +2,8 @@ import { defineComponent, onMounted, nextTick, ref, computed } from 'vue'
 import errors, { FormErrorsInterface } from '@arcanescripts/form-errors'
 import translator from '../../../../mixins/translator'
 import api from './api'
-import { Modal } from 'bootstrap/js/index.esm.js'
+// import { Modal } from 'bootstrap/dist/js/bootstrap.esm.js'
+import Modal from 'bootstrap/js/src/modal.js'
 
 type BrowserSession = {
     id: string

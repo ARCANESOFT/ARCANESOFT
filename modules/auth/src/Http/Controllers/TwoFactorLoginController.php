@@ -9,6 +9,7 @@ use Arcanesoft\Foundation\Authentication\Concerns\UseUserGuard;
 use Arcanesoft\Foundation\Fortify\Auth\AuthenticatesWithTwoFactorChallenge;
 use Authentication\Http\Requests\TwoFactorLoginRequest;
 use Authentication\Http\Routes\LoginRoutes;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 
 /**
@@ -34,12 +35,16 @@ class TwoFactorLoginController
     /**
      * Show the two factor authentication challenge view.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Authentication\Http\Requests\TwoFactorLoginRequest  $request
      *
      * @return \Illuminate\View\View|mixed
      */
-    public function create(Request $request)
+    public function create(TwoFactorLoginRequest $request)
     {
+        if ( ! $request->hasChallengedUser()) {
+            throw new HttpResponseException(redirect()->route(LoginRoutes::LOGIN_CREATE));
+        }
+
         return $this->form('auth::two-factor-challenge', $request);
     }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Authentication\Http\Requests;
 
+use Arcanesoft\Foundation\Authorization\Auth;
 use Arcanesoft\Foundation\Fortify\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -26,11 +27,10 @@ class ResetPasswordRequest extends FormRequest
      */
     public function rules(): array
     {
-
         return [
-            'token'    => ['required'],
-            'email'    => ['required', 'email'],
-            'password' => Password::make()->confirmed()->rules(),
+            'token'          => ['required'],
+            Auth::username() => ['required', 'email'],
+            'password'       => Password::make()->confirmed()->rules(), // TODO: Use the new password instead?
         ];
     }
 }

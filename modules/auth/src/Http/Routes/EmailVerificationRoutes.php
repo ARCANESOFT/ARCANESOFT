@@ -20,7 +20,7 @@ class EmailVerificationRoutes extends AbstractRouteRegistrar
      */
 
     public const NOTICE = 'auth::email.verification.notice';
-    public const RESEND = 'auth::email.verification.resend';
+    public const SEND   = 'auth::email.verification.send';
     public const VERIFY = 'auth::email.verification.verify';
 
     /* -----------------------------------------------------------------
@@ -38,10 +38,10 @@ class EmailVerificationRoutes extends AbstractRouteRegistrar
             $this->get('/', [EmailVerificationController::class, 'show'])
                  ->name('notice');
 
-            // auth::email.verification.resend
-            $this->post('/', [EmailVerificationController::class, 'resend'])
+            // auth::email.verification.send
+            $this->post('/notification', [EmailVerificationController::class, 'send'])
                  ->middleware(['throttle:6,1']) // TODO: Make the throttle configurable
-                 ->name('resend');
+                 ->name('send');
 
             // auth::email.verification.verify
             $this->get('{id}/{hash}', [EmailVerificationController::class, 'verify'])

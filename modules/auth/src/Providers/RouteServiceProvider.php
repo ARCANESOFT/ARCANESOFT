@@ -5,8 +5,12 @@ declare(strict_types=1);
 namespace Authentication\Providers;
 
 use Arcanedev\Support\Routing\Concerns\RegistersRouteClasses;
+use Arcanesoft\Foundation\Authorization\Auth;
 use Authentication\Http\Routes;
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
 
 /**
  * Class     RouteServiceProvider
@@ -71,7 +75,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function configureRateLimiting(): void
     {
-        //
+        RateLimiter::for('login', function (Request $request) {
+            return Limit::perMinute(5)->by($request->{Auth::username()}.$request->ip());
+        });
+
+        RateLimiter::for('two-factor', function (Request $request) {
+            return Limit::perMinute(5)->by($request->session()->get('login.id'));
+        });
     }
 
     /**
@@ -81,13 +91,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapRoutes(): void
     {
-        $this->prefix('auth')
-             ->name('auth::')
-             ->middleware(['web'])
-             ->group(function (): void {
-                 static::mapRouteClasses($this->getRouteClasses());
+        $this->prefix('auth')->name('auth::')->middleware(['web'])->group(function (): void {
+            static::mapRouteClasses($this->getRouteClasses());
 
-                 $this->loadRoutesFrom(dirname(__DIR__, 2).'/routes/auth.php');
-             });
+            $this->loadRoutesFrom(dirname(__DIR__, 2).'/routes/auth.php');
+        });
     }
 }

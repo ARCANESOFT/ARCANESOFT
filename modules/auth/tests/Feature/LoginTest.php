@@ -7,7 +7,6 @@ namespace Authentication\Tests\Feature;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
-use Illuminate\Support\Collection;
 use Illuminate\Testing\TestResponse;
 
 /**
@@ -159,7 +158,7 @@ class LoginTest extends TestCase
         $this->deleteJson(static::logoutUrl())
              ->assertSuccessful()
              ->assertExactJson([
-                 'redirect' => static::indexPageUrl(),
+                 'success' => 'Successfully logged out of application',
              ]);
 
         $this->assertGuest();
@@ -184,14 +183,14 @@ class LoginTest extends TestCase
         $this->deleteJson(static::logoutUrl())
              ->assertSuccessful()
              ->assertExactJson([
-                 'redirect' => static::indexPageUrl(),
+                 'success' => 'Successfully logged out of application',
              ]);
 
         $this->assertGuest();
     }
 
     /** @test */
-    public function it_cannot_allow_more_than_five_attempts_in_one_minute()
+    public function it_cannot_allow_more_than_five_attempts_in_one_minute(): void
     {
         $user = static::createUser();
         $data = [
@@ -245,7 +244,7 @@ class LoginTest extends TestCase
      * @param  \Illuminate\Testing\TestResponse  $resp
      * @param  \App\Models\User|mixed            $user
      */
-    protected function assertHasRememberMeCookie(TestResponse $resp, User $user)
+    protected function assertHasRememberMeCookie(TestResponse $resp, User $user): void
     {
         $name = $this->app->make('auth')->guard()->getRecallerName();
 

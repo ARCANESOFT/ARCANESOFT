@@ -57,7 +57,7 @@ class EmailVerificationController
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
-    public function resend(Request $request)
+    public function send(Request $request)
     {
         return $this->sendEmailVerification($request);
     }

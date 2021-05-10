@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Api\Http\Routes;
 
+use Api\Http\Controllers\ExampleController;
+
 /**
  * Class     ApiRoutes
  *
@@ -21,6 +23,7 @@ class ApiRoutes extends AbstractRouteRegistrar
      */
     public function map(): void
     {
-        //
+        $this->get('/example', [ExampleController::class, 'index'])
+             ->name('example.index');
     }
 }

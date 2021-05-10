@@ -21,9 +21,4 @@ abstract class TestCase extends BaseTestCase
 
     use CanCreateUsers;
     use CanGetRouteUrls;
-
-    /* -----------------------------------------------------------------
-     |  Common Methods
-     | -----------------------------------------------------------------
-     */
 }

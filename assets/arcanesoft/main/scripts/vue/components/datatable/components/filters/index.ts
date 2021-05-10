@@ -44,7 +44,7 @@ export default defineComponent({
             <button
                 id="v-dt-filters-menu"
                 class="v-dt-toolbar-button v-dt-filters-dropdown-btn dropdown-toggle" type="button"
-                data-toggle="dropdown" aria-expanded="false"
+                data-bs-toggle="dropdown" aria-expanded="false"
                 :aria-label="trans('Toggle Filters Dropdown')"><i class="fas fa-fw fa-filter"></i></button>
             <div ref="dropdownMenuRef" class="v-dt-filters-menu dropdown-menu dropdown-menu-right"
                  aria-labelledby="v-dt-filters-menu">

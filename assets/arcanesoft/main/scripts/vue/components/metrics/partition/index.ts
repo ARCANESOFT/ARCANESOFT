@@ -56,7 +56,7 @@ export default defineComponent({
             <div v-else class="d-flex justify-content-between flex-nowrap">
                 <ul class="list-unstyled mb-0">
                     <li v-for="item in formattedItems">
-                        <span class="status mr-1" :style="['background-color:'+item.color]"></span>
+                        <span class="status me-1" :style="['background-color:'+item.color]"></span>
                         <small>{{ item.label }} ({{ item.value }})</small>
                     </li>
                 </ul>

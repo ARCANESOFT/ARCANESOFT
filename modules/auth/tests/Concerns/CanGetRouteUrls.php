@@ -54,6 +54,26 @@ trait CanGetRouteUrls
     }
 
     /**
+     * Get the two factor `CREATE` URL.
+     *
+     * @return string
+     */
+    protected static function twoFactorCreateUrl(): string
+    {
+        return route(LoginRoutes::TWO_FACTOR_CREATE);
+    }
+
+    /**
+     * Get the two factor `POST` URL.
+     *
+     * @return string
+     */
+    protected static function twoFactorPostUrl(): string
+    {
+        return route(LoginRoutes::TWO_FACTOR_STORE);
+    }
+
+    /**
      * Get the password reset `GET` URL.
      *
      * @param  string  $token
@@ -120,9 +140,9 @@ trait CanGetRouteUrls
      *
      * @return string
      */
-    protected static function verificationResendUrl(): string
+    protected static function verificationSendUrl(): string
     {
-        return route(EmailVerificationRoutes::RESEND);
+        return route(EmailVerificationRoutes::SEND);
     }
 
     /**

@@ -2,9 +2,9 @@
 /** @var  Arcanesoft\Foundation\Authorization\Models\Administrator  $administrator */
 $administrator = auth(Arcanesoft\Foundation\Authentication\Guard::WEB_ADMINISTRATOR)->user();
 ?>
-<ul class="navbar-nav ml-md-auto d-md-flex flex-md-row">
+<ul class="navbar-nav ms-md-auto d-md-flex flex-md-row">
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown" role="button" data-toggle="dropdown"
+        <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown" role="button" data-bs-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">
             {{ $administrator->display_name }}
         </a>
@@ -13,7 +13,7 @@ $administrator = auth(Arcanesoft\Foundation\Authentication\Guard::WEB_ADMINISTRA
             <a class="dropdown-item" href="{{ route('admin::authorization.profile.index') }}">@lang('Profile')</a>
             <div class="dropdown-divider"></div>
             <button @click.prevent="logout('{{ route('auth::logout') }}')"
-                    class="dropdown-item">@lang('Logout')</button>
+                    class="dropdown-item">@lang('Log out')</button>
         </div>
     </li>
 </ul>

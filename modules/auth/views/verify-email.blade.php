@@ -15,7 +15,7 @@
                     @if (session('status') == 'verification-link-sent')
                         <p class="small text-success">@lang('A new verification link has been sent to the email address you provided during registration.')</p>
                     @endif
-                    <form action="{{ route('auth::email.verification.resend') }}" method="POST">
+                    <form action="{{ route(Authentication\Http\Routes\EmailVerificationRoutes::SEND) }}" method="POST">
                         @csrf
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">@lang('Resend verification email')</button>

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Authentication\Tests\Feature;
 
+use App\Http\Routes\PagesRoutes;
 use Authentication\Notifications\VerifyEmailNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
@@ -113,7 +114,7 @@ class EmailVerificationTest extends TestCase
     /** @test */
     public function it_cannot_let_guest_resend_a_verification_email(): void
     {
-        $this->post(static::verificationResendUrl())
+        $this->post(static::verificationSendUrl())
              ->assertRedirect(static::loginCreateUrl());
     }
 
@@ -123,7 +124,7 @@ class EmailVerificationTest extends TestCase
         $user = static::createUser();
 
         $this->actingAs($user)
-             ->post(static::verificationResendUrl())
+             ->post(static::verificationSendUrl())
              ->assertRedirect(static::homePageUrl());
     }
 
@@ -136,9 +137,40 @@ class EmailVerificationTest extends TestCase
 
         $this->actingAs($user)
              ->from(static::verificationNoticeUrl())
-             ->post(static::verificationResendUrl())
+             ->post(static::verificationSendUrl())
              ->assertRedirect(static::verificationNoticeUrl());
 
         Notification::assertSentTo($user, VerifyEmailNotification::class);
+    }
+
+    public function test_user_is_redirect_if_already_verified()
+    {
+        Notification::fake();
+
+        $user = static::createUser();
+
+        $this->from(static::verificationNoticeUrl())
+             ->actingAs($user)
+             ->post(static::verificationSendUrl())
+             ->assertRedirect(PagesRoutes::home());
+
+        Notification::assertNotSentTo($user, VerifyEmailNotification::class);
+    }
+
+    /** @test */
+    public function it_redirects_user_to_intended_url_if_already_verified(): void
+    {
+        Notification::fake();
+
+        $user = static::createUser();
+
+        $this->from(static::verificationNoticeUrl())
+             ->actingAs($user)
+             ->withSession(['url.intended' => 'http://foo.com/bar'])
+             ->post(static::verificationSendUrl())
+             ->dump()
+             ->assertRedirect('http://foo.com/bar');
+
+        Notification::assertNotSentTo($user, VerifyEmailNotification::class);
     }
 }

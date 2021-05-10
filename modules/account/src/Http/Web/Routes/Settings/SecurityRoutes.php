@@ -52,17 +52,18 @@ class SecurityRoutes extends AbstractRouteRegistrar
             $this->get('status', [TwoFactorAuthenticationController::class, 'status'])
                 ->name('status');
 
+            // TODO: Adding password confirm middleware?
             // account::settings.security.two-factor.enable
             $this->post('enable', [TwoFactorAuthenticationController::class, 'enable'])
-                ->name('enable');
+                 ->name('enable');
 
             // account::settings.security.two-factor.regenerate
             $this->put('regenerate', [TwoFactorAuthenticationController::class, 'regenerate'])
-                ->name('regenerate');
+                 ->name('regenerate');
 
             // account::settings.security.two-factor.disable
             $this->delete('disable', [TwoFactorAuthenticationController::class, 'disable'])
-                ->name('disable');
+                 ->name('disable');
         });
     }
 

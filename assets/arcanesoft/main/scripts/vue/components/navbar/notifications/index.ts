@@ -18,7 +18,7 @@ export default defineComponent({
     },
 
     template: `
-        <a id="notifications-dropdown" href="#" data-toggle="dropdown"
+        <a id="notifications-dropdown" href="#" data-bs-toggle="dropdown"
            class="dropdown-toggle no-caret navbar-link-item navbar-link-icon">
             <span class="status-indicator">
                 <i class="far fa-fw fa-bell"></i>

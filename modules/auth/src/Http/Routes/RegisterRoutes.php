@@ -32,7 +32,7 @@ class RegisterRoutes extends AbstractRouteRegistrar
      */
     public function map(): void
     {
-        $this->prefix('register')->name('register.')->middleware(['guest'])->group(function () {
+        $this->prefix('register')->name('register.')->middleware(['guest:web'])->group(function () {
             // auth::register.create
             $this->get('/', [RegisterController::class, 'create'])
                  ->name('create');

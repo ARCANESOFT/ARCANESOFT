@@ -52,19 +52,19 @@ export default defineComponent({
                 <NewFolderButton/>
             </div>
 
-            <RefreshButton class="ml-1"/>
+            <RefreshButton class="ms-1"/>
 
-            <div v-if=" ! readonly" class="btn-group ml-1" role="group">
+            <div v-if=" ! readonly" class="btn-group ms-1" role="group">
                 <MoveMediaButton/>
                 <RenameMediaButton/>
                 <DeleteMediaButton/>
             </div>
 
-            <div class="btn-group display-modes ml-auto" role="group" aria-label="Display Mode">
+            <div class="btn-group display-modes ms-auto" role="group" aria-label="Display Mode">
                 <DisplayModeButton v-for="mode in modes" :key="mode.key" :mode="mode"/>
             </div>
 
-            <PreviewModeButton v-if=" ! readonly" class="ml-1 d-none d-md-block"/>
+            <PreviewModeButton v-if=" ! readonly" class="ms-1 d-none d-md-block"/>
         </div>
 
         <div class="d-flex media-manager-toolbar" v-else>

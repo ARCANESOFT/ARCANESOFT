@@ -37,6 +37,10 @@ class ApiServiceProvider extends PackageServiceProvider
         $this->registerProviders([
             Providers\RouteServiceProvider::class
         ]);
+
+        $this->registerCommands([
+            Console\ApiGenerateCommand::class,
+        ]);
     }
 
     /**

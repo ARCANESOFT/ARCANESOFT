@@ -34,25 +34,22 @@ class PasswordResetRoutes extends AbstractRouteRegistrar
      */
     public function map(): void
     {
-        $this->prefix('password')
-             ->name('password.')
-             ->middleware(['guest'])
-             ->group(function () {
-                 // auth::password.request
-                 $this->get('forgotten', [PasswordResetLinkController::class, 'create'])
-                      ->name('request');
+        $this->prefix('password')->name('password.')->middleware(['guest:web'])->group(function () {
+             // auth::password.request
+             $this->get('forgotten', [PasswordResetLinkController::class, 'create'])
+                  ->name('request');
 
-                 // auth::password.email
-                 $this->post('forgotten', [PasswordResetLinkController::class, 'store'])
-                      ->name('email');
+             // auth::password.email
+             $this->post('forgotten', [PasswordResetLinkController::class, 'store'])
+                  ->name('email');
 
-                 // auth::password.reset
-                 $this->get('reset/{token}', [ResetPasswordController::class, 'edit'])
-                      ->name('reset');
+             // auth::password.reset
+             $this->get('reset/{token}', [ResetPasswordController::class, 'edit'])
+                  ->name('reset');
 
-                 // auth::password.update
-                 $this->post('reset', [ResetPasswordController::class, 'update'])
-                      ->name('update');
-             });
+             // auth::password.update
+             $this->post('reset', [ResetPasswordController::class, 'update'])
+                  ->name('update');
+        });
     }
 }

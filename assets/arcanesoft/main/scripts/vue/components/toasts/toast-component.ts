@@ -1,6 +1,7 @@
 import { defineComponent, onMounted, ref, computed, PropType } from 'vue'
 import arcanesoft from '../../../helpers/arcanesoft'
-import { Toast } from 'bootstrap/js/index.esm'
+// import { Toast } from 'bootstrap/dist/js/bootstrap.esm'
+import Toast from 'bootstrap/js/src/toast'
 import * as moment from 'moment'
 import ToastClass from './toast'
 import events from './events'
