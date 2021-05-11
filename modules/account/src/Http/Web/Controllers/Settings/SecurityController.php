@@ -7,6 +7,7 @@ namespace Account\Http\Web\Controllers\Settings;
 use Account\Http\Web\Controllers\Controller;
 use Account\Http\Web\Requests\Settings\UpdatePasswordRequest;
 use Arcanesoft\Foundation\Authorization\Repositories\UsersRepository;
+use Illuminate\Http\Request;
 
 /**
  * Class     SecurityController
@@ -25,11 +26,11 @@ class SecurityController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('account::settings.security.index', [
-            'user' => auth()->user(),
-        ]);
+        $user = $this->getAuthenticatedUser($request);
+
+        return view()->make('account::settings.security.index', compact('user'));
     }
 
     /**
@@ -42,12 +43,26 @@ class SecurityController extends Controller
      */
     public function updatePassword(UpdatePasswordRequest $request, UsersRepository $repo)
     {
-        $user = auth()->user();
+        $user = $this->getAuthenticatedUser($request);
 
         $updated = $repo->updatePassword($user, $request->get('password'));
 
         // TODO: Show notification
 
         return redirect()->back();
+    }
+
+    /**
+     * TODO: Refactor this method into a trait.
+     *
+     * Get the authenticated user from request.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \App\Models\User|mixed
+     */
+    protected function getAuthenticatedUser(Request $request)
+    {
+        return $request->user();
     }
 }

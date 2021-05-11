@@ -86,6 +86,8 @@ class TwoFactorAuthenticationController extends Controller
      */
 
     /**
+     * TODO: Refactor this method into a trait.
+     *
      * Get the authenticated user from request.
      *
      * @param \Illuminate\Http\Request $request

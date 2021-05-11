@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Account\Http\Web\Controllers;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
+use Illuminate\Http\Request;
 
 /**
  * Class     ProfileController
@@ -21,58 +19,33 @@ class ProfileController extends Controller
      */
 
     /**
+     * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view()->make('account::profile.index');
+        $account = $this->getAuthenticatedUser($request);
+
+        return view()->make('account::profile.index', compact('account'));
     }
 
-    /**
-     * Validate and update the given user's profile information.
-     *
-     * @param  mixed  $user
-     * @param  array  $input
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
-    public function update($user, array $input)
-    {
-        // TODO: Test this method
-        Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique('users')->ignore($user->id),
-            ],
-        ])->validateWithBag('updateProfileInformation');
-
-        if ($input['email'] !== $user->email && $user instanceof MustVerifyEmail) {
-            $this->updateVerifiedUser($user, $input);
-        }
-        else {
-            $user->forceFill([
-                'name' => $input['name'],
-                'email' => $input['email'],
-            ])->save();
-        }
-    }
 
     /**
-     * Update the given verified user's profile information.
+     * TODO: Refactor this method into a trait.
      *
-     * @param  mixed  $user
-     * @param  array  $input
+     * Get the authenticated user.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \App\Models\User|mixed|null
      */
-    protected function updateVerifiedUser($user, array $input): void
+    protected function getAuthenticatedUser(Request $request)
     {
-        $user->forceFill([
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'email_verified_at' => null,
-        ])->save();
-
-        $user->sendEmailVerificationNotification();
+        return $request->user();
     }
 }

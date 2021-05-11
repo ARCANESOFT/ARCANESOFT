@@ -1,3 +1,4 @@
+
 @extends('_template.master')
 
 <?php /** @var  App\Models\User  $account */ ?>

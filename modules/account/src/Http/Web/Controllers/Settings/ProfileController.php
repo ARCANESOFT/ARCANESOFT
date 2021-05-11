@@ -33,6 +33,8 @@ class ProfileController extends Controller
     }
 
     /**
+     * Update the user's profile.
+     *
      * @param  \Account\Http\Web\Requests\Settings\UpdateProfileRequest           $request
      * @param  \Arcanesoft\Foundation\Authorization\Repositories\UsersRepository  $repo
      *

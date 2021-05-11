@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Account\Http\Web\Controllers\Settings;
 
 use Account\Http\Web\Controllers\Controller;
+use Illuminate\Http\Request;
 
 /**
  * Class     LinkedAccountsController
@@ -23,9 +24,9 @@ class LinkedAccountsController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $account = auth()->user()->load(['linkedAccounts']);
+        $account = $this->getAuthenticatedUser($request)->load(['linkedAccounts']);
 
         return view()->make('account::settings.linked-accounts.index', compact('account'));
     }
@@ -33,5 +34,24 @@ class LinkedAccountsController extends Controller
     public function link()
     {
         //
+    }
+
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * TODO: Refactor this method into a trait.
+     *
+     * Get the authenticated user from request.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \App\Models\User|mixed
+     */
+    protected function getAuthenticatedUser(Request $request)
+    {
+        return $request->user();
     }
 }

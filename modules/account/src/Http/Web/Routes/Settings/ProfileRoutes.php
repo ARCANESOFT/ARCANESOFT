@@ -15,6 +15,14 @@ use App\Http\Routes\AbstractRouteRegistrar;
 class ProfileRoutes extends AbstractRouteRegistrar
 {
     /* -----------------------------------------------------------------
+     |  Constants
+     | -----------------------------------------------------------------
+     */
+
+    const PROFILE_INDEX  = 'account::settings.profile.index';
+    const PROFILE_UPDATE = 'account::settings.profile.update';
+
+    /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */

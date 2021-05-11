@@ -1250,7 +1250,7 @@
             "dist": {
                 "type": "path",
                 "url": "../Foundation",
-                "reference": "2d6434c3706d095dbb1a7ea6fa36b0a70bbf8618"
+                "reference": "2950abcee2e1c8a735c2569d9cb7ba5ce67667d4"
             },
             "require": {
                 "arcanedev/agent": "^9.0",

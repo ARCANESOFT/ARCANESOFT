@@ -168,7 +168,6 @@ class EmailVerificationTest extends TestCase
              ->actingAs($user)
              ->withSession(['url.intended' => 'http://foo.com/bar'])
              ->post(static::verificationSendUrl())
-             ->dump()
              ->assertRedirect('http://foo.com/bar');
 
         Notification::assertNotSentTo($user, VerifyEmailNotification::class);
