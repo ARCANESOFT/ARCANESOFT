@@ -25,15 +25,22 @@ class PagesRoutes extends AbstractRouteRegistrar
     public function map(): void
     {
         $this->name('public::')->group(function () {
+            // public::index
             $this->get('/', [PagesController::class, 'index'])
-                 ->name('index'); // public::index
+                 ->name('index');
 
+            // public::about-us
+            $this->get('about-us', [PagesController::class, 'aboutUs'])
+                 ->name('about-us');
+
+            // public::home
             $this->get('home', [HomeController::class, 'index'])
                  ->middleware(['auth'])
-                 ->name('home'); // public::home
+                 ->name('home');
 
             static::mapRouteClasses([
                 ContactRoutes::class,
+                LegalRoutes::class,
             ]);
         });
     }

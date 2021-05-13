@@ -20,9 +20,7 @@
         @include('_template.navigation')
 
         <main role="main" class="flex-shrink-0 mb-auto">
-            <div class="container">
-                @yield('content')
-            </div>
+            @yield('content')
         </main>
 
         @include('_template.footer')

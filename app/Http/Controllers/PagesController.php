@@ -7,7 +7,6 @@ namespace App\Http\Controllers;
 /**
  * Class     PagesController
  *
- * @package  App\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class PagesController extends Controller
@@ -17,8 +16,19 @@ class PagesController extends Controller
      | -----------------------------------------------------------------
      */
 
+    /**
+     * @return \Illuminate\Contracts\View\View|mixed
+     */
     public function index()
     {
-        return view('welcome');
+        return view('index');
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\View|mixed
+     */
+    public function aboutUs()
+    {
+        return view()->make('about-us');
     }
 }

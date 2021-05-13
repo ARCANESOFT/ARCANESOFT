@@ -9,7 +9,6 @@ use App\Http\Controllers\ContactController;
 /**
  * Class     ContactRoutes
  *
- * @package  App\Http\Routes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class ContactRoutes extends AbstractRouteRegistrar

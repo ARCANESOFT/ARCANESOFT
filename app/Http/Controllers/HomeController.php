@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 /**
  * Class     HomeController
  *
- * @package  App\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class HomeController extends Controller
@@ -22,10 +21,10 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\Contracts\View\View|mixed
      */
     public function index()
     {
-        return view('home');
+        return view()->make('home');
     }
 }

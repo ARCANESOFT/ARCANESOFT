@@ -88,7 +88,7 @@ class ConfirmablePasswordTest extends TestCase
                 ['password' => 'invalid']
             )
             ->assertSessionHasErrors(['password'])
-            ->assertSessionMissing('auth.password_confirmed_at')
+            ->assertSessionMissing(['auth.password_confirmed_at'])
             ->assertRedirect();
 
         static::assertNotEquals($response->getTargetUrl(), 'http://foo.com/bar');
@@ -97,7 +97,8 @@ class ConfirmablePasswordTest extends TestCase
     /** @test */
     public function it_fails_password_confirmation_without_a_password(): void
     {
-        $response = $this->withoutExceptionHandling()
+        $response = $this
+            ->withoutExceptionHandling()
             ->actingAs($this->user)
             ->withSession(['url.intended' => 'http://foo.com/bar'])
             ->post(
@@ -105,7 +106,7 @@ class ConfirmablePasswordTest extends TestCase
                 ['password' => null]
             )
             ->assertSessionHasErrors(['password'])
-            ->assertSessionMissing('auth.password_confirmed_at')
+            ->assertSessionMissing(['auth.password_confirmed_at'])
             ->assertRedirect();
 
         static::assertNotEquals($response->getTargetUrl(), 'http://foo.com/bar');

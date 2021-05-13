@@ -17,7 +17,6 @@ use Illuminate\Http\{Request, Response};
 /**
  * Class     LoginController
  *
- * @package  App\Http\Controllers\Authentication
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class LoginController
@@ -46,7 +45,7 @@ class LoginController
     {
         abort_unless(Auth::isLoginEnabled(), Response::HTTP_NOT_FOUND);
 
-        return view('auth::login');
+        return view()->make('auth::login');
     }
 
     /**

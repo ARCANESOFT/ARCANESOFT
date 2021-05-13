@@ -27,7 +27,7 @@ class UpdatePasswordRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'password' => (new Password)->confirmed()->rules(),
+            'password' => Password::make()->confirmed()->rules(),
         ];
 
         if ($this->authenticatedUser()->hasPassword()) {

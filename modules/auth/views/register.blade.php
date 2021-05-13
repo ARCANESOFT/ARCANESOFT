@@ -79,6 +79,24 @@
                                 </div>
                             </div>
 
+                            {{-- TERMS --}}
+                            @if(Arcanesoft\Foundation\Feature::hasTermsFeature())
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="terms" value="yes">
+                                    <label class="form-check-label small">
+                                        @lang('I agree to the :t and :p', [
+                                            't' => link_to_route('public::legal.tos', 'Terms of Service', [], ['target' => '_blank']),
+                                            'p' => link_to_route('public::legal.privacy', 'Privacy Policy', [], ['target' => '_blank']),
+                                        ])
+                                    </label>
+                                    @error('terms')
+                                    <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            @endif
+
                             {{-- SUBMIT BUTTON --}}
                             <div class="d-grid col-12">
                                 <button class="btn btn-lg btn-primary" type="submit">@lang('Register')</button>

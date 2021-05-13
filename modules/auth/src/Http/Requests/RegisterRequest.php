@@ -6,17 +6,24 @@ namespace Authentication\Http\Requests;
 
 use Arcanesoft\Foundation\Authorization\Auth;
 use Arcanesoft\Foundation\Authorization\Rules\Users\EmailRule;
-use Arcanesoft\Foundation\Fortify\Rules\Password;
+use Arcanesoft\Foundation\Feature;
+use Authentication\Http\Requests\Concerns\PasswordValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * Class     RegisterRequest
  *
- * @package  App\Http\Requests\Authentication
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class RegisterRequest extends FormRequest
 {
+    /* -----------------------------------------------------------------
+     |  Traits
+     | -----------------------------------------------------------------
+     */
+
+    use PasswordValidationRule;
+
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
@@ -43,7 +50,8 @@ class RegisterRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:50'],
             'last_name'  => ['required', 'string', 'max:50'],
             'email'      => ['required', 'string', 'email', 'max:255', EmailRule::unique()],
-            'password'   => Password::make()->confirmed()->rules(), // TODO: Use the new password rule instead?
+            'password'   => static::passwordRule()->rules(),
+            'terms'      => Feature::hasTermsFeature() ? ['required', 'accepted'] : [],
         ];
     }
 }

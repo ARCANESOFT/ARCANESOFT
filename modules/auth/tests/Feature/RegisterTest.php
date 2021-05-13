@@ -6,12 +6,8 @@ namespace Authentication\Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\{
-    Auth,
-    Event,
-    Hash};
+use Illuminate\Support\Facades\{Event, Hash};
 
 /**
  * Class     RegisterTest
@@ -46,8 +42,8 @@ class RegisterTest extends TestCase
         $user = static::makeUser();
 
         $this->actingAs($user)
-            ->get(static::registerGetUrl())
-            ->assertRedirect(static::indexPageUrl());
+             ->get(static::registerGetUrl())
+             ->assertRedirect(static::indexPageUrl());
     }
 
     /** @test */
@@ -61,9 +57,11 @@ class RegisterTest extends TestCase
             'email'                 => 'john.doe@example.com',
             'password'              => 'password',
             'password_confirmation' => 'password',
+            'terms'                 => 'yes',
         ];
 
-        $this->post(static::registerPostUrl(), $data)
+        $this->from(static::registerGetUrl())
+             ->post(static::registerPostUrl(), $data)
              ->assertRedirect(static::indexPageUrl());
 
         $users = User::all();
@@ -92,6 +90,7 @@ class RegisterTest extends TestCase
             'email'                 => 'john.doe@example.com',
             'password'              => 'password',
             'password_confirmation' => 'password',
+            'terms'                 => 'yes',
         ];
 
         $resp = $this->from(static::registerGetUrl())
@@ -117,6 +116,7 @@ class RegisterTest extends TestCase
             'email'                 => '',
             'password'              => 'password',
             'password_confirmation' => 'password',
+            'terms'                 => 'yes',
         ];
 
         $resp = $this->from(static::registerGetUrl())
@@ -143,6 +143,7 @@ class RegisterTest extends TestCase
             'email'                 => 'invalid-email',
             'password'              => 'password',
             'password_confirmation' => 'password',
+            'terms'                 => 'yes',
         ];
 
         $resp = $this->from(static::registerGetUrl())
@@ -169,6 +170,7 @@ class RegisterTest extends TestCase
             'email'                 => 'john.doe@example.com',
             'password'              => '',
             'password_confirmation' => '',
+            'terms'                 => 'yes',
         ];
 
         $resp = $this->from(static::registerGetUrl())
@@ -177,7 +179,7 @@ class RegisterTest extends TestCase
                      ->assertSessionHasInput('first_name', $data['first_name'])
                      ->assertSessionHasInput('last_name', $data['last_name'])
                      ->assertSessionHasInput('email', $data['email'])
-                     ->assertSessionHasErrors('password');
+                     ->assertSessionHasErrors(['password']);
 
         static::assertNoUserRegistered();
         static::assertFalse($resp->getSession()->hasOldInput('password'));
@@ -194,6 +196,7 @@ class RegisterTest extends TestCase
             'email'                 => 'john.doe@example.com',
             'password'              => 'password',
             'password_confirmation' => '',
+            'terms'                 => 'yes',
         ];
 
         $resp = $this->from(static::registerGetUrl())
@@ -202,7 +205,7 @@ class RegisterTest extends TestCase
                      ->assertSessionHasInput('first_name', $data['first_name'])
                      ->assertSessionHasInput('last_name', $data['last_name'])
                      ->assertSessionHasInput('email', $data['email'])
-                     ->assertSessionHasErrors('password');
+                     ->assertSessionHasErrors(['password']);
 
         static::assertNoUserRegistered();
         static::assertFalse($resp->getSession()->hasOldInput('password'));
@@ -219,6 +222,7 @@ class RegisterTest extends TestCase
             'email'                 => 'john.doe@example.com',
             'password'              => 'password',
             'password_confirmation' => 'Pa$$w0rd',
+            'terms'                 => 'yes',
         ];
 
         $resp = $this->from(static::registerGetUrl())
@@ -227,7 +231,7 @@ class RegisterTest extends TestCase
                      ->assertSessionHasInput('first_name', $data['first_name'])
                      ->assertSessionHasInput('last_name', $data['last_name'])
                      ->assertSessionHasInput('email', $data['email'])
-                     ->assertSessionHasErrors('password');
+                     ->assertSessionHasErrors(['password']);
 
         static::assertNoUserRegistered();
         static::assertFalse($resp->getSession()->hasOldInput('password'));
@@ -235,8 +239,28 @@ class RegisterTest extends TestCase
         $this->assertGuest();
     }
 
-    public function test_users_can_be_created_and_redirected_to_intended_url()
+    /** @test */
+    public function it_can_register_users_and_redirected_to_intended_url(): void
     {
+        $data = [
+            'first_name'            => 'John',
+            'last_name'             => 'DOE',
+            'email'                 => 'john.doe@example.com',
+            'password'              => 'password',
+            'password_confirmation' => 'password',
+            'terms'                 => 'yes',
+        ];
+
+        $this->withSession(['url.intended' => 'http://foo.com/bar'])
+             ->post(static::registerPostUrl(), $data)
+             ->assertRedirect('http://foo.com/bar');
+    }
+
+    /** @test */
+    public function it_can_register_when_terms_are_disabled(): void
+    {
+        config()->set('arcanesoft.foundation.features.terms', true);
+
         $data = [
             'first_name'            => 'John',
             'last_name'             => 'DOE',
@@ -245,9 +269,15 @@ class RegisterTest extends TestCase
             'password_confirmation' => 'password',
         ];
 
-        $this->withSession(['url.intended' => 'http://foo.com/bar'])
+        $this->from(static::registerGetUrl())
              ->post(static::registerPostUrl(), $data)
-             ->assertRedirect('http://foo.com/bar');
+             ->assertSessionHasErrors(['terms']);
+
+        config()->set('arcanesoft.foundation.features.terms', false);
+
+        $this->from(static::registerGetUrl())
+             ->post(static::registerPostUrl(), $data)
+             ->assertRedirect(static::indexPageUrl());
     }
 
     /* -----------------------------------------------------------------
