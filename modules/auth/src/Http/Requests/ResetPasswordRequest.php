@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Authentication\Http\Requests;
 
 use Arcanesoft\Foundation\Authorization\Auth;
-use Authentication\Http\Requests\Concerns\PasswordValidationRule;
+use Arcanesoft\Foundation\Fortify\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -15,13 +15,6 @@ use Illuminate\Foundation\Http\FormRequest;
  */
 class ResetPasswordRequest extends FormRequest
 {
-    /* -----------------------------------------------------------------
-     |  Traits
-     | -----------------------------------------------------------------
-     */
-
-    use PasswordValidationRule;
-
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
@@ -37,7 +30,7 @@ class ResetPasswordRequest extends FormRequest
         return [
             'token'          => ['required'],
             Auth::username() => ['required', 'email'],
-            'password'       => static::passwordRule()->rules(),
+            'password'       => Password::make()->rules(),
         ];
     }
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Authentication\Tests\Feature;
 
-use Arcanesoft\Foundation\Authorization\Auth;
 use Arcanesoft\Foundation\Authorization\Models\PasswordReset as PasswordResetModel;
 use Arcanesoft\Foundation\Authorization\Notifications\Authentication\ResetPassword as ResetPasswordNotification;
 use Arcanesoft\Foundation\Fortify\Concerns\HasPasswordBroker;
@@ -13,11 +12,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\{
-    Event,
-    Hash,
-    Notification,
-    Password};
+use Illuminate\Support\Facades\{Event, Hash, Notification, Password};
 use Mockery;
 
 /**
@@ -177,7 +172,7 @@ class ResetPasswordTest extends TestCase
 
 
     /** @test */
-    public function test_password_is_required(): void
+    public function it_requires_password(): void
     {
         $this->post(static::passwordResetPostUrl(), [
             'token' => 'token',
@@ -237,10 +232,9 @@ class ResetPasswordTest extends TestCase
 
         $this->withoutExceptionHandling()
              ->post(static::passwordResetPostUrl(), [
-                 'token' => 'token',
+                 'token'        => 'token',
                  'emailAddress' => 'taylor@laravel.com',
-                 'password' => 'password',
-                 'password_confirmation' => 'password',
+                 'password'     => 'password',
              ])
              ->assertStatus(302)
              ->assertRedirect(static::loginCreateUrl());

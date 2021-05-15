@@ -12,6 +12,7 @@
         "@arcanescripts/translator": "^1.0",
         "@arcanesoft/core": "^1.0",
         "@arcanesoft/media": "^1.0",
+        "@arcanesoft/seo": "^1.0",
         "@fortawesome/fontawesome-free": "^5.11",
         "@popperjs/core": "^2.9.2",
         "@toast-ui/editor": "^2.2.0",

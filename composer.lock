@@ -1250,7 +1250,7 @@
             "dist": {
                 "type": "path",
                 "url": "../Foundation",
-                "reference": "3a1196ef3df94a644db26b6d9b01673a8beeade6"
+                "reference": "87cabe5e72f505cb37e17f2c46900ac8247be96a"
             },
             "require": {
                 "arcanedev/agent": "^9.0",
@@ -1274,6 +1274,7 @@
             "require-dev": {
                 "composer/composer": "^1.10|^2.0",
                 "laravel/framework": "^8.0",
+                "mockery/mockery": "^1.4.2",
                 "orchestra/testbench-core": "^6.0",
                 "phpunit/phpunit": "^9.3"
             },
@@ -1342,17 +1343,17 @@
             "dist": {
                 "type": "path",
                 "url": "../Media",
-                "reference": "db82f55ff2a31cc9d4b53e1030b1f699c9cad58d"
+                "reference": "67a90b9e9bc6c9fe708ec28ef73924b7371ce8fd"
             },
             "require": {
                 "arcanesoft/foundation": "^4.0",
                 "php": "^7.3|^8.0"
             },
             "require-dev": {
-                "laravel/framework": "^8.40",
+                "laravel/framework": "^8.0",
                 "mockery/mockery": "^1.4.2",
-                "orchestra/testbench-core": "^6.4",
-                "phpunit/phpunit": "^9.3.3"
+                "orchestra/testbench-core": "^6.0",
+                "phpunit/phpunit": "^9.3"
             },
             "type": "project",
             "extra": {
@@ -1494,6 +1495,9 @@
                 "php": "^7.3|^8.0"
             },
             "require-dev": {
+                "laravel/framework": "^8.0",
+                "mockery/mockery": "^1.4.2",
+                "orchestra/testbench-core": "^6.0",
                 "phpunit/phpunit": "^9.3"
             },
             "type": "project",
@@ -1517,6 +1521,17 @@
                 "psr-4": {
                     "Arcanesoft\\Seo\\Tests\\": "tests/"
                 }
+            },
+            "scripts": {
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test:dox": [
+                    "phpunit --testdox --colors=always"
+                ],
+                "test:cov": [
+                    "phpunit --coverage-html coverage"
+                ]
             },
             "license": [
                 "MIT"
@@ -7984,16 +7999,16 @@
     "packages-dev": [
         {
             "name": "barryvdh/laravel-debugbar",
-            "version": "v3.5.5",
+            "version": "v3.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "6420113d90bb746423fa70b9940e9e7c26ebc121"
+                "reference": "88fd9cfa144b06b2549e9d487fdaec68265e791e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/6420113d90bb746423fa70b9940e9e7c26ebc121",
-                "reference": "6420113d90bb746423fa70b9940e9e7c26ebc121",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/88fd9cfa144b06b2549e9d487fdaec68265e791e",
+                "reference": "88fd9cfa144b06b2549e9d487fdaec68265e791e",
                 "shasum": ""
             },
             "require": {
@@ -8053,7 +8068,7 @@
             ],
             "support": {
                 "issues": "https://github.com/barryvdh/laravel-debugbar/issues",
-                "source": "https://github.com/barryvdh/laravel-debugbar/tree/v3.5.5"
+                "source": "https://github.com/barryvdh/laravel-debugbar/tree/v3.5.7"
             },
             "funding": [
                 {
@@ -8061,7 +8076,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-07T11:19:20+00:00"
+            "time": "2021-05-13T20:18:35+00:00"
         },
         {
             "name": "doctrine/instantiator",

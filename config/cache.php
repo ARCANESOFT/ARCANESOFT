@@ -59,6 +59,10 @@ return [
             ],
         ],
 
+        'octane' => [
+            'driver' => 'octane',
+        ],
+
         'redis'     => [
             'driver'          => 'redis',
             'connection'      => 'cache',
