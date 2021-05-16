@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Account\Http\Web\Routes\Settings;
 
@@ -24,7 +22,7 @@ class LinkedAccountsRoutes extends AbstractRouteRegistrar
      */
     public function map(): void
     {
-        $this->name('linked-accounts.')->prefix('linked-accounts')->group(function () {
+        $this->name('linked-accounts.')->prefix('linked-accounts')->group(function (): void {
             // account::settings.linked-accounts.index
             $this->get('/', [LinkedAccountsController::class, 'index'])
                  ->name('index');

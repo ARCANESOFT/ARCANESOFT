@@ -1,17 +1,10 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
 use Arcanesoft\Foundation\Fortify\Http\Middleware\RequirePassword as Middleware;
 use Illuminate\Http\Request;
 
-/**
- * Class     RequirePassword
- *
- * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
- */
 class RequirePassword extends Middleware
 {
     /**

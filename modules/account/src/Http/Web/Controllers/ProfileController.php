@@ -25,27 +25,8 @@ class ProfileController extends Controller
      */
     public function index(Request $request)
     {
-        $account = $this->getAuthenticatedUser($request);
-
-        return view()->make('account::profile.index', compact('account'));
-    }
-
-    /* -----------------------------------------------------------------
-     |  Other Methods
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * TODO: Refactor this method into a trait.
-     *
-     * Get the authenticated user.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return \App\Models\User|mixed|null
-     */
-    protected function getAuthenticatedUser(Request $request)
-    {
-        return $request->user();
+        return view()->make('account::profile.index', [
+            'account' => static::authenticatedUser($request),
+        ]);
     }
 }

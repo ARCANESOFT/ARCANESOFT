@@ -1,16 +1,13 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Listeners\Auth;
 
-use Illuminate\Auth\Events\Validated;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 
 /**
  * Class     SendAlertIfNewDeviceLoggedIn
  *
- * @package  App\Listeners\Auth
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SendAlertIfNewDeviceLoggedIn
@@ -46,9 +43,9 @@ class SendAlertIfNewDeviceLoggedIn
     /**
      * Handle the event.
      *
-     * @param  \Illuminate\Auth\Events\Validated  $event
+     * @param  \Illuminate\Auth\Events\Login  $event
      */
-    public function handle(Validated $event)
+    public function handle(Login $event)
     {
         // TODO: Check if new device
     }

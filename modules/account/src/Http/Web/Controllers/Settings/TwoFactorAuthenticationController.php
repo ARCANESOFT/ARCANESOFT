@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Account\Http\Web\Controllers\Settings;
 
@@ -27,26 +25,32 @@ class TwoFactorAuthenticationController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function status(Request $request)
+    public function status(Request $request): JsonResponse
     {
-        $user = $this->getAuthenticatedUser($request);
+        $user = static::authenticatedUser($request);
 
-        if ( ! $user->isTwoFactorEnabled()) {
+        if ($user->isTwoFactorEnabled()) {
             return new JsonResponse([
-                'enabled'       => false,
-                'recoveryCodes' => [],
+                'enabled'       => true,
+                'recoveryCodes' => $user->twoFactor->decrypted_recovery_codes,
             ]);
         }
 
         return new JsonResponse([
-            'enabled'       => true,
-            'recoveryCodes' => $user->twoFactor->decrypted_recovery_codes,
+            'enabled'       => false,
+            'recoveryCodes' => [],
         ]);
     }
 
-    public function enable(Request $request, TwoFactorAuthenticationRepository $repo)
+    /**
+     * @param  \Illuminate\Http\Request                                                       $request
+     * @param  \Arcanesoft\Foundation\Fortify\Repositories\TwoFactorAuthenticationRepository  $repo
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function enable(Request $request, TwoFactorAuthenticationRepository $repo): JsonResponse
     {
-        $user = $this->getAuthenticatedUser($request);
+        $user = static::authenticatedUser($request);
 
         $repo->enable($user);
 
@@ -57,9 +61,15 @@ class TwoFactorAuthenticationController extends Controller
         ]);
     }
 
-    public function regenerate(Request $request, TwoFactorAuthenticationRepository $repo)
+    /**
+     * @param  \Illuminate\Http\Request                                                       $request
+     * @param  \Arcanesoft\Foundation\Fortify\Repositories\TwoFactorAuthenticationRepository  $repo
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function regenerate(Request $request, TwoFactorAuthenticationRepository $repo): JsonResponse
     {
-        $user = $this->getAuthenticatedUser($request);
+        $user = static::authenticatedUser($request);
 
         $repo->generateNewRecoveryCodes($user);
 
@@ -69,33 +79,20 @@ class TwoFactorAuthenticationController extends Controller
         ]);
     }
 
-    public function disable(Request $request, TwoFactorAuthenticationRepository $repo)
+    /**
+     * @param  \Illuminate\Http\Request                                                       $request
+     * @param  \Arcanesoft\Foundation\Fortify\Repositories\TwoFactorAuthenticationRepository  $repo
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function disable(Request $request, TwoFactorAuthenticationRepository $repo): JsonResponse
     {
-        $user = $this->getAuthenticatedUser($request);
+        $user = static::authenticatedUser($request);
 
         $repo->disable($user);
 
         return new JsonResponse([
             'enabled' => $user->isTwoFactorEnabled(),
         ]);
-    }
-
-    /* -----------------------------------------------------------------
-     |  Properties
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * TODO: Refactor this method into a trait.
-     *
-     * Get the authenticated user from request.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \App\Models\User|mixed
-     */
-    protected function getAuthenticatedUser(Request $request)
-    {
-        return $request->user();
     }
 }

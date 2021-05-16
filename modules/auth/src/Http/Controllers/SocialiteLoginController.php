@@ -1,10 +1,7 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Authentication\Http\Controllers;
 
-use App\Events\Auth\UserLoggedIn;
 use App\Http\Routes\PagesRoutes;
 use Arcanesoft\Foundation\Authorization\Repositories\SocialiteUsersRepository;
 use Arcanesoft\Foundation\Authorization\Socialite;
@@ -38,7 +35,7 @@ class SocialiteLoginController
     /**
      * Obtain the user information from the provider.
      *
-     * @param  string                                                             $provider
+     * @param  string                                                                      $provider
      * @param  \Arcanesoft\Foundation\Authorization\Repositories\SocialiteUsersRepository  $repo
      *
      * @return \Illuminate\Http\RedirectResponse
@@ -50,8 +47,6 @@ class SocialiteLoginController
         $user = $repo->findOrCreateUser($provider);
 
         auth()->login($user, true);
-
-        event(new UserLoggedIn(auth()->user()));
 
         return redirect()->intended(PagesRoutes::home());
     }

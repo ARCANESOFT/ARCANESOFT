@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Account\Http;
 
@@ -30,7 +28,7 @@ class WebRoutes extends RouteRegistrar
             //'verified',
         ];
 
-        $this->prefix('account')->name('account::')->middleware($middleware)->group(function () {
+        $this->prefix('account')->name('account::')->middleware($middleware)->group(function (): void {
             static::mapRouteClasses([
                 Routes\ProfileRoutes::class,
                 Routes\SettingsRoutes::class,

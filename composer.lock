@@ -1488,7 +1488,7 @@
             "dist": {
                 "type": "path",
                 "url": "../Seo",
-                "reference": "ce6d6135d55e8b2fd43cf7923839b4791b7c7ad2"
+                "reference": "88768fa5eecaa18dcd198fc70ed2963c748c575d"
             },
             "require": {
                 "arcanesoft/foundation": "^4.0",

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Authentication\Http\Controllers;
 
@@ -8,9 +6,10 @@ use App\Http\Routes\PagesRoutes;
 use Arcanesoft\Foundation\Authentication\Concerns\UseUserGuard;
 use Arcanesoft\Foundation\Authorization\Auth;
 use Arcanesoft\Foundation\Fortify\Auth\AuthenticatesUsers;
-use Authentication\Actions\Login\{
-    AttemptToAuthenticate, EnsureLoginIsNotThrottled, PrepareAuthenticatedSession, RedirectIfTwoFactorWasEnabled
-};
+use Authentication\Actions\Login\AttemptToAuthenticate;
+use Authentication\Actions\Login\EnsureLoginIsNotThrottled;
+use Authentication\Actions\Login\PrepareAuthenticatedSession;
+use Authentication\Actions\Login\RedirectIfTwoFactorWasEnabled;
 use Authentication\Http\Requests\LoginRequest;
 use Illuminate\Http\{Request, Response};
 
@@ -26,8 +25,8 @@ class LoginController
      | -----------------------------------------------------------------
      */
 
-    use AuthenticatesUsers;
-    use UseUserGuard;
+    use AuthenticatesUsers,
+        UseUserGuard;
 
     /* -----------------------------------------------------------------
      |  Main Methods

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Api\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use OpenApi\Annotations as OA;
 
 /**
@@ -23,7 +24,7 @@ class ExampleController extends Controller
      */
     public function index()
     {
-        return response()->json([
+        return new JsonResponse([
             'message' => 'API is working!',
         ]);
     }

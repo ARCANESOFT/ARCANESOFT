@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Authentication\Http\Routes;
 
@@ -34,7 +32,7 @@ class PasswordResetRoutes extends AbstractRouteRegistrar
      */
     public function map(): void
     {
-        $this->prefix('password')->name('password.')->middleware(['guest:web'])->group(function () {
+        $this->prefix('password')->name('password.')->middleware(['guest:web'])->group(function (): void {
              // auth::password.request
              $this->get('forgotten', [PasswordResetLinkController::class, 'create'])
                   ->name('request');

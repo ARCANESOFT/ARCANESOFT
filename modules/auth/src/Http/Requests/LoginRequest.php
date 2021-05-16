@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Authentication\Http\Requests;
 
@@ -10,7 +8,6 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * Class     LoginRequest
  *
- * @package  App\Http\Requests\Authentication
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class LoginRequest extends FormRequest

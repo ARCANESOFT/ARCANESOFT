@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Account\Http\Web\Controllers\Settings;
 
@@ -22,36 +20,20 @@ class LinkedAccountsController extends Controller
     /**
      * Index page.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\View\View
      */
     public function index(Request $request)
     {
-        $account = $this->getAuthenticatedUser($request)->load(['linkedAccounts']);
-
-        return view()->make('account::settings.linked-accounts.index', compact('account'));
+        return view()->make('account::settings.linked-accounts.index', [
+            'account' => static::authenticatedUser($request)->load(['linkedAccounts']),
+        ]);
     }
 
+    /**
+     * Linked social accounts.
+     */
     public function link()
     {
         //
-    }
-
-    /* -----------------------------------------------------------------
-     |  Other Methods
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * TODO: Refactor this method into a trait.
-     *
-     * Get the authenticated user from request.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \App\Models\User|mixed
-     */
-    protected function getAuthenticatedUser(Request $request)
-    {
-        return $request->user();
     }
 }

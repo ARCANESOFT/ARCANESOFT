@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Authentication\Http\Controllers;
 
@@ -15,7 +13,6 @@ use Illuminate\Http\Request;
 /**
  * Class     RegisterController
  *
- * @package  App\Http\Controllers\Authentication
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class RegisterController
@@ -25,8 +22,8 @@ class RegisterController
      | -----------------------------------------------------------------
      */
 
-    use RegistersUsers;
-    use UseUserGuard;
+    use RegistersUsers,
+        UseUserGuard;
 
     /* -----------------------------------------------------------------
      |  Properties
@@ -65,7 +62,7 @@ class RegisterController
     {
         abort_unless(Auth::isRegistrationEnabled(),404);
 
-        return view('auth::register');
+        return view()->make('auth::register');
     }
 
     /**

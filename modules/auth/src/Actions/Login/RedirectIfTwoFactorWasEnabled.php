@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Authentication\Actions\Login;
 
@@ -34,7 +32,7 @@ class RedirectIfTwoFactorWasEnabled extends Action
      *
      * @return string
      */
-    protected function getTwoFactorUrl(Request $request)
+    protected function getTwoFactorUrl(Request $request): string
     {
         return route('auth::login.two-factor.create');
     }

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Http;
 
@@ -9,7 +7,6 @@ use Illuminate\Foundation\Http\Kernel as HttpKernel;
 /**
  * Class     Kernel
  *
- * @package  App\Http
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Kernel extends HttpKernel

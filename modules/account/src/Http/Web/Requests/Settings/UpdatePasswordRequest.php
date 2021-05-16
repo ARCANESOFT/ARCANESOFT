@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Account\Http\Web\Requests\Settings;
 
@@ -30,21 +28,11 @@ class UpdatePasswordRequest extends FormRequest
             'password' => Password::make()->confirmed()->rules(),
         ];
 
-        if ($this->authenticatedUser()->hasPassword()) {
+        if ($this->user()->hasPassword()) {
             $rules['current_password'] = $rules['password'];
             $rules['password'][]       = 'different:current_password';
         }
 
         return $rules;
-    }
-
-    /**
-     * Get the authenticated user.
-     *
-     * @return \App\Models\User|mixed|null
-     */
-    protected function authenticatedUser()
-    {
-        return $this->user();
     }
 }

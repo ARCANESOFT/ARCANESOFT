@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Exceptions;
 
@@ -10,7 +8,6 @@ use Throwable;
 /**
  * Class     Handler
  *
- * @package  App\Exceptions
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Handler extends ExceptionHandler

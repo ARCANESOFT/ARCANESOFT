@@ -1,20 +1,12 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
 use App\Http\Routes\PagesRoutes;
 use Closure;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use Illuminate\Http\{JsonResponse, Request};
 use Illuminate\Support\Facades\Auth;
 
-/**
- * Class     RedirectIfAuthenticated
- *
- * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
- */
 class RedirectIfAuthenticated
 {
     /**

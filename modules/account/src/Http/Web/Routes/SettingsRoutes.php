@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Account\Http\Web\Routes;
 
@@ -26,7 +24,7 @@ class SettingsRoutes extends AbstractRouteRegistrar
         $this->prefix('settings')
             ->name('settings.')
 //            ->middleware(['password.confirm'])
-            ->group(function () {
+            ->group(function (): void {
             static::mapRouteClasses([
                 Settings\ProfileRoutes::class,
                 Settings\SecurityRoutes::class,

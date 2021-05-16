@@ -1,14 +1,11 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Authentication\Providers;
 
 use App\Listeners\Auth\SendAlertIfNewDeviceLoggedIn;
-use Illuminate\Auth\Events\{Registered, Validated};
+use Illuminate\Auth\Events\{Login, Registered};
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 /**
  * Class     EventServiceProvider
@@ -31,7 +28,7 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        Validated::class => [
+        Login::class => [
             SendAlertIfNewDeviceLoggedIn::class
         ],
     ];

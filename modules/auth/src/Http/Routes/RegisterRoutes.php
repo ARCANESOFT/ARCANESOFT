@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Authentication\Http\Routes;
 
@@ -32,7 +30,7 @@ class RegisterRoutes extends AbstractRouteRegistrar
      */
     public function map(): void
     {
-        $this->prefix('register')->name('register.')->middleware(['guest:web'])->group(function () {
+        $this->prefix('register')->name('register.')->middleware(['guest:web'])->group(function (): void {
             // auth::register.create
             $this->get('/', [RegisterController::class, 'create'])
                  ->name('create');

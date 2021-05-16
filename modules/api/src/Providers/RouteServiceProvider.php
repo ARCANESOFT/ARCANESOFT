@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Api\Providers;
 
@@ -33,7 +31,7 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Get the route classes.
      *
-     * @return string[]|array
+     * @return array
      */
     protected function getRouteClasses(): array
     {
@@ -97,7 +95,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function configureRateLimiting(): void
     {
-        RateLimiter::for('api', function (Request $request) {
+        RateLimiter::for('api', function (Request $request): Limit {
             return Limit::perMinute(60)
                 ->by(optional($request->user())->id ?: $request->ip());
         });

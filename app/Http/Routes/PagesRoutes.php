@@ -1,15 +1,12 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Http\Routes;
 
 use App\Http\Controllers\{HomeController, PagesController};
 
 /**
- * Class     Pages
+ * Class     PagesRoutes
  *
- * @package  App\Http\Routes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class PagesRoutes extends AbstractRouteRegistrar

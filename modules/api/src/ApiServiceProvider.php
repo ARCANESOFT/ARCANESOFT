@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Api;
 
@@ -18,8 +16,18 @@ class ApiServiceProvider extends PackageServiceProvider
      | -----------------------------------------------------------------
      */
 
+    /**
+     * Vendor name.
+     *
+     * @var string
+     */
     protected $vendor = 'modules';
 
+    /**
+     * Package name.
+     *
+     * @var string
+     */
     protected $package = 'api';
 
     /* -----------------------------------------------------------------

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Account\Http\Web\Controllers\Settings;
 
@@ -27,9 +25,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $account = $this->getAuthenticatedUser();
-
-        return view()->make('account::settings.profile.index', compact('account'));
+        return view()->make('account::settings.profile.index', [
+            'account' => static::authenticatedUser(),
+        ]);
     }
 
     /**
@@ -43,18 +41,9 @@ class ProfileController extends Controller
     public function update(UpdateProfileRequest $request, UsersRepository $repo)
     {
         $repo->updateOne(
-            $this->getAuthenticatedUser(),
-            $request->validated()
+            static::authenticatedUser($request), $request->validated()
         );
 
         return redirect()->back();
-    }
-
-    /**
-     * @return \App\Models\User|mixed|null
-     */
-    protected function getAuthenticatedUser()
-    {
-        return auth()->user();
     }
 }

@@ -1,11 +1,14 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+/**
+ * Class     ExampleTest
+ *
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 class ExampleTest extends TestCase
 {
     /* -----------------------------------------------------------------

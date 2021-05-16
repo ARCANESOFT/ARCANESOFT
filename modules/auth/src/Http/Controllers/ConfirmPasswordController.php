@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Authentication\Http\Controllers;
 
@@ -21,8 +19,8 @@ class ConfirmPasswordController
      | -----------------------------------------------------------------
      */
 
-    use ConfirmsPasswords;
-    use UseUserGuard;
+    use ConfirmsPasswords,
+        UseUserGuard;
 
     /* -----------------------------------------------------------------
      |  Main Methods

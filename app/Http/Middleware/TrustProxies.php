@@ -1,17 +1,10 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
 use Fideloper\Proxy\TrustProxies as Middleware;
 use Illuminate\Http\Request;
 
-/**
- * Class     TrustProxies
- *
- * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
- */
 class TrustProxies extends Middleware
 {
     /**

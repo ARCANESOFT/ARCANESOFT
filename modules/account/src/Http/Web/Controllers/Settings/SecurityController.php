@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Account\Http\Web\Controllers\Settings;
 
@@ -24,13 +22,15 @@ class SecurityController extends Controller
     /**
      * Index page.
      *
+     * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(Request $request)
     {
-        $user = $this->getAuthenticatedUser($request);
-
-        return view()->make('account::settings.security.index', compact('user'));
+        return view()->make('account::settings.security.index', [
+            'user' => static::authenticatedUser($request)
+        ]);
     }
 
     /**
@@ -43,26 +43,12 @@ class SecurityController extends Controller
      */
     public function updatePassword(UpdatePasswordRequest $request, UsersRepository $repo)
     {
-        $user = $this->getAuthenticatedUser($request);
+        $user = static::authenticatedUser($request);
 
         $updated = $repo->updatePassword($user, $request->get('password'));
 
         // TODO: Show notification
 
         return redirect()->back();
-    }
-
-    /**
-     * TODO: Refactor this method into a trait.
-     *
-     * Get the authenticated user from request.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \App\Models\User|mixed
-     */
-    protected function getAuthenticatedUser(Request $request)
-    {
-        return $request->user();
     }
 }

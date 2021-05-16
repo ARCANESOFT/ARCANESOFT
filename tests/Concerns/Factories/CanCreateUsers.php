@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Tests\Concerns\Factories;
 
@@ -10,7 +8,6 @@ use Database\Factories\UserFactory;
 /**
  * Trait     CanCreateUsers
  *
- * @package  Tests\Concerns\Factories
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 trait CanCreateUsers

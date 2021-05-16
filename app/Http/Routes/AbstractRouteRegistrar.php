@@ -1,15 +1,12 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Http\Routes;
 
 use Arcanedev\Support\Routing\RouteRegistrar;
 
 /**
- * Class     RouteRegistrar
+ * Class     AbstractRouteRegistrar
  *
- * @package  App\Http\Routes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class AbstractRouteRegistrar extends RouteRegistrar

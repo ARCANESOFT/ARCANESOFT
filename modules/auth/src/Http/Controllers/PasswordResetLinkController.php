@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Authentication\Http\Controllers;
 
@@ -59,7 +57,7 @@ class PasswordResetLinkController
     /**
      * Get the password broker's driver.
      *
-     * @return string|null
+     * @return string
      */
     protected static function getBrokerDriver(): string
     {

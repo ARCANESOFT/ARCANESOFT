@@ -1,17 +1,9 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
-/**
- * Class     Authenticate
- *
- * @package  App\Http\Middleware
- * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
- */
 class Authenticate extends Middleware
 {
     /**

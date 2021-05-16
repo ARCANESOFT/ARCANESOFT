@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Authentication\Providers;
 
@@ -34,7 +32,7 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Get the route classes.
      *
-     * @return string[]
+     * @return array
      */
     protected function getRouteClasses(): array
     {
@@ -75,11 +73,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function configureRateLimiting(): void
     {
-        RateLimiter::for('login', function (Request $request) {
+        RateLimiter::for('login', function (Request $request): Limit {
             return Limit::perMinute(5)->by($request->{Auth::username()}.$request->ip());
         });
 
-        RateLimiter::for('two-factor', function (Request $request) {
+        RateLimiter::for('two-factor', function (Request $request): Limit {
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });
     }

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Authentication\Http\Routes;
 
@@ -24,7 +22,7 @@ class ImpersonationRoutes extends AbstractRouteRegistrar
      */
     public function map(): void
     {
-        $this->prefix('impersonate')->name('impersonate.')->group(function () {
+        $this->prefix('impersonate')->name('impersonate.')->group(function (): void {
             // auth::impersonate.stop
             $this->post('stop', [ImpersonateController::class, 'stop'])
                  ->name('stop');

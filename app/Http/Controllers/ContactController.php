@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -9,7 +7,6 @@ use App\Http\Requests\PostContactRequest;
 /**
  * Class     ContactController
  *
- * @package  App\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class ContactController extends Controller

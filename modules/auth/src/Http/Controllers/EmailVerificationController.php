@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Authentication\Http\Controllers;
 
@@ -25,11 +23,11 @@ class EmailVerificationController
      | -----------------------------------------------------------------
      */
 
-    use RetrievesUserFromRequest;
-    use UseUserGuard;
-    use SendsEmailVerificationNotification;
-    use PromptsEmailVerification;
-    use VerifiesEmails;
+    use RetrievesUserFromRequest,
+        UseUserGuard,
+        SendsEmailVerificationNotification,
+        PromptsEmailVerification,
+        VerifiesEmails;
 
     /* -----------------------------------------------------------------
      |  Main Methods

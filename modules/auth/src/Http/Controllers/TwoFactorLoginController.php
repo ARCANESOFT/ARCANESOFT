@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Authentication\Http\Controllers;
 
@@ -41,9 +39,11 @@ class TwoFactorLoginController
      */
     public function create(TwoFactorLoginRequest $request)
     {
-        if ( ! $request->hasChallengedUser()) {
-            throw new HttpResponseException(redirect()->route(LoginRoutes::LOGIN_CREATE));
-        }
+        if ( ! $request->hasChallengedUser())
+            throw new HttpResponseException(
+                redirect()->route(LoginRoutes::LOGIN_CREATE)
+            );
+
 
         return $this->form('auth::two-factor-challenge', $request);
     }

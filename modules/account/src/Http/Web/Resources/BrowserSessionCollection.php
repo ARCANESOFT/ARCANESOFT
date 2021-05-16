@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Account\Http\Web\Resources;
 
@@ -24,7 +22,7 @@ class BrowserSessionCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection->map(function(Session $session)  {
+            'data' => $this->collection->map(function(Session $session): array  {
                 return [
                     'id'              => $session->id,
                     'agent'           => [

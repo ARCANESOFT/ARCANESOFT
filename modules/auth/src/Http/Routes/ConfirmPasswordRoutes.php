@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Authentication\Http\Routes;
 
@@ -33,7 +31,7 @@ class ConfirmPasswordRoutes extends AbstractRouteRegistrar
      */
     public function map(): void
     {
-        $this->prefix('password/confirm')->name('password.confirm.')->middleware(['auth'])->group(function () {
+        $this->prefix('password/confirm')->name('password.confirm.')->middleware(['auth'])->group(function (): void {
             // auth::password.confirm.show
             $this->get('/', [ConfirmPasswordController::class, 'show'])
                  ->name('show');

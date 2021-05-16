@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Authentication\Http\Routes;
 
@@ -38,7 +36,7 @@ class LoginRoutes extends AbstractRouteRegistrar
     public function map(): void
     {
         if (Auth::isLoginEnabled()) {
-            $this->prefix('login')->name('login.')->middleware(['guest'])->group(function () {
+            $this->prefix('login')->name('login.')->middleware(['guest'])->group(function (): void {
                 $this->mapLoginRoutes();
                 $this->mapTwoFactorRoutes();
                 $this->mapSocialiteRoutes();
@@ -59,7 +57,7 @@ class LoginRoutes extends AbstractRouteRegistrar
     private function mapLoginRoutes(): void
     {
         // auth::login.create
-        $this->middleware(['guest:web'])->group(function () {
+        $this->middleware(['guest:web'])->group(function (): void {
             $this->get('/', [LoginController::class, 'create'])
                  ->name('create');
 
@@ -88,7 +86,7 @@ class LoginRoutes extends AbstractRouteRegistrar
         if ( ! Auth::isTwoFactorEnabled())
             return;
 
-        $this->prefix('two-factor-challenge')->name('two-factor.')->middleware(['guest:web'])->group(function () {
+        $this->prefix('two-factor-challenge')->name('two-factor.')->middleware(['guest:web'])->group(function (): void {
              // auth::login.two-factor.create
              $this->get('/', [TwoFactorLoginController::class, 'create'])
                   ->name('create');
@@ -108,7 +106,7 @@ class LoginRoutes extends AbstractRouteRegistrar
         if ( ! Auth::isSocialiteEnabled())
             return;
 
-        $this->prefix('{socialite_provider}')->name('socialite.')->group(function () {
+        $this->prefix('{socialite_provider}')->name('socialite.')->group(function (): void {
             // auth::login.socialite.show
             $this->get('/', [SocialiteLoginController::class, 'create'])
                  ->name('show');

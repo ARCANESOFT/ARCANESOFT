@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Account\Http\Web\Routes\Settings;
 
@@ -13,6 +11,8 @@ use App\Http\Routes\AbstractRouteRegistrar;
  * Class     SecurityRoutes
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ *
+ * @todo: Add routes constants
  */
 class SecurityRoutes extends AbstractRouteRegistrar
 {
@@ -26,12 +26,12 @@ class SecurityRoutes extends AbstractRouteRegistrar
      */
     public function map(): void
     {
-        $this->name('security.')->prefix('security')->group(function () {
+        $this->name('security.')->prefix('security')->group(function (): void {
             // account::settings.security.index
             $this->get('/', [SecurityController::class, 'index'])
                  ->name('index');
 
-            $this->name('password.')->prefix('password')->group(function () {
+            $this->name('password.')->prefix('password')->group(function (): void {
                 // account::settings.security.password.update
                 $this->put('update', [SecurityController::class, 'updatePassword'])
                      ->name('update');
@@ -47,7 +47,7 @@ class SecurityRoutes extends AbstractRouteRegistrar
      */
     protected function mapTwoFactorAuthenticationRoutes(): void
     {
-        $this->name('two-factor.')->prefix('two-factor')->middleware(['ajax'])->group(function () {
+        $this->name('two-factor.')->prefix('two-factor')->middleware(['ajax'])->group(function (): void {
             // account::settings.security.two-factor.status
             $this->get('status', [TwoFactorAuthenticationController::class, 'status'])
                 ->name('status');
@@ -67,9 +67,12 @@ class SecurityRoutes extends AbstractRouteRegistrar
         });
     }
 
+    /**
+     * Map the Browser Sessions routes.
+     */
     protected function mapBrowserSessionsRoutes(): void
     {
-        $this->name('browser-sessions.')->prefix('browser-sessions')->middleware(['ajax'])->group(function () {
+        $this->name('browser-sessions.')->prefix('browser-sessions')->middleware(['ajax'])->group(function (): void {
             // account::settings.security.browser-sessions.status
             $this->get('status', [BrowserSessionsController::class, 'status'])
                 ->name('status');

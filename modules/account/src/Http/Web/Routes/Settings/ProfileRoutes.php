@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Account\Http\Web\Routes\Settings;
 
@@ -30,9 +28,9 @@ class ProfileRoutes extends AbstractRouteRegistrar
     /**
      * Map the routes.
      */
-    public function map()
+    public function map(): void
     {
-        $this->name('profile.')->prefix('profile')->group(function () {
+        $this->name('profile.')->prefix('profile')->group(function (): void {
             // account::settings.profile.index
             $this->get('/', [ProfileController::class, 'index'])
                  ->name('index');

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Notifications\Auth;
 
@@ -12,7 +10,6 @@ use Illuminate\Notifications\Notification;
 /**
  * Class     NewLoginNotification
  *
- * @package  App\Notifications\Auth
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class NewLoginNotification extends Notification
