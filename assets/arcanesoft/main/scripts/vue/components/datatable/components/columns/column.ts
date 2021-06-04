@@ -23,13 +23,11 @@ export default defineComponent({
                 (sortedColumn: DatatableSortByColumn) => sortedColumn.key === props.column.key
             )
 
-            return sortedColumn !== undefined
-                ? sortedColumn.direction
-                : null
+            return sortedColumn?.direction ?? null
         })
         const columnClasses = computed<string[] | Object>(() => {
             if (props.column.key === 'actions')
-                return ['text-right']
+                return ['text-end']
 
             return {
                 'text-start'  : props.column.align === COLUMN_ALIGNMENT.LEFT,

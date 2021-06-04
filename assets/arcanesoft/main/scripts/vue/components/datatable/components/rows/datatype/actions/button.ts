@@ -43,7 +43,7 @@ export default defineComponent({
                 :onclick="action.allowed ? action.action : null"
                 :title="action.label"
                 :data-original-title="action.label"
-                :data-toggle="onlyIcon ? 'tooltip' : null"
+                :data-bs-toggle="onlyIcon ? 'tooltip' : null"
                 :data-container="onlyIcon ? 'body' : null"
                 :ariaDisabled="isDisabled ? 'true' : null"
                 class="v-dt-datatype-action" :class="actionClass">

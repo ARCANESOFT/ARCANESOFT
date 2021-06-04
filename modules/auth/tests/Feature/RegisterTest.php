@@ -3,6 +3,8 @@
 namespace Authentication\Tests\Feature;
 
 use App\Models\User;
+use Authentication\Tests\Concerns\HasLoginFeature;
+use Authentication\Tests\Concerns\HasRegisterFeature;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\{Event, Hash};
@@ -19,7 +21,9 @@ class RegisterTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    use RefreshDatabase;
+    use RefreshDatabase,
+        HasLoginFeature,
+        HasRegisterFeature;
 
     /* -----------------------------------------------------------------
      |  Tests
@@ -29,7 +33,10 @@ class RegisterTest extends TestCase
     /** @test */
     public function it_can_view_a_registration_form_when_user_is_guest(): void
     {
-        $this->get(static::registerGetUrl())
+        static::skipIfRegisterIsDisabled();
+
+        $this->withoutExceptionHandling()
+             ->get(static::registerGetUrl())
              ->assertSuccessful()
              ->assertViewIs('auth::register');
     }
@@ -47,6 +54,8 @@ class RegisterTest extends TestCase
     /** @test */
     public function it_can_register(): void
     {
+        static::skipIfRegisterIsDisabled();
+
         Event::fake();
 
         $data = [
@@ -69,7 +78,10 @@ class RegisterTest extends TestCase
         /** @var  \App\Models\User  $user */
         $user = $users->first();
 
-        $this->assertAuthenticatedAs($user);
+        if (static::isLoginEnabled())
+            $this->assertAuthenticatedAs($user);
+        else
+            $this->markTestIncomplete('Check the user is not logged in');
 
         static::assertSame('John', $user->first_name);
         static::assertSame('DOE', $user->last_name);
@@ -84,6 +96,8 @@ class RegisterTest extends TestCase
     /** @test */
     public function it_cannot_register_without_full_name(): void
     {
+        static::skipIfRegisterIsDisabled();
+
         $data = [
             'email'                 => 'john.doe@example.com',
             'password'              => 'password',
@@ -91,12 +105,13 @@ class RegisterTest extends TestCase
             'terms'                 => 'yes',
         ];
 
-        $resp = $this->from(static::registerGetUrl())
-                     ->post(static::registerPostUrl(), $data)
-                     ->assertRedirect(static::registerGetUrl())
-                     ->assertSessionHasErrors('first_name')
-                     ->assertSessionHasErrors('last_name')
-                     ->assertSessionHasInput('email', 'john.doe@example.com');
+        $resp = $this
+            ->from(static::registerGetUrl())
+            ->post(static::registerPostUrl(), $data)
+            ->assertRedirect(static::registerGetUrl())
+            ->assertSessionHasErrors('first_name')
+            ->assertSessionHasErrors('last_name')
+            ->assertSessionHasInput('email', 'john.doe@example.com');
 
         static::assertFalse($resp->getSession()->hasOldInput('password'));
 
@@ -108,6 +123,8 @@ class RegisterTest extends TestCase
     /** @test */
     public function it_cannot_register_without_email(): void
     {
+        static::skipIfRegisterIsDisabled();
+
         $data = [
             'first_name'            => 'John',
             'last_name'             => 'DOE',
@@ -117,13 +134,16 @@ class RegisterTest extends TestCase
             'terms'                 => 'yes',
         ];
 
-        $resp = $this->from(static::registerGetUrl())
-                     ->post(static::registerPostUrl(), $data)
-                     ->assertRedirect(static::registerGetUrl())
-                     ->assertSessionHasErrors('email')
-                     ->assertSessionHasInput('email_name', '')
-                     ->assertSessionHasInput('first_name', 'John')
-                     ->assertSessionHasInput('last_name', 'DOE');
+        $resp = $this
+            ->from(static::registerGetUrl())
+            ->post(static::registerPostUrl(), $data)
+            ->assertRedirect(static::registerGetUrl())
+            ->assertSessionHasErrors('email')
+            ->assertSessionHasInput([
+                'email_name' => '',
+                'first_name' => 'John',
+                'last_name'  => 'DOE',
+            ]);
 
         static::assertFalse($resp->getSession()->hasOldInput('password'));
 
@@ -135,6 +155,8 @@ class RegisterTest extends TestCase
     /** @test */
     public function it_cannot_register_with_invalid_email(): void
     {
+        static::skipIfRegisterIsDisabled();
+
         $data = [
             'first_name'            => 'John',
             'last_name'             => 'DOE',
@@ -144,13 +166,16 @@ class RegisterTest extends TestCase
             'terms'                 => 'yes',
         ];
 
-        $resp = $this->from(static::registerGetUrl())
-                     ->post(static::registerPostUrl(), $data)
-                     ->assertRedirect(static::registerGetUrl())
-                     ->assertSessionHasInput('first_name', $data['first_name'])
-                     ->assertSessionHasInput('last_name', $data['last_name'])
-                     ->assertSessionHasInput('email', $data['email'])
-                     ->assertSessionHasErrors('email');
+        $resp = $this
+            ->from(static::registerGetUrl())
+            ->post(static::registerPostUrl(), $data)
+            ->assertRedirect(static::registerGetUrl())
+            ->assertSessionHasInput([
+                'first_name' => $data['first_name'],
+                'last_name'  => $data['last_name'],
+                'email'      => $data['email']
+            ])
+            ->assertSessionHasErrors('email');
 
         static::assertFalse($resp->getSession()->hasOldInput('password'));
 
@@ -162,6 +187,8 @@ class RegisterTest extends TestCase
     /** @test */
     public function it_cannot_register_without_password(): void
     {
+        static::skipIfRegisterIsDisabled();
+
         $data = [
             'first_name'            => 'John',
             'last_name'             => 'DOE',
@@ -171,13 +198,16 @@ class RegisterTest extends TestCase
             'terms'                 => 'yes',
         ];
 
-        $resp = $this->from(static::registerGetUrl())
-                     ->post(static::registerPostUrl(), $data)
-                     ->assertRedirect(static::registerGetUrl())
-                     ->assertSessionHasInput('first_name', $data['first_name'])
-                     ->assertSessionHasInput('last_name', $data['last_name'])
-                     ->assertSessionHasInput('email', $data['email'])
-                     ->assertSessionHasErrors(['password']);
+        $resp = $this
+            ->from(static::registerGetUrl())
+            ->post(static::registerPostUrl(), $data)
+            ->assertRedirect(static::registerGetUrl())
+            ->assertSessionHasInput([
+                'first_name' => $data['first_name'],
+                'last_name'  => $data['last_name'],
+                'email'      => $data['email'],
+            ])
+            ->assertSessionHasErrors(['password']);
 
         static::assertNoUserRegistered();
         static::assertFalse($resp->getSession()->hasOldInput('password'));
@@ -188,6 +218,8 @@ class RegisterTest extends TestCase
     /** @test */
     public function it_cannot_register_without_a_confirmed_password(): void
     {
+        static::skipIfRegisterIsDisabled();
+
         $data = [
             'first_name'            => 'John',
             'last_name'             => 'DOE',
@@ -197,13 +229,16 @@ class RegisterTest extends TestCase
             'terms'                 => 'yes',
         ];
 
-        $resp = $this->from(static::registerGetUrl())
-                     ->post(static::registerPostUrl(), $data)
-                     ->assertRedirect(static::registerGetUrl())
-                     ->assertSessionHasInput('first_name', $data['first_name'])
-                     ->assertSessionHasInput('last_name', $data['last_name'])
-                     ->assertSessionHasInput('email', $data['email'])
-                     ->assertSessionHasErrors(['password']);
+        $resp = $this
+            ->from(static::registerGetUrl())
+            ->post(static::registerPostUrl(), $data)
+            ->assertRedirect(static::registerGetUrl())
+            ->assertSessionHasInput([
+                'first_name' => $data['first_name'],
+                'last_name'  => $data['last_name'],
+                'email'      => $data['email'],
+            ])
+            ->assertSessionHasErrors(['password']);
 
         static::assertNoUserRegistered();
         static::assertFalse($resp->getSession()->hasOldInput('password'));
@@ -214,6 +249,8 @@ class RegisterTest extends TestCase
     /** @test */
     public function it_cannot_register_with_a_unconfirmed_password(): void
     {
+        static::skipIfRegisterIsDisabled();
+
         $data = [
             'first_name'            => 'John',
             'last_name'             => 'DOE',
@@ -223,13 +260,16 @@ class RegisterTest extends TestCase
             'terms'                 => 'yes',
         ];
 
-        $resp = $this->from(static::registerGetUrl())
-                     ->post(static::registerPostUrl(), $data)
-                     ->assertRedirect(static::registerGetUrl())
-                     ->assertSessionHasInput('first_name', $data['first_name'])
-                     ->assertSessionHasInput('last_name', $data['last_name'])
-                     ->assertSessionHasInput('email', $data['email'])
-                     ->assertSessionHasErrors(['password']);
+        $resp = $this
+            ->from(static::registerGetUrl())
+            ->post(static::registerPostUrl(), $data)
+            ->assertRedirect(static::registerGetUrl())
+            ->assertSessionHasInput([
+                'first_name' => $data['first_name'],
+                'last_name'  => $data['last_name'],
+                'email'      => $data['email'],
+            ])
+            ->assertSessionHasErrors(['password']);
 
         static::assertNoUserRegistered();
         static::assertFalse($resp->getSession()->hasOldInput('password'));
@@ -240,6 +280,8 @@ class RegisterTest extends TestCase
     /** @test */
     public function it_can_register_users_and_redirected_to_intended_url(): void
     {
+        static::skipIfRegisterIsDisabled();
+
         $data = [
             'first_name'            => 'John',
             'last_name'             => 'DOE',
@@ -257,6 +299,8 @@ class RegisterTest extends TestCase
     /** @test */
     public function it_can_register_when_terms_are_disabled(): void
     {
+        static::skipIfRegisterIsDisabled();
+
         config()->set('arcanesoft.foundation.features.terms', true);
 
         $data = [

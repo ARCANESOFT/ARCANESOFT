@@ -6,6 +6,7 @@ use Account\Http\Web\Routes\Settings\ProfileRoutes;
 use Account\Tests\Feature\TestCase;
 use Authentication\Http\Routes\LoginRoutes;
 use Authentication\Notifications\VerifyEmailNotification;
+use Authentication\Tests\Concerns\HasLoginFeature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
 
@@ -14,14 +15,15 @@ use Illuminate\Support\Facades\Notification;
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class ProfileTest extends TestCase
+class ProfileControllerTest extends TestCase
 {
     /* -----------------------------------------------------------------
      |  Traits
      | -----------------------------------------------------------------
      */
 
-    use RefreshDatabase;
+    use RefreshDatabase,
+        HasLoginFeature;
 
     /* -----------------------------------------------------------------
      |  Tests
@@ -29,8 +31,10 @@ class ProfileTest extends TestCase
      */
 
     /** @test */
-    public function it_redirect_if_user_not_authenticated()
+    public function it_redirect_if_user_not_authenticated(): void
     {
+        static::skipIfLoginIsDisabled();
+
         $this->get(route(ProfileRoutes::PROFILE_INDEX))
              ->assertRedirect(route(LoginRoutes::LOGIN_CREATE));
     }

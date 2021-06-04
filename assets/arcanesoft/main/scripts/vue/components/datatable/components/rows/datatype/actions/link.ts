@@ -36,9 +36,8 @@ export default defineComponent({
         <a ref="actionRef"
            :href="action.allowed ? action.action : '#'"
            :title="action.label"
-           :data-original-title="action.label"
-           :data-toggle="onlyIcon ? 'tooltip' : null"
-           :data-container="onlyIcon ? 'body' : null"
+           :data-bs-toggle="onlyIcon ? 'tooltip' : null"
+           :data-bs-container="onlyIcon ? 'body' : null"
            :ariaDisabled="isDisabled ? 'true' : null"
            class="v-dt-datatype-action" :class="{ 'destructive': isDestructive, 'disabled': isDisabled }">
             <i v-if="onlyIcon" :class="action.icon"></i>

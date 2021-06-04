@@ -5,6 +5,7 @@ namespace Authentication\Tests\Feature;
 use Arcanesoft\Foundation\Authorization\Models\PasswordReset as PasswordResetModel;
 use Arcanesoft\Foundation\Authorization\Notifications\Authentication\ResetPassword as ResetPasswordNotification;
 use Arcanesoft\Foundation\Fortify\Concerns\HasPasswordBroker;
+use Authentication\Tests\Concerns\HasLoginFeature;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\PasswordBroker;
@@ -25,6 +26,7 @@ class ResetPasswordTest extends TestCase
      | -----------------------------------------------------------------
      */
 
+    use HasLoginFeature;
     use HasPasswordBroker;
     use RefreshDatabase;
 
@@ -59,6 +61,8 @@ class ResetPasswordTest extends TestCase
     /** @test */
     public function it_can_reset_password_with_valid_token()
     {
+        static::skipIfLoginIsDisabled();
+
         $user = static::createUser();
 
         Event::fake();
@@ -227,6 +231,8 @@ class ResetPasswordTest extends TestCase
 
             return Password::PASSWORD_RESET;
         });
+
+        static::skipIfLoginIsDisabled();
 
         $this->withoutExceptionHandling()
              ->post(static::passwordResetPostUrl(), [

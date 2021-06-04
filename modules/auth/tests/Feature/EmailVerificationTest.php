@@ -4,6 +4,7 @@ namespace Authentication\Tests\Feature;
 
 use App\Http\Routes\PagesRoutes;
 use Authentication\Notifications\VerifyEmailNotification;
+use Authentication\Tests\Concerns\HasLoginFeature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
 
@@ -19,7 +20,8 @@ class EmailVerificationTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    use RefreshDatabase;
+    use RefreshDatabase,
+        HasLoginFeature;
 
     /* -----------------------------------------------------------------
      |  Tests
@@ -29,6 +31,8 @@ class EmailVerificationTest extends TestCase
     /** @test */
     public function it_cannot_let_guest_to_see_the_verification_notice(): void
     {
+        static::skipIfLoginIsDisabled();
+
         $this->get(static::verificationNoticeUrl())
              ->assertRedirect(static::loginCreateUrl());
     }
@@ -57,6 +61,8 @@ class EmailVerificationTest extends TestCase
     /** @test */
     public function it_cannot_let_guests_sees_the_verification_verify_route(): void
     {
+        static::skipIfLoginIsDisabled();
+
         $user = static::createUnverifiedUser();
 
         $this->get(static::validVerificationVerifyUrl($user))
@@ -112,6 +118,8 @@ class EmailVerificationTest extends TestCase
     /** @test */
     public function it_cannot_let_guest_resend_a_verification_email(): void
     {
+        static::skipIfLoginIsDisabled();
+
         $this->post(static::verificationSendUrl())
              ->assertRedirect(static::loginCreateUrl());
     }

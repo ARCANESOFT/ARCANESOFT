@@ -4,24 +4,26 @@ namespace Authentication\Tests\Feature;
 
 use App\Http\Routes\PagesRoutes;
 use App\Models\User;
+use Authentication\Tests\Concerns\HasTwoFactorAuthentication;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
-use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Support\Facades\Auth;
+use PragmaRX\Google2FA\Google2FA;
 
 /**
  * Class     TwoFactorLogin
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class TwoFactorLogin extends TestCase
+class TwoFactorLoginTest extends TestCase
 {
     /* -----------------------------------------------------------------
      |  Traits
      | -----------------------------------------------------------------
      */
 
-    use RefreshDatabase;
+    use RefreshDatabase,
+        HasTwoFactorAuthentication;
 
     /* -----------------------------------------------------------------
      |  Tests
@@ -31,6 +33,8 @@ class TwoFactorLogin extends TestCase
     /** @test */
     public function it_redirect_user_to_challenge_when_using_two_factor_authentication(): void
     {
+        static::skipIfTwoFactorIsDisabled();
+
         static::createUserWithTwoFactor([
             'email' => 'taylor@laravel.com',
             'password' => 'secret',
@@ -48,9 +52,11 @@ class TwoFactorLogin extends TestCase
     /** @test */
     public function it_can_pass_two_factor_challenge_via_code(): void
     {
-        $tfaEngine = app(Google2FA::class);
-        $secret = $tfaEngine->generateSecretKey();
-        $code = $tfaEngine->getCurrentOtp($secret);
+        static::skipIfTwoFactorIsDisabled();
+
+        $engine = $this->app->make(Google2FA::class);
+        $secret = $engine->generateSecretKey();
+        $code   = $engine->getCurrentOtp($secret);
 
         $user = static::createUserWithTwoFactor([
             'email'    => 'taylor@laravel.com',
@@ -66,6 +72,8 @@ class TwoFactorLogin extends TestCase
     /** @test */
     public function it_can_pass_two_factor_challenge_via_recovery_code(): void
     {
+        static::skipIfTwoFactorIsDisabled();
+
         $user = static::createUserWithTwoFactor([
             'email'    => 'taylor@laravel.com',
             'password' => 'secret',
@@ -87,6 +95,8 @@ class TwoFactorLogin extends TestCase
     /** @test */
     public function it_must_fail_two_factor_challenge_with_invalid_recovery_code(): void
     {
+        static::skipIfTwoFactorIsDisabled();
+
         $user = static::createUserWithTwoFactor([
             'email'    => 'taylor@laravel.com',
             'password' => 'secret',
@@ -107,6 +117,8 @@ class TwoFactorLogin extends TestCase
     /** @test */
     public function test_two_factor_challenge_requires_a_challenged_user(): void
     {
+        static::skipIfTwoFactorIsDisabled();
+
         $this->get(static::twoFactorCreateUrl())
              ->assertStatus(Response::HTTP_FORBIDDEN);
 

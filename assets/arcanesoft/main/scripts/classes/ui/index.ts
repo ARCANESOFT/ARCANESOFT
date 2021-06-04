@@ -15,7 +15,7 @@ class UI {
 
     initTooltips(dom: Document): any[] {
         return Array
-            .from(dom.querySelectorAll('[data-toggle="tooltip"]'))
+            .from(dom.querySelectorAll('[data-bs-toggle="tooltip"]'))
             .map((elt: HTMLElement) => components().tooltip(elt, {boundary: 'window'}))
     }
 

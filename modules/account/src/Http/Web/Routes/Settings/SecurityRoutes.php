@@ -6,6 +6,7 @@ use Account\Http\Web\Controllers\Settings\BrowserSessionsController;
 use Account\Http\Web\Controllers\Settings\SecurityController;
 use Account\Http\Web\Controllers\Settings\TwoFactorAuthenticationController;
 use App\Http\Routes\AbstractRouteRegistrar;
+use Arcanesoft\Foundation\Authorization\Auth;
 
 /**
  * Class     SecurityRoutes
@@ -47,10 +48,13 @@ class SecurityRoutes extends AbstractRouteRegistrar
      */
     protected function mapTwoFactorAuthenticationRoutes(): void
     {
+        if ( ! Auth::isTwoFactorEnabled())
+            return;
+
         $this->name('two-factor.')->prefix('two-factor')->middleware(['ajax'])->group(function (): void {
             // account::settings.security.two-factor.status
             $this->get('status', [TwoFactorAuthenticationController::class, 'status'])
-                ->name('status');
+                 ->name('status');
 
             // TODO: Adding password confirm middleware?
             // account::settings.security.two-factor.enable

@@ -18,7 +18,7 @@ const options = {
 
 mix.setPublicPath(options.paths.assets);
 mix.setResourceRoot('../');
-mix.disableSuccessNotifications();
+mix.disableNotifications();
 mix.webpackConfig(require('./webpack.config'));
 
 if (mix.inProduction()) {

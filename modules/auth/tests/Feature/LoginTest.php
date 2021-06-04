@@ -3,6 +3,7 @@
 namespace Authentication\Tests\Feature;
 
 use App\Models\User;
+use Authentication\Tests\Concerns\HasLoginFeature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use Illuminate\Testing\TestResponse;
@@ -19,7 +20,8 @@ class LoginTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    use RefreshDatabase;
+    use RefreshDatabase,
+        HasLoginFeature;
 
     /* -----------------------------------------------------------------
      |  Tests
@@ -29,6 +31,8 @@ class LoginTest extends TestCase
     /** @test */
     public function it_can_access_login_form(): void
     {
+        static::skipIfLoginIsDisabled();
+
         $this->get(static::loginCreateUrl())
              ->assertSuccessful()
              ->assertViewIs('auth::login');
@@ -37,6 +41,8 @@ class LoginTest extends TestCase
     /** @test */
     public function it_can_disable_login_form(): void
     {
+        static::skipIfLoginIsDisabled();
+
         $this->disableLogin();
 
         $this->get(static::loginCreateUrl())
@@ -49,6 +55,8 @@ class LoginTest extends TestCase
     /** @test */
     public function it_must_hide_login_form_when_user_is_authenticated(): void
     {
+        static::skipIfLoginIsDisabled();
+
         $user = static::createUser();
 
         $this->actingAs($user)
@@ -61,6 +69,8 @@ class LoginTest extends TestCase
     /** @test */
     public function it_can_authenticate(): void
     {
+        static::skipIfLoginIsDisabled();
+
         $user = static::createUser();
 
         $this->from(static::loginCreateUrl())
@@ -76,6 +86,8 @@ class LoginTest extends TestCase
     /** @test */
     public function it_can_authenticate_with_remember_me_functionality(): void
     {
+        static::skipIfLoginIsDisabled();
+
         $user = static::createUser();
 
         $resp = $this
@@ -97,6 +109,8 @@ class LoginTest extends TestCase
     /** @test */
     public function it_cannot_let_user_login_with_incorrect_email(): void
     {
+        static::skipIfLoginIsDisabled();
+
         $resp = $this
             ->from(static::loginCreateUrl())
             ->post(static::loginStoreUrl(), [
@@ -115,6 +129,8 @@ class LoginTest extends TestCase
     /** @test */
     public function it_cannot_let_user_login_with_incorrect_password(): void
     {
+        static::skipIfLoginIsDisabled();
+
         $user = static::createUser();
 
         $resp = $this
@@ -190,6 +206,8 @@ class LoginTest extends TestCase
     /** @test */
     public function it_cannot_allow_more_than_five_attempts_in_one_minute(): void
     {
+        static::skipIfLoginIsDisabled();
+
         $user = static::createUser();
         $data = [
             'email'    => $user->email,
@@ -219,16 +237,6 @@ class LoginTest extends TestCase
     protected function getTooManyLoginAttemptsMessage(): string
     {
         return sprintf('/^%s$/', str_replace('\:seconds', '\d+', preg_quote(__('auth.throttle'), '/')));
-    }
-
-    /**
-     * Disable the login system.
-     */
-    protected function disableLogin(): void
-    {
-        $this->app['config']->set([
-            'arcanesoft.foundation.auth.authentication.login.enabled' => false
-        ]);
     }
 
     /* -----------------------------------------------------------------
