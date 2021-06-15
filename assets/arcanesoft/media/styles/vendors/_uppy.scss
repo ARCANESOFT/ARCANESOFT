@@ -1,0 +1,10 @@
+@import '~@uppy/core/src/style';
+@import '~@uppy/dashboard/src/style';
+
+.media-files-uploader {
+    .uppy-Dashboard-inner {
+        border: none;
+        border-radius: 0;
+        background-color: #FFF;
+    }
+}

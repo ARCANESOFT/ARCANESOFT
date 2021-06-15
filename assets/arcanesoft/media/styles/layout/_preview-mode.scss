@@ -1,0 +1,45 @@
+.media-item-preview {
+    box-shadow: -4px 0 2px -2px rgba(0, 0, 0, 0.1);
+
+    .item-preview-thumbnail {
+        display: flex;
+        height: 15rem;
+
+        img {
+            object-fit: contain;
+        }
+    }
+
+    .item-preview-video {
+        //
+    }
+
+    .item-preview-icon {
+        padding: 2rem 0;
+        background-color: #e4e7ea;
+
+        .fa-layers {
+            position: relative;
+
+            .fa-layers-counter {
+                position: absolute;
+                padding: 0.25rem;
+                top: 0;
+                right: 0;
+                font-size: 1rem;
+                min-width: 2rem;
+                border-radius: 1rem;
+                color: #FFF;
+            }
+        }
+    }
+
+    .item-preview-table {
+        word-break: break-all;
+
+        th {
+            vertical-align: top;
+            white-space: nowrap;
+        }
+    }
+}

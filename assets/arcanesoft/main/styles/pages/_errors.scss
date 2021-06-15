@@ -1,0 +1,9 @@
+.error-page {
+    h1 {
+        font-size: 12rem;
+
+        @media (max-width: 991px) {
+            font-size: 8rem;
+        }
+    }
+}

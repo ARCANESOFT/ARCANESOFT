@@ -1,0 +1,8 @@
+@import "~bootstrap/scss/forms/floating-labels";
+
+.form-floating {
+    > textarea.form-control {
+        height: 5rem;
+    }
+}
+

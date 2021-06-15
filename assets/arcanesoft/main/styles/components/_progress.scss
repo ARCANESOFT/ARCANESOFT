@@ -1,0 +1,25 @@
+@import "~bootstrap/scss/progress";
+
+$progress-bar-sizes: (
+    "xs": .25rem,
+    "sm": .5rem,
+    "md": .75rem,
+    "lg": 1rem,
+    "xl": 1.25rem,
+);
+
+.progress {
+    &.progress-flat {
+        border-radius: 0;
+    }
+
+    &.progress-rounded {
+        border-radius: 1rem;
+    }
+
+    @each $size, $value in $progress-bar-sizes {
+        &.progress-#{$size} {
+            height: $value;
+        }
+    }
+}

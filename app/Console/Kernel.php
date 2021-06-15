@@ -1,21 +1,18 @@
-<?php namespace App\Console;
+<?php declare(strict_types=1);
 
+namespace App\Console;
+
+use Arcanedev\LaravelBackup\Console\{CleanupBackupCommand, RunBackupCommand};
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 /**
  * Class     Kernel
  *
- * @package  App\Console
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Kernel extends ConsoleKernel
 {
-    /* -----------------------------------------------------------------
-     |  Properties
-     | -----------------------------------------------------------------
-     */
-
     /**
      * The Artisan commands provided by your application.
      *
@@ -25,29 +22,50 @@ class Kernel extends ConsoleKernel
         //
     ];
 
-    /* -----------------------------------------------------------------
-     |  Main Methods
-     | -----------------------------------------------------------------
-     */
-
     /**
      * Define the application's command schedule.
      *
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      */
-    protected function schedule(Schedule $schedule)
+    protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        if ($this->app->isLocal()) {
+            $schedule->command('telescope:prune')->daily();
+        }
+
+//        $schedule->call(function () {
+//            info('Hello there!');
+//        })->everyMinute();
+
+
+        if ($this->app->isProduction()) {
+            $this->scheduleBackups($schedule);
+        }
     }
 
     /**
-     * Register the Closure based commands for the application.
+     * Register the commands for the application.
      */
-    protected function commands()
+    protected function commands(): void
     {
         $this->load(__DIR__.'/Commands');
 
-        // require base_path('routes/console.php');
+        require base_path('routes/console.php');
+    }
+
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Schedule the backups.
+     *
+     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     */
+    protected function scheduleBackups(Schedule $schedule): void
+    {
+        $schedule->command(CleanupBackupCommand::class)->daily()->at('01:00');
+        $schedule->command(RunBackupCommand::class)->daily()->at('02:00');
     }
 }

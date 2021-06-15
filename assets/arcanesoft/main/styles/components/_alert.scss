@@ -1,0 +1,39 @@
+@import "~bootstrap/scss/alert";
+
+.alert.alert-with-icon {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    padding: 0;
+    align-items: stretch;
+
+    .alert-icon {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    .alert-content {
+        flex-grow: 1;
+        align-items: center;
+    }
+
+    button.close {
+        padding-right: .5rem;
+        padding-left: .5rem;
+    }
+
+    @each $color, $value in $theme-colors {
+        &.alert-#{$color} {
+            &.alert-solid {
+                background-color: $value;
+                color: if($color == 'light', $black, $white);
+            }
+
+            .alert-icon {
+                background-color: $value;
+                color: if($color == 'light', $black, $white);
+            }
+        }
+    }
+}

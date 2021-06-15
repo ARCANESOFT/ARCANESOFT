@@ -1,20 +1,32 @@
-<?php namespace Tests\Feature;
+<?php declare(strict_types=1);
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
+namespace Tests\Feature;
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+/**
+ * Class     ExampleTest
+ *
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
+    /* -----------------------------------------------------------------
+     |  Traits
+     | -----------------------------------------------------------------
      */
-    public function testBasicExample()
-    {
-        $response = $this->get('/');
 
-        $response->assertStatus(200);
+    use RefreshDatabase;
+
+    /* -----------------------------------------------------------------
+     |  Tests
+     | -----------------------------------------------------------------
+     */
+
+    /** @test */
+    public function it_ensure_the_app_returns_a_successful_response(): void
+    {
+        $this->get('/')
+             ->assertStatus(200);
     }
 }

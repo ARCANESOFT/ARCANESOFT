@@ -1,16 +1,21 @@
-<?php namespace App\Tests\Unit;
+<?php declare(strict_types=1);
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+namespace Tests\Unit;
 
+/**
+ * Class     ExampleTest
+ *
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
+    /* -----------------------------------------------------------------
+     |  Tests
+     | -----------------------------------------------------------------
      */
-    public function testBasicTest()
+
+    /** @test */
+    public function it_check_true_is_true(): void
     {
         $this->assertTrue(true);
     }

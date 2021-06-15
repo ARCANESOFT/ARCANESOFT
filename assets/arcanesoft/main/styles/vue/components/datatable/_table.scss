@@ -1,0 +1,7 @@
+.v-dt-table {
+    @extend .table, .table-hover, .table-borderless;
+    margin-bottom: 0;
+}
+
+@import "table/columns";
+@import "table/rows";

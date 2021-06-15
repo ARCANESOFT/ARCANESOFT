@@ -1,0 +1,39 @@
+@import "~bootstrap/scss/tables";
+
+.table thead th {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    //border-bottom-width: 1px;
+    //border-top: 0;
+
+    .btn-sorting {
+        text-decoration: none;
+        color: var(--skin-footer-text-normal-color);
+        display: block;
+
+        &:before {
+            @extend %fa-icon;
+            @extend .fas;
+            content: fa-content($fa-var-sort);
+            margin-right: .25rem;
+        }
+
+        &.btn-sorting-asc:before {
+            content: fa-content($fa-var-sort-up);
+        }
+
+        &.btn-sorting-desc:before {
+            content: fa-content($fa-var-sort-down);
+        }
+    }
+}
+
+.table {
+    th, td {
+        vertical-align: middle;
+    }
+}
+
+.table-responsive {
+    @extend %scrollable;
+}

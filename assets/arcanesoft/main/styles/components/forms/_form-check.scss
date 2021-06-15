@@ -1,0 +1,17 @@
+@import "~bootstrap/scss/forms/form-check";
+
+// Colors
+.form-check-input {
+    @each $color, $value in $theme-colors {
+        &.bg-#{$color}:checked {
+            border-color: $value;
+        }
+
+        &[type="checkbox"],
+        &[type="radio"] {
+            &.bg-#{$color}:not(:checked) {
+                background-color: $form-check-input-bg !important;
+            }
+        }
+    }
+}

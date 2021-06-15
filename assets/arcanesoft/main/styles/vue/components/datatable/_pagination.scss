@@ -1,0 +1,15 @@
+.v-dt-pagination-info {
+    //
+}
+
+.v-dt-pagination {
+    @extend .pagination;
+}
+
+.v-dt-page-item {
+    @extend .page-item;
+}
+
+.v-dt-page-link {
+    @extend .page-link;
+}

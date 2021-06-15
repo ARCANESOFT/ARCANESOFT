@@ -1,0 +1,15 @@
+.v-dt-row {
+    vertical-align: middle;
+
+    .v-dt-row-col {
+        font-size: 0.875em; // TODO: use the same $variable as .small
+    }
+}
+
+@import "datatype/actions";
+@import "datatype/avatar";
+@import "datatype/badge-active";
+@import "datatype/badge-count";
+@import "datatype/plain";
+@import "datatype/status";
+@import "datatype/tags";

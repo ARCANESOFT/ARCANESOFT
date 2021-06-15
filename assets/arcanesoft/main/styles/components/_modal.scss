@@ -1,0 +1,49 @@
+@import "~bootstrap/scss/modal";
+
+.modal-xl {
+    @include media-breakpoint-up(md) {
+        max-width: $modal-xl;
+    }
+}
+
+.modal-bordered {
+    .modal-content {
+        border-width: $border-width;
+    }
+
+    .modal-header {
+        border-bottom-width: $border-width;
+    }
+
+    .modal-footer {
+        border-top-width: $border-width;
+    }
+}
+
+@each $color, $value in $theme-colors {
+    .modal-#{$color} {
+        .modal-content {
+            background-color: $value;
+
+            & {
+                color: if($color == "light", $body-color, $white);
+            }
+
+            .close {
+                &,
+                &:not(:disabled):not(.disabled):hover,
+                &:not(:disabled):not(.disabled):focus {
+                    color: if($color == "light", $body-color, $white);
+                }
+            }
+        }
+
+        &.modal-bordered {
+            .modal-content,
+            .modal-header,
+            .modal-footer {
+                border-color: darken($value, 5%);
+            }
+        }
+    }
+}

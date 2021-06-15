@@ -1,0 +1,47 @@
+$status-size-unit: 0.25rem;
+
+$statuses-sizes: (
+    "sm": $status-size-unit * 1,
+    "md": $status-size-unit * 2,
+    "lg": $status-size-unit * 3,
+    "xl": $status-size-unit * 4,
+);
+
+.status {
+    display: inline-block;
+    width: $status-size-unit * 2;
+    height: $status-size-unit * 2;
+    background: $gray-600;
+    @extend .rounded-circle;
+
+    @each $size, $value in $statuses-sizes {
+        &.status-#{$size} {
+            height: $value;
+            width: $value;
+        }
+    }
+
+    &.status-animated {
+        animation: status-pulse 1.5s infinite ease;
+    }
+}
+
+.status-indicator {
+    position: relative;
+
+    .status {
+        position: absolute;
+        right: -2px;
+        border: 1px solid #fff;
+        box-shadow: inset 0 0 1px rgba($black, 0.5);
+        transform: scale(1.5);
+
+        &.status-top {
+            top: -2px;
+        }
+
+        &.status-bottom, &:not(.status-top) {
+            bottom: -2px;
+        }
+    }
+}

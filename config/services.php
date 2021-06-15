@@ -7,61 +7,58 @@ return [
      | -----------------------------------------------------------------
      */
 
-    'bitbucket' => [
-        'client_id'     => env('BITBUCKET_CLIENT_ID'),
-        'client_secret' => env('BITBUCKET_CLIENT_SECRET'),
-        'redirect'      => env('BITBUCKET_REDIRECT_URL', 'http://project.dev/auth/social/bitbucket/callback'),
+    'mailgun' => [
+        'domain'   => env('MAILGUN_DOMAIN'),
+        'secret'   => env('MAILGUN_SECRET'),
+        'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
     ],
 
-    'facebook'  => [
+    'postmark' => [
+        'token' => env('POSTMARK_TOKEN'),
+    ],
+
+    'ses' => [
+        'key'    => env('AWS_ACCESS_KEY_ID'),
+        'secret' => env('AWS_SECRET_ACCESS_KEY'),
+        'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+    ],
+
+    /* -----------------------------------------------------------------
+     |  Socialite
+     | -----------------------------------------------------------------
+     */
+
+    'facebook' => [
         'client_id'     => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'redirect'      => env('FACEBOOK_REDIRECT_URL', 'http://project.dev/auth/social/facebook/callback'),
+        'redirect'      => env('FACEBOOK_REDIRECT'),
+        'scopes'        => [],
+        'with'          => [],
+        'fields'        => [],
     ],
 
-    'github'    => [
+    'github' => [
         'client_id'     => env('GITHUB_CLIENT_ID'),
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
-        'redirect'      => env('GITHUB_REDIRECT_URL', 'http://project.dev/auth/social/github/callback'),
+        'redirect'      => env('GITHUB_REDIRECT'),
+        'scopes'        => [],
+        'with'          => [],
     ],
 
-    'google'    => [
+    'google' => [
         'client_id'     => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect'      => env('GOOGLE_REDIRECT_URL', 'http://project.dev/auth/social/google/callback'),
+        'redirect'      => env('GOOGLE_REDIRECT'),
+        'scopes'        => [],
+        'with'          => [],
     ],
 
-    'linkedin'  => [
-        'client_id'     => env('LINKEDIN_CLIENT_ID'),
-        'client_secret' => env('LINKEDIN_CLIENT_SECRET'),
-        'redirect'      => env('LINKEDIN_REDIRECT_URL', 'http://project.dev/auth/social/linkedin/callback'),
-    ],
-
-    'mailgun'   => [
-        'domain' => env('MAILGUN_DOMAIN'),
-        'secret' => env('MAILGUN_SECRET'),
-    ],
-
-    'ses'       => [
-        'key'    => env('SES_KEY'),
-        'secret' => env('SES_SECRET'),
-        'region' => 'us-east-1',
-    ],
-
-    'sparkpost' => [
-        'secret' => env('SPARKPOST_SECRET'),
-    ],
-
-    'stripe'    => [
-        'model'  => \App\Models\User::class,
-        'key'    => env('STRIPE_KEY'),
-        'secret' => env('STRIPE_SECRET'),
-    ],
-
-    'twitter'   => [
+    'twitter' => [
         'client_id'     => env('TWITTER_CLIENT_ID'),
         'client_secret' => env('TWITTER_CLIENT_SECRET'),
-        'redirect'      => env('TWITTER_REDIRECT_URL', 'http://project.dev/auth/social/twitter/callback'),
+        'redirect'      => env('TWITTER_REDIRECT'),
+        'scopes'        => [],
+        'with'          => [],
     ],
 
 ];

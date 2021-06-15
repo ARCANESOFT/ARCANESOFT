@@ -1,0 +1,15 @@
+.v-dt-datatype-actions {
+    text-align: right;
+
+    .v-dt-datatype-action {
+        @extend .btn, .btn-sm, .btn-light;
+
+        & + .v-dt-datatype-action {
+            margin-left: 0.25rem;
+        }
+
+        &.destructive {
+            //
+        }
+    }
+}

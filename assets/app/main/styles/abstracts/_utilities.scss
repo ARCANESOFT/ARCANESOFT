@@ -1,0 +1,23 @@
+@import "~bootstrap/scss/utilities";
+
+$utilities: map-merge(
+    $utilities,
+    (
+        // Social Utilities
+        "social-color": (
+            property: color,
+            class: text-social,
+            values: $social-colors
+        ),
+        "social-background-color": (
+            property: background-color,
+            class: bg-social,
+            values: $social-colors
+        ),
+        "social-border-color": (
+            property: border-color,
+            class: border-social,
+            values: $social-colors
+        ),
+    )
+);

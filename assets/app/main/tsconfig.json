@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "lib": ["dom", "esnext"],
+        "module": "es2015",
+        "moduleResolution": "node",
+        "noEmit": false,
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "types": [
+            "lodash",
+            "node"
+        ]
+    }
+}

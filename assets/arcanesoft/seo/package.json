@@ -1,0 +1,16 @@
+{
+    "name": "@arcanesoft/seo",
+    "private": true,
+    "version": "1.0.0",
+    "main": "scripts/index.ts",
+    "dependencies": {
+        "@arcanescripts/translator": "^1.0",
+        "@arcanesoft/core": "^1.0",
+        "vue": "^3.0"
+    },
+    "devDependencies": {
+        "@types/node": "^12.7",
+        "ts-loader": "^8.0.4",
+        "typescript": "^4.0.3"
+    }
+}

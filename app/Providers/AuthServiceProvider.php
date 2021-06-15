@@ -1,38 +1,60 @@
-<?php namespace App\Providers;
+<?php declare(strict_types=1);
 
-use Arcanedev\Support\Providers\AuthorizationServiceProvider as ServiceProvider;
+namespace App\Providers;
+
+use Arcanesoft\Foundation\Support\Providers\Concerns\HasPolicyClasses;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 /**
  * Class     AuthServiceProvider
  *
- * @package  App\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class AuthServiceProvider extends ServiceProvider
 {
     /* -----------------------------------------------------------------
+     |  Traits
+     | -----------------------------------------------------------------
+     */
+
+    use HasPolicyClasses;
+
+    /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * The policy mappings for the application.
      *
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
     ];
+
+    /**
+     * Get policy's classes.
+     *
+     * @return iterable
+     */
+    public function policyClasses(): iterable
+    {
+        return (array) config('policies');
+    }
 
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Register any authentication / authorization services.
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerPolicies();
+        $this->registerPolicyClasses();
 
         //
     }

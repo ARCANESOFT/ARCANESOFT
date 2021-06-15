@@ -1,0 +1,34 @@
+// Dark Mode
+
+$skin-colors: (
+    "secondary":  $gray-600,
+    "light":      $gray-800,
+);
+
+@include skin-mode('dark') {
+    // Bootstrap
+
+    table {
+        //@extend .table-dark;
+    }
+
+    @each $color, $value in $skin-colors {
+        .btn-#{$color} {
+            @include button-variant($value, $value);
+        }
+    }
+
+    // Datatables
+
+    .dataTables_wrapper {
+        .dataTables_length,
+        .dataTables_filter,
+        .dataTables_info {
+            color: $table-dark-color;
+        }
+
+        .dataTables_processing {
+            background: rgba($gray-800, 0.4);
+        }
+    }
+}

@@ -1,0 +1,51 @@
+.avatar {
+    display: inline-block;
+    vertical-align: bottom;
+    width: map_get($avatar-sizes, "md");
+    height: map_get($avatar-sizes, "md");
+    font-size: $font-size-base;
+    user-select: none;
+
+    @extend .status-indicator;
+
+    & > i {
+        vertical-align: middle;
+    }
+
+    & > img {
+        object-fit: cover;
+        width: 100%;
+    }
+}
+
+.avatar-list {
+    padding: 0;
+    font-size: 0;
+
+    &.avatar-list-stacked {
+        .avatar + .avatar {
+            margin-left: -0.8em;
+        }
+
+        .avatar:hover {
+            z-index: 1;
+        }
+    }
+
+    &:not(.avatar-list-stacked) {
+        .avatar + .avatar {
+            margin-left: 0.25rem;
+        }
+    }
+}
+
+// SIZES
+//--------------------------------------------
+
+@each $size, $value in $avatar-sizes {
+    .avatar.avatar-#{$size} {
+        width: $value;
+        height: $value;
+        line-height: $value;
+    }
+}

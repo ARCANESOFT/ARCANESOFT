@@ -1,0 +1,23 @@
+.icons-list {
+    border-left: 1px solid $border-color;
+    border-top: 1px solid $border-color;
+    margin-left: 0;
+    margin-right: 0;
+
+    & > div {
+        display: flex;
+        align-items: center;
+        background: $white;
+        border-bottom: 1px solid $border-color;
+        border-right: 1px solid $border-color;
+        padding: 15px 15px;
+
+        i {
+            display: inline-block;
+            font-size: 20px;
+            width: 40px;
+            text-align: left;
+            color: theme-color("primary");
+        }
+    }
+}

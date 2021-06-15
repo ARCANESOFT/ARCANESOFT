@@ -1,0 +1,11 @@
+@import "~bootstrap/scss/toasts";
+
+.toasts-container {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+.toast-footer {
+    padding: 0.25rem 0.75rem;
+}

@@ -1,0 +1,4 @@
+/.git/
+/build
+/vendor
+.phpunit.result.cache

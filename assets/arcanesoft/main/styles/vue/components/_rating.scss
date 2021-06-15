@@ -1,0 +1,37 @@
+.vue-rating {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.vue-rating-label {
+    margin-bottom: 0;
+    line-height: 1;
+    font-size: 1.5em;
+    color: #ABABAB;
+    transition: color .2s ease-out;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &.is-selected {
+        color: #FFD700;
+    }
+
+    &:disabled:hover,
+    &.disabled:hover {
+        cursor: default;
+    }
+}
+
+.vue-rating-input {
+    position: absolute;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    height: 0;
+    width: 0;
+    border: none;
+    opacity: 0;
+}

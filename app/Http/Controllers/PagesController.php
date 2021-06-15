@@ -1,9 +1,10 @@
-<?php namespace App\Http\Controllers;
+<?php declare(strict_types=1);
+
+namespace App\Http\Controllers;
 
 /**
  * Class     PagesController
  *
- * @package  App\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class PagesController extends Controller
@@ -14,12 +15,18 @@ class PagesController extends Controller
      */
 
     /**
-     * Show the home page.
-     *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Contracts\View\View|mixed
      */
-    public function home()
+    public function index()
     {
-        return $this->view('home');
+        return view('index');
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\View|mixed
+     */
+    public function aboutUs()
+    {
+        return view()->make('about-us');
     }
 }

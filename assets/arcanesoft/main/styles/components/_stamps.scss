@@ -1,0 +1,33 @@
+.stamp {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.5rem;
+    word-wrap: break-word;
+    background-color: $white;
+    @include border-radius($card-border-radius);
+
+    .stamp-icon {
+        display: inline-block;
+        padding: 0 0.25rem;
+        min-width: 2rem;
+        height: 2rem;
+        line-height: 2rem;
+        text-align: center;
+        @include border-radius($card-border-radius);
+
+        color: #fff;
+        background: $gray-600;
+    }
+
+    .stamp-content {
+        width: 100%;
+    }
+
+    &.stamp-md .stamp-icon {
+        min-width: 2.5rem;
+        height: 2.5rem;
+        line-height: 2.5rem;
+    }
+}

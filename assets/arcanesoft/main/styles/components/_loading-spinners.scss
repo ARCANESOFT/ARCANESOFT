@@ -1,0 +1,46 @@
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: var(--skin-surface-1-bg-color);
+    opacity: 0.5;
+
+    .flashing-dots {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        &, &:before, &:after {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: #9880ff;
+            color: #9880ff;
+            animation: loading-dots 1s infinite linear alternate;
+        }
+
+        &:before, &:after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: 0;
+        }
+
+        & {
+            animation-delay: 0.5s;
+        }
+
+        &:before {
+            left: -1.25rem;
+            animation-delay: 0s;
+        }
+
+        &:after {
+            left: 1.25rem;
+            animation-delay: 1s;
+        }
+    }
+}
