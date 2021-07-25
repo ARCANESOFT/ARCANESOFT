@@ -117,10 +117,10 @@ return [
     ],
     'starts_with' => 'This must start with one of the following: :values.',
     'string' => 'This must be a string.',
-    'timezone' => 'This must be a valid zone.',
+    'timezone' => 'The must be a valid timezone.',
     'unique' => 'This has already been taken.',
     'uploaded' => 'This failed to upload.',
-    'url' => 'This format is invalid.',
+    'url' => 'The must be a valid URL.',
     'uuid' => 'This must be a valid UUID.',
 
     /*

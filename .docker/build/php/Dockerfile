@@ -1,6 +1,8 @@
+# https://gitlab.alpinelinux.org/alpine/aports/-/issues/12396
+ARG ALPINE_VERSION=3.13
 ARG PHP_VERSION=8.0
 
-FROM php:${PHP_VERSION}-fpm-alpine
+FROM php:${PHP_VERSION}-fpm-alpine${ALPINE_VERSION}
 
 # ENV
 ENV REDIS_VERSION 5.3.2
@@ -52,9 +54,7 @@ RUN docker-php-ext-install redis
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 # Installing NODEJS / NPM / YARN
-RUN apk add --update nodejs
-RUN apk add --update npm
-RUN apk add --update yarn
+RUN apk add --update nodejs npm yarn
 
 # Copy PHP config file
 COPY config/php.ini /usr/local/etc/php/php.ini
@@ -66,5 +66,11 @@ COPY config/cronjobs/root /etc/crontabs/root
 COPY config/supervisord.conf /etc/supervisord.conf
 COPY config/supervisor/* /etc/supervisor.d/
 
-# Start services
-CMD ["sh", "/var/www/html/.docker/build/php/start.sh"]
+# Run Shell script
+WORKDIR /var/www/html
+
+COPY ./docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+RUN chmod +x /usr/local/bin/docker-entrypoint
+
+ENTRYPOINT ["docker-entrypoint"]
+CMD ["php-fpm"]

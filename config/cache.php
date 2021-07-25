@@ -7,7 +7,7 @@ return [
     /* -----------------------------------------------------------------
      |  Default Cache Store
      | -----------------------------------------------------------------
-     |  Supported: "apc", "array", "database", "file", "memcached", "redis", "dynamodb", "null"
+     |  Supported: "apc", "array", "database", "file", "memcached", "redis", "dynamodb", "octane", "null"
      */
 
     'default' => env('CACHE_DRIVER', 'file'),
