@@ -14,14 +14,15 @@
         "arcanesoft/media": "@dev",
         "arcanesoft/passport": "@dev",
         "arcanesoft/seo": "@dev",
+        "arcanesoft/shop": "@dev",
         "fideloper/proxy": "^4.4.1",
         "fruitcake/laravel-cors": "^2.0.3",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.51",
         "laravel/tinker": "^2.5",
         "modules/account": "@dev",
-        "modules/auth": "@dev",
-        "modules/api": "@dev"
+        "modules/api": "@dev",
+        "modules/auth": "@dev"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

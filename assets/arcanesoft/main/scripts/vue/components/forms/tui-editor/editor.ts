@@ -100,9 +100,9 @@ export default defineComponent({
     },
 
     template: `
-            <div>
-                <input type="hidden" :name="name" :value="rawContent">
-                <div ref="tuiEditor"></div>
-            </div>
-        `,
+        <div>
+            <input type="hidden" :name="name" :value="rawContent">
+            <div ref="tuiEditor"></div>
+        </div>
+    `,
 })
