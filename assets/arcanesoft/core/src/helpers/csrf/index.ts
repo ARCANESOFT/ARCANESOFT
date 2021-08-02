@@ -1,6 +1,6 @@
 class Csrf {
-    public static token(): string | null {
-        const token = document.head.querySelector('meta[name="csrf-token"]')
+    public static token(): string|null {
+        const token = document.head.querySelector('meta[name="csrf-token"]') as HTMLMetaElement|undefined
 
         if (token !== undefined)
             return token.getAttribute('content');

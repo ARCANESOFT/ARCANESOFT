@@ -1,5 +1,4 @@
-// import { Tooltip } from 'bootstrap/dist/js/bootstrap.esm'
-import Tooltip from 'bootstrap/js/src/tooltip'
+import { Tooltip } from 'bootstrap/dist/js/bootstrap.esm'
 
 export default (element: HTMLElement, config?: Object) => new Tooltip(element, {
     ...{ boundary: 'window' },

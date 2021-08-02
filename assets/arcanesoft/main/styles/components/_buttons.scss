@@ -42,6 +42,12 @@
     }
 }
 
+.btn-seperated {
+    .btn + .btn {
+        margin-left: .25rem;
+    }
+}
+
 .btn-toolbar {
     .btn-group + .btn-group {
         margin-left: 1rem;

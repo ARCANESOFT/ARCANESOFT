@@ -1,3 +1,5 @@
+import { EditorOptions } from "@toast-ui/editor";
+
 export default {
 
     minHeight: '300px',
@@ -6,8 +8,8 @@ export default {
 
     useCommandShortcut: false,
 
-    useDefaultHTMLSanitizer: true,
+    // useDefaultHTMLSanitizer: true,
 
     usageStatistics: false,
 
-}
+} as EditorOptions

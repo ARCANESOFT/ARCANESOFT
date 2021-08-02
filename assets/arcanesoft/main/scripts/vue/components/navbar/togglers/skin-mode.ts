@@ -1,13 +1,9 @@
 import { defineComponent, onMounted, ref, computed } from 'vue'
 import tap from '@arcanesoft/core/src/functions/tap'
 import arcanesoft from '../../../../helpers/arcanesoft'
+import { SKIN_MODE } from '../../../../emuns'
 
 const EVENT_CLASS = 'Arcanesoft\\Foundation\\Core\\Events\\UI\\SkinModeToggled'
-
-enum SKIN_MODE {
-    DARK = 'dark',
-    LIGHT = 'light',
-}
 
 export default defineComponent({
     name: 'v-skin-mode-toggler',

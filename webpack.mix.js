@@ -20,6 +20,9 @@ mix.setPublicPath(options.paths.assets);
 mix.setResourceRoot('../');
 mix.disableNotifications();
 mix.webpackConfig(require('./webpack.config'));
+// mix.alias({
+//     vue$: path.join(__dirname, 'node_modules/vue/dist/vue.esm-bundler.js'),
+// });
 
 if (mix.inProduction()) {
     mix.version();

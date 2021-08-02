@@ -18,6 +18,7 @@
         "glob": "^7.1.6",
         "laravel-mix": "^6.0.0",
         "postcss": "^8.1.14",
-        "postcss-loader": "^4.0.4"
+        "postcss-loader": "^4.0.4",
+        "webpack": "^5.47.1"
     }
 }

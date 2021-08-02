@@ -14,9 +14,11 @@ class UI {
     }
 
     initTooltips(dom: Document): any[] {
-        return Array
-            .from(dom.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            .map((elt: HTMLElement) => components().tooltip(elt, {boundary: 'window'}))
+        const selector = '[data-bs-toggle="tooltip"]'
+
+        return [].slice
+            .call(dom.querySelectorAll(selector))
+            .map((elt: HTMLElement) => components().tooltip(elt))
     }
 
     initPageScrolled(): void {

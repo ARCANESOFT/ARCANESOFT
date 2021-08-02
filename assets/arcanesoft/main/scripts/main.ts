@@ -1,11 +1,14 @@
 import './vendors'
-import './helpers'
 import './components'
 
 import arcanesoft from './classes/arcanesoft'
 
-arcanesoft({
+const app = arcanesoft({
     vue: {
         rootContainer: '#arcanesoft',
     },
+})
+
+app.on('arcanesoft::started', () => {
+    app.bootComponents(document)
 })

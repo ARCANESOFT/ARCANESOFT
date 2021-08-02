@@ -1,5 +1,5 @@
-import { defineComponent } from 'vue'
-import Editor from '@toast-ui/editor'
+import { defineComponent, onMounted, ref } from 'vue'
+import Viewer from '@toast-ui/editor/dist/toastui-editor-viewer'
 
 export default defineComponent({
     name: 'v-markdown-viewer',
@@ -16,19 +16,26 @@ export default defineComponent({
         },
     },
 
-    mounted(): void {
-        const options = {
-            ...{
-                el: this.$refs.tuiViewer,
-                height: this.height,
-                initialValue: this.value,
-                viewer: true,
-            },
-        }
+    setup(props) {
+        const tuiViewerRef = ref<HTMLElement>()
+        const viewer = ref<Viewer>()
 
-        this.editor = Editor.factory(options)
+        onMounted((): void => {
+            const options = {
+                el: tuiViewerRef.value,
+                height: props.height,
+                initialValue: props.value,
+                viewer: true,
+            }
+
+            viewer.value = new Viewer(options)
+        })
+
+        return {
+            tuiViewerRef,
+        }
     },
 
-    template: `<div ref="tuiViewer"></div>`
+    template: `<div ref="tuiViewerRef"></div>`
 })
 
