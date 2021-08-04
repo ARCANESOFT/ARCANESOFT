@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e03e259608e243b663bdbf9408a3e422",
+    "content-hash": "619c95a92417991bd88d8af12a149262",
     "packages": [
         {
             "name": "arcanedev/agent",
@@ -1051,16 +1051,10 @@
         {
             "name": "arcanesoft/analytics",
             "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ARCANESOFT/Analytics.git",
-                "reference": "95797006f59be8263f2ae7365f724275bef8b455"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ARCANESOFT/Analytics/zipball/95797006f59be8263f2ae7365f724275bef8b455",
-                "reference": "95797006f59be8263f2ae7365f724275bef8b455",
-                "shasum": ""
+                "type": "path",
+                "url": "../Analytics",
+                "reference": "95797006f59be8263f2ae7365f724275bef8b455"
             },
             "require": {
                 "arcanedev/agent": "^9.0",
@@ -1071,7 +1065,6 @@
                 "orchestra/testbench": "^6.0",
                 "phpunit/phpunit": "^9.3"
             },
-            "default-branch": true,
             "type": "project",
             "extra": {
                 "laravel": {
@@ -1089,7 +1082,11 @@
                     "Arcanesoft\\Analytics\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Arcanesoft\\Analytics\\Tests\\": "tests/"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -1109,25 +1106,18 @@
                 "framework",
                 "laravel"
             ],
-            "support": {
-                "issues": "https://github.com/ARCANESOFT/Analytics/issues",
-                "source": "https://github.com/ARCANESOFT/Analytics/tree/master"
-            },
-            "time": "2021-06-09T10:22:14+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "arcanesoft/backups",
             "version": "dev-develop",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ARCANESOFT/Backups.git",
-                "reference": "2b1870f1c3d6924966e132d28abc99ccb864d452"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ARCANESOFT/Backups/zipball/2b1870f1c3d6924966e132d28abc99ccb864d452",
-                "reference": "2b1870f1c3d6924966e132d28abc99ccb864d452",
-                "shasum": ""
+                "type": "path",
+                "url": "../Backups",
+                "reference": "2b1870f1c3d6924966e132d28abc99ccb864d452"
             },
             "require": {
                 "arcanedev/laravel-backup": "^3.2",
@@ -1158,7 +1148,19 @@
                     "Arcanesoft\\Backups\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Arcanesoft\\Backups\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpunit"
+                ],
+                "test:dox": [
+                    "phpunit --testdox"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -1178,25 +1180,18 @@
                 "backups",
                 "database"
             ],
-            "support": {
-                "issues": "https://github.com/ARCANESOFT/Backups/issues",
-                "source": "https://github.com/ARCANESOFT/Backups/tree/develop"
-            },
-            "time": "2021-06-08T19:23:34+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "arcanesoft/blog",
             "version": "dev-develop",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ARCANESOFT/Blog.git",
-                "reference": "295e5e7275c4b073bd754c53d3b69143364bb842"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ARCANESOFT/Blog/zipball/295e5e7275c4b073bd754c53d3b69143364bb842",
-                "reference": "295e5e7275c4b073bd754c53d3b69143364bb842",
-                "shasum": ""
+                "type": "path",
+                "url": "../Blog",
+                "reference": "69df5869fc63641e4bae684c79764943bd7f2e51"
             },
             "require": {
                 "arcanedev/laravel-markdown": "~5.0",
@@ -1224,7 +1219,11 @@
                     "Arcanesoft\\Blog\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Arcanesoft\\Blog\\Tests\\": "tests/"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -1244,25 +1243,18 @@
                 "framework",
                 "laravel"
             ],
-            "support": {
-                "issues": "https://github.com/ARCANESOFT/Blog/issues",
-                "source": "https://github.com/ARCANESOFT/Blog/tree/develop"
-            },
-            "time": "2021-07-31T20:12:11+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "arcanesoft/foundation",
             "version": "dev-develop",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ARCANESOFT/Foundation.git",
-                "reference": "8e3041283735f0e76c224f7de293f1093d87e83a"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ARCANESOFT/Foundation/zipball/8e3041283735f0e76c224f7de293f1093d87e83a",
-                "reference": "8e3041283735f0e76c224f7de293f1093d87e83a",
-                "shasum": ""
+                "type": "path",
+                "url": "../Foundation",
+                "reference": "9cf3e6d77031beaa6a295bad297f899b1cfe4497"
             },
             "require": {
                 "arcanedev/agent": "^9.0",
@@ -1312,7 +1304,22 @@
                     "helpers.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Arcanesoft\\Foundation\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test:dox": [
+                    "phpunit --testdox --colors=always"
+                ],
+                "test:cov": [
+                    "phpunit --coverage-html coverage"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -1332,25 +1339,18 @@
                 "framework",
                 "laravel"
             ],
-            "support": {
-                "issues": "https://github.com/ARCANESOFT/Foundation/issues",
-                "source": "https://github.com/ARCANESOFT/Foundation/tree/develop"
-            },
-            "time": "2021-07-31T20:17:01+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "arcanesoft/media",
             "version": "dev-develop",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ARCANESOFT/Media.git",
-                "reference": "280da8e2be841791fe0f758816e5d9849c0f3b7c"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ARCANESOFT/Media/zipball/280da8e2be841791fe0f758816e5d9849c0f3b7c",
-                "reference": "280da8e2be841791fe0f758816e5d9849c0f3b7c",
-                "shasum": ""
+                "type": "path",
+                "url": "../Media",
+                "reference": "280da8e2be841791fe0f758816e5d9849c0f3b7c"
             },
             "require": {
                 "arcanesoft/foundation": "^4.0",
@@ -1382,7 +1382,22 @@
                     "Arcanesoft\\Media\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Arcanesoft\\Media\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test:dox": [
+                    "phpunit --testdox --colors=always"
+                ],
+                "test:cov": [
+                    "phpunit --coverage-html coverage"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -1406,25 +1421,18 @@
                 "media-manager",
                 "media-viewer"
             ],
-            "support": {
-                "issues": "https://github.com/ARCANESOFT/Media/issues",
-                "source": "https://github.com/ARCANESOFT/Media/tree/develop"
-            },
-            "time": "2021-07-30T00:41:59+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "arcanesoft/passport",
             "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ARCANESOFT/Passport.git",
-                "reference": "dcb7de2586c67ac7a3f3422fa64387b367921ece"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ARCANESOFT/Passport/zipball/dcb7de2586c67ac7a3f3422fa64387b367921ece",
-                "reference": "dcb7de2586c67ac7a3f3422fa64387b367921ece",
-                "shasum": ""
+                "type": "path",
+                "url": "../Passport",
+                "reference": "dcb7de2586c67ac7a3f3422fa64387b367921ece"
             },
             "require": {
                 "arcanesoft/foundation": "^4.0",
@@ -1436,7 +1444,6 @@
                 "orchestra/testbench": "^6.0",
                 "phpunit/phpunit": "^9.3"
             },
-            "default-branch": true,
             "type": "project",
             "extra": {
                 "laravel": {
@@ -1454,7 +1461,11 @@
                     "Arcanesoft\\Passport\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Arcanesoft\\Passport\\Tests\\": "tests/"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -1473,25 +1484,18 @@
                 "laravel",
                 "passport"
             ],
-            "support": {
-                "issues": "https://github.com/ARCANESOFT/Passport/issues",
-                "source": "https://github.com/ARCANESOFT/Passport/tree/master"
-            },
-            "time": "2021-06-09T10:23:31+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "arcanesoft/seo",
             "version": "dev-develop",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ARCANESOFT/SEO.git",
-                "reference": "468f5f15e3486af83fa9ec1f4a66029e2b03693b"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ARCANESOFT/SEO/zipball/468f5f15e3486af83fa9ec1f4a66029e2b03693b",
-                "reference": "468f5f15e3486af83fa9ec1f4a66029e2b03693b",
-                "shasum": ""
+                "type": "path",
+                "url": "../Seo",
+                "reference": "468f5f15e3486af83fa9ec1f4a66029e2b03693b"
             },
             "require": {
                 "arcanesoft/foundation": "^4.0",
@@ -1520,7 +1524,22 @@
                     "Arcanesoft\\Seo\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Arcanesoft\\Seo\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test:dox": [
+                    "phpunit --testdox --colors=always"
+                ],
+                "test:cov": [
+                    "phpunit --coverage-html coverage"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -1539,25 +1558,18 @@
                 "laravel",
                 "seo"
             ],
-            "support": {
-                "issues": "https://github.com/ARCANESOFT/SEO/issues",
-                "source": "https://github.com/ARCANESOFT/SEO/tree/develop"
-            },
-            "time": "2021-05-26T13:38:56+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "arcanesoft/shop",
             "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ARCANESOFT/Shop.git",
-                "reference": "2f41b00f319eae5b5cd91f979d2ac122a2f3c13a"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ARCANESOFT/Shop/zipball/2f41b00f319eae5b5cd91f979d2ac122a2f3c13a",
-                "reference": "2f41b00f319eae5b5cd91f979d2ac122a2f3c13a",
-                "shasum": ""
+                "type": "path",
+                "url": "../Shop",
+                "reference": "2f41b00f319eae5b5cd91f979d2ac122a2f3c13a"
             },
             "require": {
                 "arcanesoft/foundation": "^4.0",
@@ -1569,7 +1581,6 @@
                 "orchestra/testbench-core": "^6.0",
                 "phpunit/phpunit": "^9.3.3"
             },
-            "default-branch": true,
             "type": "project",
             "extra": {
                 "laravel": {
@@ -1587,7 +1598,11 @@
                     "Arcanesoft\\Shop\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Arcanesoft\\Shop\\Tests\\": "tests/"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -1607,11 +1622,10 @@
                 "laravel",
                 "shop"
             ],
-            "support": {
-                "issues": "https://github.com/ARCANESOFT/Shop/issues",
-                "source": "https://github.com/ARCANESOFT/Shop/tree/master"
-            },
-            "time": "2021-07-29T21:39:44+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "asm89/stack-cors",
@@ -2890,16 +2904,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.52.0",
+            "version": "v8.53.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "8fe9877d52e25f8aed36c51734e5a8510be967e6"
+                "reference": "4b2e3e7317da82dd9f5b88d477abd93444748b43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/8fe9877d52e25f8aed36c51734e5a8510be967e6",
-                "reference": "8fe9877d52e25f8aed36c51734e5a8510be967e6",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/4b2e3e7317da82dd9f5b88d477abd93444748b43",
+                "reference": "4b2e3e7317da82dd9f5b88d477abd93444748b43",
                 "shasum": ""
             },
             "require": {
@@ -2972,7 +2986,7 @@
                 "illuminate/view": "self.version"
             },
             "require-dev": {
-                "aws/aws-sdk-php": "^3.155",
+                "aws/aws-sdk-php": "^3.186.4",
                 "doctrine/dbal": "^2.6|^3.0",
                 "filp/whoops": "^2.8",
                 "guzzlehttp/guzzle": "^6.5.5|^7.0.1",
@@ -2985,7 +2999,7 @@
                 "symfony/cache": "^5.1.4"
             },
             "suggest": {
-                "aws/aws-sdk-php": "Required to use the SQS queue driver, DynamoDb failed job storage and SES mail driver (^3.155).",
+                "aws/aws-sdk-php": "Required to use the SQS queue driver, DynamoDb failed job storage and SES mail driver (^3.186.4).",
                 "brianium/paratest": "Required to run tests in parallel (^6.0).",
                 "doctrine/dbal": "Required to rename columns and drop SQLite columns (^2.6|^3.0).",
                 "ext-ftp": "Required to use the Flysystem FTP driver.",
@@ -3054,7 +3068,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-07-27T13:03:29+00:00"
+            "time": "2021-08-03T14:36:33+00:00"
         },
         {
             "name": "laravel/passport",
@@ -3333,41 +3347,43 @@
         },
         {
             "name": "lcobucci/jwt",
-            "version": "4.1.4",
+            "version": "4.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lcobucci/jwt.git",
-                "reference": "71cf170102c8371ccd933fa4df6252086d144de6"
+                "reference": "ae4165a76848e070fdac691e773243d10cd06ce1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/71cf170102c8371ccd933fa4df6252086d144de6",
-                "reference": "71cf170102c8371ccd933fa4df6252086d144de6",
+                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/ae4165a76848e070fdac691e773243d10cd06ce1",
+                "reference": "ae4165a76848e070fdac691e773243d10cd06ce1",
                 "shasum": ""
             },
             "require": {
-                "ext-hash": "*",
-                "ext-json": "*",
                 "ext-mbstring": "*",
                 "ext-openssl": "*",
-                "ext-sodium": "*",
                 "lcobucci/clock": "^2.0",
                 "php": "^7.4 || ^8.0"
             },
             "require-dev": {
-                "infection/infection": "^0.21",
+                "infection/infection": "^0.20",
                 "lcobucci/coding-standard": "^6.0",
-                "mikey179/vfsstream": "^1.6.7",
-                "phpbench/phpbench": "^1.0@alpha",
+                "mikey179/vfsstream": "^1.6",
+                "phpbench/phpbench": "^0.17",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpstan": "^0.12",
                 "phpstan/phpstan-deprecation-rules": "^0.12",
                 "phpstan/phpstan-phpunit": "^0.12",
                 "phpstan/phpstan-strict-rules": "^0.12",
                 "phpunit/php-invoker": "^3.1",
-                "phpunit/phpunit": "^9.5"
+                "phpunit/phpunit": "^9.4"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.0-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Lcobucci\\JWT\\": "src"
@@ -3391,7 +3407,7 @@
             ],
             "support": {
                 "issues": "https://github.com/lcobucci/jwt/issues",
-                "source": "https://github.com/lcobucci/jwt/tree/4.1.4"
+                "source": "https://github.com/lcobucci/jwt/tree/4.0.3"
             },
             "funding": [
                 {
@@ -3403,7 +3419,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-03-23T23:53:08+00:00"
+            "time": "2021-03-23T23:47:22+00:00"
         },
         {
             "name": "league/commonmark",
@@ -3804,22 +3820,23 @@
         },
         {
             "name": "league/oauth1-client",
-            "version": "v1.9.1",
+            "version": "1.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/oauth1-client.git",
-                "reference": "19a3ce488bb1547c906209e8293199ec34eaa5b1"
+                "reference": "6247ffbf6b74fcc7f21313315b79e9b2560e68b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/oauth1-client/zipball/19a3ce488bb1547c906209e8293199ec34eaa5b1",
-                "reference": "19a3ce488bb1547c906209e8293199ec34eaa5b1",
+                "url": "https://api.github.com/repos/thephpleague/oauth1-client/zipball/6247ffbf6b74fcc7f21313315b79e9b2560e68b0",
+                "reference": "6247ffbf6b74fcc7f21313315b79e9b2560e68b0",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-openssl": "*",
                 "guzzlehttp/guzzle": "^6.0|^7.0",
+                "guzzlehttp/psr7": "^1.7|^2.0",
                 "php": ">=7.1||>=8.0"
             },
             "require-dev": {
@@ -3873,9 +3890,9 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/oauth1-client/issues",
-                "source": "https://github.com/thephpleague/oauth1-client/tree/v1.9.1"
+                "source": "https://github.com/thephpleague/oauth1-client/tree/1.9.2"
             },
-            "time": "2021-07-07T22:54:46+00:00"
+            "time": "2021-08-03T23:29:01+00:00"
         },
         {
             "name": "league/oauth2-server",
@@ -9068,16 +9085,16 @@
         },
         {
             "name": "maximebf/debugbar",
-            "version": "v1.17.0",
+            "version": "v1.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maximebf/php-debugbar.git",
-                "reference": "4ef8e359d9fffbfbce26218ee36f196453a4dd7d"
+                "reference": "0a3532556be0145603f8a9de23e76dc28eed7054"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/4ef8e359d9fffbfbce26218ee36f196453a4dd7d",
-                "reference": "4ef8e359d9fffbfbce26218ee36f196453a4dd7d",
+                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/0a3532556be0145603f8a9de23e76dc28eed7054",
+                "reference": "0a3532556be0145603f8a9de23e76dc28eed7054",
                 "shasum": ""
             },
             "require": {
@@ -9127,9 +9144,9 @@
             ],
             "support": {
                 "issues": "https://github.com/maximebf/php-debugbar/issues",
-                "source": "https://github.com/maximebf/php-debugbar/tree/v1.17.0"
+                "source": "https://github.com/maximebf/php-debugbar/tree/v1.17.1"
             },
-            "time": "2021-07-27T05:47:57+00:00"
+            "time": "2021-08-01T09:19:02+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -11015,7 +11032,6 @@
                     "type": "github"
                 }
             ],
-            "abandoned": true,
             "time": "2020-09-28T06:45:17+00:00"
         },
         {
@@ -11269,5 +11285,5 @@
         "ext-json": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.0.0"
 }

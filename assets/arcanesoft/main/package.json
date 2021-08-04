@@ -18,7 +18,7 @@
         "@toast-ui/editor": "^3.0.0",
         "autosize": "^4.0.2",
         "axios": "^0.21",
-        "bootstrap": "^5.0.0",
+        "bootstrap": "^5.1",
         "chart.js": "^2.8",
         "flatpickr": "^4.6",
         "lodash-es": "^4.17",

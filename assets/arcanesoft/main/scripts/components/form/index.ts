@@ -7,7 +7,8 @@ type FormOptions = {
 }
 
 class Form extends Component {
-    public action(action?: string): this | string | null {
+    public action(action?: string): this | string | null
+    {
         return action
             ? this.setAction(action)
             : this.getAction();
@@ -16,14 +17,16 @@ class Form extends Component {
     /**
      * Get the form's action attribute.
      */
-    public getAction(): string | null {
+    public getAction(): string | null
+    {
         return this.elt().getAttribute('action')
     }
 
     /**
      * Set the form's action attribute.
      */
-    public setAction(action: string): this {
+    public setAction(action: string): this
+    {
         this.elt().setAttribute('action', action)
 
         return this
@@ -32,12 +35,13 @@ class Form extends Component {
     /**
      * Submit the form.
      */
-    public submit(): void {
-        (<HTMLFormElement> this.elt()).submit()
+    public submit(): void
+    {
+        (this.elt() as HTMLFormElement).submit()
     }
 
-    public submitButton(selector?: string, options?: LoadingButtonOptions): SubmitButton {
-
+    public submitButton(selector?: string, options?: LoadingButtonOptions): SubmitButton
+    {
         return new SubmitButton(
             this.elt().querySelector(selector || this.options['submitBtnSelector'] || 'button[type="submit"]'),
             options
@@ -47,13 +51,15 @@ class Form extends Component {
     /**
      * Register an event listener.
      */
-    public on(event: string, callback: EventListenerOrEventListenerObject): this {
+    public on(event: string, callback: EventListenerOrEventListenerObject): this
+    {
         this.elt().addEventListener(event, callback)
 
         return this
     }
 
-    public onSubmit(method, onSuccess: Function) {
+    public onSubmit(method, onSuccess: Function)
+    {
         return this.on('submit', (event) => {
             event.preventDefault()
 
