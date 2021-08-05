@@ -1,4 +1,5 @@
 {
+    // https://www.typescriptlang.org/tsconfig
     "compilerOptions": {
         "module": "es6",
         "target": "es6",

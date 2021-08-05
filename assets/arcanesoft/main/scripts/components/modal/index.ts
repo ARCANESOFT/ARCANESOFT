@@ -1,4 +1,3 @@
-// import { Modal as BaseModal } from 'bootstrap/dist/js/bootstrap.esm'
 import BaseModal from 'bootstrap/js/src/modal'
 
 const EVENT_KEY = `.bs.modal`

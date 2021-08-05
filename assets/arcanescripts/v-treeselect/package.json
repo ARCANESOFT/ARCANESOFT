@@ -1,0 +1,14 @@
+{
+    "name": "@arcanescripts/v-treeselect",
+    "version": "1.0.0",
+    "private": true,
+    "main": "scripts/index.ts",
+    "dependencies": {
+        "vue": "^3.0"
+    },
+    "devDependencies": {
+        "@types/node": "^12.7",
+        "ts-loader": "^8.0.4",
+        "typescript": "^4.0.3"
+    }
+}

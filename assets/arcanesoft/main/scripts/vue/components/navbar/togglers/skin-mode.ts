@@ -1,52 +1,24 @@
-import { defineComponent, onMounted, ref, computed } from 'vue'
-import tap from '@arcanesoft/core/src/functions/tap'
-import arcanesoft from '../../../../helpers/arcanesoft'
-import { SKIN_MODE } from '../../../../emuns'
-
-const EVENT_CLASS = 'Arcanesoft\\Foundation\\Core\\Events\\UI\\SkinModeToggled'
+import { computed, defineComponent } from 'vue'
+import skinMode from '../../../store/modules/skin-mode'
 
 export default defineComponent({
     name: 'v-skin-mode-toggler',
 
     setup() {
-        const selected = ref(null)
+        const { isDarkMode, toggleMode } = skinMode()
 
-        onMounted((): void => {
-            selected.value = document.body.dataset.skinMode || SKIN_MODE.LIGHT
-        })
-
-        function toggle(): void {
-            selected.value = (selected.value === SKIN_MODE.LIGHT) ? SKIN_MODE.DARK : SKIN_MODE.LIGHT
-
-            save()
-        }
-
-        function save(): void {
-            const mode = selected.value
-
-            document.body.dataset.skinMode = mode
-
-            tap(arcanesoft(), function (arcanesoft) {
-                arcanesoft.request().post('/admin/api/events', {
-                    class: EVENT_CLASS,
-                    options: {mode},
-                }).then()
-
-                arcanesoft.emit('foundation.ui.skin', {mode})
-            })
-        }
+        const iconClass = computed(
+            (): string => isDarkMode.value ? 'far fa-fw fa-sun' : 'far fa-fw fa-moon'
+        )
 
         return {
-            selected,
-            toggle,
-            iconClass: computed(
-                (): string => selected.value === SKIN_MODE.DARK ? 'far fa-fw fa-sun' : 'far fa-fw fa-moon'
-            ),
+            toggleMode,
+            iconClass,
         }
     },
 
     template: `
-        <a class="navbar-link-item navbar-link-icon" @click.prevent="toggle">
+        <a @click.prevent="toggleMode" class="navbar-link-item navbar-link-icon">
             <i :class="iconClass"></i>
         </a>
     `,

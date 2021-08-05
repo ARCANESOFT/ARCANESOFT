@@ -3,8 +3,8 @@
 @each $mode, $skin-colors in $skins {
     @include skin-mode($mode) {
         // COLORS
-        --skin-body-bg-color:             #{map-get($skin-colors, "body-bg-color")};
-        --skin-body-font-color:           #{map-get($skin-colors, "body-font-color")};
+        --#{$variable-prefix}body-bg:     #{map-get($skin-colors, "body-bg-color")};
+        --#{$variable-prefix}body-color:  #{map-get($skin-colors, "body-font-color")};
         --skin-link-color:                #{map-get($skin-colors, "link-color")};
 
         // Surface
@@ -28,8 +28,8 @@
         --skin-sidebar-link-active-color: #{map-get($skin-colors, "sidebar-link-active-color")};
 
         // INPUT
-        --skin-input-bg-color:            var(--skin-body-bg-color);
-        --skin-input-font-color:          var(--skin-body-font-color);
+        --skin-input-bg:                  #{map-get($skin-colors, "input-bg")};
+        --skin-input-font-color:          #{map-get($skin-colors, "body-font-color")};
         --skin-input-border-color:        #{map-get($skin-colors, "input-border-color")};
         --skin-input-placeholder-color:   #{map-get($skin-colors, "input-placeholder-color")};
 

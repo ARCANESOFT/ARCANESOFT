@@ -3,6 +3,7 @@ import { Editor, EditorOptions } from '@toast-ui/editor'
 import { EditorType, EventMap, PreviewStyle } from '@toast-ui/editor/types/editor'
 import arcanesoft from '../../../../helpers/arcanesoft'
 import { SKIN_MODE } from '../../../../emuns'
+import skinMode from '../../../store/modules/skin-mode'
 import defaultOptions from './config'
 
 export default defineComponent({
@@ -40,6 +41,7 @@ export default defineComponent({
         const editor = ref<Editor|null>(null)
         const markdown = ref(null)
         const arc = arcanesoft()
+        const { isDarkMode } = skinMode()
 
         const editorEvents: EventMap = {
             load: (editor) => {
@@ -69,6 +71,7 @@ export default defineComponent({
                     height: props.height,
                     initialValue: props.value || '',
                     events: editorEvents,
+                    theme: isDarkMode.value ? 'dark' : 'default'
                 }
             }
 
@@ -88,16 +91,13 @@ export default defineComponent({
                 reader.readAsDataURL(blob)
             })
 
-            arc.on('foundation.ui.skin', ({mode}) => {
+            arc.on('foundation.ui.skin', ({mode}): void => {
                 const elt = tuiEditorRef.value.querySelector('div.toastui-editor-defaultUI')
-                if (mode === SKIN_MODE.DARK) {
-                    if ( ! elt.classList.contains('toastui-editor-dark'))
-                        elt.classList.add('toastui-editor-dark')
-                }
-                else if (mode === SKIN_MODE.LIGHT) {
-                    if (elt.classList.contains('toastui-editor-dark'))
-                        elt.classList.remove('toastui-editor-dark')
-                }
+                if (mode === SKIN_MODE.LIGHT)
+                    return elt.classList.remove('toastui-editor-dark')
+
+                if ( ! elt.classList.contains('toastui-editor-dark'))
+                    elt.classList.add('toastui-editor-dark')
             })
         })
 

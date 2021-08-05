@@ -51,6 +51,7 @@
 @import "components/navbar";
 @import "components/offcanvas";
 @import "components/pagination";
+@import "components/placeholders";
 @import "components/popover";
 @import "components/progress";
 @import "components/spinners";
@@ -68,7 +69,7 @@
 @import "components/statuses";
 
 // VUE
-@import "vue/index";
+@import "vue";
 
 // 7- Page
 @import "pages/auth";

@@ -1,4 +1,4 @@
-// import './lodash'
+import './lodash'
 import './request'
 import './popper'
 import './twitter-bootstrap'
@@ -8,11 +8,6 @@ import './twitter-bootstrap'
 
 window['moment'] = require('moment-timezone')
 
-// TuiEditor
-//-----------------------
-
-window['TuiEditor'] = require('@toast-ui/editor')
-
 // Plugins Container
 //----------------------------------------
 
@@ -21,7 +16,7 @@ import flatpickr from './flatpickr'
 import autosize from './autosize'
 
 window['plugins'] = {
+    autosize,
     chart,
     flatpickr,
-    autosize,
 }

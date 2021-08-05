@@ -23,7 +23,7 @@ const app = createApp({
 })
 
 // Config
-app.config.isCustomElement = tag => tag.startsWith('x-')
+app.config.compilerOptions.isCustomElement = tag => tag.startsWith('x-')
 
 // Plugins
 import plugins from './plugins'

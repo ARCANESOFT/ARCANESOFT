@@ -20,12 +20,9 @@ mix.setPublicPath(options.paths.assets);
 mix.setResourceRoot('../');
 mix.disableNotifications();
 mix.webpackConfig(require('./webpack.config'));
-// mix.alias({
-//     vue$: path.join(__dirname, 'node_modules/vue/dist/vue.esm-bundler.js'),
-// });
+mix.version();
 
 if (mix.inProduction()) {
-    mix.version();
     mix.options({
         cssNano: {
             discardComments: {
@@ -34,8 +31,9 @@ if (mix.inProduction()) {
         },
     });
 }
-else
+else {
     mix.sourceMaps();
+}
 
 /*--------------------------------------------------------------------------
  | Run Mixes

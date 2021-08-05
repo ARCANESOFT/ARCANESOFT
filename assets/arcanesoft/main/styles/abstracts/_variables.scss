@@ -2,6 +2,8 @@
  * This file contains all application-wide Sass variables.
  */
 
+$variable-prefix: bs-;
+
 // PATHS
 
 $base-path:     "..";
@@ -27,7 +29,6 @@ $grid-breakpoints: (
 );
 
 $body-bg:    #E9ECEF;
-$body-color: var(--skin-body-font-color);
 $link-color: $gray-600;
 
 // FONTS
@@ -149,7 +150,7 @@ $tooltip-border-radius: 0.375rem;
 
 // FORMS
 
-$input-bg:                var(--skin-input-bg-color);
+$input-bg:                var(--skin-input-bg);
 $input-color:             var(--skin-input-font-color);
 $input-border-radius:     $border-radius;
 $input-border-color:      var(--skin-input-border-color);
@@ -164,8 +165,8 @@ $form-file-button-bg:     $gray-200; // TODO: Fix the $color2: var(--skin-input-
 $dropdown-bg:             var(--skin-surface-1-bg-color);
 $dropdown-border-color:   $border-color;
 $dropdown-divider-bg:     $border-color;
-$dropdown-link-color:     $body-color;
-$dropdown-header-color:   $body-color;
+$dropdown-link-color:     var(--#{$variable-prefix}body-bg);
+$dropdown-header-color:   var(--#{$variable-prefix}body-bg);
 
 // MEASUREMENT AND PROPERTY VARIABLES
 
@@ -201,7 +202,7 @@ $nav-tabs-border-color:             #EBEDF2;
 $nav-tabs-link-bg:                  #F6F8FA;
 $nav-tabs-link-color:               $black;
 $nav-tabs-link-hover-border-color:  $nav-tabs-border-color $nav-tabs-border-color $nav-tabs-border-color;
-$nav-tabs-link-active-color:        $body-color;
+$nav-tabs-link-active-color:        var(--#{$variable-prefix}body-bg);
 $nav-tabs-link-active-bg:           $white;
 $nav-tabs-link-active-border-color: $nav-tabs-border-color $nav-tabs-border-color $nav-tabs-link-active-bg;
 $nav-pills-custom-bg:               #FCFCFD;
@@ -276,6 +277,7 @@ $skins: (
         heading-text-color:           $gray-900,
         heading-muted-color:          $gray-600,
 
+        input-bg:                     #E9ECEF,
         input-border-color:           $gray-400,
         input-placeholder-color:      $gray-600,
 
@@ -312,6 +314,7 @@ $skins: (
         heading-text-color:           $gray-200,
         heading-muted-color:          $gray-500,
 
+        input-bg:                     #121212,
         input-border-color:           $gray-900,
         input-placeholder-color:      $gray-600,
 

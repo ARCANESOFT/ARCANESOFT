@@ -1,3 +1,3 @@
-import * as lodash from 'lodash'
-
-window['_'] = lodash
+// import * as lodash from 'lodash'
+//
+// window['_'] = lodash
