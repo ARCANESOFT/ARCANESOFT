@@ -220,16 +220,16 @@
         },
         {
             "name": "arcanedev/laravel-active",
-            "version": "4.0.1",
+            "version": "4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ARCANEDEV/LaravelActive.git",
-                "reference": "3aff22ff6910e14ffc71b9b22ce5be89389f3b89"
+                "reference": "d02fd94e59051b08f74f98708ac90376cdd00f7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ARCANEDEV/LaravelActive/zipball/3aff22ff6910e14ffc71b9b22ce5be89389f3b89",
-                "reference": "3aff22ff6910e14ffc71b9b22ce5be89389f3b89",
+                "url": "https://api.github.com/repos/ARCANEDEV/LaravelActive/zipball/d02fd94e59051b08f74f98708ac90376cdd00f7d",
+                "reference": "d02fd94e59051b08f74f98708ac90376cdd00f7d",
                 "shasum": ""
             },
             "require": {
@@ -237,7 +237,8 @@
                 "php": "^7.3|^8.0"
             },
             "require-dev": {
-                "orchestra/testbench": "^6.4",
+                "laravel/framework": "^8.0",
+                "orchestra/testbench-core": "^6.4",
                 "phpunit/phpunit": "^9.3.3"
             },
             "type": "library",
@@ -283,9 +284,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ARCANEDEV/LaravelActive/issues",
-                "source": "https://github.com/ARCANEDEV/LaravelActive/tree/4.0.1"
+                "source": "https://github.com/ARCANEDEV/LaravelActive/tree/4.0.2"
             },
-            "time": "2020-11-30T17:50:41+00:00"
+            "time": "2021-08-06T00:13:15+00:00"
         },
         {
             "name": "arcanedev/laravel-backup",
@@ -1254,7 +1255,7 @@
             "dist": {
                 "type": "path",
                 "url": "../Foundation",
-                "reference": "9cf3e6d77031beaa6a295bad297f899b1cfe4497"
+                "reference": "00066a67f34fc45cd0a04ae2ea6b4c352c01ce53"
             },
             "require": {
                 "arcanedev/agent": "^9.0",
@@ -5687,16 +5688,16 @@
         },
         {
             "name": "ramsey/collection",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/collection.git",
-                "reference": "4d85fbcd9d2fb1cfd6f81b2f00e687b1c6056b3a"
+                "reference": "eaca1dc1054ddd10cbd83c1461907bee6fb528fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/collection/zipball/4d85fbcd9d2fb1cfd6f81b2f00e687b1c6056b3a",
-                "reference": "4d85fbcd9d2fb1cfd6f81b2f00e687b1c6056b3a",
+                "url": "https://api.github.com/repos/ramsey/collection/zipball/eaca1dc1054ddd10cbd83c1461907bee6fb528fa",
+                "reference": "eaca1dc1054ddd10cbd83c1461907bee6fb528fa",
                 "shasum": ""
             },
             "require": {
@@ -5739,7 +5740,7 @@
                     "homepage": "https://benramsey.com"
                 }
             ],
-            "description": "A PHP 7.2+ library for representing and manipulating collections.",
+            "description": "A PHP library for representing and manipulating collections.",
             "keywords": [
                 "array",
                 "collection",
@@ -5750,7 +5751,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/collection/issues",
-                "source": "https://github.com/ramsey/collection/tree/1.2.0"
+                "source": "https://github.com/ramsey/collection/tree/1.2.1"
             },
             "funding": [
                 {
@@ -5762,7 +5763,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-08-05T14:54:37+00:00"
+            "time": "2021-08-06T03:41:06+00:00"
         },
         {
             "name": "ramsey/uuid",
