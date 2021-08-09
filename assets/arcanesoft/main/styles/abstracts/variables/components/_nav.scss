@@ -1,0 +1,15 @@
+// TABS
+
+$nav-tabs-border-color:             #EBEDF2;
+$nav-tabs-link-bg:                  #F6F8FA;
+$nav-tabs-link-color:               $black;
+$nav-tabs-link-hover-border-color:  $nav-tabs-border-color $nav-tabs-border-color $nav-tabs-border-color;
+$nav-tabs-link-active-color:        var(--#{$variable-prefix}body-bg);
+$nav-tabs-link-active-bg:           $white;
+$nav-tabs-link-active-border-color: $nav-tabs-border-color $nav-tabs-border-color $nav-tabs-link-active-bg;
+$nav-pills-custom-bg:               #FCFCFD;
+
+// NAVS
+
+$nav-link-padding-y:                0.7rem;
+$nav-link-padding-x:                1.5rem;

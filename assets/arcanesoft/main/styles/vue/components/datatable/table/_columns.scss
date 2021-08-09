@@ -1,5 +1,6 @@
 .v-dt-column {
-    @extend .fw-light, .text-uppercase, .text-muted;
+    color: var(--bs-gray-500);
+    text-transform: uppercase;
 
     &.v-dt-column-sortable {
         position: relative;

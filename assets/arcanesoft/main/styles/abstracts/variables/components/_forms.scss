@@ -1,0 +1,11 @@
+// FORMS
+
+$input-bg:                var(--skin-input-bg);
+$input-color:             var(--skin-input-font-color);
+$input-border-radius:     $border-radius;
+$input-border-color:      var(--skin-input-border-color);
+$input-placeholder-color: var(--skin-input-placeholder-color);
+$input-group-addon-bg:    var(--skin-input-bg-color);
+$input-disabled-bg:       transparent;
+
+$form-file-button-bg:     $gray-200; // TODO: Fix the $color2: var(--skin-input-bg-color) is not a color.

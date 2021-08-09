@@ -1,11 +1,14 @@
 import { createApp } from 'vue'
-import request from '../helpers/request'
+import arcanesoft from '../helpers/arcanesoft'
 
 // Creating the Vue App
+//------------------------------------
+
 const app = createApp({
     setup() {
         const logout = (url: string): void => {
-            request()
+            arcanesoft()
+                .request()
                 .delete(url)
                 .then((response) => response.data.redirect)
                 .then((redirectUrl) => {
@@ -23,9 +26,13 @@ const app = createApp({
 })
 
 // Config
+//------------------------------------
+
 app.config.compilerOptions.isCustomElement = tag => tag.startsWith('x-')
 
 // Plugins
+//------------------------------------
+
 import plugins from './plugins'
 
 plugins.forEach((plugin) => {
@@ -33,6 +40,8 @@ plugins.forEach((plugin) => {
 })
 
 // Components
+//------------------------------------
+
 import components from './components'
 
 components.forEach((component) => {
