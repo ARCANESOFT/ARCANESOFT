@@ -14,10 +14,11 @@
     ],
     "require": {
         "php": "^7.3|^8.0",
+        "laravel/sanctum": "^2.11",
         "arcanedev/support": "^8.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^6.0",
+        "orchestra/testbench-core": "^6.0",
         "phpunit/phpunit": "^9.3",
         "zircote/swagger-php": "^3.1"
     },

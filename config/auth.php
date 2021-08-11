@@ -17,7 +17,6 @@ return [
     /* -----------------------------------------------------------------
      |  Authentication Guards
      | -----------------------------------------------------------------
-     |  Supported drivers: "session", "token"
      */
 
     'guards' => [
@@ -29,12 +28,6 @@ return [
         Guard::WEB_ADMINISTRATOR => [
             'driver'   => 'session',
             'provider' => 'administrators',
-        ],
-
-        'api'   => [
-            'driver'   => 'token',
-            'provider' => 'users',
-            'hash'     => false,
         ],
     ],
 

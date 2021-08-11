@@ -23,5 +23,8 @@ class ApiRoutes extends AbstractRouteRegistrar
     {
         $this->get('/example', [ExampleController::class, 'index'])
              ->name('example.index');
+
+        $this->middleware('auth:sanctum')
+             ->get('/user', [ExampleController::class, 'user']);
     }
 }

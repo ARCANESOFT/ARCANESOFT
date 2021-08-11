@@ -9,7 +9,7 @@ use Arcanedev\Support\Routing\RouteRegistrar;
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class AbstractRouteRegistrar extends RouteRegistrar
+abstract class AbstractRouteRegistrar extends RouteRegistrar
 {
     //
 }

@@ -15,10 +15,9 @@
         "arcanesoft/passport": "@dev",
         "arcanesoft/seo": "@dev",
         "arcanesoft/shop": "@dev",
-        "fideloper/proxy": "^4.4.1",
         "fruitcake/laravel-cors": "^2.0.3",
         "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^8.51",
+        "laravel/framework": "^8.54",
         "laravel/tinker": "^2.5",
         "modules/account": "@dev",
         "modules/api": "@dev",
@@ -30,7 +29,7 @@
         "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.4.2",
         "modules/demo": "@dev",
-        "nunomaduro/collision": "^5.0",
+        "nunomaduro/collision": "^5.6",
         "phpunit/phpunit": "^9.3.3"
     },
     "autoload": {

@@ -6,6 +6,7 @@ use Arcanesoft\Foundation\Authorization\Models\User as Authenticatable;
 use Authentication\Notifications\VerifyEmailNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+//use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Class     User
@@ -19,6 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail
      | -----------------------------------------------------------------
      */
 
+//    use HasApiTokens;
     use HasFactory;
 
     /* -----------------------------------------------------------------
