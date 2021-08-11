@@ -4,6 +4,8 @@
     "private": true,
     "main": "scripts/index.ts",
     "dependencies": {
+        "fuse.js": "^6.4.6",
+        "lodash-es": "^4.17.21",
         "vue": "^3.0"
     },
     "devDependencies": {

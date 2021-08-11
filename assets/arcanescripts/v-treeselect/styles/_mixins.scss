@@ -1,0 +1,79 @@
+@mixin clickable {
+    cursor: pointer;
+}
+
+@mixin inputtable {
+    cursor: text;
+}
+
+@mixin forbidden {
+    cursor: not-allowed;
+}
+
+@mixin reset-cursor {
+    cursor: default;
+}
+
+@mixin rounded {
+    border-radius: 50%;
+}
+
+@mixin border-radius-top($size) {
+    border-top-left-radius: $size;
+    border-top-right-radius: $size;
+}
+
+@mixin border-radius-bottom($size) {
+    border-bottom-left-radius: $size;
+    border-bottom-right-radius: $size;
+}
+
+@mixin text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@mixin horizontal-padding($value) {
+    padding-left: $value;
+    padding-right: $value;
+}
+
+@mixin vertical-padding($value) {
+    padding-top: $value;
+    padding-bottom: $value;
+}
+
+@mixin icon {
+    display: block;
+    margin: auto;
+}
+
+@mixin row {
+    @include horizontal-padding($treeselect-padding);
+
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+@mixin cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+@mixin wide-cell {
+    @include cell;
+    @include horizontal-padding($treeselect-padding);
+    @include text-truncate;
+
+    width: $treeselect-wide-cell-width;
+}
+
+@mixin narrow-cell() {
+    @include cell;
+
+    width: $treeselect-narrow-cell-width;
+    text-align: center;
+    line-height: 0;
+}

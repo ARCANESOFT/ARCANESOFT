@@ -1,0 +1,1 @@
+export { onLeftClick } from './onLeftClick'

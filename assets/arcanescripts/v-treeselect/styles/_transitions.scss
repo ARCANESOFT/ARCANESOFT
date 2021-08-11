@@ -1,0 +1,55 @@
+/**
+ * Transitions
+ */
+
+.v-treeselect__multi-value-item--transition {
+    &-enter-active,
+    &-leave-active {
+        transition-duration: $treeselect-transition-duration;
+        transition-property: transform, opacity;
+    }
+
+    &-enter-active {
+        //transition-timing-function: $ease-out-circ;
+    }
+
+    &-leave-active {
+        //transition-timing-function: $ease-out-cubic;
+        // trigger animation when element is removed
+        position: absolute;
+    }
+
+    &-enter,
+    &-leave-to {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+
+    &-move {
+        //transition: $treeselect-transition-duration transform $ease-out-quart;
+    }
+}
+
+.v-treeselect__menu--transition {
+    &-enter-active,
+    &-leave-active {
+        // to be overriden
+    }
+
+    &-enter,
+    &-leave-to {
+        // to be overriden
+    }
+}
+
+.v-treeselect__list--transition {
+    &-enter-active,
+    &-leave-active {
+        // to be overriden
+    }
+
+    &-enter,
+    &-leave-to {
+        // to be overriden
+    }
+}
