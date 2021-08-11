@@ -1,5 +1,6 @@
 import { computed, defineComponent, provide, reactive } from 'vue'
 import getters from '../store/getters'
+import data from '../store/data'
 
 import Control from './control'
 
@@ -169,19 +170,10 @@ export default defineComponent({
 
     setup(props) {
         const {
-            isSingle, isMultiple, isSearchable, shouldShowCloseIcon
+            isSingle, isMultiple, isSearchable, shouldShowCloseIcon,
         } = getters(props)
 
-        const menu = reactive({
-            // Is the menu opened?
-            isOpen: false,
-            // Id of current highlighted option.
-            current: null,
-            // The scroll position before last menu closing.
-            lastScrollPosition: 0,
-            // Which direction to open the menu.
-            placement: 'bottom',
-        })
+        const { forest, menu } = data(props)
 
         provide('treeselect', {
             'props': props,
@@ -191,7 +183,7 @@ export default defineComponent({
                 isSearchable,
                 shouldShowCloseIcon,
             },
-            data: {menu},
+            data: {forest, menu},
         });
 
         return {
