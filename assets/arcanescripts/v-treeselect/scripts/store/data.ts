@@ -1,42 +1,10 @@
 import { reactive } from 'vue'
 import { createMap } from '../utilities'
+import useMethods from './methods'
+import { MENU_PLACEMENT } from "../enums";
 
 export default (props) => {
-    const getInstanceId = () => {
-        return props.instanceId == null ? props.id : props.instanceId
-    }
-
-    const extractCheckedNodeIdsFromValue = () => {
-        if (props.modelValue == null) return []
-
-        if (props.valueFormat === 'id') {
-            return props.multiple
-                ? props.modelValue.slice()
-                : [ props.modelValue ]
-        }
-
-        return (props.multiple ? props.modelValue : [ props.modelValue ])
-            .map(node => enhancedNormalizer(node))
-            .map(node => node.id)
-    }
-
-    const enhancedNormalizer = (raw) => {
-        return {
-            ...raw,
-            ...props.normalizer(raw, getInstanceId()),
-        }
-    }
-
-    const menu = reactive({
-        // Is the menu opened?
-        isOpen: false,
-        // Id of current highlighted option.
-        current: null,
-        // The scroll position before last menu closing.
-        lastScrollPosition: 0,
-        // Which direction to open the menu.
-        placement: 'bottom',
-    })
+    const { extractCheckedNodeIdsFromValue } = useMethods(props)
 
     const forest = reactive({
         // Normalized options.
@@ -52,8 +20,27 @@ export default (props) => {
         selectedNodeMap: createMap(),
     })
 
+    const menu = reactive({
+        // Is the menu opened?
+        isOpen: false,
+        // Id of current highlighted option.
+        current: null,
+        // The scroll position before last menu closing.
+        lastScrollPosition: 0,
+        // Which direction to open the menu.
+        placement: MENU_PLACEMENT.BOTTOM,
+    })
+
+    const trigger = reactive({
+        // Is the control focused?
+        isFocused: false,
+        // User entered search query - value of the input.
+        searchQuery: '',
+    })
+
     return {
         forest,
         menu,
+        trigger,
     }
 }

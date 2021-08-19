@@ -1,2 +1,5 @@
 export { onLeftClick } from './onLeftClick'
 export { createMap } from './createMap'
+export { find } from './find'
+export { warning } from './warning'
+export { includes } from './includes'

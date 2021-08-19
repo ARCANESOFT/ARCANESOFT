@@ -1,10 +1,10 @@
 import { computed, defineComponent, inject } from 'vue'
+import { onLeftClick } from '../utilities'
 
 import SingleValue from './single-value'
 import MultiValue from './multiple-value'
 import ArrowIcon from './icons/arrow'
 import DeleteIcon from './icons/delete'
-import { onLeftClick } from '../utilities'
 
 export default defineComponent({
     name: 'v-treeselect-control',
@@ -17,22 +17,23 @@ export default defineComponent({
     },
 
     setup() {
-        const { props, getters, actions, data } = inject('treeselect')
+        const { props, getters, data } = inject('treeselect')
+
         const closeTitle = computed((): string => getters.isMultiple ? props.clearAllText : props.clearValueText)
 
         const handleMouseDown = () => {
-
+            //
         }
 
         const handleMouseDownOnClose = () => {
-
+            //
         }
 
         const focusInput = () => {
-
+            //
         }
 
-        const toggleMenu = () => {
+        const toggleMenu = (): void => {
             data.menu.isOpen = ! data.menu.isOpen
         }
 
@@ -42,7 +43,7 @@ export default defineComponent({
         })
 
         const shouldShowArrowIcon = computed((): boolean => {
-            if (!props.alwaysOpen)
+            if ( ! props.alwaysOpen)
                 return true
 
             // Even with `alwaysOpen: true`, sometimes the menu is still closed,
@@ -65,13 +66,13 @@ export default defineComponent({
     },
 
     template: `
-        <div class="v-treeselect-control" @mousedown="handleMouseDown">
+        <div class="v-treeselect-control" @mousedown.prevent="handleMouseDown">
             <SingleValue v-if="isSingle"/>
             <MultiValue v-if="isMultiple"/>
 
-            <div v-if="shouldShowCloseIcon" @mousedown="handleMouseDownOnClose"
+            <div v-if="shouldShowCloseIcon" @mousedown.prevent="handleMouseDownOnClose"
                  :title="closeTitle" class="v-treeselect-control-close-wrapper">
-                <DeleteIcon class="v-treeselect-control-close" />
+                <DeleteIcon class="v-treeselect-control-close"/>
             </div>
 
             <div v-if="shouldShowArrowIcon" @onmousedown.prevent.stop="handleMouseDownOnArrow"

@@ -1,8 +1,9 @@
-import { computed, defineComponent, provide, reactive } from 'vue'
-import getters from '../store/getters'
-import data from '../store/data'
+import { computed, defineComponent, provide } from 'vue'
+import useGetters from '../store/getters'
+import useData from '../store/data'
 
 import Control from './control'
+import { MENU_PLACEMENT } from "../enums";
 
 export default defineComponent({
     name: 'v-treeselect',
@@ -65,6 +66,14 @@ export default defineComponent({
         closeOnSelect: {
             type: Boolean,
             default: true,
+        },
+
+        /**
+         * Prevent branch nodes from being selected?
+         */
+        disableBranchNodes: {
+            type: Boolean,
+            default: false,
         },
 
         /**
@@ -169,30 +178,29 @@ export default defineComponent({
     },
 
     setup(props) {
-        const {
-            isSingle, isMultiple, isSearchable, shouldShowCloseIcon,
-        } = getters(props)
-
-        const { forest, menu } = data(props)
+        const getters = useGetters(props)
+        const data = useData(props)
 
         provide('treeselect', {
-            'props': props,
-            'getters': {
-                isSingle,
-                isMultiple,
-                isSearchable,
-                shouldShowCloseIcon,
-            },
-            data: {forest, menu},
+            props,
+            getters,
+            data,
         });
 
         return {
             wrapperClass: computed(() => ({
-                'v-treeselect':             true,
-                'v-treeselect--multi':      isMultiple.value,
-                'v-treeselect--single':     isSingle.value,
-                'v-treeselect--searchable': isSearchable.value,
-                'v-treeselect--open-below': true,
+                'v-treeselect':                        true,
+                'v-treeselect--multi':                 getters.isMultiple.value,
+                'v-treeselect--single':                getters.isSingle.value,
+                'v-treeselect--searchable':            getters.isSearchable.value,
+                'v-treeselect--disabled':              getters.isDisabled.value,
+                'v-treeselect--open':                  data.menu.isOpen,
+                'v-treeselect--open-above':            data.menu.placement === MENU_PLACEMENT.UP,
+                'v-treeselect--open-below':            data.menu.placement === MENU_PLACEMENT.BOTTOM,
+                'v-treeselect--focused':               data.trigger.isFocused,
+                'v-treeselect--has-value':             getters.hasValue.value,
+                'v-treeselect--branch-nodes-disabled': props.disableBranchNodes,
+                'v-treeselect--append-to-body':        props.appendToBody,
             })),
         }
     },
