@@ -56,6 +56,6 @@ class ApiServiceProvider extends PackageServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->loadMigrations();
     }
 }
