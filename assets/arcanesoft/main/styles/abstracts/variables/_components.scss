@@ -1,0 +1,22 @@
+// COMPONENTS
+
+$component-active-bg: #34314F;
+
+$border-width:   1px;
+$border-color:   rgba($black, 0.125);
+$border-radius:  0.125rem;
+
+@import "components/sidebar";
+@import "components/horizontal-menu";
+@import "components/navbar";
+@import "components/buttons";
+@import "components/tooltip";
+@import "components/forms";
+@import "components/dropdown";
+@import "components/breadcrumbs";
+@import "components/nav";
+@import "components/modal";
+@import "components/card";
+@import "components/table";
+@import "components/pagination";
+@import "components/avatars";

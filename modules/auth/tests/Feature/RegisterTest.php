@@ -1,0 +1,352 @@
+<?php declare(strict_types=1);
+
+namespace Authentication\Tests\Feature;
+
+use App\Models\User;
+use Authentication\Tests\Concerns\HasLoginFeature;
+use Authentication\Tests\Concerns\HasRegisterFeature;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\{Event, Hash};
+
+/**
+ * Class     RegisterTest
+ *
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
+class RegisterTest extends TestCase
+{
+    /* -----------------------------------------------------------------
+     |  Traits
+     | -----------------------------------------------------------------
+     */
+
+    use RefreshDatabase,
+        HasLoginFeature,
+        HasRegisterFeature;
+
+    /* -----------------------------------------------------------------
+     |  Tests
+     | -----------------------------------------------------------------
+     */
+
+    /** @test */
+    public function it_can_view_a_registration_form_when_user_is_guest(): void
+    {
+        static::skipIfRegisterIsDisabled();
+
+        $this->withoutExceptionHandling()
+             ->get(static::registerGetUrl())
+             ->assertSuccessful()
+             ->assertViewIs('auth::register');
+    }
+
+    /** @test */
+    public function it_cannot_view_a_registration_form_when_user_is_authenticated(): void
+    {
+        $user = static::makeUser();
+
+        $this->actingAs($user)
+             ->get(static::registerGetUrl())
+             ->assertRedirect(static::indexPageUrl());
+    }
+
+    /** @test */
+    public function it_can_register(): void
+    {
+        static::skipIfRegisterIsDisabled();
+
+        Event::fake();
+
+        $data = [
+            'first_name'            => 'John',
+            'last_name'             => 'DOE',
+            'email'                 => 'john.doe@example.com',
+            'password'              => 'password',
+            'password_confirmation' => 'password',
+            'terms'                 => 'yes',
+        ];
+
+        $this->from(static::registerGetUrl())
+             ->post(static::registerPostUrl(), $data)
+             ->assertRedirect(static::indexPageUrl());
+
+        $users = User::all();
+
+        static::assertCount(1, $users);
+
+        /** @var  \App\Models\User  $user */
+        $user = $users->first();
+
+        if (static::isLoginEnabled())
+            $this->assertAuthenticatedAs($user);
+        else
+            $this->markTestIncomplete('Check the user is not logged in');
+
+        static::assertSame('John', $user->first_name);
+        static::assertSame('DOE', $user->last_name);
+        static::assertSame('john.doe@example.com', $user->email);
+        static::assertTrue(Hash::check('password', $user->password));
+
+        Event::assertDispatched(Registered::class, function (Registered $e) use ($user) {
+            return $e->user->getAuthIdentifier() === $user->getAuthIdentifier();
+        });
+    }
+
+    /** @test */
+    public function it_cannot_register_without_full_name(): void
+    {
+        static::skipIfRegisterIsDisabled();
+
+        $data = [
+            'email'                 => 'john.doe@example.com',
+            'password'              => 'password',
+            'password_confirmation' => 'password',
+            'terms'                 => 'yes',
+        ];
+
+        $resp = $this
+            ->from(static::registerGetUrl())
+            ->post(static::registerPostUrl(), $data)
+            ->assertRedirect(static::registerGetUrl())
+            ->assertSessionHasErrors('first_name')
+            ->assertSessionHasErrors('last_name')
+            ->assertSessionHasInput('email', 'john.doe@example.com');
+
+        static::assertFalse($resp->getSession()->hasOldInput('password'));
+
+        static::assertNoUserRegistered();
+
+        $this->assertGuest();
+    }
+
+    /** @test */
+    public function it_cannot_register_without_email(): void
+    {
+        static::skipIfRegisterIsDisabled();
+
+        $data = [
+            'first_name'            => 'John',
+            'last_name'             => 'DOE',
+            'email'                 => '',
+            'password'              => 'password',
+            'password_confirmation' => 'password',
+            'terms'                 => 'yes',
+        ];
+
+        $resp = $this
+            ->from(static::registerGetUrl())
+            ->post(static::registerPostUrl(), $data)
+            ->assertRedirect(static::registerGetUrl())
+            ->assertSessionHasErrors('email')
+            ->assertSessionHasInput([
+                'email_name' => '',
+                'first_name' => 'John',
+                'last_name'  => 'DOE',
+            ]);
+
+        static::assertFalse($resp->getSession()->hasOldInput('password'));
+
+        static::assertNoUserRegistered();
+
+        $this->assertGuest();
+    }
+
+    /** @test */
+    public function it_cannot_register_with_invalid_email(): void
+    {
+        static::skipIfRegisterIsDisabled();
+
+        $data = [
+            'first_name'            => 'John',
+            'last_name'             => 'DOE',
+            'email'                 => 'invalid-email',
+            'password'              => 'password',
+            'password_confirmation' => 'password',
+            'terms'                 => 'yes',
+        ];
+
+        $resp = $this
+            ->from(static::registerGetUrl())
+            ->post(static::registerPostUrl(), $data)
+            ->assertRedirect(static::registerGetUrl())
+            ->assertSessionHasInput([
+                'first_name' => $data['first_name'],
+                'last_name'  => $data['last_name'],
+                'email'      => $data['email']
+            ])
+            ->assertSessionHasErrors('email');
+
+        static::assertFalse($resp->getSession()->hasOldInput('password'));
+
+        static::assertNoUserRegistered();
+
+        $this->assertGuest();
+    }
+
+    /** @test */
+    public function it_cannot_register_without_password(): void
+    {
+        static::skipIfRegisterIsDisabled();
+
+        $data = [
+            'first_name'            => 'John',
+            'last_name'             => 'DOE',
+            'email'                 => 'john.doe@example.com',
+            'password'              => '',
+            'password_confirmation' => '',
+            'terms'                 => 'yes',
+        ];
+
+        $resp = $this
+            ->from(static::registerGetUrl())
+            ->post(static::registerPostUrl(), $data)
+            ->assertRedirect(static::registerGetUrl())
+            ->assertSessionHasInput([
+                'first_name' => $data['first_name'],
+                'last_name'  => $data['last_name'],
+                'email'      => $data['email'],
+            ])
+            ->assertSessionHasErrors(['password']);
+
+        static::assertNoUserRegistered();
+        static::assertFalse($resp->getSession()->hasOldInput('password'));
+
+        $this->assertGuest();
+    }
+
+    /** @test */
+    public function it_cannot_register_without_a_confirmed_password(): void
+    {
+        static::skipIfRegisterIsDisabled();
+
+        $data = [
+            'first_name'            => 'John',
+            'last_name'             => 'DOE',
+            'email'                 => 'john.doe@example.com',
+            'password'              => 'password',
+            'password_confirmation' => '',
+            'terms'                 => 'yes',
+        ];
+
+        $resp = $this
+            ->from(static::registerGetUrl())
+            ->post(static::registerPostUrl(), $data)
+            ->assertRedirect(static::registerGetUrl())
+            ->assertSessionHasInput([
+                'first_name' => $data['first_name'],
+                'last_name'  => $data['last_name'],
+                'email'      => $data['email'],
+            ])
+            ->assertSessionHasErrors(['password']);
+
+        static::assertNoUserRegistered();
+        static::assertFalse($resp->getSession()->hasOldInput('password'));
+
+        $this->assertGuest();
+    }
+
+    /** @test */
+    public function it_cannot_register_with_a_unconfirmed_password(): void
+    {
+        static::skipIfRegisterIsDisabled();
+
+        $data = [
+            'first_name'            => 'John',
+            'last_name'             => 'DOE',
+            'email'                 => 'john.doe@example.com',
+            'password'              => 'password',
+            'password_confirmation' => 'Pa$$w0rd',
+            'terms'                 => 'yes',
+        ];
+
+        $resp = $this
+            ->from(static::registerGetUrl())
+            ->post(static::registerPostUrl(), $data)
+            ->assertRedirect(static::registerGetUrl())
+            ->assertSessionHasInput([
+                'first_name' => $data['first_name'],
+                'last_name'  => $data['last_name'],
+                'email'      => $data['email'],
+            ])
+            ->assertSessionHasErrors(['password']);
+
+        static::assertNoUserRegistered();
+        static::assertFalse($resp->getSession()->hasOldInput('password'));
+
+        $this->assertGuest();
+    }
+
+    /** @test */
+    public function it_can_register_users_and_redirected_to_intended_url(): void
+    {
+        static::skipIfRegisterIsDisabled();
+
+        $data = [
+            'first_name'            => 'John',
+            'last_name'             => 'DOE',
+            'email'                 => 'john.doe@example.com',
+            'password'              => 'password',
+            'password_confirmation' => 'password',
+            'terms'                 => 'yes',
+        ];
+
+        $this->withSession(['url.intended' => 'http://foo.com/bar'])
+             ->post(static::registerPostUrl(), $data)
+             ->assertRedirect('http://foo.com/bar');
+    }
+
+    /** @test */
+    public function it_can_register_when_terms_are_disabled(): void
+    {
+        static::skipIfRegisterIsDisabled();
+
+        config()->set('arcanesoft.foundation.features.terms', true);
+
+        $data = [
+            'first_name'            => 'John',
+            'last_name'             => 'DOE',
+            'email'                 => 'john.doe@example.com',
+            'password'              => 'password',
+            'password_confirmation' => 'password',
+        ];
+
+        $this->from(static::registerGetUrl())
+             ->post(static::registerPostUrl(), $data)
+             ->assertSessionHasErrors(['terms']);
+
+        config()->set('arcanesoft.foundation.features.terms', false);
+
+        $this->from(static::registerGetUrl())
+             ->post(static::registerPostUrl(), $data)
+             ->assertRedirect(static::indexPageUrl());
+    }
+
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Get the users count.
+     *
+     * @return int
+     */
+    protected static function getUsersCount(): int
+    {
+        return User::query()->count();
+    }
+
+    /* -----------------------------------------------------------------
+     |  Custom assertions
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Assert no users was registered in the database.
+     */
+    protected static function assertNoUserRegistered(): void
+    {
+        static::assertSame(0, static::getUsersCount());
+    }
+}

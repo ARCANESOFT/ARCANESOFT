@@ -1,0 +1,77 @@
+// THEMES
+
+$skins: (
+    'light': (
+        body-bg-color:                #E9ECEF,
+        body-font-color:              $gray-800,
+
+        link-color:                   $primary,
+
+        surface-1-bg-color:           $white,
+        surface-2-bg-color:           $gray-300,
+        surface-text-normal-color:    $gray-700,
+        surface-text-hover-color:     $gray-600,
+        surface-text-muted-color:     $gray-600,
+
+        accent-bg-color:              #34314F,
+        accent-text-normal-color:     #D0D0D0,
+        accent-text-hover-color:      #DEDEDE,
+
+        border-color:                 $gray-400,
+
+        heading-text-color:           $gray-900,
+        heading-muted-color:          $gray-600,
+
+        input-bg:                     #E9ECEF,
+        input-border-color:           $gray-400,
+        input-placeholder-color:      $gray-600,
+
+        breadcrumbs-item-color:       $gray-600,
+        breadcrumbs-item-hover-color: $gray-800,
+        breadcrumbs-active-color:     $gray-600,
+        breadcrumbs-divider-color:    $gray-600,
+
+        sidebar-bg-color:              $gray-100,
+        sidebar-text-normal-color:     $gray-800,
+        sidebar-text-hover-color:      $gray-600,
+        sidebar-link-active-bg:        #34314F,
+        sidebar-link-active-color:     $gray-100,
+
+    ),
+    'dark':  (
+        body-bg-color:                #181818,
+        body-font-color:              $gray-200,
+
+        link-color:                   $gray-200,
+
+        surface-1-bg-color:           #202020,
+        surface-2-bg-color:           #313131,
+        surface-text-normal-color:    $gray-300,
+        surface-text-hover-color:     $gray-400,
+        surface-text-muted-color:     $gray-500,
+
+        accent-bg-color:              #202020,
+        accent-text-normal-color:     $gray-400,
+        accent-text-hover-color:      $gray-200,
+
+        border-color:                 $gray-900,
+
+        heading-text-color:           $gray-200,
+        heading-muted-color:          $gray-500,
+
+        input-bg:                     #121212,
+        input-border-color:           $gray-900,
+        input-placeholder-color:      $gray-600,
+
+        breadcrumbs-item-color:       $gray-500,
+        breadcrumbs-item-hover-color: $gray-300,
+        breadcrumbs-active-color:     $gray-500,
+        breadcrumbs-divider-color:    $gray-500,
+
+        sidebar-bg-color:              #202020,
+        sidebar-text-normal-color:     $gray-200,
+        sidebar-text-hover-color:      $gray-300,
+        sidebar-link-active-bg:        #34314F,
+        sidebar-link-active-color:     $gray-100,
+    ),
+);

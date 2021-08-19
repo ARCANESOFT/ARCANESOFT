@@ -1,0 +1,30 @@
+.app-container,
+.main-navbar,
+.main-container,
+.sidebar-container {
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in-out;
+}
+
+.app-container {
+    padding-top: $navbar-height;
+    transition-property: padding-top;
+
+    .page-scrolled & {
+        padding-top: 0;
+    }
+}
+
+.main-container {
+    transition-property: margin-left;
+
+    @include media-breakpoint-up(lg) {
+        margin-left: $sidebar-width;
+    }
+
+    [data-sidebar-visible="false"] & {
+        @include media-breakpoint-up(lg) {
+            margin-left: 0;
+        }
+    }
+}

@@ -1,0 +1,62 @@
+@import "~bootstrap/scss/buttons";
+
+// STYLES
+.btn {
+    &.btn-xs {
+        padding: $btn-padding-y-xs $btn-padding-x-xs;
+        font-size: 0.8rem;
+        line-height: 1.2rem;
+        border-radius: $btn-border-radius-xs;
+    }
+
+    &.btn-rounded {
+        border-radius: 50px;
+    }
+
+    &.btn-fw {
+        min-width: $button-fixed-width;
+    }
+
+    /* Buttons with only icons */
+    &.btn-icon {
+        width: 42px;
+        height: 42px;
+        padding: 0;
+    }
+
+    /* Buttons with icon and text */
+    &.btn-icon-text {
+        .btn-icon-prepend {
+            margin-right: 0.5rem;
+        }
+
+        .btn-icon-append {
+            margin-left: 0.5rem;
+        }
+    }
+}
+
+.btn-group {
+    .btn + .btn {
+        border-left: 0;
+    }
+}
+
+.btn-separated {
+    .btn + .btn {
+        margin-left: .25rem;
+    }
+}
+
+.btn-toolbar {
+    .btn-group + .btn-group {
+        margin-left: 1rem;
+    }
+}
+
+/* inverse buttons */
+@each $color, $value in $theme-colors {
+    .btn-inverse-#{$color} {
+        @include button-inverse-variant($value);
+    }
+}

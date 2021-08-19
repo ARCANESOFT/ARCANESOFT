@@ -1,0 +1,21 @@
+{
+    // https://www.typescriptlang.org/tsconfig
+    "compilerOptions": {
+        "module": "es6",
+        "target": "es6",
+        "lib": ["dom", "esnext"],
+        "moduleResolution": "node",
+        "noEmit": false,
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "types": [
+            "jest",
+            "lodash",
+            "node"
+        ]
+    },
+    "include": [
+        "scripts/**/*",
+        "tests/**/*.test.ts"
+    ]
+}

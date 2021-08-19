@@ -1,0 +1,19 @@
+.v-dt-datatype-tags {
+
+}
+
+.v-dt-datatype-tag {
+    @extend .badge, .rounded-pill;
+    border: 1px solid transparent;
+    color: #6C757D; // TODO: Use a variable same as .text-muted
+
+    & + .v-dt-datatype-tag {
+        margin-left: 0.25rem;
+    }
+
+    @each $color, $value in $theme-colors {
+        &.v-dt-datatype-tag-#{$color} {
+            border-color: $value !important;
+        }
+    }
+}

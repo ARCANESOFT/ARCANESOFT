@@ -1,0 +1,130 @@
+@import "~bootstrap/scss/nav";
+
+.nav-tabs {
+    .nav-link {
+        //background: $nav-tabs-link-bg;
+        border-radius: 0;
+        border-color: $border-color;
+        color: $nav-tabs-link-color;
+
+        &.active {
+            border-bottom-color: transparent;
+        }
+    }
+
+    .nav-item {
+        &:first-child .nav-link {
+            border-top-left-radius: $nav-tabs-border-radius;
+        }
+
+        &:last-child .nav-link {
+            border-top-right-radius: $nav-tabs-border-radius;
+        }
+    }
+
+    .tab-content {
+        border-top: 0;
+    }
+
+    &.nav-tabs-vertical {
+        @extend .flex-column;
+        border-bottom: 0;
+
+        .nav-link.active {
+            border-bottom-color: $border-color;
+        }
+
+        .nav-item {
+            &:first-child .nav-link {
+                border-top-left-radius: $nav-tabs-border-radius;
+                border-top-right-radius: $nav-tabs-border-radius;
+            }
+
+            &:last-child .nav-link {
+                border-bottom-left-radius: $nav-tabs-border-radius;
+                border-bottom-right-radius: $nav-tabs-border-radius;
+            }
+        }
+    }
+
+    &.nav-tabs-vertical-custom {
+        @extend .nav-tabs-vertical;
+        background: $primary;
+        border-radius: $nav-tabs-border-radius;
+
+        .nav-link {
+            background: transparent;
+            border-color: rgba($white, .2);
+            color: darken($primary, 30%);
+            padding: 1.75rem;
+
+            &.active {
+                color: $white;
+                border-color: rgba($white, .2);
+            }
+        }
+    }
+}
+
+.nav-pills {
+    .nav-link {
+        padding: .5rem 2rem;
+    }
+
+    &.nav-pills-vertical {
+        flex-direction: column;
+        border-bottom: 0;
+
+        .nav-item {
+            margin-right: 0;
+            margin-bottom: 1rem;
+        }
+    }
+
+    &.nav-pills-rounded .nav-link {
+        border-radius: 1.25rem;
+        border-width: 1px;
+        border-style: solid;
+    }
+}
+
+.pill-content {
+    margin-top: 1rem;
+    @extend .tab-content;
+}
+
+.tab-content,
+.pill-content {
+    border-width: 0 1px 1px;
+    border-style: solid;
+    border-color: $border-color;
+    padding: 1rem;
+}
+
+.tab-content.tab-content-vertical {
+    border-top: 1px solid $border-color;
+}
+
+.pill-content {
+    border-top-width: 1px;
+}
+
+/* gradient pills */
+@each $color, $value in $theme-colors {
+    .nav-tabs-#{$color}, .nav-pills-#{$color} {
+        .nav-link {
+            color: $black;
+            border-color: #ebedf2;
+
+            &.active {
+                background: $value;
+                border-color: darken($value, 5%) darken($value, 5%) transparent;
+                color: if($color == 'light', $black, $white);
+            }
+
+            &:disabled, &.disabled {
+                color: $nav-link-disabled-color;
+            }
+        }
+    }
+}

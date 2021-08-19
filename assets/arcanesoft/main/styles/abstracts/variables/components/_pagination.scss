@@ -1,0 +1,12 @@
+// PAGINATION
+
+$pagination-bg:           var(--skin-surface-1-bg-color);
+$pagination-border-color: var(--skin-surface-2-bg-color);
+
+$pagination-hover-bg:           var(--skin-surface-2-bg-color);
+$pagination-hover-color:        var(--skin-body-font-color);
+$pagination-hover-border-color: var(--skin-surface-2-bg-color);
+
+$pagination-disabled-bg:           var(--skin-surface-1-bg-color);
+$pagination-disabled-color:        $gray-600;
+$pagination-disabled-border-color: var(--skin-surface-2-bg-color);

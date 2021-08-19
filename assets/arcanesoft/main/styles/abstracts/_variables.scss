@@ -1,0 +1,34 @@
+/**
+ * This file contains all application-wide Sass variables.
+ */
+
+$variable-prefix: bs-;
+
+// PATHS
+
+$base-path:     "..";
+$images-path:   "#{$base-path}/images";
+$fonts-path:    "#{$base-path}/fonts";
+$fa-font-path:  "~@fortawesome/fontawesome-free/webfonts";
+$mdi-font-path: "~@mdi/font/fonts";
+
+// COLORS
+
+@import "variables/colors";
+@import "variables/global";
+@import "variables/fonts";
+@import "variables/components";
+
+// Misc settings
+
+$settings-panel-width:              300px;
+$boxed-container-width:             1200px;
+$border-property:                   1px solid $border-color;
+$action-transition-duration:        0.25s;
+$action-transition-timing-function: ease;
+
+@import "variables/skins";
+
+// Bootstrap Variables
+// -----------------------------------------------
+@import "~bootstrap/scss/variables";

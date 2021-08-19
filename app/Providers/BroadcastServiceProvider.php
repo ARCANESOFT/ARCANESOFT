@@ -1,4 +1,6 @@
-<?php namespace App\Providers;
+<?php declare(strict_types=1);
+
+namespace App\Providers;
 
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\ServiceProvider;
@@ -6,7 +8,6 @@ use Illuminate\Support\ServiceProvider;
 /**
  * Class     BroadcastServiceProvider
  *
- * @package  App\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class BroadcastServiceProvider extends ServiceProvider
@@ -15,10 +16,11 @@ class BroadcastServiceProvider extends ServiceProvider
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Bootstrap any application services.
      */
-    public function boot()
+    public function boot(): void
     {
         Broadcast::routes();
 

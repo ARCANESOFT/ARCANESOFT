@@ -1,0 +1,19 @@
+// LEVELS MENU
+.log-levels-menu-nav {
+    display: grid;
+    grid-gap: 0.5rem;
+
+    @include media-breakpoint-down(md) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+    }
+
+    @include media-breakpoint-up(lg) {
+        grid-template-columns: repeat(9, 1fr);
+    }
+}
+
+.log-entry-stack-content {
+    color: var(--skin-surface-text-muted-color);
+    white-space: pre-line;
+}

@@ -1,0 +1,10 @@
+.main-footer {
+    font-size: calc(16px - 0.05rem);
+    color: var(--skin-footer-text-normal-color);
+    @extend %global-smooth-transition;
+
+    @media (max-width: 991px) {
+        margin-left: 0;
+        width: 100%;
+    }
+}

@@ -1,41 +1,24 @@
-<?php namespace App\Providers;
+<?php declare(strict_types=1);
+
+namespace App\Providers;
 
 use App\Http\Routes;
-use Arcanedev\LaravelAuth\Services\SocialAuthenticator;
-use Arcanedev\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Arcanedev\Support\Routing\Concerns\RegistersRouteClasses;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 /**
  * Class     RouteServiceProvider
  *
- * @package  App\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class RouteServiceProvider extends ServiceProvider
 {
     /* -----------------------------------------------------------------
-     |  Properties
+     |  Traits
      | -----------------------------------------------------------------
      */
 
-    /**
-     * This namespace is applied to your controller routes.
-     *
-     * In addition, it is set as the URL generator's root namespace.
-     *
-     * @var string
-     */
-    protected $namespace = 'App\\Http\\Controllers';
-
-    /**
-     * The web middlewares.
-     *
-     * @var array
-     */
-    protected $webMiddlewares = [
-        'web',
-//        'tracking',
-//        'impersonate',
-    ];
+    use RegistersRouteClasses;
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -43,25 +26,33 @@ class RouteServiceProvider extends ServiceProvider
      */
 
     /**
-     * Define your route model bindings, pattern filters, etc.
+     * Get the route classes.
+     *
+     * @return string[]
      */
-    public function boot()
+    protected function getRouteClasses(): array
     {
-        //
-
-        parent::boot();
+        return [
+            // Public
+            Routes\PagesRoutes::class,
+        ];
     }
 
     /**
-     * Define the routes for the application.
+     * Define your route model bindings, pattern filters, etc.
      */
-    public function map()
+    public function boot(): void
     {
-        $this->mapWebRoutes();
-        $this->mapAuthRoutes();
-        $this->mapApiRoutes();
+        // Register the limiters
+        $this->configureRateLimiting();
 
-        //
+        // Bind the routes
+        static::bindRouteClasses($this->getRouteClasses());
+
+        // Map the routes
+        $this->routes(function (): void {
+            $this->mapRoutes();
+        });
     }
 
     /* -----------------------------------------------------------------
@@ -74,56 +65,20 @@ class RouteServiceProvider extends ServiceProvider
      *
      * These routes all receive session state, CSRF protection, etc.
      */
-    protected function mapWebRoutes()
+    protected function mapRoutes(): void
     {
-        $this->middleware($this->webMiddlewares)
-             ->group(function () {
-                 $this->namespace($this->namespace)->group(function () {
-                     Routes\Front\PagesRoutes::register();
-                     Routes\Front\ProfileRoutes::register();
+        $this->middleware(['web'])->group(function (): void {
+            static::mapRouteClasses($this->getRouteClasses());
 
-                     require base_path('routes/web.php');
-                 });
-
-                 \Arcanesoft\Blog\Blog::routes();
-             });
+            $this->loadRoutesFrom(base_path('routes/web.php'));
+        });
     }
 
     /**
-     * Define the auth routes for the application.
+     * Configure the rate limiters for the application.
      */
-    protected function mapAuthRoutes()
+    protected function configureRateLimiting(): void
     {
-        $this->middleware($this->webMiddlewares)
-             ->namespace($this->namespace.'\\Auth')
-             ->prefix('auth')
-             ->as('auth::')
-             ->group(function () {
-                 Routes\Auth\AuthenticationRoutes::register();
-                 Routes\Auth\RegisterRoutes::register();
-                 Routes\Auth\PasswordResetRoutes::register();
-
-                 if (impersonator()->isEnabled())
-                     Routes\Auth\ImpersonateRoutes::register();
-
-                 if (SocialAuthenticator::isEnabled())
-                     Routes\Auth\SocialiteRoutes::register();
-             });
-    }
-
-    /**
-     * Define the "api" routes for the application.
-     *
-     * These routes are typically stateless.
-     */
-    protected function mapApiRoutes()
-    {
-        $this->middleware('api')
-             ->namespace($this->namespace)
-             ->prefix('api')
-             ->as('api::')
-             ->group(function () {
-                 require base_path('routes/api.php');
-             });
+        //
     }
 }

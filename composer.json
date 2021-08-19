@@ -1,50 +1,42 @@
 {
-    "name":        "arcanesoft/arcanesoft",
-    "description": "ARCANESOFT - CMS built with Laravel Framework.",
-    "keywords":    ["arcanedev", "arcanesoft", "cms", "framework", "laravel"],
-    "homepage":    "https://github.com/ARCANESOFT/ARCANESOFT",
-    "license":     "MIT",
-    "type":        "project",
-    "authors":     [
-        {
-            "name":     "ARCANEDEV",
-            "email":    "arcanedev.maroc@gmail.com",
-            "homepage": "https://github.com/arcanedev-maroc",
-            "role":     "Developer"
-        }
-    ],
+    "name": "arcanesoft/arcanesoft",
+    "description": "The Laravel Framework.",
+    "type": "project",
+    "license": "MIT",
+    "keywords": ["arcanesoft", "framework", "laravel"],
     "require": {
-        "php": ">=7.0",
-        "arcanedev/composer": "~1.4",
-        "arcanedev/laravel-html": "~5.5.0",
-        "arcanedev/laravel-markdown": "~1.3.0",
-        "arcanesoft/auth": "~3.1.0",
-        "arcanesoft/backups": "~1.1.0",
-        "arcanesoft/blog": "~3.0",
-        "arcanesoft/foundation": "~2.4.0",
-        "arcanesoft/media": "~2.4.0",
-        "arcanesoft/seo": "~2.3.0",
-        "arcanesoft/tracker": "~2.1.0",
-        "fideloper/proxy": "~3.3",
-        "laravel/framework": "~5.5.0",
-        "laravel/tinker": "~1.0"
+        "php": "^7.3|^8.0",
+        "ext-json": "*",
+        "arcanesoft/analytics": "@dev",
+        "arcanesoft/backups": "@dev",
+        "arcanesoft/blog": "@dev",
+        "arcanesoft/foundation": "@dev",
+        "arcanesoft/media": "@dev",
+        "arcanesoft/passport": "@dev",
+        "arcanesoft/seo": "@dev",
+        "arcanesoft/shop": "@dev",
+        "fruitcake/laravel-cors": "^2.0.3",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "laravel/framework": "^8.54",
+        "laravel/tinker": "^2.5",
+        "modules/account": "@dev",
+        "modules/api": "@dev",
+        "modules/auth": "@dev"
     },
     "require-dev": {
-        "filp/whoops": "~2.0",
-        "fzaninotto/faker": "~1.4",
-        "mockery/mockery": "~1.0",
-        "phpunit/phpunit": "~6.0",
-        "phpunit/phpcov": "~4.0",
-        "barryvdh/laravel-ide-helper": "~2.2",
-        "barryvdh/laravel-debugbar": "~2.2"
+        "barryvdh/laravel-debugbar": "^3.5",
+        "facade/ignition": "^2.5",
+        "fakerphp/faker": "^1.9.1",
+        "mockery/mockery": "^1.4.2",
+        "modules/demo": "@dev",
+        "nunomaduro/collision": "^5.6",
+        "phpunit/phpunit": "^9.3.3"
     },
     "autoload": {
-        "classmap": [
-            "database/seeds",
-            "database/factories"
-        ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
         }
     },
     "autoload-dev": {
@@ -52,52 +44,50 @@
             "Tests\\": "tests/"
         }
     },
-    "extra": {
-        "merge-plugin": {
-            "include": ["modules/*/composer.json"]
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./modules/*",
+            "options": {
+                "symlink": true
+            }
         },
-        "laravel": {
-            "dont-discover": [
-                "arcanedev/localization",
-                "arcanedev/laravel-markdown",
-                "spatie/laravel-backup",
-                "arcanedev/seo-helper",
-                "arcanedev/notify",
-                "arcanedev/laravel-html",
-                "arcanedev/laravel-active",
-                "arcanedev/hasher",
-                "arcanedev/breadcrumbs",
-                "arcanedev/laravel-impersonator",
-                "arcanedev/gravatar",
-                "arcanedev/log-viewer",
-                "arcanedev/laravel-auth",
-                "arcanedev/spam-blocker",
-                "arcanedev/route-viewer",
-                "arcanedev/geo-ip",
-                "arcanedev/agent",
-                "arcanedev/laravel-tracker",
-                "arcanedev/laravel-settings"
-            ]
+        {
+            "type": "path",
+            "url": "../*",
+            "options": {
+                "symlink": true
+            }
         }
-    },
+    ],
     "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "Arcanesoft\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi",
+            "@php artisan arcanesoft:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi"
+        ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "@php artisan key:generate"
+            "@php artisan key:generate --ansi"
         ],
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover"
-        ]
+        "test": "phpunit --testdox"
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
     },
     "config": {
+        "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true,
-        "optimize-autoloader": true
+        "sort-packages": true
     },
-    "suggest": {
-        "arcanedev/laravel-lang": "Translations manager and checker for Laravel 5 based on 'caouecs/Laravel-lang' translations."
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

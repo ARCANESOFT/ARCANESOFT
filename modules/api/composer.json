@@ -1,0 +1,47 @@
+{
+    "name":        "modules/api",
+    "description": "ARCANESOFT - API module.",
+    "keywords":    ["arcanedev", "arcanesoft", "api", "laravel"],
+    "license":     "MIT",
+    "type":        "project",
+    "authors":     [
+        {
+            "name":     "ARCANEDEV",
+            "email":    "arcanedev.maroc@gmail.com",
+            "homepage": "https://github.com/arcanedev-maroc",
+            "role":     "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.3|^8.0",
+        "laravel/sanctum": "^2.11",
+        "arcanedev/support": "^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench-core": "^6.0",
+        "phpunit/phpunit": "^9.3",
+        "zircote/swagger-php": "^3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Api\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Api\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Api\\ApiServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

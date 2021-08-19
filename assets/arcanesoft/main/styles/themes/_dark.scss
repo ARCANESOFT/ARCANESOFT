@@ -1,0 +1,14 @@
+// Dark Mode
+
+$skin-colors: (
+    "secondary": $gray-600,
+    "light":     $gray-800,
+);
+
+@include skin-mode('dark') {
+    @each $color, $value in $skin-colors {
+        .btn-#{$color} {
+            @include button-variant($value, $value);
+        }
+    }
+}

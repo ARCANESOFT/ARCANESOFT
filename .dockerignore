@@ -1,0 +1,15 @@
+.git
+bootstrap/cache/*
+
+storage/app/*
+storage/debugbar/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/logs/*
+
+vendor
+**/*node_modules
+
+.docker/*
+docker-compose.yml

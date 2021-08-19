@@ -1,0 +1,74 @@
+@import "~bootstrap/scss/type";
+
+/**
+ * Basic typography style for copy text
+ */
+
+body {
+    -webkit-font-smoothing: antialiased;
+}
+
+address p {
+    margin-bottom: 0;
+}
+
+// BLOCKQUOTE
+
+.blockquote {
+    &.blockquote-styled {
+        padding: 1.25rem;
+        border: 1px solid $border-color;
+    }
+}
+
+@each $color, $value in $theme-colors {
+    .blockquote-#{$color} {
+        border-color: $color;
+
+        .blockquote-footer {
+            color: $color;
+        }
+    }
+}
+
+pre {
+    background: color("gray-lighter");
+    padding: 15px;
+    font-size: 14px;
+}
+
+code {
+    padding: 5px;
+    color: theme-color("danger");
+    border-radius: 4px;
+}
+
+.icon-lg {
+    font-size: 3.438rem;
+}
+
+.icon-md {
+    font-size: 1.875rem;
+}
+
+.icon-sm {
+    font-size: 1rem;
+}
+
+.font-weight-semibold {
+    font-weight: 600 !important;
+}
+
+.text-gray {
+    color: #8c8c8c;
+}
+
+.text-black {
+    color: $black;
+}
+
+.no-underline {
+    &, &:hover {
+        text-decoration: none;
+    }
+}

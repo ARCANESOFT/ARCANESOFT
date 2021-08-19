@@ -1,0 +1,51 @@
+// CUSTOM PROPERTIES
+
+@each $mode, $skin-colors in $skins {
+    @include skin-mode($mode) {
+        // COLORS
+        --#{$variable-prefix}body-bg:     #{map-get($skin-colors, "body-bg-color")};
+        --#{$variable-prefix}body-color:  #{map-get($skin-colors, "body-font-color")};
+        --skin-link-color:                #{map-get($skin-colors, "link-color")};
+
+        // Surface
+        --skin-surface-1-bg-color:        #{map-get($skin-colors, "surface-1-bg-color")};
+        --skin-surface-2-bg-color:        #{map-get($skin-colors, "surface-2-bg-color")};
+        --skin-surface-text-normal-color: #{map-get($skin-colors, "surface-text-normal-color")};
+        --skin-surface-text-hover-color:  #{map-get($skin-colors, "surface-text-hover-color")};
+        --skin-surface-text-muted-color:  #{map-get($skin-colors, "surface-text-muted-color")};
+
+        // Layouts
+        --skin-navbar-bg-color:           var(--skin-surface-1-bg-color);
+        --skin-page-header-bg-color:      var(--skin-surface-1-bg-color);
+        --skin-footer-bg-color:           var(--skin-surface-1-bg-color);
+        --skin-footer-text-normal-color:  var(--skin-surface-text-normal-color);
+
+        // SIDEBAR
+        --skin-sidebar-bg-color:          #{map-get($skin-colors, "sidebar-bg-color")};
+        --skin-sidebar-text-normal-color: #{map-get($skin-colors, "sidebar-text-normal-color")};
+        --skin-sidebar-text-hover-color:  #{map-get($skin-colors, "sidebar-text-hover-color")};
+        --skin-sidebar-link-active-bg:    #{map-get($skin-colors, "sidebar-link-active-bg")};
+        --skin-sidebar-link-active-color: #{map-get($skin-colors, "sidebar-link-active-color")};
+
+        // INPUT
+        --skin-input-bg:                  #{map-get($skin-colors, "input-bg")};
+        --skin-input-font-color:          #{map-get($skin-colors, "body-font-color")};
+        --skin-input-border-color:        #{map-get($skin-colors, "input-border-color")};
+        --skin-input-placeholder-color:   #{map-get($skin-colors, "input-placeholder-color")};
+
+        // BREADCRUMBS
+        --skin-breadcrumb-item-color:       #{map-get($skin-colors, "breadcrumbs-item-color")};
+        --skin-breadcrumb-item-hover-color: #{map-get($skin-colors, "breadcrumbs-item-hover-color")};
+        --skin-breadcrumb-active-color:     #{map-get($skin-colors, "breadcrumbs-active-color")};
+        --skin-breadcrumb-divider-color:    #{map-get($skin-colors, "breadcrumbs-divider-color")};
+
+        // MISC
+        --skin-border-color:              #{map-get($skin-colors, "border-color")};
+        --skin-heading-text-color:        #{map_get($skin-colors, "heading-text-color")};
+        --skin-heading-muted-color:       #{map_get($skin-colors, "heading-muted-color")};
+    }
+}
+
+// SKINS
+@import "light";
+@import "dark";

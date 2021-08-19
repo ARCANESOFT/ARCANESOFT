@@ -1,5 +1,7 @@
 <?php
 
+use Arcanesoft\Foundation\Authentication\Guard;
+
 return [
 
     /* -----------------------------------------------------------------
@@ -8,43 +10,47 @@ return [
      */
 
     'defaults' => [
-        'guard'     => 'web',
+        'guard'     => Guard::WEB_USER,
         'passwords' => 'users',
     ],
 
     /* -----------------------------------------------------------------
      |  Authentication Guards
      | -----------------------------------------------------------------
-     | Supported: "session", "token"
      */
 
     'guards' => [
-        'web' => [
+        Guard::WEB_USER => [
             'driver'   => 'session',
             'provider' => 'users',
         ],
 
-        'api' => [
-            'driver'   => 'token',
-            'provider' => 'users',
+        Guard::WEB_ADMINISTRATOR => [
+            'driver'   => 'session',
+            'provider' => 'administrators',
         ],
     ],
 
     /* -----------------------------------------------------------------
      |  User Providers
      | -----------------------------------------------------------------
-     | Supported: "database", "eloquent"
+     |  Supported Drivers: "database", "eloquent"
      */
 
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model'  => \App\Models\User::class,
+            'model'  => App\Models\User::class,
+        ],
+
+        'administrators' => [
+            'driver' => 'eloquent',
+            'model'  => Arcanesoft\Foundation\Authorization\Models\Administrator::class,
         ],
 
         // 'users' => [
         //     'driver' => 'database',
-        //     'table'  => 'users',
+        //     'table' => 'users',
         // ],
     ],
 
@@ -58,7 +64,22 @@ return [
             'provider' => 'users',
             'table'    => 'auth_password_resets',
             'expire'   => 60,
+            'throttle' => 60,
+        ],
+
+        'administrators' => [
+            'provider' => 'administrators',
+            'table'    => 'auth_password_resets',
+            'expire'   => 60,
+            'throttle' => 60,
         ],
     ],
+
+    /* -----------------------------------------------------------------
+     |  Password Confirmation Timeout
+     | -----------------------------------------------------------------
+     */
+
+    'password_timeout' => 10800, // in seconds (= 3 hours)
 
 ];

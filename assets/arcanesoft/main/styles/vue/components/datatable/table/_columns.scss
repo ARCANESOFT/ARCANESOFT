@@ -1,0 +1,51 @@
+.v-dt-column {
+    color: var(--bs-gray-500);
+    text-transform: uppercase;
+
+    &.v-dt-column-sortable {
+        position: relative;
+        padding-right: 1.5rem;
+        user-select: none;
+        cursor: pointer;
+        white-space: nowrap;
+
+        &:after {
+            position: absolute;
+            top: 50%;
+            right: 8px;
+            display: block;
+            opacity: 0.5;
+            font-size: 1rem;
+            transform: translateY(-50%);
+
+            @extend %fa-icon;
+            @extend .fas;
+
+            transition: opacity .25s ease-in-out;
+        }
+
+        &.v-dt-column-sort-asc:after,
+        &.v-dt-column-sort-desc:after {
+            color: $primary;
+            opacity: 0.75;
+        }
+
+        &.v-dt-column-sort-asc:after {
+            content: fa-content($fa-var-sort-amount-up);
+        }
+
+        &.v-dt-column-sort-desc:after {
+            content: fa-content($fa-var-sort-amount-down);
+        }
+
+        &:not(.v-dt-column-sort-asc):not(.v-dt-column-sort-desc):after {
+            content: fa-content($fa-var-sort);
+        }
+
+        &:hover {
+            &:after {
+                opacity: 1;
+            }
+        }
+    }
+}

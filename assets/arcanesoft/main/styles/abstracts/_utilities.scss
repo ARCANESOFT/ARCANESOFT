@@ -1,0 +1,36 @@
+@import "~bootstrap/scss/utilities";
+
+$utilities: map-merge(
+    $utilities,
+    (
+        // LogViewer Utilities
+        "log-level-color": (
+            property: color,
+            class: text-log-level,
+            values: $log-level-colors
+        ),
+        "log-level-background": (
+            property: background-color,
+            class: bg-log-level,
+            values: $log-level-colors
+        ),
+        "log-level-border": (
+            property: border-color,
+            class: border-log-level,
+            values: $log-level-colors
+        ),
+
+        // Bootstrap
+        "font-weight": map-merge(
+            map-get($utilities, "font-weight"),
+            (
+                values: map-merge(
+                    map-get(map-get($utilities, "font-weight"), "values"),
+                    (
+                        semibold: $font-weight-semibold
+                    ),
+                ),
+            ),
+        ),
+    )
+);
